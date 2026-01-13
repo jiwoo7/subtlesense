@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Upload, Camera, Mic } from "lucide-react";
+import { Upload, Camera, Mic, Video } from "lucide-react";
 import { useState } from "react";
 
 interface UploadZoneProps {
@@ -11,8 +11,8 @@ const UploadZone = ({ onUpload }: UploadZoneProps) => {
 
   return (
     <motion.div
-      className={`relative glass-panel rounded-2xl p-8 cursor-pointer transition-all duration-300 ${
-        isDragging ? "border-primary glow-border" : ""
+      className={`relative glass-panel rounded-3xl p-8 cursor-pointer transition-all duration-300 overflow-hidden ${
+        isDragging ? "ring-2 ring-pastel-pink" : ""
       }`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -28,68 +28,61 @@ const UploadZone = ({ onUpload }: UploadZoneProps) => {
         onUpload();
       }}
       onClick={onUpload}
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ scale: 1.02, y: -5 }}
       whileTap={{ scale: 0.98 }}
     >
-      {/* Animated border */}
-      <div className="absolute inset-0 rounded-2xl overflow-hidden">
-        <motion.div
-          className="absolute inset-0 rounded-2xl"
-          style={{
-            background: "linear-gradient(90deg, transparent, hsl(180, 100%, 50%), transparent)",
-            backgroundSize: "200% 100%",
-          }}
-          animate={{
-            backgroundPosition: ["200% 0%", "-200% 0%"],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-        <div className="absolute inset-[1px] rounded-2xl bg-card" />
-      </div>
+      {/* Decorative gradient border */}
+      <div className="absolute inset-0 rounded-3xl pastel-gradient opacity-20" />
+      <div className="absolute inset-[2px] rounded-3xl bg-white/90" />
 
-      <div className="relative flex flex-col items-center gap-6 py-8">
-        {/* Upload icon with pulse */}
-        <div className="relative">
-          <motion.div
-            className="absolute inset-0 rounded-full bg-primary/20"
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.5, 0, 0.5],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeOut",
-            }}
-          />
-          <div className="relative w-20 h-20 rounded-full bg-muted flex items-center justify-center">
-            <Upload className="w-8 h-8 text-primary" />
+      <div className="relative flex flex-col items-center gap-5 py-6">
+        {/* Upload icon with animation */}
+        <motion.div
+          className="relative"
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="w-20 h-20 rounded-2xl pastel-gradient flex items-center justify-center shadow-lg">
+            <Upload className="w-9 h-9 text-white" />
           </div>
-        </div>
+          
+          {/* Floating particles */}
+          <motion.div
+            className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-pastel-yellow"
+            animate={{ y: [0, -10, 0], opacity: [1, 0.5, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          <motion.div
+            className="absolute -bottom-1 -left-2 w-3 h-3 rounded-full bg-pastel-mint"
+            animate={{ y: [0, -8, 0], opacity: [0.8, 1, 0.8] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
+        </motion.div>
 
         <div className="text-center">
-          <h3 className="text-xl font-display font-semibold text-foreground mb-2">
-            Upload Session Capture
+          <h3 className="text-xl font-display font-bold text-foreground mb-2">
+            Upload Your Coding Session 🎬
           </h3>
-          <p className="text-muted-foreground text-sm max-w-xs">
-            Drop your webcam/audio recording here or click to browse
+          <p className="text-muted-foreground text-sm max-w-xs leading-relaxed">
+            Drop your webcam or audio recording here, and we'll analyze your emotional journey!
           </p>
         </div>
 
         {/* Supported formats */}
-        <div className="flex gap-4">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted/50 text-xs text-muted-foreground">
-            <Camera className="w-3.5 h-3.5" />
-            <span>Video</span>
-          </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted/50 text-xs text-muted-foreground">
-            <Mic className="w-3.5 h-3.5" />
-            <span>Audio</span>
-          </div>
+        <div className="flex flex-wrap gap-3 justify-center">
+          {[
+            { icon: Camera, label: "Webcam", color: "bg-pastel-pink/20 text-pink-600" },
+            { icon: Mic, label: "Audio", color: "bg-pastel-lavender/20 text-purple-600" },
+            { icon: Video, label: "Video", color: "bg-pastel-sky/20 text-blue-600" },
+          ].map(({ icon: Icon, label, color }) => (
+            <div
+              key={label}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium ${color}`}
+            >
+              <Icon className="w-3.5 h-3.5" />
+              <span>{label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </motion.div>

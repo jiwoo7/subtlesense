@@ -3,62 +3,110 @@ import { motion } from "framer-motion";
 const AnimatedBackground = () => {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      {/* Grid pattern */}
-      <div className="absolute inset-0 grid-bg opacity-50" />
+      {/* Pastel gradient base */}
+      <div className="absolute inset-0 bubble-bg" />
       
-      {/* Scan line effect */}
-      <div className="absolute inset-0 scan-line" />
-      
-      {/* Floating orbs */}
+      {/* Floating shapes */}
       <motion.div
-        className="absolute w-96 h-96 rounded-full bg-primary/10 blur-3xl"
+        className="absolute w-64 h-64 rounded-full bg-pastel-pink/30 blur-3xl"
         animate={{
-          x: [0, 100, 0],
-          y: [0, -50, 0],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        style={{ top: "10%", left: "10%" }}
-      />
-      
-      <motion.div
-        className="absolute w-80 h-80 rounded-full bg-secondary/10 blur-3xl"
-        animate={{
-          x: [0, -80, 0],
-          y: [0, 80, 0],
-          scale: [1, 1.3, 1],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        style={{ top: "50%", right: "10%" }}
-      />
-      
-      <motion.div
-        className="absolute w-64 h-64 rounded-full bg-accent/5 blur-3xl"
-        animate={{
-          x: [0, 60, 0],
-          y: [0, -40, 0],
+          x: [0, 50, 0],
+          y: [0, -30, 0],
+          scale: [1, 1.1, 1],
         }}
         transition={{
           duration: 15,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        style={{ bottom: "20%", left: "30%" }}
+        style={{ top: "5%", left: "5%" }}
       />
       
-      {/* Corner decorations */}
-      <div className="absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 border-primary/30" />
-      <div className="absolute top-0 right-0 w-32 h-32 border-r-2 border-t-2 border-primary/30" />
-      <div className="absolute bottom-0 left-0 w-32 h-32 border-l-2 border-b-2 border-primary/30" />
-      <div className="absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-primary/30" />
+      <motion.div
+        className="absolute w-80 h-80 rounded-full bg-pastel-lavender/30 blur-3xl"
+        animate={{
+          x: [0, -40, 0],
+          y: [0, 40, 0],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{ top: "40%", right: "5%" }}
+      />
+      
+      <motion.div
+        className="absolute w-72 h-72 rounded-full bg-pastel-mint/30 blur-3xl"
+        animate={{
+          x: [0, 30, 0],
+          y: [0, -20, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{ bottom: "10%", left: "20%" }}
+      />
+
+      <motion.div
+        className="absolute w-56 h-56 rounded-full bg-pastel-sky/30 blur-3xl"
+        animate={{
+          x: [0, -30, 0],
+          y: [0, 30, 0],
+        }}
+        transition={{
+          duration: 14,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{ top: "20%", left: "50%" }}
+      />
+
+      <motion.div
+        className="absolute w-48 h-48 rounded-full bg-pastel-yellow/30 blur-3xl"
+        animate={{
+          x: [0, 20, 0],
+          y: [0, -25, 0],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{ bottom: "30%", right: "15%" }}
+      />
+
+      {/* Decorative floating elements */}
+      <motion.div
+        className="absolute w-8 h-8 rounded-full bg-pastel-pink/50"
+        animate={{ y: [0, -30, 0], rotate: [0, 180, 360] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        style={{ top: "15%", left: "15%" }}
+      />
+      
+      <motion.div
+        className="absolute w-6 h-6 rounded-lg bg-pastel-lavender/50 rotate-45"
+        animate={{ y: [0, -20, 0], rotate: [45, 135, 45] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        style={{ top: "60%", left: "80%" }}
+      />
+      
+      <motion.div
+        className="absolute w-5 h-5 rounded-full bg-pastel-mint/60"
+        animate={{ y: [0, -25, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        style={{ top: "75%", left: "10%" }}
+      />
+
+      <motion.div
+        className="absolute w-4 h-4 rounded-full bg-pastel-yellow/60"
+        animate={{ y: [0, -15, 0], x: [0, 10, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        style={{ top: "30%", right: "25%" }}
+      />
     </div>
   );
 };

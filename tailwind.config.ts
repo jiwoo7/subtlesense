@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Orbitron', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        display: ['Nunito', 'sans-serif'],
+        body: ['Quicksand', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -59,6 +59,13 @@ export default {
           DEFAULT: "hsl(var(--warning))",
           foreground: "hsl(var(--warning-foreground))",
         },
+        pastel: {
+          pink: "hsl(var(--pastel-pink))",
+          lavender: "hsl(var(--pastel-lavender))",
+          mint: "hsl(var(--pastel-mint))",
+          sky: "hsl(var(--pastel-sky))",
+          yellow: "hsl(var(--pastel-yellow))",
+        },
         confusion: "hsl(var(--confusion))",
         frustration: "hsl(var(--frustration))",
         sidebar: {
@@ -86,15 +93,10 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "pulse-ring": {
-          "0%": { transform: "scale(1)", opacity: "1" },
-          "100%": { transform: "scale(1.5)", opacity: "0" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "pulse-ring": "pulse-ring 2s ease-out infinite",
       },
     },
   },
