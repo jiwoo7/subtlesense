@@ -2,16 +2,24 @@ import { motion } from "framer-motion";
 import { Upload, Camera, Mic, Video } from "lucide-react";
 import { useState } from "react";
 
+type UploadType = "webcam" | "audio" | "video";
+
 interface UploadZoneProps {
-  onUpload: () => void;
+  onUpload: (type: UploadType) => void;
 }
 
 const UploadZone = ({ onUpload }: UploadZoneProps) => {
   const [isDragging, setIsDragging] = useState(false);
 
+  const uploadOptions = [
+    { icon: Camera, label: "Webcam", type: "webcam" as UploadType, color: "bg-pastel-pink/20 text-pink-600 hover:bg-pastel-pink/40" },
+    { icon: Mic, label: "Audio", type: "audio" as UploadType, color: "bg-pastel-lavender/20 text-purple-600 hover:bg-pastel-lavender/40" },
+    { icon: Video, label: "Video", type: "video" as UploadType, color: "bg-pastel-sky/20 text-blue-600 hover:bg-pastel-sky/40" },
+  ];
+
   return (
     <motion.div
-      className={`relative glass-panel rounded-3xl p-8 cursor-pointer transition-all duration-300 overflow-hidden ${
+      className={`relative glass-panel rounded-3xl p-8 transition-all duration-300 overflow-hidden ${
         isDragging ? "ring-2 ring-pastel-pink" : ""
       }`}
       initial={{ opacity: 0, y: 20 }}
@@ -25,11 +33,8 @@ const UploadZone = ({ onUpload }: UploadZoneProps) => {
       onDrop={(e) => {
         e.preventDefault();
         setIsDragging(false);
-        onUpload();
+        onUpload("video");
       }}
-      onClick={onUpload}
-      whileHover={{ scale: 1.02, y: -5 }}
-      whileTap={{ scale: 0.98 }}
     >
       {/* Decorative gradient border */}
       <div className="absolute inset-0 rounded-3xl pastel-gradient opacity-20" />
@@ -64,24 +69,23 @@ const UploadZone = ({ onUpload }: UploadZoneProps) => {
             Upload Your Coding Session 🎬
           </h3>
           <p className="text-muted-foreground text-sm max-w-xs leading-relaxed">
-            Drop your webcam or audio recording here, and we'll analyze your emotional journey!
+            Choose an input type below, and we'll analyze your emotional journey!
           </p>
         </div>
 
-        {/* Supported formats */}
+        {/* Clickable upload options */}
         <div className="flex flex-wrap gap-3 justify-center">
-          {[
-            { icon: Camera, label: "Webcam", color: "bg-pastel-pink/20 text-pink-600" },
-            { icon: Mic, label: "Audio", color: "bg-pastel-lavender/20 text-purple-600" },
-            { icon: Video, label: "Video", color: "bg-pastel-sky/20 text-blue-600" },
-          ].map(({ icon: Icon, label, color }) => (
-            <div
+          {uploadOptions.map(({ icon: Icon, label, type, color }) => (
+            <motion.button
               key={label}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium ${color}`}
+              onClick={() => onUpload(type)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-all ${color}`}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Icon className="w-3.5 h-3.5" />
+              <Icon className="w-4 h-4" />
               <span>{label}</span>
-            </div>
+            </motion.button>
           ))}
         </div>
       </div>

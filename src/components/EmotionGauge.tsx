@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 interface EmotionGaugeProps {
   label: string;
   value: number;
-  color: "confusion" | "frustration" | "primary" | "success";
+  color: "confusion" | "frustration" | "primary" | "success" | "focus";
   emoji: string;
   delay?: number;
 }
@@ -24,6 +24,10 @@ const colorMap = {
   success: {
     stroke: "hsl(160, 55%, 70%)",
     bg: "hsla(160, 55%, 70%, 0.2)",
+  },
+  focus: {
+    stroke: "hsl(270, 60%, 75%)",
+    bg: "hsla(270, 60%, 75%, 0.2)",
   },
 };
 

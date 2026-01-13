@@ -10,14 +10,64 @@ import UsersSection from "@/components/UsersSection";
 import HowItHelpsSection from "@/components/HowItHelpsSection";
 import CTASection from "@/components/CTASection";
 
+export type UploadType = "webcam" | "audio" | "video" | null;
+
+export interface AnalysisResult {
+  confusion: number;
+  frustration: number;
+  focus: number;
+  uploadType: UploadType;
+}
+
+const generateAnalysis = (type: UploadType): AnalysisResult => {
+  // Different ranges based on input type for variety
+  const baseConfusion = Math.floor(Math.random() * 40) + 30;
+  const baseFrustration = Math.floor(Math.random() * 35) + 20;
+  const baseFocus = Math.floor(Math.random() * 30) + 50;
+
+  switch (type) {
+    case "webcam":
+      return {
+        confusion: baseConfusion + Math.floor(Math.random() * 20),
+        frustration: baseFrustration + Math.floor(Math.random() * 15),
+        focus: baseFocus + Math.floor(Math.random() * 10),
+        uploadType: type,
+      };
+    case "audio":
+      return {
+        confusion: baseConfusion + Math.floor(Math.random() * 10),
+        frustration: baseFrustration + Math.floor(Math.random() * 25),
+        focus: baseFocus - Math.floor(Math.random() * 10),
+        uploadType: type,
+      };
+    case "video":
+      return {
+        confusion: baseConfusion - Math.floor(Math.random() * 10),
+        frustration: baseFrustration + Math.floor(Math.random() * 10),
+        focus: baseFocus + Math.floor(Math.random() * 15),
+        uploadType: type,
+      };
+    default:
+      return {
+        confusion: 73,
+        frustration: 42,
+        focus: 65,
+        uploadType: null,
+      };
+  }
+};
+
 const Index = () => {
   const [isAnalyzed, setIsAnalyzed] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
 
-  const handleUpload = () => {
+  const handleUpload = (type: UploadType) => {
     setIsAnalyzing(true);
+    setIsAnalyzed(false);
     setTimeout(() => {
       setIsAnalyzing(false);
+      setAnalysisResult(generateAnalysis(type));
       setIsAnalyzed(true);
     }, 2000);
   };
@@ -105,7 +155,7 @@ const Index = () => {
           </div>
 
           {/* Right column - Analysis */}
-          <AnalysisDashboard isAnalyzed={isAnalyzed} />
+          <AnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
         </div>
 
         {/* Stats Section */}
