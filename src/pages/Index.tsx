@@ -13,48 +13,45 @@ import CTASection from "@/components/CTASection";
 export type UploadType = "webcam" | "audio" | "video" | null;
 
 export interface AnalysisResult {
+  happiness: number;
+  sadness: number;
+  anger: number;
+  fear: number;
+  surprise: number;
+  disgust: number;
   confusion: number;
-  frustration: number;
   focus: number;
+  excitement: number;
+  accuracy: number;
+  suggestions: Array<{
+    title: string;
+    description: string;
+    icon: string;
+    variant: string;
+  }>;
+  advice: string;
   uploadType: UploadType;
 }
 
 const generateAnalysis = (type: UploadType): AnalysisResult => {
-  // Different ranges based on input type for variety
-  const baseConfusion = Math.floor(Math.random() * 40) + 30;
-  const baseFrustration = Math.floor(Math.random() * 35) + 20;
-  const baseFocus = Math.floor(Math.random() * 30) + 50;
+  // Generate random values for demo
+  const randomValue = () => Math.floor(Math.random() * 60) + 20;
 
-  switch (type) {
-    case "webcam":
-      return {
-        confusion: baseConfusion + Math.floor(Math.random() * 20),
-        frustration: baseFrustration + Math.floor(Math.random() * 15),
-        focus: baseFocus + Math.floor(Math.random() * 10),
-        uploadType: type,
-      };
-    case "audio":
-      return {
-        confusion: baseConfusion + Math.floor(Math.random() * 10),
-        frustration: baseFrustration + Math.floor(Math.random() * 25),
-        focus: baseFocus - Math.floor(Math.random() * 10),
-        uploadType: type,
-      };
-    case "video":
-      return {
-        confusion: baseConfusion - Math.floor(Math.random() * 10),
-        frustration: baseFrustration + Math.floor(Math.random() * 10),
-        focus: baseFocus + Math.floor(Math.random() * 15),
-        uploadType: type,
-      };
-    default:
-      return {
-        confusion: 73,
-        frustration: 42,
-        focus: 65,
-        uploadType: null,
-      };
-  }
+  return {
+    happiness: randomValue(),
+    sadness: randomValue(),
+    anger: randomValue(),
+    fear: randomValue(),
+    surprise: randomValue(),
+    disgust: randomValue(),
+    confusion: randomValue(),
+    focus: randomValue(),
+    excitement: randomValue(),
+    accuracy: Math.floor(Math.random() * 15) + 80,
+    suggestions: [],
+    advice: "This is a demo analysis. Sign in to get real AI-powered emotion detection!",
+    uploadType: type,
+  };
 };
 
 const Index = () => {
