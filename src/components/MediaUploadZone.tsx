@@ -33,14 +33,20 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
   const startWebcam = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: true, 
+        video: { width: 640, height: 480 }, 
         audio: false 
       });
       setMediaStream(stream);
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
       setSelectedType("webcam");
+      
+      // Wait for next tick to ensure video element is rendered
+      setTimeout(() => {
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+          videoRef.current.play().catch(console.error);
+        }
+      }, 100);
+      
       toast.success("Webcam connected! 📸");
     } catch (error) {
       toast.error("Could not access webcam. Please check permissions.");
@@ -129,29 +135,39 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
 
   const fileToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const result = reader.result as string;
-        // Extract first frame from video
-        const video = document.createElement("video");
-        video.src = result;
-        video.onloadeddata = () => {
-          const canvas = document.createElement("canvas");
-          canvas.width = video.videoWidth;
-          canvas.height = video.videoHeight;
-          const ctx = canvas.getContext("2d");
-          if (ctx) {
-            ctx.drawImage(video, 0, 0);
-            const base64 = canvas.toDataURL("image/jpeg", 0.8).split(",")[1];
-            resolve(base64);
-          } else {
-            reject(new Error("Could not get context"));
-          }
-        };
-        video.onerror = () => reject(new Error("Could not load video"));
+      const url = URL.createObjectURL(file);
+      const video = document.createElement("video");
+      video.src = url;
+      video.muted = true;
+      video.playsInline = true;
+      
+      video.onloadedmetadata = () => {
+        // Seek to 1 second or 10% of video duration (whichever is smaller)
+        video.currentTime = Math.min(1, video.duration * 0.1);
       };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
+      
+      video.onseeked = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = video.videoWidth || 640;
+        canvas.height = video.videoHeight || 480;
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const base64 = canvas.toDataURL("image/jpeg", 0.8).split(",")[1];
+          URL.revokeObjectURL(url);
+          resolve(base64);
+        } else {
+          URL.revokeObjectURL(url);
+          reject(new Error("Could not get context"));
+        }
+      };
+      
+      video.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error("Could not load video"));
+      };
+      
+      video.load();
     });
   };
 

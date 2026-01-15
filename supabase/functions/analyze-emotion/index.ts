@@ -6,9 +6,15 @@ const corsHeaders = {
 };
 
 interface EmotionAnalysis {
+  happiness: number;
+  sadness: number;
+  anger: number;
+  fear: number;
+  surprise: number;
+  disgust: number;
   confusion: number;
-  frustration: number;
   focus: number;
+  excitement: number;
   accuracy: number;
   suggestions: Array<{
     title: string;
@@ -35,21 +41,26 @@ serve(async (req) => {
     let userContent: any[];
     const systemPrompt = `You are an expert emotion detection AI specializing in analyzing human emotional states during learning sessions. 
 
-When analyzing media, detect and quantify:
-1. Confusion Level (0-100): Signs include furrowed brows, squinting, head tilting, pauses, "umm" sounds, repeated phrases
-2. Frustration Level (0-100): Signs include sighs, rapid movements, tense facial expressions, raised voice, clicking sounds
-3. Focus Level (0-100): Signs include steady gaze, minimal fidgeting, consistent speech patterns, engaged posture
+When analyzing media, detect and quantify these 9 emotions (each 0-100):
+1. Happiness (0-100): Smiles, relaxed face, positive posture, light voice, joyful expressions
+2. Sadness (0-100): Downturned mouth, droopy eyes, slumped posture, slow/soft speech
+3. Anger (0-100): Furrowed brows, clenched jaw, tense muscles, raised voice, aggressive gestures
+4. Fear (0-100): Wide eyes, raised eyebrows, tense expression, trembling, hesitant voice
+5. Surprise (0-100): Raised eyebrows, wide open eyes, open mouth, gasps, sudden movements
+6. Disgust (0-100): Wrinkled nose, curled lip, turned away, expressions of aversion
+7. Confusion (0-100): Furrowed brows, squinting, head tilting, pauses, "umm" sounds
+8. Focus (0-100): Steady gaze, minimal fidgeting, consistent speech, engaged posture
+9. Excitement (0-100): Animated gestures, rapid speech, wide eyes, high energy, enthusiastic tone
 
 Provide actionable, encouraging suggestions based on emotional state. Be supportive and empathetic.
 
 IMPORTANT: Return your analysis as a function call using the analyze_emotions tool.`;
 
     if (uploadType === "webcam" || uploadType === "video") {
-      // For video/webcam, analyze visual content
       userContent = [
         {
           type: "text",
-          text: `Analyze this ${uploadType} capture from a learning session. Detect emotional states including confusion, frustration, and focus levels. Consider facial expressions, body language, and any visible signs of emotional state.`
+          text: `Analyze this ${uploadType} capture from a learning session. Detect all 9 emotional states. Consider facial expressions, body language, and any visible signs of emotional state.`
         },
         {
           type: "image_url",
@@ -59,13 +70,12 @@ IMPORTANT: Return your analysis as a function call using the analyze_emotions to
         }
       ];
     } else {
-      // For audio, we'll analyze the transcription or audio patterns
       userContent = [
         {
           type: "text",
-          text: `Analyze this audio transcription from a learning session. The user is speaking about their experience. Detect emotional states from speech patterns, word choice, and described feelings. Audio type: ${uploadType}. 
+          text: `Analyze this audio transcription from a learning session. Detect all 9 emotional states from speech patterns, word choice, and described feelings. Audio type: ${uploadType}. 
           
-Note: Since this is audio-only, focus on vocal indicators like speech pace, word choice, and expressed frustrations. Provide your best estimate based on typical audio emotion patterns for a learning context.`
+Note: Since this is audio-only, focus on vocal indicators like speech pace, word choice, and expressed frustrations.`
         }
       ];
     }
@@ -87,21 +97,45 @@ Note: Since this is audio-only, focus on vocal indicators like speech pace, word
             type: "function",
             function: {
               name: "analyze_emotions",
-              description: "Return the emotion analysis results",
+              description: "Return the emotion analysis results with 9 emotions",
               parameters: {
                 type: "object",
                 properties: {
+                  happiness: { 
+                    type: "number", 
+                    description: "Happiness level from 0-100" 
+                  },
+                  sadness: { 
+                    type: "number", 
+                    description: "Sadness level from 0-100" 
+                  },
+                  anger: { 
+                    type: "number", 
+                    description: "Anger level from 0-100" 
+                  },
+                  fear: { 
+                    type: "number", 
+                    description: "Fear level from 0-100" 
+                  },
+                  surprise: { 
+                    type: "number", 
+                    description: "Surprise level from 0-100" 
+                  },
+                  disgust: { 
+                    type: "number", 
+                    description: "Disgust level from 0-100" 
+                  },
                   confusion: { 
                     type: "number", 
                     description: "Confusion level from 0-100" 
                   },
-                  frustration: { 
-                    type: "number", 
-                    description: "Frustration level from 0-100" 
-                  },
                   focus: { 
                     type: "number", 
                     description: "Focus level from 0-100" 
+                  },
+                  excitement: { 
+                    type: "number", 
+                    description: "Excitement level from 0-100" 
                   },
                   accuracy: { 
                     type: "number", 
@@ -114,8 +148,8 @@ Note: Since this is audio-only, focus on vocal indicators like speech pace, word
                       properties: {
                         title: { type: "string", description: "Short actionable title with emoji" },
                         description: { type: "string", description: "Helpful supportive description" },
-                        icon: { type: "string", enum: ["coffee", "lightbulb", "focus", "timer", "stretch", "music"] },
-                        variant: { type: "string", enum: ["pink", "lavender", "mint", "sky", "yellow"] }
+                        icon: { type: "string", enum: ["coffee", "lightbulb", "focus", "timer", "stretch", "music", "heart", "star", "sparkles"] },
+                        variant: { type: "string", enum: ["pink", "lavender", "mint", "sky", "yellow", "peach", "rose"] }
                       },
                       required: ["title", "description", "icon", "variant"]
                     },
@@ -123,10 +157,10 @@ Note: Since this is audio-only, focus on vocal indicators like speech pace, word
                   },
                   advice: {
                     type: "string",
-                    description: "A warm, encouraging paragraph of overall advice for improving the learning experience"
+                    description: "A warm, encouraging paragraph of overall advice for improving the learning experience based on the emotional profile"
                   }
                 },
-                required: ["confusion", "frustration", "focus", "accuracy", "suggestions", "advice"]
+                required: ["happiness", "sadness", "anger", "fear", "surprise", "disgust", "confusion", "focus", "excitement", "accuracy", "suggestions", "advice"]
               }
             }
           }
@@ -155,7 +189,6 @@ Note: Since this is audio-only, focus on vocal indicators like speech pace, word
 
     const data = await response.json();
     
-    // Extract the function call result
     const toolCall = data.choices?.[0]?.message?.tool_calls?.[0];
     if (!toolCall || toolCall.function.name !== "analyze_emotions") {
       throw new Error("Invalid AI response format");
