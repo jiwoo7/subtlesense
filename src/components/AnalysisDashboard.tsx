@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Brain, Clock, Coffee, Lightbulb, Target, Sparkles, Headphones, Video, Camera, Focus } from "lucide-react";
 import EmotionGauge from "./EmotionGauge";
 import SuggestionCard from "./SuggestionCard";
-import type { AnalysisResult } from "@/pages/Index";
+import type { AnalysisResult } from "@/pages/Dashboard";
 
 interface AnalysisDashboardProps {
   isAnalyzed: boolean;
@@ -22,12 +22,12 @@ const getSuggestions = (result: AnalysisResult) => {
     });
   }
   
-  // High frustration suggestions
-  if (result.frustration > 50) {
+  // High anger suggestions
+  if (result.anger > 50) {
     suggestions.push({
       icon: Coffee,
       title: "Take a 2-Minute Break ☕",
-      description: "A short pause reduces confusion by 40% and helps restore your focus!",
+      description: "A short pause reduces frustration by 40% and helps restore your focus!",
       metric: "-40%",
       variant: "pink" as const,
     });
@@ -126,6 +126,18 @@ const AnalysisDashboard = ({ isAnalyzed, analysisResult }: AnalysisDashboardProp
 
   const suggestions = getSuggestions(analysisResult);
 
+  const emotions = [
+    { label: "Happiness", value: analysisResult.happiness, color: "happiness" as const, emoji: "😊" },
+    { label: "Sadness", value: analysisResult.sadness, color: "sadness" as const, emoji: "😢" },
+    { label: "Anger", value: analysisResult.anger, color: "anger" as const, emoji: "😠" },
+    { label: "Fear", value: analysisResult.fear, color: "fear" as const, emoji: "😨" },
+    { label: "Surprise", value: analysisResult.surprise, color: "surprise" as const, emoji: "😲" },
+    { label: "Disgust", value: analysisResult.disgust, color: "disgust" as const, emoji: "🤢" },
+    { label: "Confusion", value: analysisResult.confusion, color: "confusion" as const, emoji: "🤔" },
+    { label: "Focus", value: analysisResult.focus, color: "focus" as const, emoji: "🎯" },
+    { label: "Excitement", value: analysisResult.excitement, color: "excitement" as const, emoji: "🤩" },
+  ];
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -158,37 +170,25 @@ const AnalysisDashboard = ({ isAnalyzed, analysisResult }: AnalysisDashboardProp
       >
         <Target className="w-4 h-4 text-emerald-600" />
         <span className="text-sm font-semibold">
-          <span className="text-emerald-600">{Math.floor(Math.random() * 10) + 78}%</span>
+          <span className="text-emerald-600">{analysisResult.accuracy}%</span>
           <span className="text-muted-foreground ml-1">Accuracy</span>
         </span>
       </motion.div>
 
-      {/* Emotion gauges */}
-      <div className="grid grid-cols-2 gap-6">
-        <EmotionGauge 
-          label="Confusion Level" 
-          value={Math.min(100, analysisResult.confusion)} 
-          color="confusion" 
-          emoji="🤔" 
-          delay={0.3} 
-        />
-        <EmotionGauge 
-          label="Frustration Level" 
-          value={Math.min(100, analysisResult.frustration)} 
-          color="frustration" 
-          emoji="😤" 
-          delay={0.5} 
-        />
+      {/* 9 Emotion gauges in grid */}
+      <div className="grid grid-cols-3 gap-4">
+        {emotions.map((emotion, index) => (
+          <EmotionGauge
+            key={emotion.label}
+            label={emotion.label}
+            value={Math.min(100, emotion.value || 0)}
+            color={emotion.color}
+            emoji={emotion.emoji}
+            delay={0.3 + index * 0.1}
+            size="sm"
+          />
+        ))}
       </div>
-
-      {/* Focus gauge */}
-      <EmotionGauge 
-        label="Focus Level" 
-        value={Math.min(100, analysisResult.focus)} 
-        color="focus" 
-        emoji="🎯" 
-        delay={0.7} 
-      />
 
       {/* Divider */}
       <motion.div
