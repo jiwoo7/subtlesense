@@ -15,9 +15,15 @@ import { toast } from "sonner";
 export type UploadType = "webcam" | "audio" | "video" | null;
 
 export interface AnalysisResult {
+  happiness: number;
+  sadness: number;
+  anger: number;
+  fear: number;
+  surprise: number;
+  disgust: number;
   confusion: number;
-  frustration: number;
   focus: number;
+  excitement: number;
   accuracy: number;
   suggestions: Array<{
     title: string;
@@ -55,7 +61,7 @@ const Dashboard = () => {
           user_id: user.id,
           upload_type: result.uploadType,
           confusion_level: result.confusion,
-          frustration_level: result.frustration,
+          frustration_level: Math.round((result.anger + result.disgust) / 2), // Map anger+disgust to frustration
           focus_level: result.focus,
           accuracy: result.accuracy,
           ai_suggestions: result.suggestions,

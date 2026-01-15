@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Brain, Target, Sparkles, Coffee, Lightbulb, Clock, Focus, Headphones, Activity, Music } from "lucide-react";
+import { Brain, Target, Sparkles, Coffee, Lightbulb, Clock, Focus, Headphones, Activity, Music, Heart, Star } from "lucide-react";
 import EmotionGauge from "./EmotionGauge";
 import type { AnalysisResult } from "@/pages/Dashboard";
 
@@ -15,7 +15,10 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   timer: Clock,
   stretch: Activity,
   music: Music,
-  headphones: Headphones
+  headphones: Headphones,
+  heart: Heart,
+  star: Star,
+  sparkles: Sparkles
 };
 
 const variantColors: Record<string, string> = {
@@ -23,7 +26,9 @@ const variantColors: Record<string, string> = {
   lavender: "card-lavender",
   mint: "card-mint",
   sky: "card-sky",
-  yellow: "card-yellow"
+  yellow: "card-yellow",
+  peach: "bg-orange-100/60",
+  rose: "bg-rose-100/60"
 };
 
 const getTypeLabel = (type: string | null) => {
@@ -70,6 +75,18 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
     );
   }
 
+  const emotions = [
+    { label: "Happiness", value: analysisResult.happiness, color: "happiness" as const, emoji: "😊" },
+    { label: "Sadness", value: analysisResult.sadness, color: "sadness" as const, emoji: "😢" },
+    { label: "Anger", value: analysisResult.anger, color: "anger" as const, emoji: "😠" },
+    { label: "Fear", value: analysisResult.fear, color: "fear" as const, emoji: "😨" },
+    { label: "Surprise", value: analysisResult.surprise, color: "surprise" as const, emoji: "😲" },
+    { label: "Disgust", value: analysisResult.disgust, color: "disgust" as const, emoji: "🤢" },
+    { label: "Confusion", value: analysisResult.confusion, color: "confusion" as const, emoji: "🤔" },
+    { label: "Focus", value: analysisResult.focus, color: "focus" as const, emoji: "🎯" },
+    { label: "Excitement", value: analysisResult.excitement, color: "excitement" as const, emoji: "🤩" },
+  ];
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -107,32 +124,31 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
         </span>
       </motion.div>
 
-      {/* Emotion gauges */}
-      <div className="grid grid-cols-2 gap-6">
-        <EmotionGauge 
-          label="Confusion Level" 
-          value={Math.min(100, analysisResult.confusion)} 
-          color="confusion" 
-          emoji="🤔" 
-          delay={0.3} 
-        />
-        <EmotionGauge 
-          label="Frustration Level" 
-          value={Math.min(100, analysisResult.frustration)} 
-          color="frustration" 
-          emoji="😤" 
-          delay={0.5} 
-        />
-      </div>
-
-      {/* Focus gauge */}
-      <EmotionGauge 
-        label="Focus Level" 
-        value={Math.min(100, analysisResult.focus)} 
-        color="focus" 
-        emoji="🎯" 
-        delay={0.7} 
-      />
+      {/* 9 Emotion gauges in grid */}
+      <motion.div
+        className="glass-panel rounded-2xl p-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+      >
+        <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+          <Sparkles className="w-5 h-5 text-pastel-yellow" />
+          9 Emotion Analysis
+        </h3>
+        <div className="grid grid-cols-3 gap-4">
+          {emotions.map((emotion, index) => (
+            <EmotionGauge
+              key={emotion.label}
+              label={emotion.label}
+              value={Math.min(100, emotion.value || 0)}
+              color={emotion.color}
+              emoji={emotion.emoji}
+              delay={0.3 + index * 0.1}
+              size="sm"
+            />
+          ))}
+        </div>
+      </motion.div>
 
       {/* AI Advice */}
       {analysisResult.advice && (
@@ -140,7 +156,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
           className="glass-panel rounded-2xl p-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9 }}
+          transition={{ delay: 1.2 }}
         >
           <h3 className="font-display text-lg font-bold text-foreground mb-3 flex items-center gap-2">
             <Brain className="w-5 h-5 text-pastel-lavender" />
@@ -155,14 +171,14 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
         className="h-px bg-gradient-to-r from-transparent via-pastel-lavender to-transparent"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
-        transition={{ duration: 0.8, delay: 1 }}
+        transition={{ duration: 0.8, delay: 1.4 }}
       />
 
       {/* Suggestions */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 1.1 }}
+        transition={{ duration: 0.5, delay: 1.5 }}
       >
         <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
           <Sparkles className="w-5 h-5 text-pastel-yellow" />
@@ -180,7 +196,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
                 className={`${colorClass} rounded-xl p-4 flex items-start gap-4`}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.2 + index * 0.15 }}
+                transition={{ delay: 1.6 + index * 0.15 }}
                 whileHover={{ scale: 1.02 }}
               >
                 <div className="w-10 h-10 rounded-xl bg-white/50 flex items-center justify-center flex-shrink-0">
