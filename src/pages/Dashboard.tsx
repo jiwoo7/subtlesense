@@ -9,6 +9,7 @@ import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
 import SessionHistory from "@/components/SessionHistory";
 import MoodBoard from "@/components/MoodBoard";
 import StatsSection from "@/components/StatsSection";
+import FeedbackModal from "@/components/FeedbackModal";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -42,6 +43,8 @@ const Dashboard = () => {
   const [isAnalyzed, setIsAnalyzed] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [lastSessionId, setLastSessionId] = useState<string | undefined>();
 
   useEffect(() => {
     if (!loading && !user) {
@@ -57,19 +60,26 @@ const Dashboard = () => {
     // Save to database
     if (user) {
       try {
-        const { error } = await supabase.from("emotion_sessions").insert({
+        const { data, error } = await supabase.from("emotion_sessions").insert({
           user_id: user.id,
           upload_type: result.uploadType,
           confusion_level: result.confusion,
-          frustration_level: Math.round((result.anger + result.disgust) / 2), // Map anger+disgust to frustration
+          frustration_level: Math.round((result.anger + result.disgust) / 2),
           focus_level: result.focus,
           accuracy: result.accuracy,
           ai_suggestions: result.suggestions,
           ai_advice: result.advice
-        });
+        }).select("id").single();
 
         if (error) throw error;
+        
+        setLastSessionId(data?.id);
         toast.success("Analysis saved to your history! 📊");
+        
+        // Show feedback modal after a short delay
+        setTimeout(() => {
+          setShowFeedback(true);
+        }, 2000);
       } catch (error) {
         console.error("Failed to save session:", error);
         toast.error("Failed to save session");
@@ -187,6 +197,13 @@ const Dashboard = () => {
 
         {activeTab === "analyze" && <StatsSection />}
       </div>
+
+      {/* Feedback Modal */}
+      <FeedbackModal
+        isOpen={showFeedback}
+        onClose={() => setShowFeedback(false)}
+        sessionId={lastSessionId}
+      />
     </div>
   );
 };
