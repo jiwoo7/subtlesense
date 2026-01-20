@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Heart, Sparkles, Star, ArrowRight, Brain, Shield, Zap, Users, CheckCircle } from "lucide-react";
+import { Heart, Sparkles, Star, ArrowRight, Brain, Shield, Zap, Users, BarChart3 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
 
@@ -59,6 +59,14 @@ const Landing = () => {
               <span className="font-display text-2xl font-bold gradient-text">EmotionAI</span>
             </div>
             <div className="flex items-center gap-4">
+              <Button 
+                variant="ghost" 
+                onClick={() => navigate("/analytics")}
+                className="font-semibold"
+              >
+                <BarChart3 className="w-4 h-4 mr-2" />
+                Analytics
+              </Button>
               <Button 
                 variant="ghost" 
                 onClick={() => navigate("/auth")}
