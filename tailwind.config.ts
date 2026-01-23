@@ -95,12 +95,20 @@ export default {
   				DEFAULT: 'hsl(var(--warning))',
   				foreground: 'hsl(var(--warning-foreground))'
   			},
+  			neon: {
+  				pink: 'hsl(var(--neon-pink))',
+  				purple: 'hsl(var(--neon-purple))',
+  				red: 'hsl(var(--neon-red))',
+  				magenta: 'hsl(var(--neon-magenta))',
+  				violet: 'hsl(var(--neon-violet))'
+  			},
+  			// Legacy support - map pastel to neon colors
   			pastel: {
-  				pink: 'hsl(var(--pastel-pink))',
-  				lavender: 'hsl(var(--pastel-lavender))',
-  				mint: 'hsl(var(--pastel-mint))',
-  				sky: 'hsl(var(--pastel-sky))',
-  				yellow: 'hsl(var(--pastel-yellow))'
+  				pink: 'hsl(var(--neon-pink))',
+  				lavender: 'hsl(var(--neon-purple))',
+  				mint: 'hsl(var(--success))',
+  				sky: 'hsl(var(--neon-magenta))',
+  				yellow: 'hsl(var(--neon-red))'
   			},
   			confusion: 'hsl(var(--confusion))',
   			frustration: 'hsl(var(--frustration))',
