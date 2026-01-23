@@ -105,7 +105,7 @@ const Landing = () => {
             <h1 className="font-display text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
               Learn Better by
               <br />
-              <span className="gradient-text">Understanding Your Emotions</span>
+              <span className="gradient-text italic">Understanding Your Emotions</span>
             </h1>
 
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
@@ -261,9 +261,12 @@ const Landing = () => {
         </section>
 
         {/* Footer */}
-        <footer className="container mx-auto px-6 py-8 text-center">
-          <p className="text-muted-foreground">
+        <footer className="container mx-auto px-6 py-8 text-center border-t border-border/30">
+          <p className="text-muted-foreground mb-2">
             Made with 💜 for learners everywhere • Privacy-first • Your emotions, your data
+          </p>
+          <p className="text-sm text-muted-foreground/70">
+            Made by <span className="font-semibold text-primary">Naiyya Thapa</span>
           </p>
         </footer>
       </div>
