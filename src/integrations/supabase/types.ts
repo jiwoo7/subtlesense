@@ -98,24 +98,36 @@ export type Database = {
         Row: {
           avatar_url: string | null
           created_at: string
+          display_name: string | null
           full_name: string | null
           id: string
+          notification_analysis_complete: boolean | null
+          notification_email: boolean | null
+          notification_weekly_report: boolean | null
           updated_at: string
           user_id: string
         }
         Insert: {
           avatar_url?: string | null
           created_at?: string
+          display_name?: string | null
           full_name?: string | null
           id?: string
+          notification_analysis_complete?: boolean | null
+          notification_email?: boolean | null
+          notification_weekly_report?: boolean | null
           updated_at?: string
           user_id: string
         }
         Update: {
           avatar_url?: string | null
           created_at?: string
+          display_name?: string | null
           full_name?: string | null
           id?: string
+          notification_analysis_complete?: boolean | null
+          notification_email?: boolean | null
+          notification_weekly_report?: boolean | null
           updated_at?: string
           user_id?: string
         }
