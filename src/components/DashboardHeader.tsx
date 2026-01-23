@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Heart, Sparkles, Star, History, BarChart3, LogOut, User } from "lucide-react";
+import { Heart, Sparkles, Star, History, BarChart3, LogOut, User, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -105,8 +105,19 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
           <Button
             variant="ghost"
             size="icon"
+            onClick={() => navigate("/settings")}
+            className="rounded-full"
+            title="Settings"
+          >
+            <Settings className="w-4 h-4" />
+          </Button>
+          
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={handleSignOut}
             className="rounded-full"
+            title="Sign Out"
           >
             <LogOut className="w-4 h-4" />
           </Button>
