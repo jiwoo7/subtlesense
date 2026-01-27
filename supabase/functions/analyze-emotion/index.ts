@@ -6,15 +6,26 @@ const corsHeaders = {
 };
 
 interface EmotionAnalysis {
+  // Surface Emotions
   happiness: number;
   sadness: number;
   anger: number;
   fear: number;
   surprise: number;
   disgust: number;
-  confusion: number;
-  focus: number;
-  excitement: number;
+  // Hidden Emotions
+  hiddenAnxiety: number;
+  hiddenInsecurity: number;
+  hiddenLoneliness: number;
+  hiddenGuilt: number;
+  // Suppressed Emotions
+  suppressedAnger: number;
+  suppressedSadness: number;
+  suppressedFear: number;
+  suppressedDesire: number;
+  // Meta States
+  emotionalMasking: number;
+  innerConflict: number;
   accuracy: number;
   suggestions: Array<{
     title: string;
@@ -23,6 +34,7 @@ interface EmotionAnalysis {
     variant: string;
   }>;
   advice: string;
+  deepInsight: string;
 }
 
 serve(async (req) => {
@@ -39,20 +51,33 @@ serve(async (req) => {
     }
 
     let userContent: any[];
-    const systemPrompt = `You are an expert emotion detection AI specializing in analyzing human emotional states during learning sessions. 
+    const systemPrompt = `You are an expert deep emotion detection AI specializing in analyzing not just surface emotions, but HIDDEN and SUPPRESSED emotions that people often mask or are unaware of.
 
-When analyzing media, detect and quantify these 9 emotions (each 0-100):
-1. Happiness (0-100): Smiles, relaxed face, positive posture, light voice, joyful expressions
-2. Sadness (0-100): Downturned mouth, droopy eyes, slumped posture, slow/soft speech
-3. Anger (0-100): Furrowed brows, clenched jaw, tense muscles, raised voice, aggressive gestures
-4. Fear (0-100): Wide eyes, raised eyebrows, tense expression, trembling, hesitant voice
-5. Surprise (0-100): Raised eyebrows, wide open eyes, open mouth, gasps, sudden movements
-6. Disgust (0-100): Wrinkled nose, curled lip, turned away, expressions of aversion
-7. Confusion (0-100): Furrowed brows, squinting, head tilting, pauses, "umm" sounds
-8. Focus (0-100): Steady gaze, minimal fidgeting, consistent speech, engaged posture
-9. Excitement (0-100): Animated gestures, rapid speech, wide eyes, high energy, enthusiastic tone
+SURFACE EMOTIONS (what they show):
+1. Happiness (0-100): Visible joy, smiles, positive expressions
+2. Sadness (0-100): Visible sadness, tears, downcast expressions
+3. Anger (0-100): Visible frustration, tension, aggressive expressions
+4. Fear (0-100): Visible worry, wide eyes, tense posture
+5. Surprise (0-100): Visible shock, raised eyebrows
+6. Disgust (0-100): Visible aversion, wrinkled nose
 
-Provide actionable, encouraging suggestions based on emotional state. Be supportive and empathetic.
+HIDDEN EMOTIONS (what they feel but don't show clearly):
+7. Hidden Anxiety (0-100): Underlying worry masked by calm exterior - look for micro-expressions, fidgeting, breathing patterns, subtle tension
+8. Hidden Insecurity (0-100): Self-doubt beneath confidence - overcompensation, seeking validation, defensive posture
+9. Hidden Loneliness (0-100): Isolation masked by social engagement - distant gaze, forced smiles, disconnected energy
+10. Hidden Guilt (0-100): Unspoken regret - avoiding eye contact, shrinking posture, self-soothing behaviors
+
+SUPPRESSED EMOTIONS (what they're actively holding back):
+11. Suppressed Anger (0-100): Held-back frustration - clenched jaw while smiling, tight shoulders, controlled voice
+12. Suppressed Sadness (0-100): Pushed-down grief - throat clearing, forced cheerfulness, glassy eyes
+13. Suppressed Fear (0-100): Masked vulnerability - over-confident tone, rigid posture, avoidance behaviors
+14. Suppressed Desire (0-100): Hidden wants/needs - longing glances, hesitation before speaking, unfulfilled energy
+
+META EMOTIONAL STATES:
+15. Emotional Masking (0-100): How much they're hiding their true feelings
+16. Inner Conflict (0-100): Internal emotional tension between what they feel vs show
+
+Be deeply empathetic. Your goal is to help people understand their complete emotional landscape, including what they might not realize they're feeling.
 
 IMPORTANT: Return your analysis as a function call using the analyze_emotions tool.`;
 
@@ -60,7 +85,7 @@ IMPORTANT: Return your analysis as a function call using the analyze_emotions to
       userContent = [
         {
           type: "text",
-          text: `Analyze this ${uploadType} capture from a learning session. Detect all 9 emotional states. Consider facial expressions, body language, and any visible signs of emotional state.`
+          text: `Deeply analyze this ${uploadType} capture. Go beyond surface emotions - detect HIDDEN emotions (anxiety, insecurity, loneliness, guilt masked beneath the surface) and SUPPRESSED emotions (anger, sadness, fear, desire being actively held back). Look for micro-expressions, body language incongruences, and emotional masking patterns.`
         },
         {
           type: "image_url",
@@ -73,9 +98,7 @@ IMPORTANT: Return your analysis as a function call using the analyze_emotions to
       userContent = [
         {
           type: "text",
-          text: `Analyze this audio transcription from a learning session. Detect all 9 emotional states from speech patterns, word choice, and described feelings. Audio type: ${uploadType}. 
-          
-Note: Since this is audio-only, focus on vocal indicators like speech pace, word choice, and expressed frustrations.`
+          text: `Deeply analyze this audio from a session. Go beyond surface emotions - detect HIDDEN emotions (underlying anxiety, insecurity, loneliness, guilt) and SUPPRESSED emotions (held-back anger, sadness, fear, desire). Listen for vocal inconsistencies, pauses, breathing patterns, and emotional masking in speech.`
         }
       ];
     }
@@ -97,70 +120,55 @@ Note: Since this is audio-only, focus on vocal indicators like speech pace, word
             type: "function",
             function: {
               name: "analyze_emotions",
-              description: "Return the emotion analysis results with 9 emotions",
+              description: "Return deep emotion analysis including surface, hidden, and suppressed emotions",
               parameters: {
                 type: "object",
                 properties: {
-                  happiness: { 
-                    type: "number", 
-                    description: "Happiness level from 0-100" 
-                  },
-                  sadness: { 
-                    type: "number", 
-                    description: "Sadness level from 0-100" 
-                  },
-                  anger: { 
-                    type: "number", 
-                    description: "Anger level from 0-100" 
-                  },
-                  fear: { 
-                    type: "number", 
-                    description: "Fear level from 0-100" 
-                  },
-                  surprise: { 
-                    type: "number", 
-                    description: "Surprise level from 0-100" 
-                  },
-                  disgust: { 
-                    type: "number", 
-                    description: "Disgust level from 0-100" 
-                  },
-                  confusion: { 
-                    type: "number", 
-                    description: "Confusion level from 0-100" 
-                  },
-                  focus: { 
-                    type: "number", 
-                    description: "Focus level from 0-100" 
-                  },
-                  excitement: { 
-                    type: "number", 
-                    description: "Excitement level from 0-100" 
-                  },
-                  accuracy: { 
-                    type: "number", 
-                    description: "Confidence in analysis accuracy from 70-95" 
-                  },
+                  // Surface Emotions
+                  happiness: { type: "number", description: "Surface happiness level 0-100" },
+                  sadness: { type: "number", description: "Surface sadness level 0-100" },
+                  anger: { type: "number", description: "Surface anger level 0-100" },
+                  fear: { type: "number", description: "Surface fear level 0-100" },
+                  surprise: { type: "number", description: "Surface surprise level 0-100" },
+                  disgust: { type: "number", description: "Surface disgust level 0-100" },
+                  // Hidden Emotions
+                  hiddenAnxiety: { type: "number", description: "Hidden anxiety beneath the surface 0-100" },
+                  hiddenInsecurity: { type: "number", description: "Hidden insecurity/self-doubt 0-100" },
+                  hiddenLoneliness: { type: "number", description: "Hidden loneliness/isolation 0-100" },
+                  hiddenGuilt: { type: "number", description: "Hidden guilt/regret 0-100" },
+                  // Suppressed Emotions
+                  suppressedAnger: { type: "number", description: "Suppressed/held-back anger 0-100" },
+                  suppressedSadness: { type: "number", description: "Suppressed/held-back sadness 0-100" },
+                  suppressedFear: { type: "number", description: "Suppressed/held-back fear 0-100" },
+                  suppressedDesire: { type: "number", description: "Suppressed wants/needs 0-100" },
+                  // Meta States
+                  emotionalMasking: { type: "number", description: "How much they're masking true feelings 0-100" },
+                  innerConflict: { type: "number", description: "Internal emotional tension level 0-100" },
+                  accuracy: { type: "number", description: "Confidence in analysis 70-95" },
                   suggestions: {
                     type: "array",
                     items: {
                       type: "object",
                       properties: {
                         title: { type: "string", description: "Short actionable title with emoji" },
-                        description: { type: "string", description: "Helpful supportive description" },
-                        icon: { type: "string", enum: ["coffee", "lightbulb", "focus", "timer", "stretch", "music", "heart", "star", "sparkles"] },
-                        variant: { type: "string", enum: ["pink", "lavender", "mint", "sky", "yellow", "peach", "rose"] }
+                        description: { type: "string", description: "Helpful supportive description addressing hidden/suppressed emotions" },
+                        icon: { type: "string", enum: ["coffee", "lightbulb", "focus", "timer", "stretch", "music", "heart", "star", "sparkles", "shield", "eye", "unlock"] },
+                        variant: { type: "string", enum: ["pink", "lavender", "mint", "sky", "yellow", "peach", "rose", "purple", "red"] }
                       },
                       required: ["title", "description", "icon", "variant"]
                     },
-                    description: "3-5 personalized suggestions based on detected emotions"
+                    description: "3-5 suggestions addressing both surface and hidden emotional needs"
                   },
                   advice: {
                     type: "string",
-                    description: "A warm, encouraging paragraph of overall advice for improving the learning experience based on the emotional profile"
+                    description: "Warm, empathetic advice acknowledging what they're showing AND what they might be hiding"
+                  },
+                  deepInsight: {
+                    type: "string",
+                    description: "A profound insight about their hidden emotional patterns and what they might need to acknowledge or release"
                   }
                 },
-                required: ["happiness", "sadness", "anger", "fear", "surprise", "disgust", "confusion", "focus", "excitement", "accuracy", "suggestions", "advice"]
+                required: ["happiness", "sadness", "anger", "fear", "surprise", "disgust", "hiddenAnxiety", "hiddenInsecurity", "hiddenLoneliness", "hiddenGuilt", "suppressedAnger", "suppressedSadness", "suppressedFear", "suppressedDesire", "emotionalMasking", "innerConflict", "accuracy", "suggestions", "advice", "deepInsight"]
               }
             }
           }

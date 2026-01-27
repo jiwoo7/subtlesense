@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { Brain, Clock, Coffee, Lightbulb, Target, Sparkles, Headphones, Video, Camera, Focus } from "lucide-react";
+import { Brain, Clock, Coffee, Lightbulb, Target, Sparkles, Headphones, Video, Camera, Shield, Eye, Unlock, Heart } from "lucide-react";
 import EmotionGauge from "./EmotionGauge";
 import SuggestionCard from "./SuggestionCard";
-import type { AnalysisResult } from "@/pages/Dashboard";
+import type { AnalysisResult } from "@/types/emotions";
+import { SURFACE_EMOTIONS, HIDDEN_EMOTIONS, SUPPRESSED_EMOTIONS, META_EMOTIONS } from "@/types/emotions";
 
 interface AnalysisDashboardProps {
   isAnalyzed: boolean;
@@ -12,33 +13,33 @@ interface AnalysisDashboardProps {
 const getSuggestions = (result: AnalysisResult) => {
   const suggestions = [];
   
-  // High confusion suggestions
-  if (result.confusion > 60) {
+  // Hidden anxiety suggestions
+  if (result.hiddenAnxiety > 50) {
     suggestions.push({
       icon: Lightbulb,
-      title: "Try a Simpler Example 💡",
-      description: "Breaking concepts into bite-sized pieces makes learning easier and more fun.",
+      title: "Release Hidden Tension 🧘",
+      description: "You might be carrying more anxiety than you realize. Try a 2-minute breathing exercise.",
       variant: "lavender" as const,
     });
   }
   
-  // High anger suggestions
-  if (result.anger > 50) {
+  // Suppressed anger suggestions
+  if (result.suppressedAnger > 50) {
     suggestions.push({
       icon: Coffee,
-      title: "Take a 2-Minute Break ☕",
-      description: "A short pause reduces frustration by 40% and helps restore your focus!",
+      title: "Express What You're Holding 💭",
+      description: "It's okay to feel frustrated. Write it down or talk to someone you trust.",
       metric: "-40%",
       variant: "pink" as const,
     });
   }
   
-  // Low focus suggestions
-  if (result.focus < 60) {
+  // High emotional masking
+  if (result.emotionalMasking > 60) {
     suggestions.push({
-      icon: Focus,
-      title: "Remove Distractions 🎧",
-      description: "Try closing extra tabs and silencing notifications for deeper concentration.",
+      icon: Shield,
+      title: "It's Safe to Be You 🫂",
+      description: "You're putting energy into maintaining a facade. Consider spaces where you can be authentic.",
       variant: "sky" as const,
     });
   }
@@ -47,37 +48,37 @@ const getSuggestions = (result: AnalysisResult) => {
   if (result.uploadType === "webcam") {
     suggestions.push({
       icon: Camera,
-      title: "Your Facial Expressions Show Stress 😅",
-      description: "We noticed tension in your expression. Try some quick shoulder rolls!",
+      title: "Your Face Tells a Story 📸",
+      description: "We noticed micro-expressions beyond your smile. What's really on your mind?",
       variant: "mint" as const,
     });
   } else if (result.uploadType === "audio") {
     suggestions.push({
       icon: Headphones,
-      title: "Voice Patterns Indicate Fatigue 🎙️",
-      description: "Your voice shows signs of tiredness. A quick stretch might help!",
+      title: "Your Voice Reveals Depth 🎙️",
+      description: "Vocal patterns suggest there's more beneath the surface. Honor those feelings.",
       variant: "yellow" as const,
     });
   } else if (result.uploadType === "video") {
     suggestions.push({
       icon: Video,
-      title: "Body Language Check 📹",
-      description: "Your posture suggests you've been coding intensely. Time for a posture reset!",
+      title: "Body & Soul Connection 📹",
+      description: "Your body language shows what words don't say. Be gentle with yourself.",
       variant: "mint" as const,
     });
   }
   
-  // Always include debugging tip if confusion is moderate+
-  if (result.confusion > 40) {
+  // Inner conflict suggestion
+  if (result.innerConflict > 40) {
     suggestions.push({
       icon: Clock,
-      title: "Debug Step by Step 🔍",
-      description: "Use console.log to trace values — it's like being a detective in your own code!",
+      title: "Honor Both Sides 🔮",
+      description: "You're experiencing internal tension. Both feelings are valid - give them space.",
       variant: "mint" as const,
     });
   }
   
-  return suggestions.slice(0, 4); // Max 4 suggestions
+  return suggestions.slice(0, 4);
 };
 
 const getTypeLabel = (type: string | null) => {
@@ -112,31 +113,19 @@ const AnalysisDashboard = ({ isAnalyzed, analysisResult }: AnalysisDashboardProp
           animate={{ rotate: [0, 5, -5, 0] }}
           transition={{ duration: 3, repeat: Infinity }}
         >
-          <Brain className="w-10 h-10 text-pastel-lavender" />
+          <Brain className="w-10 h-10 text-neon-purple" />
         </motion.div>
         <h3 className="font-display text-xl font-bold text-foreground mb-2">
-          Ready When You Are! 🎯
+          Ready for Deep Analysis! 🔮
         </h3>
         <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mx-auto">
-          Upload a coding session and we'll help you understand your emotional patterns
+          Upload a session and we'll detect your hidden & suppressed emotions
         </p>
       </motion.div>
     );
   }
 
   const suggestions = getSuggestions(analysisResult);
-
-  const emotions = [
-    { label: "Happiness", value: analysisResult.happiness, color: "happiness" as const, emoji: "😊" },
-    { label: "Sadness", value: analysisResult.sadness, color: "sadness" as const, emoji: "😢" },
-    { label: "Anger", value: analysisResult.anger, color: "anger" as const, emoji: "😠" },
-    { label: "Fear", value: analysisResult.fear, color: "fear" as const, emoji: "😨" },
-    { label: "Surprise", value: analysisResult.surprise, color: "surprise" as const, emoji: "😲" },
-    { label: "Disgust", value: analysisResult.disgust, color: "disgust" as const, emoji: "🤢" },
-    { label: "Confusion", value: analysisResult.confusion, color: "confusion" as const, emoji: "🤔" },
-    { label: "Focus", value: analysisResult.focus, color: "focus" as const, emoji: "🎯" },
-    { label: "Excitement", value: analysisResult.excitement, color: "excitement" as const, emoji: "🤩" },
-  ];
 
   return (
     <div className="space-y-6">
@@ -148,51 +137,116 @@ const AnalysisDashboard = ({ isAnalyzed, analysisResult }: AnalysisDashboardProp
       >
         <div className="flex items-center gap-3 mb-2">
           <motion.div 
-            className="w-4 h-4 rounded-full bg-pastel-mint"
+            className="w-4 h-4 rounded-full bg-neon-pink"
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 1, repeat: Infinity }}
           />
-          <span className="text-sm font-semibold text-emerald-600">
+          <span className="text-sm font-semibold text-neon-pink">
             {getTypeEmoji(analysisResult.uploadType)} {getTypeLabel(analysisResult.uploadType)} Complete! ✨
           </span>
         </div>
         <h2 className="font-display text-2xl font-bold text-foreground">
-          Your Emotion Profile
+          Your Deep Emotion Profile
         </h2>
       </motion.div>
 
       {/* Accuracy badge */}
       <motion.div
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-full card-mint"
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-purple/20 border border-neon-purple/30"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <Target className="w-4 h-4 text-emerald-600" />
+        <Target className="w-4 h-4 text-neon-purple" />
         <span className="text-sm font-semibold">
-          <span className="text-emerald-600">{analysisResult.accuracy}%</span>
+          <span className="text-neon-purple">{analysisResult.accuracy}%</span>
           <span className="text-muted-foreground ml-1">Accuracy</span>
         </span>
       </motion.div>
 
-      {/* 9 Emotion gauges in grid */}
-      <div className="grid grid-cols-3 gap-4">
-        {emotions.map((emotion, index) => (
-          <EmotionGauge
-            key={emotion.label}
-            label={emotion.label}
-            value={Math.min(100, emotion.value || 0)}
-            color={emotion.color}
-            emoji={emotion.emoji}
-            delay={0.3 + index * 0.1}
-            size="sm"
-          />
-        ))}
+      {/* Surface Emotions */}
+      <div className="glass-panel rounded-2xl p-4">
+        <h4 className="text-sm font-semibold text-muted-foreground mb-3 flex items-center gap-2">
+          <Eye className="w-4 h-4" /> Surface Emotions
+        </h4>
+        <div className="grid grid-cols-3 gap-3">
+          {SURFACE_EMOTIONS.map((emotion, index) => (
+            <EmotionGauge
+              key={emotion.key}
+              label={emotion.label}
+              value={Math.min(100, (analysisResult[emotion.key] as number) || 0)}
+              color={emotion.color}
+              emoji={emotion.emoji}
+              delay={0.3 + index * 0.1}
+              size="sm"
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Hidden Emotions */}
+      <div className="glass-panel rounded-2xl p-4 border border-neon-purple/30">
+        <h4 className="text-sm font-semibold text-neon-purple mb-3 flex items-center gap-2">
+          <Shield className="w-4 h-4" /> Hidden Emotions
+        </h4>
+        <div className="grid grid-cols-2 gap-3">
+          {HIDDEN_EMOTIONS.map((emotion, index) => (
+            <EmotionGauge
+              key={emotion.key}
+              label={emotion.label}
+              value={Math.min(100, (analysisResult[emotion.key] as number) || 0)}
+              color={emotion.color}
+              emoji={emotion.emoji}
+              delay={0.5 + index * 0.1}
+              size="sm"
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Suppressed Emotions */}
+      <div className="glass-panel rounded-2xl p-4 border border-neon-red/30">
+        <h4 className="text-sm font-semibold text-neon-red mb-3 flex items-center gap-2">
+          <Unlock className="w-4 h-4" /> Suppressed Emotions
+        </h4>
+        <div className="grid grid-cols-2 gap-3">
+          {SUPPRESSED_EMOTIONS.map((emotion, index) => (
+            <EmotionGauge
+              key={emotion.key}
+              label={emotion.label}
+              value={Math.min(100, (analysisResult[emotion.key] as number) || 0)}
+              color={emotion.color}
+              emoji={emotion.emoji}
+              delay={0.7 + index * 0.1}
+              size="sm"
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Meta States */}
+      <div className="glass-panel rounded-2xl p-4">
+        <h4 className="text-sm font-semibold text-muted-foreground mb-3 flex items-center gap-2">
+          <Brain className="w-4 h-4" /> Emotional Awareness
+        </h4>
+        <div className="grid grid-cols-2 gap-3">
+          {META_EMOTIONS.map((emotion, index) => (
+            <EmotionGauge
+              key={emotion.key}
+              label={emotion.label}
+              value={Math.min(100, (analysisResult[emotion.key] as number) || 0)}
+              color={emotion.color}
+              emoji={emotion.emoji}
+              delay={0.9 + index * 0.1}
+              size="sm"
+            />
+          ))}
+        </div>
       </div>
 
       {/* Divider */}
       <motion.div
-        className="h-px bg-gradient-to-r from-transparent via-pastel-lavender to-transparent"
+        className="h-px bg-gradient-to-r from-transparent via-neon-purple to-transparent"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 0.8, delay: 0.8 }}
@@ -205,7 +259,7 @@ const AnalysisDashboard = ({ isAnalyzed, analysisResult }: AnalysisDashboardProp
         transition={{ duration: 0.5, delay: 1 }}
       >
         <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-pastel-yellow" />
+          <Sparkles className="w-5 h-5 text-neon-pink" />
           Personalized Tips for You
         </h3>
         

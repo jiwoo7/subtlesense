@@ -1,15 +1,22 @@
 import { motion } from "framer-motion";
 
+export type EmotionColor = 
+  | "happiness" | "sadness" | "anger" | "fear" | "surprise" | "disgust"
+  | "hiddenAnxiety" | "hiddenInsecurity" | "hiddenLoneliness" | "hiddenGuilt"
+  | "suppressedAnger" | "suppressedSadness" | "suppressedFear" | "suppressedDesire"
+  | "emotionalMasking" | "innerConflict";
+
 interface EmotionGaugeProps {
   label: string;
   value: number;
-  color: "happiness" | "sadness" | "anger" | "fear" | "surprise" | "disgust" | "confusion" | "focus" | "excitement";
+  color: EmotionColor;
   emoji: string;
   delay?: number;
   size?: "sm" | "md";
 }
 
-const colorMap = {
+const colorMap: Record<EmotionColor, { stroke: string; bg: string }> = {
+  // Surface emotions
   happiness: {
     stroke: "hsl(50, 85%, 60%)",
     bg: "hsla(50, 85%, 60%, 0.2)",
@@ -34,17 +41,48 @@ const colorMap = {
     stroke: "hsl(90, 50%, 50%)",
     bg: "hsla(90, 50%, 50%, 0.2)",
   },
-  confusion: {
-    stroke: "hsl(200, 70%, 70%)",
-    bg: "hsla(200, 70%, 70%, 0.2)",
+  // Hidden emotions
+  hiddenAnxiety: {
+    stroke: "hsl(270, 70%, 55%)",
+    bg: "hsla(270, 70%, 55%, 0.2)",
   },
-  focus: {
-    stroke: "hsl(270, 60%, 75%)",
-    bg: "hsla(270, 60%, 75%, 0.2)",
+  hiddenInsecurity: {
+    stroke: "hsl(200, 60%, 50%)",
+    bg: "hsla(200, 60%, 50%, 0.2)",
   },
-  excitement: {
-    stroke: "hsl(330, 75%, 65%)",
-    bg: "hsla(330, 75%, 65%, 0.2)",
+  hiddenLoneliness: {
+    stroke: "hsl(240, 50%, 60%)",
+    bg: "hsla(240, 50%, 60%, 0.2)",
+  },
+  hiddenGuilt: {
+    stroke: "hsl(320, 50%, 50%)",
+    bg: "hsla(320, 50%, 50%, 0.2)",
+  },
+  // Suppressed emotions
+  suppressedAnger: {
+    stroke: "hsl(0, 80%, 45%)",
+    bg: "hsla(0, 80%, 45%, 0.2)",
+  },
+  suppressedSadness: {
+    stroke: "hsl(210, 70%, 45%)",
+    bg: "hsla(210, 70%, 45%, 0.2)",
+  },
+  suppressedFear: {
+    stroke: "hsl(290, 60%, 50%)",
+    bg: "hsla(290, 60%, 50%, 0.2)",
+  },
+  suppressedDesire: {
+    stroke: "hsl(340, 75%, 55%)",
+    bg: "hsla(340, 75%, 55%, 0.2)",
+  },
+  // Meta states
+  emotionalMasking: {
+    stroke: "hsl(180, 50%, 45%)",
+    bg: "hsla(180, 50%, 45%, 0.2)",
+  },
+  innerConflict: {
+    stroke: "hsl(30, 80%, 50%)",
+    bg: "hsla(30, 80%, 50%, 0.2)",
   },
 };
 
@@ -55,7 +93,7 @@ const EmotionGauge = ({ label, value, color, emoji, delay = 0, size = "md" }: Em
   const center = isSm ? 42.5 : 65;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (value / 100) * circumference;
-  const colors = colorMap[color];
+  const colors = colorMap[color] || colorMap.happiness;
 
   return (
     <motion.div
@@ -77,8 +115,8 @@ const EmotionGauge = ({ label, value, color, emoji, delay = 0, size = "md" }: Em
             cx={center}
             cy={center}
             r={radius}
-            fill="white"
-            stroke="hsl(270, 30%, 92%)"
+            fill="hsl(var(--card))"
+            stroke="hsl(var(--border))"
             strokeWidth={isSm ? 6 : 10}
           />
           <motion.circle

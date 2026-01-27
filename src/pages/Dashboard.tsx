@@ -12,29 +12,7 @@ import StatsSection from "@/components/StatsSection";
 import FeedbackModal from "@/components/FeedbackModal";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-
-export type UploadType = "webcam" | "audio" | "video" | null;
-
-export interface AnalysisResult {
-  happiness: number;
-  sadness: number;
-  anger: number;
-  fear: number;
-  surprise: number;
-  disgust: number;
-  confusion: number;
-  focus: number;
-  excitement: number;
-  accuracy: number;
-  suggestions: Array<{
-    title: string;
-    description: string;
-    icon: string;
-    variant: string;
-  }>;
-  advice: string;
-  uploadType: UploadType;
-}
+import type { AnalysisResult, UploadType } from "@/types/emotions";
 
 const Dashboard = () => {
   const { user, loading } = useAuth();
@@ -63,9 +41,9 @@ const Dashboard = () => {
         const { data, error } = await supabase.from("emotion_sessions").insert({
           user_id: user.id,
           upload_type: result.uploadType,
-          confusion_level: result.confusion,
-          frustration_level: Math.round((result.anger + result.disgust) / 2),
-          focus_level: result.focus,
+          confusion_level: result.hiddenAnxiety,
+          frustration_level: Math.round((result.suppressedAnger + result.innerConflict) / 2),
+          focus_level: 100 - result.emotionalMasking,
           accuracy: result.accuracy,
           ai_suggestions: result.suggestions,
           ai_advice: result.advice
@@ -74,9 +52,8 @@ const Dashboard = () => {
         if (error) throw error;
         
         setLastSessionId(data?.id);
-        toast.success("Analysis saved to your history! 📊");
+        toast.success("Deep analysis saved! 🔮");
         
-        // Show feedback modal after a short delay
         setTimeout(() => {
           setShowFeedback(true);
         }, 2000);
@@ -130,27 +107,27 @@ const Dashboard = () => {
                   <div className="flex items-center gap-4">
                     <div className="relative">
                       <motion.div
-                        className="w-12 h-12 rounded-full border-3 border-pastel-pink border-t-transparent"
+                        className="w-12 h-12 rounded-full border-3 border-neon-pink border-t-transparent"
                         animate={{ rotate: 360 }}
                         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                       />
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-xl">🧠</span>
+                        <span className="text-xl">🔮</span>
                       </div>
                     </div>
                     <div>
                       <h4 className="font-display font-bold text-foreground">
-                        AI is Analyzing...
+                        Deep Emotion Analysis...
                       </h4>
                       <p className="text-sm text-muted-foreground">
-                        Detecting your emotional patterns ✨
+                        Detecting hidden & suppressed emotions ✨
                       </p>
                     </div>
                   </div>
                   
                   <div className="mt-4 h-2 bg-muted rounded-full overflow-hidden">
                     <motion.div
-                      className="h-full pastel-gradient"
+                      className="h-full bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red"
                       initial={{ width: "0%" }}
                       animate={{ width: "100%" }}
                       transition={{ duration: 8, ease: "easeInOut" }}
@@ -167,9 +144,9 @@ const Dashboard = () => {
                 transition={{ delay: 0.4 }}
               >
                 {[
-                  { label: "Detection", value: "Real-time", emoji: "⚡" },
+                  { label: "Detection", value: "16 Emotions", emoji: "🔮" },
                   { label: "Powered by", value: "Gemini AI", emoji: "🧠" },
-                  { label: "Response", value: "<5s", emoji: "🚀" },
+                  { label: "Detects", value: "Hidden + Suppressed", emoji: "🎭" },
                 ].map((stat) => (
                   <motion.div
                     key={stat.label}
@@ -177,7 +154,7 @@ const Dashboard = () => {
                     whileHover={{ y: -5 }}
                   >
                     <div className="text-2xl mb-1">{stat.emoji}</div>
-                    <p className="text-lg font-display font-bold gradient-text">
+                    <p className="text-sm font-display font-bold gradient-text">
                       {stat.value}
                     </p>
                     <p className="text-xs text-muted-foreground font-medium mt-1">
@@ -198,7 +175,6 @@ const Dashboard = () => {
         {activeTab === "analyze" && <StatsSection />}
       </div>
 
-      {/* Feedback Modal */}
       <FeedbackModal
         isOpen={showFeedback}
         onClose={() => setShowFeedback(false)}
