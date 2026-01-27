@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { Brain, Target, Sparkles, Coffee, Lightbulb, Clock, Focus, Headphones, Activity, Music, Heart, Star } from "lucide-react";
+import { Brain, Target, Sparkles, Coffee, Lightbulb, Clock, Focus, Headphones, Activity, Music, Heart, Star, Shield, Eye, Unlock } from "lucide-react";
 import EmotionGauge from "./EmotionGauge";
-import type { AnalysisResult } from "@/pages/Dashboard";
+import type { AnalysisResult } from "@/types/emotions";
+import { SURFACE_EMOTIONS, HIDDEN_EMOTIONS, SUPPRESSED_EMOTIONS, META_EMOTIONS } from "@/types/emotions";
 
 interface RealAnalysisDashboardProps {
   isAnalyzed: boolean;
@@ -18,7 +19,10 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   headphones: Headphones,
   heart: Heart,
   star: Star,
-  sparkles: Sparkles
+  sparkles: Sparkles,
+  shield: Shield,
+  eye: Eye,
+  unlock: Unlock,
 };
 
 const variantColors: Record<string, string> = {
@@ -27,15 +31,17 @@ const variantColors: Record<string, string> = {
   mint: "card-mint",
   sky: "card-sky",
   yellow: "card-yellow",
-  peach: "bg-orange-100/60",
-  rose: "bg-rose-100/60"
+  peach: "bg-orange-500/20 border border-orange-500/30",
+  rose: "bg-rose-500/20 border border-rose-500/30",
+  purple: "bg-purple-500/20 border border-purple-500/30",
+  red: "bg-red-500/20 border border-red-500/30",
 };
 
 const getTypeLabel = (type: string | null) => {
   switch (type) {
-    case "webcam": return "Webcam Analysis";
-    case "audio": return "Audio Analysis";
-    case "video": return "Video Analysis";
+    case "webcam": return "Deep Webcam Analysis";
+    case "audio": return "Deep Audio Analysis";
+    case "video": return "Deep Video Analysis";
     default: return "Session";
   }
 };
@@ -63,32 +69,20 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
           animate={{ rotate: [0, 5, -5, 0] }}
           transition={{ duration: 3, repeat: Infinity }}
         >
-          <Brain className="w-10 h-10 text-pastel-lavender" />
+          <Brain className="w-10 h-10 text-neon-purple" />
         </motion.div>
         <h3 className="font-display text-xl font-bold text-foreground mb-2">
-          Ready When You Are! 🎯
+          Ready for Deep Analysis! 🔮
         </h3>
         <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mx-auto">
-          Choose an input method and our AI will analyze your emotional state in real-time
+          Our AI detects hidden & suppressed emotions beyond the surface
         </p>
       </motion.div>
     );
   }
 
-  const emotions = [
-    { label: "Happiness", value: analysisResult.happiness, color: "happiness" as const, emoji: "😊" },
-    { label: "Sadness", value: analysisResult.sadness, color: "sadness" as const, emoji: "😢" },
-    { label: "Anger", value: analysisResult.anger, color: "anger" as const, emoji: "😠" },
-    { label: "Fear", value: analysisResult.fear, color: "fear" as const, emoji: "😨" },
-    { label: "Surprise", value: analysisResult.surprise, color: "surprise" as const, emoji: "😲" },
-    { label: "Disgust", value: analysisResult.disgust, color: "disgust" as const, emoji: "🤢" },
-    { label: "Confusion", value: analysisResult.confusion, color: "confusion" as const, emoji: "🤔" },
-    { label: "Focus", value: analysisResult.focus, color: "focus" as const, emoji: "🎯" },
-    { label: "Excitement", value: analysisResult.excitement, color: "excitement" as const, emoji: "🤩" },
-  ];
-
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-h-[80vh] overflow-y-auto pr-2">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -97,34 +91,34 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
       >
         <div className="flex items-center gap-3 mb-2">
           <motion.div 
-            className="w-4 h-4 rounded-full bg-pastel-mint"
+            className="w-4 h-4 rounded-full bg-neon-pink"
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 1, repeat: Infinity }}
           />
-          <span className="text-sm font-semibold text-emerald-600">
+          <span className="text-sm font-semibold text-neon-pink">
             {getTypeEmoji(analysisResult.uploadType)} {getTypeLabel(analysisResult.uploadType)} Complete! ✨
           </span>
         </div>
         <h2 className="font-display text-2xl font-bold text-foreground">
-          Your Emotion Profile
+          Your Deep Emotion Profile
         </h2>
       </motion.div>
 
       {/* Accuracy badge */}
       <motion.div
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-full card-mint"
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-purple/20 border border-neon-purple/30"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <Target className="w-4 h-4 text-emerald-600" />
+        <Target className="w-4 h-4 text-neon-purple" />
         <span className="text-sm font-semibold">
-          <span className="text-emerald-600">{analysisResult.accuracy}%</span>
+          <span className="text-neon-purple">{analysisResult.accuracy}%</span>
           <span className="text-muted-foreground ml-1">AI Confidence</span>
         </span>
       </motion.div>
 
-      {/* 9 Emotion gauges in grid */}
+      {/* Surface Emotions */}
       <motion.div
         className="glass-panel rounded-2xl p-6"
         initial={{ opacity: 0, y: 20 }}
@@ -132,15 +126,16 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
         transition={{ delay: 0.3 }}
       >
         <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-pastel-yellow" />
-          9 Emotion Analysis
+          <Eye className="w-5 h-5 text-neon-pink" />
+          Surface Emotions
+          <span className="text-xs font-normal text-muted-foreground">(What you show)</span>
         </h3>
         <div className="grid grid-cols-3 gap-4">
-          {emotions.map((emotion, index) => (
+          {SURFACE_EMOTIONS.map((emotion, index) => (
             <EmotionGauge
-              key={emotion.label}
+              key={emotion.key}
               label={emotion.label}
-              value={Math.min(100, emotion.value || 0)}
+              value={Math.min(100, (analysisResult[emotion.key] as number) || 0)}
               color={emotion.color}
               emoji={emotion.emoji}
               delay={0.3 + index * 0.1}
@@ -149,6 +144,102 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
           ))}
         </div>
       </motion.div>
+
+      {/* Hidden Emotions */}
+      <motion.div
+        className="glass-panel rounded-2xl p-6 border-2 border-neon-purple/30"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+      >
+        <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+          <Shield className="w-5 h-5 text-neon-purple" />
+          Hidden Emotions
+          <span className="text-xs font-normal text-muted-foreground">(What you feel but don't show)</span>
+        </h3>
+        <div className="grid grid-cols-2 gap-4">
+          {HIDDEN_EMOTIONS.map((emotion, index) => (
+            <EmotionGauge
+              key={emotion.key}
+              label={emotion.label}
+              value={Math.min(100, (analysisResult[emotion.key] as number) || 0)}
+              color={emotion.color}
+              emoji={emotion.emoji}
+              delay={0.5 + index * 0.1}
+              size="sm"
+            />
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Suppressed Emotions */}
+      <motion.div
+        className="glass-panel rounded-2xl p-6 border-2 border-neon-red/30"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.7 }}
+      >
+        <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+          <Unlock className="w-5 h-5 text-neon-red" />
+          Suppressed Emotions
+          <span className="text-xs font-normal text-muted-foreground">(What you're holding back)</span>
+        </h3>
+        <div className="grid grid-cols-2 gap-4">
+          {SUPPRESSED_EMOTIONS.map((emotion, index) => (
+            <EmotionGauge
+              key={emotion.key}
+              label={emotion.label}
+              value={Math.min(100, (analysisResult[emotion.key] as number) || 0)}
+              color={emotion.color}
+              emoji={emotion.emoji}
+              delay={0.7 + index * 0.1}
+              size="sm"
+            />
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Meta Emotional States */}
+      <motion.div
+        className="glass-panel rounded-2xl p-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.9 }}
+      >
+        <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+          <Brain className="w-5 h-5 text-neon-pink" />
+          Emotional Awareness
+        </h3>
+        <div className="grid grid-cols-2 gap-4">
+          {META_EMOTIONS.map((emotion, index) => (
+            <EmotionGauge
+              key={emotion.key}
+              label={emotion.label}
+              value={Math.min(100, (analysisResult[emotion.key] as number) || 0)}
+              color={emotion.color}
+              emoji={emotion.emoji}
+              delay={0.9 + index * 0.1}
+              size="sm"
+            />
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Deep Insight */}
+      {analysisResult.deepInsight && (
+        <motion.div
+          className="glass-panel rounded-2xl p-6 border-2 border-neon-purple/50 bg-gradient-to-br from-neon-purple/10 to-neon-pink/10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.1 }}
+        >
+          <h3 className="font-display text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-neon-purple" />
+            Deep Insight 🔮
+          </h3>
+          <p className="text-muted-foreground leading-relaxed italic">{analysisResult.deepInsight}</p>
+        </motion.div>
+      )}
 
       {/* AI Advice */}
       {analysisResult.advice && (
@@ -159,7 +250,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
           transition={{ delay: 1.2 }}
         >
           <h3 className="font-display text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-            <Brain className="w-5 h-5 text-pastel-lavender" />
+            <Heart className="w-5 h-5 text-neon-pink" />
             AI Insight
           </h3>
           <p className="text-muted-foreground leading-relaxed">{analysisResult.advice}</p>
@@ -168,7 +259,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
 
       {/* Divider */}
       <motion.div
-        className="h-px bg-gradient-to-r from-transparent via-pastel-lavender to-transparent"
+        className="h-px bg-gradient-to-r from-transparent via-neon-purple to-transparent"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 0.8, delay: 1.4 }}
@@ -181,7 +272,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
         transition={{ duration: 0.5, delay: 1.5 }}
       >
         <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-pastel-yellow" />
+          <Sparkles className="w-5 h-5 text-neon-pink" />
           Personalized Tips for You
         </h3>
         
@@ -199,7 +290,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
                 transition={{ delay: 1.6 + index * 0.15 }}
                 whileHover={{ scale: 1.02 }}
               >
-                <div className="w-10 h-10 rounded-xl bg-white/50 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-background/50 flex items-center justify-center flex-shrink-0">
                   <IconComponent className="w-5 h-5" />
                 </div>
                 <div>
