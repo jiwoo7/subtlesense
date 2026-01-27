@@ -9,47 +9,36 @@ import ImportanceSection from "@/components/ImportanceSection";
 import UsersSection from "@/components/UsersSection";
 import HowItHelpsSection from "@/components/HowItHelpsSection";
 import CTASection from "@/components/CTASection";
-
-export type UploadType = "webcam" | "audio" | "video" | null;
-
-export interface AnalysisResult {
-  happiness: number;
-  sadness: number;
-  anger: number;
-  fear: number;
-  surprise: number;
-  disgust: number;
-  confusion: number;
-  focus: number;
-  excitement: number;
-  accuracy: number;
-  suggestions: Array<{
-    title: string;
-    description: string;
-    icon: string;
-    variant: string;
-  }>;
-  advice: string;
-  uploadType: UploadType;
-}
+import type { AnalysisResult, UploadType } from "@/types/emotions";
 
 const generateAnalysis = (type: UploadType): AnalysisResult => {
-  // Generate random values for demo
   const randomValue = () => Math.floor(Math.random() * 60) + 20;
 
   return {
+    // Surface Emotions
     happiness: randomValue(),
     sadness: randomValue(),
     anger: randomValue(),
     fear: randomValue(),
     surprise: randomValue(),
     disgust: randomValue(),
-    confusion: randomValue(),
-    focus: randomValue(),
-    excitement: randomValue(),
+    // Hidden Emotions
+    hiddenAnxiety: randomValue(),
+    hiddenInsecurity: randomValue(),
+    hiddenLoneliness: randomValue(),
+    hiddenGuilt: randomValue(),
+    // Suppressed Emotions
+    suppressedAnger: randomValue(),
+    suppressedSadness: randomValue(),
+    suppressedFear: randomValue(),
+    suppressedDesire: randomValue(),
+    // Meta States
+    emotionalMasking: randomValue(),
+    innerConflict: randomValue(),
     accuracy: Math.floor(Math.random() * 15) + 80,
     suggestions: [],
-    advice: "This is a demo analysis. Sign in to get real AI-powered emotion detection!",
+    advice: "This is a demo analysis. Sign in to get real AI-powered deep emotion detection!",
+    deepInsight: "Sign in to unlock deep insights about your hidden emotional patterns.",
     uploadType: type,
   };
 };
@@ -92,20 +81,20 @@ const Index = () => {
                 <div className="flex items-center gap-4">
                   <div className="relative">
                     <motion.div
-                      className="w-12 h-12 rounded-full border-3 border-pastel-pink border-t-transparent"
+                      className="w-12 h-12 rounded-full border-3 border-neon-pink border-t-transparent"
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-xl">🔍</span>
+                      <span className="text-xl">🔮</span>
                     </div>
                   </div>
                   <div>
                     <h4 className="font-display font-bold text-foreground">
-                      Analyzing Your Session...
+                      Deep Analysis in Progress...
                     </h4>
                     <p className="text-sm text-muted-foreground">
-                      Reading your emotional patterns ✨
+                      Detecting hidden emotional patterns ✨
                     </p>
                   </div>
                 </div>
@@ -113,7 +102,7 @@ const Index = () => {
                 {/* Progress bar */}
                 <div className="mt-4 h-2 bg-muted rounded-full overflow-hidden">
                   <motion.div
-                    className="h-full pastel-gradient"
+                    className="h-full bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red"
                     initial={{ width: "0%" }}
                     animate={{ width: "100%" }}
                     transition={{ duration: 2, ease: "easeInOut" }}
@@ -130,9 +119,9 @@ const Index = () => {
               transition={{ delay: 0.4 }}
             >
               {[
-                { label: "Detection", value: "Real-time", emoji: "⚡" },
-                { label: "Accuracy", value: "82%", emoji: "🎯" },
-                { label: "Response", value: "<50ms", emoji: "🚀" },
+                { label: "Emotions", value: "16 Types", emoji: "🔮" },
+                { label: "Detects", value: "Hidden", emoji: "🎭" },
+                { label: "Response", value: "<5s", emoji: "🚀" },
               ].map((stat) => (
                 <motion.div
                   key={stat.label}
@@ -178,7 +167,7 @@ const Index = () => {
           viewport={{ once: true }}
         >
           <p className="text-sm text-muted-foreground">
-            Made with 💜 for learners everywhere • Privacy-first • Your emotions, your data
+            Made with 💜 by Naiyya Thapa • Privacy-first • Your emotions, your data
           </p>
         </motion.footer>
       </div>

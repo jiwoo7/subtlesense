@@ -4,7 +4,7 @@ import { Upload, Camera, Mic, Video, X, Play, Pause } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import type { AnalysisResult, UploadType } from "@/pages/Dashboard";
+import type { AnalysisResult, UploadType } from "@/types/emotions";
 
 interface MediaUploadZoneProps {
   onStartAnalysis: () => void;
