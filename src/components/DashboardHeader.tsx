@@ -60,7 +60,7 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
           
           <div>
             <h1 className="font-display text-2xl font-extrabold gradient-text">
-              EmotionAI
+              Subtle Sense
             </h1>
             <p className="text-xs text-muted-foreground font-medium">
               Welcome back! ✨

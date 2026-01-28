@@ -37,7 +37,7 @@ const Auth = () => {
         if (error) {
           toast.error(error.message);
         } else {
-          toast.success("Welcome to EmotionAI! 🎉");
+          toast.success("Welcome to Subtle Sense! 🎉");
           navigate("/dashboard");
         }
       } else {
@@ -84,7 +84,7 @@ const Auth = () => {
               <Heart className="w-7 h-7 text-white fill-white" />
             </div>
             <div>
-              <h1 className="font-display text-2xl font-bold gradient-text">EmotionAI</h1>
+              <h1 className="font-display text-2xl font-bold gradient-text">Subtle Sense</h1>
               <p className="text-xs text-muted-foreground">Your Learning Companion</p>
             </div>
           </div>
