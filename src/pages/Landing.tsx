@@ -57,7 +57,7 @@ const Landing = () => {
               >
                 <Heart className="w-6 h-6 text-white fill-white" />
               </motion.div>
-              <span className="font-display text-2xl font-bold gradient-text">EmotionAI</span>
+              <span className="font-display text-2xl font-bold gradient-text">Subtle Sense</span>
             </div>
             <div className="flex items-center gap-4">
               <Button 
