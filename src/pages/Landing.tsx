@@ -158,7 +158,7 @@ const Landing = () => {
             viewport={{ once: true }}
           >
             <h2 className="font-display text-4xl font-bold mb-4">
-              How EmotionAI Works 🔮
+              How Subtle Sense Works 🔮
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Deep analysis that reveals what's beneath the surface
@@ -244,7 +244,7 @@ const Landing = () => {
                 Ready to Discover Your True Emotions? ✨
               </h2>
               <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-8">
-                Join users who have uncovered their hidden emotional patterns with EmotionAI
+                Join users who have uncovered their hidden emotional patterns with Subtle Sense
               </p>
               <Button
                 size="lg"

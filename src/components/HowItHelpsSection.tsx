@@ -54,7 +54,7 @@ const HowItHelpsSection = () => {
           How We Help You Succeed 🚀
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          EmotionAI is like having a supportive friend who understands the 
+          Subtle Sense is like having a supportive friend who understands the 
           emotional challenges of coding and knows exactly how to help.
         </p>
       </motion.div>

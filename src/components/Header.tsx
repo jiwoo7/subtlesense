@@ -47,7 +47,7 @@ const Header = () => {
           
           <div>
             <h1 className="font-display text-3xl font-extrabold gradient-text">
-              EmotionAI
+              Subtle Sense
             </h1>
             <p className="text-sm text-muted-foreground font-medium tracking-wide">
               Your Friendly Learning Companion ✨

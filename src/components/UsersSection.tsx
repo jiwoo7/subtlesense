@@ -61,7 +61,7 @@ const UsersSection = () => {
         transition={{ duration: 0.6 }}
       >
         <h2 className="font-display text-3xl md:text-4xl font-extrabold gradient-text mb-4">
-          Who Uses EmotionAI? 🌈
+          Who Uses Subtle Sense? 🌈
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
           From first-time coders to seasoned professionals, we're here to support 
