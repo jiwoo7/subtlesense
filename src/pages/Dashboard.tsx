@@ -10,6 +10,7 @@ import SessionHistory from "@/components/SessionHistory";
 import MoodBoard from "@/components/MoodBoard";
 import StatsSection from "@/components/StatsSection";
 import FeedbackModal from "@/components/FeedbackModal";
+import WelcomeMessage from "@/components/WelcomeMessage";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { AnalysisResult, UploadType } from "@/types/emotions";
@@ -86,12 +87,17 @@ const Dashboard = () => {
     <div className="min-h-screen relative overflow-hidden">
       <AnimatedBackground />
       
-      <div className="relative z-10 container mx-auto px-6 py-6 max-w-6xl">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-4 sm:py-6 max-w-6xl">
         <DashboardHeader activeTab={activeTab} setActiveTab={setActiveTab} />
 
         {activeTab === "analyze" && (
-          <div className="mt-8 grid lg:grid-cols-2 gap-8">
-            <div className="space-y-6">
+          <>
+            <div className="mt-4 sm:mt-6">
+              <WelcomeMessage />
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+            <div className="space-y-4 sm:space-y-6">
               <MediaUploadZone 
                 onStartAnalysis={handleStartAnalysis}
                 onAnalysisComplete={handleAnalysisComplete}
@@ -100,32 +106,32 @@ const Dashboard = () => {
               
               {isAnalyzing && (
                 <motion.div
-                  className="glass-panel rounded-2xl p-6"
+                  className="glass-panel rounded-xl sm:rounded-2xl p-4 sm:p-6"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="relative">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="relative flex-shrink-0">
                       <motion.div
-                        className="w-12 h-12 rounded-full border-3 border-neon-pink border-t-transparent"
+                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-3 border-neon-pink border-t-transparent"
                         animate={{ rotate: 360 }}
                         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                       />
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-xl">🔮</span>
+                        <span className="text-lg sm:text-xl">🔮</span>
                       </div>
                     </div>
-                    <div>
-                      <h4 className="font-display font-bold text-foreground">
+                    <div className="min-w-0">
+                      <h4 className="font-display font-bold text-foreground text-sm sm:text-base">
                         Deep Emotion Analysis...
                       </h4>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs sm:text-sm text-muted-foreground truncate">
                         Detecting hidden & suppressed emotions ✨
                       </p>
                     </div>
                   </div>
                   
-                  <div className="mt-4 h-2 bg-muted rounded-full overflow-hidden">
+                  <div className="mt-3 sm:mt-4 h-2 bg-muted rounded-full overflow-hidden">
                     <motion.div
                       className="h-full bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red"
                       initial={{ width: "0%" }}
@@ -136,9 +142,9 @@ const Dashboard = () => {
                 </motion.div>
               )}
 
-              {/* Quick stats */}
+              {/* Quick stats - Mobile optimized */}
               <motion.div
-                className="grid grid-cols-3 gap-3"
+                className="grid grid-cols-3 gap-2 sm:gap-3"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
@@ -150,14 +156,14 @@ const Dashboard = () => {
                 ].map((stat) => (
                   <motion.div
                     key={stat.label}
-                    className="glass-panel rounded-xl p-4 text-center"
+                    className="glass-panel rounded-lg sm:rounded-xl p-2 sm:p-4 text-center"
                     whileHover={{ y: -5 }}
                   >
-                    <div className="text-2xl mb-1">{stat.emoji}</div>
-                    <p className="text-sm font-display font-bold gradient-text">
+                    <div className="text-lg sm:text-2xl mb-1">{stat.emoji}</div>
+                    <p className="text-[10px] sm:text-sm font-display font-bold gradient-text leading-tight">
                       {stat.value}
                     </p>
-                    <p className="text-xs text-muted-foreground font-medium mt-1">
+                    <p className="text-[9px] sm:text-xs text-muted-foreground font-medium mt-0.5 sm:mt-1">
                       {stat.label}
                     </p>
                   </motion.div>
@@ -167,6 +173,7 @@ const Dashboard = () => {
 
             <RealAnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
           </div>
+          </>
         )}
 
         {activeTab === "history" && <SessionHistory />}
