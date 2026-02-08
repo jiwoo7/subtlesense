@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Heart, Sparkles, Star, ArrowRight, Brain, Shield, Zap, Users } from "lucide-react";
+import { Heart, Sparkles, Star, ArrowRight, Brain, Shield, Zap, Users, Play } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import FeedbacksSection from "@/components/FeedbacksSection";
@@ -109,19 +109,19 @@ const Landing = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4">
               <Button
                 size="lg"
-                onClick={() => navigate("/auth")}
+                onClick={() => navigate("/demo")}
                 className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-xl w-full sm:w-auto"
               >
-                Start Deep Analysis
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
+                <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                Try Demo
               </Button>
               <Button
                 size="lg"
-                variant="outline"
-                className="font-semibold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 border-neon-purple/50 hover:bg-neon-purple/10 w-full sm:w-auto"
-                onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => navigate("/auth")}
+                className="font-semibold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 border-2 border-neon-purple/50 bg-transparent hover:bg-neon-purple/10 w-full sm:w-auto"
               >
-                Learn More
+                Get Started Free
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
               </Button>
             </div>
 
