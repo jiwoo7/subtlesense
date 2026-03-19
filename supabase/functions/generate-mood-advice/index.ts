@@ -75,9 +75,13 @@ Provide personalized advice to help them improve their learning experience.`;
                     type: "array",
                     items: { type: "string" },
                     description: "4-5 things to avoid doing"
+                  },
+                  trendExplanation: {
+                    type: "string",
+                    description: "2-3 sentence analysis of how emotions are trending over time and what to expect"
                   }
                 },
-                required: ["summary", "overallMood", "doList", "dontList"]
+                required: ["summary", "overallMood", "doList", "dontList", "trendExplanation"]
               }
             }
           }
