@@ -25,3 +25,7 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## How many users are using this application?
+
+
+Right now, we have happy 600+ users using this application.
