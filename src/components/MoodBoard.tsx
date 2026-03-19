@@ -4,6 +4,8 @@ import { BarChart3, TrendingUp, TrendingDown, Target, Brain, AlertCircle, CheckC
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { format } from "date-fns";
 
 interface SessionStats {
   totalSessions: number;
