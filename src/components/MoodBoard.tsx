@@ -84,6 +84,15 @@ const MoodBoard = () => {
         focusTrend: getTrend("focus_level")
       });
 
+      // Build chart data (reversed so oldest first)
+      const chartPoints = sessions.slice(0, 20).reverse().map(s => ({
+        date: format(new Date(s.created_at), "MMM d"),
+        confusion: s.confusion_level,
+        frustration: s.frustration_level,
+        focus: s.focus_level,
+      }));
+      setChartData(chartPoints);
+
       // Generate AI advice
       generateAdvice(avgConfusion, avgFrustration, avgFocus);
     } catch (error) {
