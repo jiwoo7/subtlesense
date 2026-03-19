@@ -22,6 +22,7 @@ interface MoodAdvice {
   dontList: string[];
   overallMood: "positive" | "neutral" | "needs-attention";
   summary: string;
+  trendExplanation?: string;
 }
 
 const MoodBoard = () => {
