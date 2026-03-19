@@ -4,6 +4,8 @@ import { BarChart3, TrendingUp, TrendingDown, Target, Brain, AlertCircle, CheckC
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { format } from "date-fns";
 
 interface SessionStats {
   totalSessions: number;
@@ -20,12 +22,14 @@ interface MoodAdvice {
   dontList: string[];
   overallMood: "positive" | "neutral" | "needs-attention";
   summary: string;
+  trendExplanation?: string;
 }
 
 const MoodBoard = () => {
   const { user } = useAuth();
   const [stats, setStats] = useState<SessionStats | null>(null);
   const [advice, setAdvice] = useState<MoodAdvice | null>(null);
+  const [chartData, setChartData] = useState<Array<{ date: string; confusion: number; frustration: number; focus: number }>>([]);
   const [loading, setLoading] = useState(true);
   const [generatingAdvice, setGeneratingAdvice] = useState(false);
 
@@ -79,6 +83,15 @@ const MoodBoard = () => {
         frustrationTrend: getTrend("frustration_level"),
         focusTrend: getTrend("focus_level")
       });
+
+      // Build chart data (reversed so oldest first)
+      const chartPoints = sessions.slice(0, 20).reverse().map(s => ({
+        date: format(new Date(s.created_at), "MMM d"),
+        confusion: s.confusion_level,
+        frustration: s.frustration_level,
+        focus: s.focus_level,
+      }));
+      setChartData(chartPoints);
 
       // Generate AI advice
       generateAdvice(avgConfusion, avgFrustration, avgFocus);
@@ -254,6 +267,53 @@ const MoodBoard = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Emotion Trends Graph */}
+      {chartData.length > 1 && (
+        <motion.div
+          className="glass-panel rounded-2xl p-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45 }}
+        >
+          <h3 className="font-display text-lg font-bold mb-4">📈 Emotion Trends</h3>
+          <div className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                <XAxis dataKey="date" tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }} />
+                <YAxis domain={[0, 100]} tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "hsl(var(--card))",
+                    border: "1px solid hsl(var(--border))",
+                    borderRadius: "12px",
+                    color: "hsl(var(--foreground))",
+                  }}
+                />
+                <Legend />
+                <Line type="monotone" dataKey="confusion" stroke="#7dd3fc" strokeWidth={2} dot={{ r: 3 }} name="Confusion" />
+                <Line type="monotone" dataKey="frustration" stroke="#fda4af" strokeWidth={2} dot={{ r: 3 }} name="Frustration" />
+                <Line type="monotone" dataKey="focus" stroke="#86efac" strokeWidth={2} dot={{ r: 3 }} name="Focus" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+          {advice?.trendExplanation && (
+            <motion.div
+              className="mt-4 p-4 rounded-xl bg-muted/50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <Brain className="w-4 h-4 text-pastel-lavender" />
+                <span className="text-sm font-semibold text-foreground">AI Trend Analysis</span>
+              </div>
+              <p className="text-sm text-muted-foreground">{advice.trendExplanation}</p>
+            </motion.div>
+          )}
+        </motion.div>
+      )}
 
       {/* AI Summary */}
       {advice && (

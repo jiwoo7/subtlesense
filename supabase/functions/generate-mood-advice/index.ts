@@ -25,6 +25,7 @@ Return your advice using the generate_advice function with:
 - 4-5 actionable "do" recommendations
 - 4-5 things to avoid ("don't" recommendations)
 - Overall mood assessment (positive, neutral, or needs-attention)
+- A trend explanation (2-3 sentences) analyzing how their emotions have been changing over time, explaining likely causes and what they should expect going forward
 
 Be warm, supportive, and specific. Focus on practical tips for improving the learning experience.`;
 
@@ -74,9 +75,13 @@ Provide personalized advice to help them improve their learning experience.`;
                     type: "array",
                     items: { type: "string" },
                     description: "4-5 things to avoid doing"
+                  },
+                  trendExplanation: {
+                    type: "string",
+                    description: "2-3 sentence analysis of how emotions are trending over time and what to expect"
                   }
                 },
-                required: ["summary", "overallMood", "doList", "dontList"]
+                required: ["summary", "overallMood", "doList", "dontList", "trendExplanation"]
               }
             }
           }
