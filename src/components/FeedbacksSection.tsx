@@ -65,8 +65,10 @@ const FeedbacksSection = () => {
         .order("created_at", { ascending: false })
         .limit(6);
 
-      if (data) {
+      if (data && data.length > 0) {
         setFeedbacks(data);
+      } else {
+        setFeedbacks(PLACEHOLDER_FEEDBACKS);
       }
     } catch (error) {
       console.error("Failed to fetch feedbacks:", error);
