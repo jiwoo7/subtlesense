@@ -29,6 +29,7 @@ const MoodBoard = () => {
   const { user } = useAuth();
   const [stats, setStats] = useState<SessionStats | null>(null);
   const [advice, setAdvice] = useState<MoodAdvice | null>(null);
+  const [chartData, setChartData] = useState<Array<{ date: string; confusion: number; frustration: number; focus: number }>>([]);
   const [loading, setLoading] = useState(true);
   const [generatingAdvice, setGeneratingAdvice] = useState(false);
 
