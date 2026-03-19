@@ -7,7 +7,7 @@
 You can use this app to identify your own emotion which you sometimes hide or supressed due to fear of judgement... 
 Everyone does. I did it too, Thats why i thought why should i hide my emotions.. 
 
-I should explore about that and how not to hide it and express more openly with fearing. 
+I should explore about that and how not to hide it and express more openly without fearing. 
 
 Anyone can use this application it could be teacher who want to examine studdent's emotion for more healthy studying environment
 
