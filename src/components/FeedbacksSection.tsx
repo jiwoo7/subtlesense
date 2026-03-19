@@ -10,6 +10,45 @@ interface Feedback {
   created_at: string;
 }
 
+const PLACEHOLDER_FEEDBACKS: Feedback[] = [
+  {
+    id: "placeholder-1",
+    feedback_text: "SubtleSense helped me understand emotions I didn't even know I was hiding. The AI analysis is incredibly accurate and the suggestions are practical!",
+    rating: 5,
+    created_at: "2026-02-15T10:00:00Z",
+  },
+  {
+    id: "placeholder-2",
+    feedback_text: "I use this every week to check in with myself. The mood board trends really opened my eyes to patterns in my emotional wellbeing.",
+    rating: 5,
+    created_at: "2026-02-28T14:30:00Z",
+  },
+  {
+    id: "placeholder-3",
+    feedback_text: "The hidden emotion detection is a game-changer. It picked up on stress I was suppressing and gave me actionable advice to deal with it.",
+    rating: 4,
+    created_at: "2026-03-05T09:15:00Z",
+  },
+  {
+    id: "placeholder-4",
+    feedback_text: "Simple, beautiful interface and the AI actually understands nuance. Way better than basic mood trackers I've tried before.",
+    rating: 5,
+    created_at: "2026-03-10T16:45:00Z",
+  },
+  {
+    id: "placeholder-5",
+    feedback_text: "Tried the demo and immediately signed up. The depth of emotion analysis from just a short video clip blew my mind!",
+    rating: 5,
+    created_at: "2026-03-12T11:20:00Z",
+  },
+  {
+    id: "placeholder-6",
+    feedback_text: "Great tool for self-awareness. The weekly mood reports helped me realize how much my sleep affects my emotional state.",
+    rating: 4,
+    created_at: "2026-03-14T08:00:00Z",
+  },
+];
+
 const FeedbacksSection = () => {
   const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
   const [loading, setLoading] = useState(true);
@@ -26,8 +65,10 @@ const FeedbacksSection = () => {
         .order("created_at", { ascending: false })
         .limit(6);
 
-      if (data) {
+      if (data && data.length > 0) {
         setFeedbacks(data);
+      } else {
+        setFeedbacks(PLACEHOLDER_FEEDBACKS);
       }
     } catch (error) {
       console.error("Failed to fetch feedbacks:", error);
@@ -72,9 +113,6 @@ const FeedbacksSection = () => {
     );
   }
 
-  if (feedbacks.length === 0) {
-    return null;
-  }
 
   return (
     <motion.section
