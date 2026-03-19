@@ -113,9 +113,6 @@ const FeedbacksSection = () => {
     );
   }
 
-  if (feedbacks.length === 0) {
-    return null;
-  }
 
   return (
     <motion.section
