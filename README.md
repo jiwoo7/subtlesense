@@ -37,4 +37,6 @@ Achieved 82% hidden emotion accuracy (tested by real people)
 ## Real reviews from people using this application-
 <img width="1895" height="943" alt="image" src="https://github.com/user-attachments/assets/bac479c1-f2be-4d8c-9b42-39e343b11e4e" />
 
+## Working Demo of SubtleSence
 
+https://streamable.com/u04l1d
