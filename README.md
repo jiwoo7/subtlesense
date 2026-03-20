@@ -4,16 +4,13 @@
 
 ## Why Should i use this app?
 
-You can use this app to identify your own emotion which you sometimes hide or supressed due to fear of judgement... 
-Everyone does. I did it too, Thats why i thought why should i hide my emotions.. 
+This application enables users to identify emotions they may unconsciously hide or suppress due to fear of judgment. Such behavior is common, and it inspired the idea behind this platform. Rather than concealing emotions, individuals should be encouraged to explore and understand them, and to express themselves more openly without fear.
 
-I should explore about that and how not to hide it and express more openly without fearing. 
+The application is designed for a wide range of users. Educators, for instance, can utilize it to better understand students’ emotional states, thereby fostering a healthier and more supportive learning environment.
 
-Anyone can use this application it could be teacher who want to examine studdent's emotion for more healthy studying environment
+Researchers may also benefit from this tool, as it aligns with the principles of Affective Computing and Emotion AI. It can serve as a practical resource for studying human emotions and behavioral patterns.
 
-Reasearchers can use this to research about Affective computing or similar areas of studies because this app is insipired by affective computing or Emotion AI.
-
-In Hospitals, it could be a great app because it could sense early stages of depression or anziety in patients
+In healthcare settings, the application holds significant potential. It can assist in identifying early signs of conditions such as depression or anxiety, enabling timely intervention and improved patient care.
 
 ## What technologies are used for this project?
 
