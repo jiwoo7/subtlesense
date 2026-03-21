@@ -128,7 +128,7 @@ An independent research paper exploring ethnic-specific bias in micro-expression
 
 ## About the Builder
 
-SubtleSense was independently conceived, designed, and built by **Naiyya Thapa**, a high school student from Dharamsala, India, with a focus on Emotion AI, affective computing, and ethical human-computer interaction.
+SubtleSense was independently conceived, designed, and built by **Naiyya Thapa**, a high school student from Shimla, India, with a focus on Emotion AI, affective computing, and ethical human-computer interaction.
 
 This is not a school project. It is a real product, built to solve a real problem.
 
