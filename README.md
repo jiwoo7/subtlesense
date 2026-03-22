@@ -17,6 +17,8 @@ Built on principles from affective computing and micro-expression research, Subt
 
 The idea came from a personal observation: people routinely mask their real emotional states due to fear of judgment. SubtleSense was built to make those hidden states visible — to the person themselves, and to those who care about them.
 
+*130+ users tested the emotion detection demo across 567 visits*
+
 ---
 
 ## Live Demo
