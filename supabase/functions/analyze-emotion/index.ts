@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -6,24 +7,20 @@ const corsHeaders = {
 };
 
 interface EmotionAnalysis {
-  // Surface Emotions
   happiness: number;
   sadness: number;
   anger: number;
   fear: number;
   surprise: number;
   disgust: number;
-  // Hidden Emotions
   hiddenAnxiety: number;
   hiddenInsecurity: number;
   hiddenLoneliness: number;
   hiddenGuilt: number;
-  // Suppressed Emotions
   suppressedAnger: number;
   suppressedSadness: number;
   suppressedFear: number;
   suppressedDesire: number;
-  // Meta States
   emotionalMasking: number;
   innerConflict: number;
   accuracy: number;
@@ -43,6 +40,30 @@ serve(async (req) => {
   }
 
   try {
+    // Verify authentication
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader?.startsWith('Bearer ')) {
+      return new Response(
+        JSON.stringify({ error: 'Missing authorization header' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const supabaseClient = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      { global: { headers: { Authorization: authHeader } } }
+    );
+
+    const token = authHeader.replace('Bearer ', '');
+    const { data: claimsData, error: authError } = await supabaseClient.auth.getClaims(token);
+    if (authError || !claimsData?.claims) {
+      return new Response(
+        JSON.stringify({ error: 'Unauthorized' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     const { mediaBase64, mediaType, uploadType } = await req.json();
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
@@ -124,24 +145,20 @@ IMPORTANT: Return your analysis as a function call using the analyze_emotions to
               parameters: {
                 type: "object",
                 properties: {
-                  // Surface Emotions
                   happiness: { type: "number", description: "Surface happiness level 0-100" },
                   sadness: { type: "number", description: "Surface sadness level 0-100" },
                   anger: { type: "number", description: "Surface anger level 0-100" },
                   fear: { type: "number", description: "Surface fear level 0-100" },
                   surprise: { type: "number", description: "Surface surprise level 0-100" },
                   disgust: { type: "number", description: "Surface disgust level 0-100" },
-                  // Hidden Emotions
                   hiddenAnxiety: { type: "number", description: "Hidden anxiety beneath the surface 0-100" },
                   hiddenInsecurity: { type: "number", description: "Hidden insecurity/self-doubt 0-100" },
                   hiddenLoneliness: { type: "number", description: "Hidden loneliness/isolation 0-100" },
                   hiddenGuilt: { type: "number", description: "Hidden guilt/regret 0-100" },
-                  // Suppressed Emotions
                   suppressedAnger: { type: "number", description: "Suppressed/held-back anger 0-100" },
                   suppressedSadness: { type: "number", description: "Suppressed/held-back sadness 0-100" },
                   suppressedFear: { type: "number", description: "Suppressed/held-back fear 0-100" },
                   suppressedDesire: { type: "number", description: "Suppressed wants/needs 0-100" },
-                  // Meta States
                   emotionalMasking: { type: "number", description: "How much they're masking true feelings 0-100" },
                   innerConflict: { type: "number", description: "Internal emotional tension level 0-100" },
                   accuracy: { type: "number", description: "Confidence in analysis 70-95" },
@@ -190,8 +207,7 @@ IMPORTANT: Return your analysis as a function call using the analyze_emotions to
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-      const errorText = await response.text();
-      console.error("AI gateway error:", response.status, errorText);
+      console.error("AI gateway error:", response.status);
       throw new Error(`AI gateway error: ${response.status}`);
     }
 
@@ -211,7 +227,7 @@ IMPORTANT: Return your analysis as a function call using the analyze_emotions to
   } catch (error) {
     console.error("analyze-emotion error:", error);
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : "Unknown error" }),
+      JSON.stringify({ error: "An error occurred during analysis. Please try again." }),
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
