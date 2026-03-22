@@ -66,6 +66,15 @@ serve(async (req) => {
 
     const { mediaBase64, mediaType, uploadType } = await req.json();
 
+    // Validate uploadType to prevent injection
+    const allowedUploadTypes = ['webcam', 'audio', 'video'];
+    if (!allowedUploadTypes.includes(uploadType)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid upload type. Must be webcam, audio, or video.' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
