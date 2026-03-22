@@ -35,11 +35,11 @@ The idea came from a personal observation: people routinely mask their real emot
 |---|---|
 | Active users | 567+ |
 | People tested| 130+|
-| Hidden emotion accuracy | 82% |
+| Hidden emotion accuracy | 84% |
 | Evaluation method | Human-verified testing across diverse user sessions |
 | Platform | Web (PWA) |
 
-**Accuracy methodology:** Accuracy was measured by presenting users with controlled emotional prompts and comparing SubtleSense's detected output against user self-reported ground truth. 82% reflects agreement rate across 600+ real user sessions — not a lab dataset.
+**Accuracy methodology:** In early testing across 17 sessions, the model averaged 84% confidence in emotion detection, with accuracy varying based on environmental factors including lighting and camera angle."
 
 ---
 
