@@ -38,6 +38,17 @@ serve(async (req) => {
 
     const { confusion, frustration, focus } = await req.json();
 
+    // Validate numeric inputs to prevent prompt injection
+    const isValidMetric = (v: unknown): v is number =>
+      typeof v === 'number' && isFinite(v) && v >= 0 && v <= 100;
+
+    if (!isValidMetric(confusion) || !isValidMetric(frustration) || !isValidMetric(focus)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid input: metrics must be numbers between 0 and 100' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");

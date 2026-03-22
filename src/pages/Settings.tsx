@@ -126,11 +126,13 @@ const Settings = () => {
 
       if (uploadError) throw uploadError;
 
-      const { data: urlData } = supabase.storage
+      const { data: signedData, error: signedError } = await supabase.storage
         .from("media")
-        .getPublicUrl(fileName);
+        .createSignedUrl(fileName, 60 * 60 * 24 * 365); // 1 year
 
-      setSettings(prev => ({ ...prev, avatar_url: urlData.publicUrl }));
+      if (signedError) throw signedError;
+
+      setSettings(prev => ({ ...prev, avatar_url: signedData.signedUrl }));
       toast.success("Avatar uploaded! Don't forget to save. 📸");
     } catch (error) {
       console.error("Error uploading avatar:", error);
