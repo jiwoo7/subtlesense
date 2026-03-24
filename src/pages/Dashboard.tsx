@@ -10,6 +10,8 @@ import SessionHistory from "@/components/SessionHistory";
 import MoodBoard from "@/components/MoodBoard";
 import StatsSection from "@/components/StatsSection";
 import FeedbackModal from "@/components/FeedbackModal";
+import ExitPoll from "@/components/ExitPoll";
+import ShareResults from "@/components/ShareResults";
 import WelcomeMessage from "@/components/WelcomeMessage";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
