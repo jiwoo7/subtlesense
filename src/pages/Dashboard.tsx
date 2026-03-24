@@ -177,6 +177,21 @@ const Dashboard = () => {
 
             <RealAnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
           </div>
+
+            {/* Post-analysis: Exit Poll + Share */}
+            {isAnalyzed && (
+              <div className="grid sm:grid-cols-2 gap-4 mt-4">
+                <ExitPoll
+                  isVisible={showExitPoll}
+                  sessionId={lastSessionId}
+                  onDismiss={() => setShowExitPoll(false)}
+                />
+                <ShareResults
+                  isVisible={showShare}
+                  analysisResult={analysisResult}
+                />
+              </div>
+            )}
           </>
         )}
 
