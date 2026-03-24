@@ -1,9 +1,13 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Heart, Sparkles, Star, ArrowRight, Brain, Shield, Zap, Users, Play } from "lucide-react";
+import { Heart, Sparkles, Star, ArrowRight, Brain, Shield, Zap, Users, ArrowDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import FeedbacksSection from "@/components/FeedbacksSection";
+import TransparencySection from "@/components/landing/TransparencySection";
+import SampleOutputSection from "@/components/landing/SampleOutputSection";
+import RealWorldUseCases from "@/components/landing/RealWorldUseCases";
+import InlineTrySection from "@/components/landing/InlineTrySection";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -37,17 +41,21 @@ const Landing = () => {
 
   const stats = [
     { value: "16", label: "Emotions Detected" },
-    { value: "Hidden", label: "Emotions Revealed" },
+    { value: "84.5%", label: "Avg Accuracy" },
     { value: "<5s", label: "Response time" },
     { value: "Deep", label: "AI Analysis" }
   ];
+
+  const scrollToTry = () => {
+    document.getElementById("try-it-out")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="min-h-screen relative overflow-hidden">
       <AnimatedBackground />
       
       <div className="relative z-10">
-        {/* Header - Mobile optimized */}
+        {/* Header */}
         <header className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
           <nav className="flex items-center justify-between">
             <div className="flex items-center gap-2 sm:gap-3">
@@ -68,16 +76,16 @@ const Landing = () => {
                 Sign In
               </Button>
               <Button 
-                onClick={() => navigate("/auth")}
+                onClick={scrollToTry}
                 className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-semibold shadow-lg text-sm sm:text-base px-3 sm:px-4"
               >
-                Get Started
+                Try It Out
               </Button>
             </div>
           </nav>
         </header>
 
-        {/* Hero Section - Mobile optimized */}
+        {/* Hero Section */}
         <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
           <motion.div
             className="text-center max-w-4xl mx-auto"
@@ -92,7 +100,7 @@ const Landing = () => {
               transition={{ delay: 0.2 }}
             >
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-neon-pink" />
-              <span className="text-xs sm:text-sm font-medium">Deep Emotion Analysis • Hidden & Suppressed Detection</span>
+              <span className="text-xs sm:text-sm font-medium">Powered by Gemini AI • Hidden & Suppressed Detection</span>
             </motion.div>
 
             <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 sm:mb-6 leading-tight">
@@ -103,29 +111,29 @@ const Landing = () => {
 
             <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed px-4">
               Our AI goes beyond surface emotions to detect what you're hiding and suppressing. 
-              Understand your complete emotional landscape with deep analysis. 🔮
+              No signup required to try it — test it out right here. 🔮
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4">
               <Button
                 size="lg"
-                onClick={() => navigate("/demo")}
+                onClick={scrollToTry}
                 className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-xl w-full sm:w-auto"
               >
-                <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Try Demo
+                <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                Test It Out Free
               </Button>
               <Button
                 size="lg"
                 onClick={() => navigate("/auth")}
                 className="font-semibold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 border-2 border-neon-purple/50 bg-transparent hover:bg-neon-purple/10 w-full sm:w-auto"
               >
-                Get Started Free
+                Sign Up for Full Access
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
               </Button>
             </div>
 
-            {/* Stats - Mobile optimized */}
+            {/* Stats */}
             <motion.div
               className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mt-10 sm:mt-16 px-4 sm:px-0"
               initial={{ opacity: 0 }}
@@ -149,7 +157,7 @@ const Landing = () => {
           </motion.div>
         </section>
 
-        {/* Features Section - Mobile optimized */}
+        {/* Features Section */}
         <section id="features" className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
           <motion.div
             className="text-center mb-10 sm:mb-16"
@@ -186,7 +194,21 @@ const Landing = () => {
           </div>
         </section>
 
-        {/* How It Works - Mobile optimized */}
+        {/* Inline Try Section */}
+        <div id="try-it-out">
+          <InlineTrySection />
+        </div>
+
+        {/* Transparency Section */}
+        <TransparencySection />
+
+        {/* Sample Output Section */}
+        <SampleOutputSection />
+
+        {/* Real World Use Cases */}
+        <RealWorldUseCases />
+
+        {/* How It Works */}
         <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
           <motion.div
             className="text-center mb-10 sm:mb-16"
@@ -229,7 +251,7 @@ const Landing = () => {
           <FeedbacksSection />
         </section>
 
-        {/* CTA Section - Mobile optimized */}
+        {/* CTA Section */}
         <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
           <motion.div
             className="glass-panel rounded-2xl sm:rounded-3xl p-6 sm:p-12 text-center relative overflow-hidden border border-neon-purple/30"
@@ -241,10 +263,10 @@ const Landing = () => {
             <div className="relative z-10">
               <Star className="w-10 h-10 sm:w-12 sm:h-12 text-neon-pink mx-auto mb-4 sm:mb-6" />
               <h2 className="font-display text-2xl sm:text-4xl font-bold mb-3 sm:mb-4">
-                Ready to Discover Your True Emotions? ✨
+                Ready for the Full Experience? ✨
               </h2>
               <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto mb-6 sm:mb-8">
-                Join users who have uncovered their hidden emotional patterns with Subtle Sense
+                Sign up to save your history, get personalized AI advice, and track your emotional growth over time
               </p>
               <Button
                 size="lg"
@@ -258,7 +280,7 @@ const Landing = () => {
           </motion.div>
         </section>
 
-        {/* Footer - Mobile optimized */}
+        {/* Footer */}
         <footer className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 text-center border-t border-border/30">
           <p className="text-muted-foreground mb-2 text-sm sm:text-base">
             Made with 💜 for emotional awareness • Privacy-first • Your emotions, your data
