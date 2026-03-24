@@ -10,6 +10,8 @@ import SessionHistory from "@/components/SessionHistory";
 import MoodBoard from "@/components/MoodBoard";
 import StatsSection from "@/components/StatsSection";
 import FeedbackModal from "@/components/FeedbackModal";
+import ExitPoll from "@/components/ExitPoll";
+import ShareResults from "@/components/ShareResults";
 import WelcomeMessage from "@/components/WelcomeMessage";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -24,6 +26,8 @@ const Dashboard = () => {
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [lastSessionId, setLastSessionId] = useState<string | undefined>();
+  const [showExitPoll, setShowExitPoll] = useState(false);
+  const [showShare, setShowShare] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -173,6 +177,21 @@ const Dashboard = () => {
 
             <RealAnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
           </div>
+
+            {/* Post-analysis: Exit Poll + Share */}
+            {isAnalyzed && (
+              <div className="grid sm:grid-cols-2 gap-4 mt-4">
+                <ExitPoll
+                  isVisible={showExitPoll}
+                  sessionId={lastSessionId}
+                  onDismiss={() => setShowExitPoll(false)}
+                />
+                <ShareResults
+                  isVisible={showShare}
+                  analysisResult={analysisResult}
+                />
+              </div>
+            )}
           </>
         )}
 
@@ -184,7 +203,11 @@ const Dashboard = () => {
 
       <FeedbackModal
         isOpen={showFeedback}
-        onClose={() => setShowFeedback(false)}
+        onClose={() => {
+          setShowFeedback(false);
+          setShowExitPoll(true);
+          setTimeout(() => setShowShare(true), 500);
+        }}
         sessionId={lastSessionId}
       />
     </div>
