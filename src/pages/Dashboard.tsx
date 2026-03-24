@@ -26,6 +26,8 @@ const Dashboard = () => {
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [lastSessionId, setLastSessionId] = useState<string | undefined>();
+  const [showExitPoll, setShowExitPoll] = useState(false);
+  const [showShare, setShowShare] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
