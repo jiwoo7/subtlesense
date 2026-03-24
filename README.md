@@ -107,7 +107,17 @@ An independent research paper exploring ethnic-specific bias in micro-expression
 
 ---
 
+## Roadmap
 
+- [x] Core emotion detection (live webcam)
+- [x] 600+ user deployment
+- [x] Moodboard and emotion graph visualization
+- [x] PWA support
+- [ ] Hand-coded rebuild (removing no-code dependencies)
+- [ ] Custom domain deployment
+- [ ] Android app (Play Store)
+- [ ] Ethnic-bias correction layer for South Asian expression norms
+- [ ] Research paper publication (arXiv + IEEE/ACM student conference)
 
 ---
 
