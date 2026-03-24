@@ -188,7 +188,11 @@ const Dashboard = () => {
 
       <FeedbackModal
         isOpen={showFeedback}
-        onClose={() => setShowFeedback(false)}
+        onClose={() => {
+          setShowFeedback(false);
+          setShowExitPoll(true);
+          setTimeout(() => setShowShare(true), 500);
+        }}
         sessionId={lastSessionId}
       />
     </div>
