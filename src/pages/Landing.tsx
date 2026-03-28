@@ -85,11 +85,11 @@ const Landing = () => {
               </motion.div>
               <span className="font-display text-xl sm:text-2xl font-bold gradient-text">Subtle Sense</span>
             </div>
-            <Button 
+            <Button
               onClick={scrollToTry}
               className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-semibold shadow-lg text-sm sm:text-base px-3 sm:px-4"
             >
-              Check It Out ↓
+              Analyze Now ↓
             </Button>
           </nav>
         </header>
@@ -130,7 +130,7 @@ const Landing = () => {
                 className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-xl w-full sm:w-auto"
               >
                 <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Start Testing Now
+                Start Analyzing
               </Button>
             </div>
 
