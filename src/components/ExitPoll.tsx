@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircleQuestion, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 
 interface ExitPollProps {
@@ -27,24 +26,24 @@ const MISSED_EMOTIONS = [
 ];
 
 const ExitPoll = ({ isVisible, sessionId, onDismiss }: ExitPollProps) => {
-  const { user } = useAuth();
   const [selected, setSelected] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
   const handleSelect = async (emotion: string) => {
     setSelected(emotion);
 
-    if (user) {
-      try {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
         await supabase.from("feedbacks").insert({
           user_id: user.id,
           session_id: sessionId || null,
           feedback_text: `Missed emotion: ${emotion}`,
           rating: null,
         });
-      } catch (e) {
-        console.error("Failed to save exit poll:", e);
       }
+    } catch (e) {
+      console.error("Failed to save exit poll:", e);
     }
 
     setSubmitted(true);
