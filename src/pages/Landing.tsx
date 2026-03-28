@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Heart, Sparkles, Star, Brain, Shield, Zap, Users, ArrowDown } from "lucide-react";
@@ -6,9 +7,29 @@ import FeedbacksSection from "@/components/FeedbacksSection";
 import TransparencySection from "@/components/landing/TransparencySection";
 import SampleOutputSection from "@/components/landing/SampleOutputSection";
 import RealWorldUseCases from "@/components/landing/RealWorldUseCases";
-import InlineTrySection from "@/components/landing/InlineTrySection";
+import MediaUploadZone from "@/components/MediaUploadZone";
+import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
+import ExitPoll from "@/components/ExitPoll";
+import ShareResults from "@/components/ShareResults";
+import type { AnalysisResult } from "@/types/emotions";
 
 const Landing = () => {
+  const [isAnalyzed, setIsAnalyzed] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+
+  const handleStartAnalysis = () => {
+    setIsAnalyzing(true);
+    setIsAnalyzed(false);
+    setAnalysisResult(null);
+  };
+
+  const handleAnalysisComplete = (result: AnalysisResult) => {
+    setAnalysisResult(result);
+    setIsAnalyzed(true);
+    setIsAnalyzing(false);
+  };
+
   const features = [
     {
       icon: Brain,
@@ -64,11 +85,11 @@ const Landing = () => {
               </motion.div>
               <span className="font-display text-xl sm:text-2xl font-bold gradient-text">Subtle Sense</span>
             </div>
-            <Button 
+            <Button
               onClick={scrollToTry}
               className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-semibold shadow-lg text-sm sm:text-base px-3 sm:px-4"
             >
-              Check It Out ↓
+              Analyze Now ↓
             </Button>
           </nav>
         </header>
@@ -109,7 +130,7 @@ const Landing = () => {
                 className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-xl w-full sm:w-auto"
               >
                 <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Start Testing Now
+                Start Analyzing
               </Button>
             </div>
 
@@ -176,7 +197,104 @@ const Landing = () => {
 
         {/* Inline Try Section */}
         <div id="try-it-out">
-          <InlineTrySection />
+          <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
+            <motion.div
+              className="text-center mb-8 sm:mb-12"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="font-display text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">
+                Analyze Your Emotions Now 🔮
+              </h2>
+              <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
+                Use your webcam, record audio, or upload a video — get full AI-powered deep analysis instantly.
+              </p>
+            </motion.div>
+
+            <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+              <div className="space-y-4 sm:space-y-6">
+                <MediaUploadZone
+                  onStartAnalysis={handleStartAnalysis}
+                  onAnalysisComplete={handleAnalysisComplete}
+                  isAnalyzing={isAnalyzing}
+                />
+
+                {isAnalyzing && (
+                  <motion.div
+                    className="glass-panel rounded-xl sm:rounded-2xl p-4 sm:p-6"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                  >
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="relative flex-shrink-0">
+                        <motion.div
+                          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-3 border-neon-pink border-t-transparent"
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-lg sm:text-xl">🔮</span>
+                        </div>
+                      </div>
+                      <div className="min-w-0">
+                        <h4 className="font-display font-bold text-foreground text-sm sm:text-base">
+                          Deep Emotion Analysis...
+                        </h4>
+                        <p className="text-xs sm:text-sm text-muted-foreground truncate">
+                          Detecting hidden & suppressed emotions ✨
+                        </p>
+                      </div>
+                    </div>
+                    <div className="mt-3 sm:mt-4 h-2 bg-muted rounded-full overflow-hidden">
+                      <motion.div
+                        className="h-full bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red"
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: 8, ease: "easeInOut" }}
+                      />
+                    </div>
+                  </motion.div>
+                )}
+
+                <motion.div
+                  className="grid grid-cols-3 gap-2 sm:gap-3"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  {[
+                    { label: "Detection", value: "16 Emotions", emoji: "🔮" },
+                    { label: "Powered by", value: "Gemini AI", emoji: "🧠" },
+                    { label: "Detects", value: "Hidden + Suppressed", emoji: "🎭" },
+                  ].map((stat) => (
+                    <motion.div
+                      key={stat.label}
+                      className="glass-panel rounded-lg sm:rounded-xl p-2 sm:p-4 text-center"
+                      whileHover={{ y: -5 }}
+                    >
+                      <div className="text-lg sm:text-2xl mb-1">{stat.emoji}</div>
+                      <p className="text-[10px] sm:text-sm font-display font-bold gradient-text leading-tight">
+                        {stat.value}
+                      </p>
+                      <p className="text-[9px] sm:text-xs text-muted-foreground font-medium mt-0.5 sm:mt-1">
+                        {stat.label}
+                      </p>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+
+              <RealAnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
+            </div>
+
+            {isAnalyzed && (
+              <div className="grid sm:grid-cols-2 gap-4 mt-6 max-w-6xl mx-auto">
+                <ExitPoll isVisible={true} onDismiss={() => {}} />
+                <ShareResults isVisible={true} analysisResult={analysisResult} />
+              </div>
+            )}
+          </section>
         </div>
 
         {/* Transparency Section */}
