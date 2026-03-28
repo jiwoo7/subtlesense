@@ -68,7 +68,7 @@ const Landing = () => {
               onClick={scrollToTry}
               className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-semibold shadow-lg text-sm sm:text-base px-3 sm:px-4"
             >
-              Try It Out
+              Check It Out ↓
             </Button>
           </nav>
         </header>
@@ -109,7 +109,7 @@ const Landing = () => {
                 className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-xl w-full sm:w-auto"
               >
                 <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Test It Out Free
+                Start Testing Now
               </Button>
             </div>
 
