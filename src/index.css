@@ -1,18 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cascadia+Code&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Quicksand:wght@300;400;500;600;700&display=swap');
-
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=Cascadia+Code&display=swap");
 
 /* Dark Neon AI Tutor Design System - Black/Red/Pink/Purple */
 
