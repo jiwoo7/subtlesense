@@ -8,13 +8,13 @@
 [![Accuracy](https://img.shields.io/badge/Accuracy-84%25-brightgreen)]()
 
 ---
-**Technical Abstract: SubtleSense**
+## **Technical Abstract: SubtleSense**
 
 Project Title: SubtleSense: A Multimodal Affective Computing System for Real-Time Emotional Intelligence
 Founder: Naiyya Thapa
 Category: Artificial Intelligence / Human-Computer Interaction (HCI)
 
-**Executive Summary**
+## **Executive Summary**
 
 SubtleSense is an AI-driven analytical engine designed to bridge the gap between human emotion and digital communication. By utilizing real-time computer vision and acoustic analysis, the platform identifies "hidden" emotional states—specifically Frustration, Anxiety, and Focus—to provide users with actionable "Prescriptive Advice." With an average visitor duration of 6m 37s and a 22% user conversion rate during beta testing, SubtleSense demonstrates significant product-market fit for corporate wellness, remote sales, and neurodivergent support.
 Technical Architecture & Innovation
