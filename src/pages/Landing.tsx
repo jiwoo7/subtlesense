@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Heart, Sparkles, Star, ArrowRight, Brain, Shield, Zap, Users, ArrowDown } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Heart, Sparkles, Star, Brain, Shield, Zap, Users, ArrowDown } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import FeedbacksSection from "@/components/FeedbacksSection";
 import TransparencySection from "@/components/landing/TransparencySection";
@@ -10,8 +9,6 @@ import RealWorldUseCases from "@/components/landing/RealWorldUseCases";
 import InlineTrySection from "@/components/landing/InlineTrySection";
 
 const Landing = () => {
-  const navigate = useNavigate();
-
   const features = [
     {
       icon: Brain,
@@ -67,21 +64,12 @@ const Landing = () => {
               </motion.div>
               <span className="font-display text-xl sm:text-2xl font-bold gradient-text">Subtle Sense</span>
             </div>
-            <div className="flex items-center gap-2 sm:gap-4">
-              <Button 
-                variant="ghost" 
-                onClick={() => navigate("/auth")}
-                className="font-semibold text-sm sm:text-base px-2 sm:px-4"
-              >
-                Sign In
-              </Button>
-              <Button 
-                onClick={scrollToTry}
-                className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-semibold shadow-lg text-sm sm:text-base px-3 sm:px-4"
-              >
-                Try It Out
-              </Button>
-            </div>
+            <Button 
+              onClick={scrollToTry}
+              className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-semibold shadow-lg text-sm sm:text-base px-3 sm:px-4"
+            >
+              Try It Out
+            </Button>
           </nav>
         </header>
 
@@ -111,7 +99,7 @@ const Landing = () => {
 
             <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed px-4">
               Our AI goes beyond surface emotions to detect what you're hiding and suppressing. 
-              No signup required to try it — test it out right here. 🔮
+              Test it out right here — instant results, no account needed. 🔮
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4">
@@ -122,14 +110,6 @@ const Landing = () => {
               >
                 <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 Test It Out Free
-              </Button>
-              <Button
-                size="lg"
-                onClick={() => navigate("/auth")}
-                className="font-semibold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 border-2 border-neon-purple/50 bg-transparent hover:bg-neon-purple/10 w-full sm:w-auto"
-              >
-                Sign Up for Full Access
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
               </Button>
             </div>
 
@@ -249,35 +229,6 @@ const Landing = () => {
         {/* Feedbacks Section */}
         <section className="container mx-auto px-4 sm:px-6">
           <FeedbacksSection />
-        </section>
-
-        {/* CTA Section */}
-        <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
-          <motion.div
-            className="glass-panel rounded-2xl sm:rounded-3xl p-6 sm:p-12 text-center relative overflow-hidden border border-neon-purple/30"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-neon-purple/10 to-neon-pink/10" />
-            <div className="relative z-10">
-              <Star className="w-10 h-10 sm:w-12 sm:h-12 text-neon-pink mx-auto mb-4 sm:mb-6" />
-              <h2 className="font-display text-2xl sm:text-4xl font-bold mb-3 sm:mb-4">
-                Ready for the Full Experience? ✨
-              </h2>
-              <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto mb-6 sm:mb-8">
-                Sign up to save your history, get personalized AI advice, and track your emotional growth over time
-              </p>
-              <Button
-                size="lg"
-                onClick={() => navigate("/auth")}
-                className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-xl w-full sm:w-auto"
-              >
-                Get Started for Free
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
-              </Button>
-            </div>
-          </motion.div>
         </section>
 
         {/* Footer */}

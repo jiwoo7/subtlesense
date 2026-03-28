@@ -238,6 +238,8 @@ const InlineTrySection = () => {
                 <div className="space-y-2">
                   <EmotionMiniBar label="Anxiety" value={result.hiddenAnxiety} emoji="😰" color="bg-neon-purple" />
                   <EmotionMiniBar label="Insecurity" value={result.hiddenInsecurity} emoji="🫣" color="bg-neon-purple" />
+                  <EmotionMiniBar label="Loneliness" value={result.hiddenLoneliness} emoji="😔" color="bg-neon-purple" />
+                  <EmotionMiniBar label="Guilt" value={result.hiddenGuilt} emoji="😣" color="bg-neon-purple" />
                 </div>
               </div>
 
@@ -249,6 +251,8 @@ const InlineTrySection = () => {
                 <div className="space-y-2">
                   <EmotionMiniBar label="Desire" value={result.suppressedDesire} emoji="🔒" color="bg-neon-red" />
                   <EmotionMiniBar label="Anger" value={result.suppressedAnger} emoji="😤" color="bg-neon-red" />
+                  <EmotionMiniBar label="Sadness" value={result.suppressedSadness} emoji="💧" color="bg-neon-red" />
+                  <EmotionMiniBar label="Fear" value={result.suppressedFear} emoji="😨" color="bg-neon-red" />
                 </div>
               </div>
 
@@ -257,7 +261,7 @@ const InlineTrySection = () => {
                 <div className="flex items-start gap-2 text-xs">
                   <Sparkles className="w-3.5 h-3.5 text-neon-purple mt-0.5 shrink-0" />
                   <p className="text-muted-foreground">
-                    <strong className="text-foreground">Quick insight:</strong> Sign up for full AI-powered deep analysis with personalized advice & actionable suggestions.
+                    <strong className="text-foreground">Quick insight:</strong> Your emotional masking index is {result.emotionalMasking}% with inner conflict at {result.innerConflict}%. Try again with different inputs to explore patterns.
                   </p>
                 </div>
               </div>
