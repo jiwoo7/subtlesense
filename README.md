@@ -11,7 +11,9 @@
 ## **Technical Abstract: SubtleSense**
 
 Project Title: SubtleSense: A Multimodal Affective Computing System for Real-Time Emotional Intelligence
+
 Founder: Naiyya Thapa
+
 Category: Artificial Intelligence / Human-Computer Interaction (HCI)
 
 ## **Executive Summary**
