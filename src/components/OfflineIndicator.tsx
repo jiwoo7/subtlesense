@@ -4,12 +4,16 @@ import { WifiOff, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const OfflineIndicator = () => {
-  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+  const [isOffline, setIsOffline] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const syncConnectionState = () => setIsOffline(!window.navigator.onLine);
     const handleOnline = () => setIsOffline(false);
     const handleOffline = () => setIsOffline(true);
 
+    syncConnectionState();
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
 
@@ -20,6 +24,7 @@ const OfflineIndicator = () => {
   }, []);
 
   const handleRetry = () => {
+    if (typeof window === "undefined") return;
     window.location.reload();
   };
 
