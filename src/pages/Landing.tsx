@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Heart, Sparkles, Brain, Shield, Zap, Users, ArrowDown } from "lucide-react";
@@ -6,16 +6,31 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 import TransparencySection from "@/components/landing/TransparencySection";
 import SampleOutputSection from "@/components/landing/SampleOutputSection";
 import RealWorldUseCases from "@/components/landing/RealWorldUseCases";
-import MediaUploadZone from "@/components/MediaUploadZone";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
-import ExitPoll from "@/components/ExitPoll";
 import ShareResults from "@/components/ShareResults";
 import type { AnalysisResult } from "@/types/emotions";
 
+const MediaUploadZone = lazy(() => import("@/components/MediaUploadZone"));
+const ExitPoll = lazy(() => import("@/components/ExitPoll"));
+
+const AnalyzerFallback = () => (
+  <div className="glass-panel rounded-2xl sm:rounded-3xl p-6 sm:p-8 min-h-[320px] flex items-center justify-center text-center">
+    <div>
+      <p className="font-display text-lg font-bold text-foreground mb-2">Preparing the live analyzer…</p>
+      <p className="text-sm text-muted-foreground">Camera, audio, and AI tools are loading safely.</p>
+    </div>
+  </div>
+);
+
 const Landing = () => {
+  const [isMounted, setIsMounted] = useState(false);
   const [isAnalyzed, setIsAnalyzed] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleStartAnalysis = () => {
     setIsAnalyzing(true);
@@ -64,6 +79,7 @@ const Landing = () => {
   ];
 
   const scrollToTry = () => {
+    if (typeof document === "undefined") return;
     document.getElementById("try-it-out")?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -213,11 +229,17 @@ const Landing = () => {
 
             <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
               <div className="space-y-4 sm:space-y-6">
-                <MediaUploadZone
-                  onStartAnalysis={handleStartAnalysis}
-                  onAnalysisComplete={handleAnalysisComplete}
-                  isAnalyzing={isAnalyzing}
-                />
+                <Suspense fallback={<AnalyzerFallback />}>
+                  {isMounted ? (
+                    <MediaUploadZone
+                      onStartAnalysis={handleStartAnalysis}
+                      onAnalysisComplete={handleAnalysisComplete}
+                      isAnalyzing={isAnalyzing}
+                    />
+                  ) : (
+                    <AnalyzerFallback />
+                  )}
+                </Suspense>
 
                 {isAnalyzing && (
                   <motion.div
@@ -287,9 +309,11 @@ const Landing = () => {
               <RealAnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
             </div>
 
-            {isAnalyzed && (
+            {isMounted && isAnalyzed && (
               <div className="grid sm:grid-cols-2 gap-4 mt-6 max-w-6xl mx-auto">
-                <ExitPoll isVisible={true} onDismiss={() => {}} />
+                <Suspense fallback={<div className="glass-panel rounded-2xl p-5" />}>
+                  <ExitPoll isVisible={true} onDismiss={() => {}} />
+                </Suspense>
                 <ShareResults isVisible={true} analysisResult={analysisResult} />
               </div>
             )}
