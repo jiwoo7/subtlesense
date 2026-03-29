@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Heart, Sparkles, Star, Brain, Shield, Zap, Users, ArrowDown } from "lucide-react";
+import { Heart, Sparkles, Brain, Shield, Zap, Users, ArrowDown } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import FeedbacksSection from "@/components/FeedbacksSection";
 import TransparencySection from "@/components/landing/TransparencySection";
 import SampleOutputSection from "@/components/landing/SampleOutputSection";
 import RealWorldUseCases from "@/components/landing/RealWorldUseCases";
@@ -344,11 +343,6 @@ const Landing = () => {
           </div>
         </section>
 
-        {/* Feedbacks Section */}
-        <section className="container mx-auto px-4 sm:px-6">
-          <FeedbacksSection />
-        </section>
-
         {/* Footer */}
         <footer className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 text-center border-t border-border/30">
           <p className="text-muted-foreground mb-2 text-sm sm:text-base">
@@ -358,6 +352,12 @@ const Landing = () => {
             Made by <span className="font-semibold text-neon-pink">Naiyya Thapa</span>
           </p>
         </footer>
+
+        <section className="container mx-auto px-4 sm:px-6 pb-8 sm:pb-10">
+          <p className="mx-auto max-w-5xl text-center text-xs sm:text-sm text-muted-foreground leading-relaxed">
+            Disclaimer: This app uses AI to provide insights into emotional states for informational and educational purposes only. These results are not a medical diagnosis or a substitute for professional mental health advice. If you or someone you know is in crisis, please seek immediate help from a licensed professional or emergency services.
+          </p>
+        </section>
       </div>
     </div>
   );
