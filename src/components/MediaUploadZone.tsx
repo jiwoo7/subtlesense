@@ -2,7 +2,6 @@ import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Upload, Camera, Mic, Video, X, Play, Pause, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { AnalysisResult, UploadType } from "@/types/emotions";
 
@@ -213,15 +212,25 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
         mediaBase64 = "";
       }
 
-      const { data, error } = await supabase.functions.invoke("analyze-emotion", {
-        body: { 
+      const functionUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-emotion`;
+      const functionResponse = await fetch(functionUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+        },
+        body: JSON.stringify({
           mediaBase64,
           mediaType: selectedType === "audio" ? "audio" : "image",
-          uploadType: selectedType
-        }
+          uploadType: selectedType,
+        }),
       });
 
-      if (error) throw error;
+      const data = await functionResponse.json();
+
+      if (!functionResponse.ok) {
+        throw new Error(data?.error || "Function request failed");
+      }
 
       if (data.error) {
         toast.error(data.error);
