@@ -23,7 +23,7 @@ import type { AnalysisResult, UploadType } from "@/types/emotions";
 const Dashboard = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<"analyze" | "history" | "moodboard">("analyze");
+  const [activeTab, setActiveTab] = useState<"analyze" | "history" | "moodboard" | "journal">("analyze");
   const [isAnalyzed, setIsAnalyzed] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
