@@ -181,25 +181,34 @@ const Dashboard = () => {
             <RealAnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
           </div>
 
-            {/* Post-analysis: Exit Poll + Share */}
+            {/* Post-analysis: Recommendations + Exit Poll + Share */}
             {isAnalyzed && (
-              <div className="grid sm:grid-cols-2 gap-4 mt-4">
-                <ExitPoll
-                  isVisible={showExitPoll}
-                  sessionId={lastSessionId}
-                  onDismiss={() => setShowExitPoll(false)}
-                />
-                <ShareResults
-                  isVisible={showShare}
-                  analysisResult={analysisResult}
-                />
-              </div>
+              <>
+                <MoodRecommendations analysisResult={analysisResult} />
+                <div className="grid sm:grid-cols-2 gap-4 mt-4">
+                  <ExitPoll
+                    isVisible={showExitPoll}
+                    sessionId={lastSessionId}
+                    onDismiss={() => setShowExitPoll(false)}
+                  />
+                  <ShareResults
+                    isVisible={showShare}
+                    analysisResult={analysisResult}
+                  />
+                </div>
+              </>
             )}
           </>
         )}
 
-        {activeTab === "history" && <SessionHistory />}
+        {activeTab === "history" && (
+          <>
+            <EmotionTimeline />
+            <SessionHistory />
+          </>
+        )}
         {activeTab === "moodboard" && <MoodBoard />}
+        {activeTab === "journal" && <JournalSection />}
 
         {activeTab === "analyze" && <StatsSection />}
       </div>
