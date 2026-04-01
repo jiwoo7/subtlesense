@@ -73,6 +73,7 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
 
           {/* Mobile user actions */}
           <div className="flex items-center gap-2 sm:hidden">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
