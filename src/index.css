@@ -196,6 +196,11 @@
     box-shadow: var(--shadow-card);
   }
 
+  .light .glass-panel {
+    background: hsla(0, 0%, 100%, 0.85);
+    border: 1px solid hsla(330, 60%, 70%, 0.3);
+  }
+
   .neon-gradient {
     background: linear-gradient(
       135deg,

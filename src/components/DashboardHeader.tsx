@@ -130,6 +130,8 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
             </span>
           </motion.div>
           
+          <ThemeToggle />
+          
           <Button
             variant="ghost"
             size="icon"
