@@ -29,6 +29,8 @@ Technical Architecture & Innovation
 
 **Iterative Engineering:** The project utilizes an ErrorBoundary framework to ensure high fault tolerance, maintaining 99% uptime during peak traffic of 500+ global visitors.
 
+## Android app coming soon
+
 ---
 
 ## What is SubtleSense?
