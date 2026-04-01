@@ -25,6 +25,7 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
     { id: "analyze" as const, label: "Analyze", icon: Sparkles, emoji: "🎯" },
     { id: "history" as const, label: "History", icon: History, emoji: "📊" },
     { id: "moodboard" as const, label: "Mood Board", icon: BarChart3, emoji: "🎨" },
+    { id: "journal" as const, label: "Journal", icon: BookOpen, emoji: "📝" },
   ];
 
   return (
