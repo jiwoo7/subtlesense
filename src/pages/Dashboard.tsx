@@ -7,7 +7,10 @@ import DashboardHeader from "@/components/DashboardHeader";
 import MediaUploadZone from "@/components/MediaUploadZone";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
 import SessionHistory from "@/components/SessionHistory";
+import EmotionTimeline from "@/components/EmotionTimeline";
 import MoodBoard from "@/components/MoodBoard";
+import MoodRecommendations from "@/components/MoodRecommendations";
+import JournalSection from "@/components/JournalSection";
 import StatsSection from "@/components/StatsSection";
 import FeedbackModal from "@/components/FeedbackModal";
 import ExitPoll from "@/components/ExitPoll";
@@ -20,7 +23,7 @@ import type { AnalysisResult, UploadType } from "@/types/emotions";
 const Dashboard = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<"analyze" | "history" | "moodboard">("analyze");
+  const [activeTab, setActiveTab] = useState<"analyze" | "history" | "moodboard" | "journal">("analyze");
   const [isAnalyzed, setIsAnalyzed] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
@@ -178,25 +181,34 @@ const Dashboard = () => {
             <RealAnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
           </div>
 
-            {/* Post-analysis: Exit Poll + Share */}
+            {/* Post-analysis: Recommendations + Exit Poll + Share */}
             {isAnalyzed && (
-              <div className="grid sm:grid-cols-2 gap-4 mt-4">
-                <ExitPoll
-                  isVisible={showExitPoll}
-                  sessionId={lastSessionId}
-                  onDismiss={() => setShowExitPoll(false)}
-                />
-                <ShareResults
-                  isVisible={showShare}
-                  analysisResult={analysisResult}
-                />
-              </div>
+              <>
+                <MoodRecommendations analysisResult={analysisResult} />
+                <div className="grid sm:grid-cols-2 gap-4 mt-4">
+                  <ExitPoll
+                    isVisible={showExitPoll}
+                    sessionId={lastSessionId}
+                    onDismiss={() => setShowExitPoll(false)}
+                  />
+                  <ShareResults
+                    isVisible={showShare}
+                    analysisResult={analysisResult}
+                  />
+                </div>
+              </>
             )}
           </>
         )}
 
-        {activeTab === "history" && <SessionHistory />}
+        {activeTab === "history" && (
+          <>
+            <EmotionTimeline />
+            <SessionHistory />
+          </>
+        )}
         {activeTab === "moodboard" && <MoodBoard />}
+        {activeTab === "journal" && <JournalSection />}
 
         {activeTab === "analyze" && <StatsSection />}
       </div>

@@ -135,6 +135,42 @@
     --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.4), 0 8px 10px -1px hsl(0 0% 0% / 0.3);
     --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.5);
   }
+
+  .light {
+    --background: 0 0% 97%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 330 75% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 280 40% 90%;
+    --secondary-foreground: 280 60% 30%;
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 350 60% 92%;
+    --accent-foreground: 350 70% 35%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 160 50% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 80% 50%;
+    --warning-foreground: 0 0% 10%;
+    --neon-pink: 330 70% 50%;
+    --neon-purple: 280 60% 50%;
+    --neon-red: 350 65% 48%;
+    --neon-magenta: 310 65% 48%;
+    --neon-violet: 270 55% 50%;
+    --border: 0 0% 85%;
+    --input: 0 0% 90%;
+    --ring: 330 75% 50%;
+    --chart-1: 330 75% 50%;
+    --chart-2: 280 60% 50%;
+    --chart-3: 350 65% 48%;
+    --chart-4: 310 65% 48%;
+    --chart-5: 270 55% 50%;
+  }
 }
 
 @layer base {
@@ -158,6 +194,11 @@
     backdrop-filter: blur(20px);
     border: 1px solid hsla(330, 80%, 50%, 0.25);
     box-shadow: var(--shadow-card);
+  }
+
+  .light .glass-panel {
+    background: hsla(0, 0%, 100%, 0.85);
+    border: 1px solid hsla(330, 60%, 70%, 0.3);
   }
 
   .neon-gradient {

@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
-import { Heart, Sparkles, Star, History, BarChart3, LogOut, User, Settings } from "lucide-react";
+import { Heart, Sparkles, Star, History, BarChart3, LogOut, User, Settings, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import ThemeToggle from "./ThemeToggle";
 
 interface DashboardHeaderProps {
-  activeTab: "analyze" | "history" | "moodboard";
-  setActiveTab: (tab: "analyze" | "history" | "moodboard") => void;
+  activeTab: "analyze" | "history" | "moodboard" | "journal";
+  setActiveTab: (tab: "analyze" | "history" | "moodboard" | "journal") => void;
 }
 
 const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
@@ -24,6 +25,7 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
     { id: "analyze" as const, label: "Analyze", icon: Sparkles, emoji: "🎯" },
     { id: "history" as const, label: "History", icon: History, emoji: "📊" },
     { id: "moodboard" as const, label: "Mood Board", icon: BarChart3, emoji: "🎨" },
+    { id: "journal" as const, label: "Journal", icon: BookOpen, emoji: "📝" },
   ];
 
   return (
@@ -71,6 +73,7 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
 
           {/* Mobile user actions */}
           <div className="flex items-center gap-2 sm:hidden">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
@@ -126,6 +129,8 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
               {user?.email?.split("@")[0]}
             </span>
           </motion.div>
+          
+          <ThemeToggle />
           
           <Button
             variant="ghost"
