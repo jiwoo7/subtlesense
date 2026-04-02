@@ -213,12 +213,25 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
       }
 
       const functionUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-emotion`;
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+        apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+      };
+
+      // Get auth token if available (logged-in users)
+      try {
+        const { supabase } = await import("@/integrations/supabase/client");
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.access_token) {
+          headers["Authorization"] = `Bearer ${session.access_token}`;
+        }
+      } catch (_) {
+        // No auth available (landing page)
+      }
+
       const functionResponse = await fetch(functionUrl, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-        },
+        headers,
         body: JSON.stringify({
           mediaBase64,
           mediaType: selectedType === "audio" ? "audio" : "image",

@@ -5,6 +5,7 @@ import { Heart, Sparkles, Brain, Shield, Zap, Users, ArrowDown } from "lucide-re
 import AnimatedBackground from "@/components/AnimatedBackground";
 import TransparencySection from "@/components/landing/TransparencySection";
 import SampleOutputSection from "@/components/landing/SampleOutputSection";
+import ComparisonSection from "@/components/landing/ComparisonSection";
 import RealWorldUseCases from "@/components/landing/RealWorldUseCases";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
 import ShareResults from "@/components/ShareResults";
@@ -319,6 +320,9 @@ const Landing = () => {
             )}
           </section>
         </div>
+
+        {/* Comparison Section */}
+        <ComparisonSection />
 
         {/* Transparency Section */}
         <TransparencySection />
