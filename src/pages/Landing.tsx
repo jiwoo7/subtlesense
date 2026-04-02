@@ -321,6 +321,9 @@ const Landing = () => {
           </section>
         </div>
 
+        {/* Comparison Section */}
+        <ComparisonSection />
+
         {/* Transparency Section */}
         <TransparencySection />
 

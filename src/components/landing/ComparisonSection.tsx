@@ -97,9 +97,9 @@ const comparisonData: ComparisonFeature[] = [
 ];
 
 const StatusIcon = ({ status }: { status: "full" | "partial" | "none" }) => {
-  if (status === "full") return <Check className="w-5 h-5 text-emerald-400" />;
-  if (status === "partial") return <Minus className="w-5 h-5 text-amber-400" />;
-  return <X className="w-5 h-5 text-red-400" />;
+  if (status === "full") return <Check className="w-5 h-5 flex-shrink-0 text-[hsl(var(--primary))]" />;
+  if (status === "partial") return <Minus className="w-5 h-5 flex-shrink-0 text-[hsl(var(--accent))]" />;
+  return <X className="w-5 h-5 flex-shrink-0 text-destructive" />;
 };
 
 const ComparisonSection = () => {
