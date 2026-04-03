@@ -193,6 +193,30 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
     });
   };
 
+  const blobToBase64 = (blob: Blob): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        if (typeof reader.result !== "string") {
+          reject(new Error("Could not read media data"));
+          return;
+        }
+
+        const base64 = reader.result.split(",")[1];
+        if (!base64) {
+          reject(new Error("Could not encode media data"));
+          return;
+        }
+
+        resolve(base64);
+      };
+
+      reader.onerror = () => reject(new Error("Could not read media data"));
+      reader.readAsDataURL(blob);
+    });
+  };
+
   const analyzeMedia = async () => {
     if (!selectedType) {
       toast.error("Please select an input type first");
@@ -203,13 +227,15 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
 
     try {
       let mediaBase64 = "";
+      let mediaMimeType = selectedType === "audio" ? "audio/webm" : "image/jpeg";
 
       if (selectedType === "webcam" && videoRef.current) {
         mediaBase64 = await captureFrame();
       } else if (selectedType === "video" && uploadedFile) {
         mediaBase64 = await fileToBase64(uploadedFile);
-      } else if (selectedType === "audio") {
-        mediaBase64 = "";
+      } else if (selectedType === "audio" && recordedBlob) {
+        mediaBase64 = await blobToBase64(recordedBlob);
+        mediaMimeType = recordedBlob.type || "audio/webm";
       }
 
       const functionUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-emotion`;
@@ -234,7 +260,7 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
         headers,
         body: JSON.stringify({
           mediaBase64,
-          mediaType: selectedType === "audio" ? "audio" : "image",
+          mediaType: mediaMimeType,
           uploadType: selectedType,
         }),
       });
@@ -257,7 +283,7 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
 
     } catch (error) {
       console.error("Analysis error:", error);
-      toast.error("Failed to analyze. Please try again.");
+      toast.error(error instanceof Error ? error.message : "Failed to analyze. Please try again.");
     }
   };
 
