@@ -29,6 +29,11 @@ const Landing = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
 
+  const featureToneClasses = {
+    primary: { badge: "bg-primary/15", icon: "text-primary" },
+    accent: { badge: "bg-accent/15", icon: "text-accent" },
+  } as const;
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -45,30 +50,34 @@ const Landing = () => {
     setIsAnalyzing(false);
   };
 
+  const handleAnalysisError = () => {
+    setIsAnalyzing(false);
+  };
+
   const features = [
     {
       icon: Brain,
       title: "Deep AI Detection",
       description: "Detects hidden & suppressed emotions beyond the surface using advanced AI",
-      color: "neon-purple"
+      tone: "primary" as const,
     },
     {
       icon: Zap,
       title: "Instant Insights",
       description: "Get personalized suggestions within seconds addressing what you're truly feeling",
-      color: "neon-pink"
+      tone: "accent" as const,
     },
     {
       icon: Shield,
       title: "Privacy First",
       description: "Your data stays secure. We analyze locally and never share your emotions",
-      color: "neon-purple"
+      tone: "primary" as const,
     },
     {
       icon: Users,
       title: "For Everyone",
       description: "Anyone seeking emotional awareness can benefit from deep analysis",
-      color: "neon-pink"
+      tone: "accent" as const,
     }
   ];
 
@@ -125,7 +134,7 @@ const Landing = () => {
               transition={{ delay: 0.2 }}
             >
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-neon-pink" />
-              <span className="text-xs sm:text-sm font-medium">Powered by Gemini AI • Hidden & Suppressed Detection</span>
+              <span className="text-xs sm:text-sm font-medium">Powered by AI • Hidden & Suppressed Detection</span>
             </motion.div>
 
             <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 sm:mb-6 leading-tight">
@@ -191,7 +200,10 @@ const Landing = () => {
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {features.map((feature, index) => (
+              {features.map((feature, index) => {
+                const toneClasses = featureToneClasses[feature.tone];
+
+                return (
               <motion.div
                 key={feature.title}
                 className="glass-panel rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-border/50 hover:border-neon-purple/30 transition-all"
@@ -201,13 +213,13 @@ const Landing = () => {
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
               >
-                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-${feature.color}/20 flex items-center justify-center mb-3 sm:mb-4`}>
-                  <feature.icon className={`w-5 h-5 sm:w-6 sm:h-6 text-${feature.color}`} />
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${toneClasses.badge} flex items-center justify-center mb-3 sm:mb-4`}>
+                    <feature.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${toneClasses.icon}`} />
                 </div>
                 <h3 className="font-display text-base sm:text-lg font-bold mb-1 sm:mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground text-xs sm:text-sm">{feature.description}</p>
               </motion.div>
-            ))}
+              )})}
           </div>
         </section>
 
@@ -235,6 +247,7 @@ const Landing = () => {
                     <MediaUploadZone
                       onStartAnalysis={handleStartAnalysis}
                       onAnalysisComplete={handleAnalysisComplete}
+                      onAnalysisError={handleAnalysisError}
                       isAnalyzing={isAnalyzing}
                     />
                   ) : (
@@ -287,7 +300,7 @@ const Landing = () => {
                 >
                   {[
                     { label: "Detection", value: "16 Emotions", emoji: "🔮" },
-                    { label: "Powered by", value: "Gemini AI", emoji: "🧠" },
+                     { label: "Powered by", value: "AI models", emoji: "🧠" },
                     { label: "Detects", value: "Hidden + Suppressed", emoji: "🎭" },
                   ].map((stat) => (
                     <motion.div

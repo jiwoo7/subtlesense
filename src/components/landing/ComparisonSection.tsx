@@ -11,94 +11,66 @@ interface ComparisonFeature {
 
 const comparisonData: ComparisonFeature[] = [
   {
-    feature: "Surface Emotion Detection",
+    feature: "Visible Emotion Readout",
     subtleSense: "full",
-    subtleSenseDetail: "6 core emotions (happiness, sadness, anger, fear, surprise, disgust) with nuanced intensity scoring 0–100",
-    others: "full",
-    othersDetail: "Most apps detect 5–7 basic emotions using standard facial action coding (FACS)",
+    subtleSenseDetail: "Estimates multiple visible emotion intensities and presents them as an easy-to-read profile instead of a single mood label.",
+    others: "partial",
+    othersDetail: "Many tools stop at a smaller set of obvious affects, sentiment buckets, or facial-expression labels.",
   },
   {
-    feature: "Hidden Emotion Detection",
+    feature: "Hidden Emotion Inference",
     subtleSense: "full",
-    subtleSenseDetail: "Detects 4 hidden emotions: anxiety, insecurity, loneliness, guilt — masked beneath surface expressions via micro-expression analysis",
-    others: "none",
-    othersDetail: "No mainstream emotion app detects hidden or masked emotions; they only report what's visually obvious",
+    subtleSenseDetail: "Attempts best-effort inference for anxiety, insecurity, loneliness, and guilt that may sit underneath the visible signal. These are interpretive AI signals, not clinical measurements.",
+    others: "partial",
+    othersDetail: "Typical emotion APIs expose visible outputs first; hidden-state interpretation usually needs custom prompting, extra context, or manual review.",
   },
   {
-    feature: "Suppressed Emotion Detection",
+    feature: "Suppressed Emotion Signals",
     subtleSense: "full",
-    subtleSenseDetail: "Identifies 4 suppressed states: held-back anger, sadness, fear, and desire — emotions actively being controlled",
-    others: "none",
-    othersDetail: "Not available in any consumer emotion detection tool; clinical tools sometimes attempt this with EEG/biometric data",
+    subtleSenseDetail: "Highlights possible held-back anger, sadness, fear, and desire so users get a richer read than surface affect alone.",
+    others: "partial",
+    othersDetail: "Most competing products do not ship this as a first-class consumer feature; it is usually absent or left for downstream interpretation.",
   },
   {
     feature: "Emotional Masking Analysis",
     subtleSense: "full",
-    subtleSenseDetail: "Quantifies how much someone is masking (0–100) and measures inner conflict between shown vs felt emotions",
-    others: "none",
-    othersDetail: "No consumer app provides masking or inner-conflict metrics",
-  },
-  {
-    feature: "Total Emotions Analyzed",
-    subtleSense: "full",
-    subtleSenseDetail: "16 distinct emotional dimensions across 4 categories (Surface, Hidden, Suppressed, Meta)",
+    subtleSenseDetail: "Returns separate masking and inner-conflict scores to describe how polished the outside signal looks versus what may be happening underneath.",
     others: "partial",
-    othersDetail: "Typically 5–7 basic emotions. Apps like Affectiva/iMotions detect up to 7; Face++ detects 7",
+    othersDetail: "This kind of derived interpretation is uncommon in off-the-shelf consumer apps and often requires custom analytics work.",
   },
   {
-    feature: "Multimodal Input",
+    feature: "Multimodal Browser Flow",
     subtleSense: "full",
-    subtleSenseDetail: "Webcam (live), audio recording, and video upload — all three modalities supported",
+    subtleSenseDetail: "Webcam capture, recorded audio, and uploaded video all feed into one simple browser experience.",
     others: "partial",
-    othersDetail: "Most apps support only one input (photo or video). Few support audio. None combine all three",
+    othersDetail: "Capabilities vary widely by vendor. Many products focus on face analysis or voice analysis, but not both in one lightweight consumer flow.",
   },
   {
-    feature: "AI-Powered Advice & Suggestions",
+    feature: "Actionable Guidance",
     subtleSense: "full",
-    subtleSenseDetail: "Personalized, empathetic suggestions addressing both visible AND hidden emotional needs — breathing exercises, journaling prompts, etc.",
-    others: "none",
-    othersDetail: "Most apps only show emotion labels/scores. No actionable advice or therapeutic suggestions",
-  },
-  {
-    feature: "Deep Insight Generation",
-    subtleSense: "full",
-    subtleSenseDetail: "AI generates a profound narrative insight about hidden emotional patterns and what the user may need to acknowledge or release",
-    others: "none",
-    othersDetail: "Not available — other apps provide charts/numbers but no interpretive emotional insights",
-  },
-  {
-    feature: "Privacy & Local Processing",
-    subtleSense: "full",
-    subtleSenseDetail: "Media is processed in real-time and never stored permanently. Analysis happens via encrypted API calls",
+    subtleSenseDetail: "Turns the analysis into narrative insight plus concrete next steps, so users get interpretation and support instead of raw numbers alone.",
     others: "partial",
-    othersDetail: "Varies widely. Some (like Affectiva) process locally; others (like Face++) send data to cloud servers with unclear retention",
+    othersDetail: "Many alternatives return labels, scores, or charts. Advice and supportive follow-up often need a second product layer.",
   },
   {
-    feature: "Session History & Trends",
+    feature: "Follow-Up Inside the Same App",
     subtleSense: "full",
-    subtleSenseDetail: "Full session history with emotion timeline charts, mood boards, and weekly trend tracking",
+    subtleSenseDetail: "Signed-in users can continue with history, reflections, and session-based context instead of treating every analysis as a dead end.",
     others: "partial",
-    othersDetail: "Some apps offer basic history. Most don't track trends or provide visual analytics over time",
+    othersDetail: "Some products provide dashboards or exports, but journaling and personal follow-up are often separate products or missing entirely.",
   },
   {
-    feature: "Journaling Integration",
+    feature: "Privacy & Account Model",
     subtleSense: "full",
-    subtleSenseDetail: "Built-in journal for personal reflections linked to emotion sessions, with mood tagging",
-    others: "none",
-    othersDetail: "No emotion detection app integrates journaling — this is unique to SubtleSense",
-  },
-  {
-    feature: "Free to Use (No API Key Needed)",
-    subtleSense: "full",
-    subtleSenseDetail: "Completely free. No API key, no subscription required. Works instantly from the browser",
+    subtleSenseDetail: "The live demo can be tried without an account, while saved history and personalization only appear when a user signs in.",
     others: "partial",
-    othersDetail: "Most require developer API keys (Affectiva, Face++, AWS Rekognition) or paid subscriptions. Consumer apps are limited",
+    othersDetail: "Competing products range from consumer apps to developer APIs, and storage or retention rules depend heavily on the specific vendor and plan.",
   },
 ];
 
 const StatusIcon = ({ status }: { status: "full" | "partial" | "none" }) => {
-  if (status === "full") return <Check className="w-5 h-5 flex-shrink-0 text-[hsl(var(--primary))]" />;
-  if (status === "partial") return <Minus className="w-5 h-5 flex-shrink-0 text-[hsl(var(--accent))]" />;
+  if (status === "full") return <Check className="w-5 h-5 flex-shrink-0 text-primary" />;
+  if (status === "partial") return <Minus className="w-5 h-5 flex-shrink-0 text-accent" />;
   return <X className="w-5 h-5 flex-shrink-0 text-destructive" />;
 };
 
@@ -115,7 +87,7 @@ const ComparisonSection = () => {
           SubtleSense vs Other Emotion Detection Apps ⚡
         </h2>
         <p className="text-muted-foreground text-base sm:text-lg max-w-3xl mx-auto">
-          Most emotion detection tools only scratch the surface. Here's how SubtleSense compares to popular alternatives like Affectiva, Face++, AWS Rekognition, Microsoft Azure Face, and consumer mood apps.
+          This compares SubtleSense with the common patterns you usually see in emotion APIs, mood apps, and facial-expression tools. Specific vendors differ by plan and implementation, so this section stays intentionally conservative.
         </p>
       </motion.div>
 
@@ -204,22 +176,25 @@ const ComparisonSection = () => {
       >
         <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-primary/20">
           <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 gradient-text">
-            Why SubtleSense Stands Apart
+            What You Actually Get Here
           </h3>
           <div className="grid sm:grid-cols-3 gap-4 text-center">
             <div>
-              <p className="text-3xl font-bold gradient-text">16</p>
-              <p className="text-sm text-muted-foreground">Emotions detected<br />(vs 5–7 in others)</p>
+              <p className="text-3xl font-bold gradient-text">Deeper</p>
+              <p className="text-sm text-muted-foreground">Surface plus hidden and suppressed interpretation</p>
             </div>
             <div>
-              <p className="text-3xl font-bold gradient-text">3×</p>
-              <p className="text-sm text-muted-foreground">More emotional depth<br />(hidden + suppressed)</p>
+              <p className="text-3xl font-bold gradient-text">Useful</p>
+              <p className="text-sm text-muted-foreground">Guidance and next steps instead of raw labels alone</p>
             </div>
             <div>
-              <p className="text-3xl font-bold gradient-text">Free</p>
-              <p className="text-sm text-muted-foreground">No API keys needed<br />(vs paid SDKs)</p>
+              <p className="text-3xl font-bold gradient-text">Simple</p>
+              <p className="text-sm text-muted-foreground">Webcam, audio, and video in one browser flow</p>
             </div>
           </div>
+          <p className="mt-5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+            Important: SubtleSense is an interpretive AI product for reflection and guidance. It is not a medical or clinical diagnostic tool, and no comparison here should be read as a scientific benchmark claim.
+          </p>
         </div>
       </motion.div>
     </section>

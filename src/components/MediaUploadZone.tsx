@@ -4,20 +4,23 @@ import { Upload, Camera, Mic, Video, X, Play, Pause, AlertCircle } from "lucide-
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import type { AnalysisResult, UploadType } from "@/types/emotions";
+import { supabase } from "@/integrations/supabase/client";
 
 interface MediaUploadZoneProps {
   onStartAnalysis: () => void;
   onAnalysisComplete: (result: AnalysisResult) => void;
+  onAnalysisError: () => void;
   isAnalyzing: boolean;
 }
 
-const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: MediaUploadZoneProps) => {
+const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError, isAnalyzing }: MediaUploadZoneProps) => {
   const [selectedType, setSelectedType] = useState<UploadType>(null);
   const [isRecording, setIsRecording] = useState(false);
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
   const [recordedBlob, setRecordedBlob] = useState<Blob | null>(null);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [permissionError, setPermissionError] = useState<string | null>(null);
+  const [isWebcamReady, setIsWebcamReady] = useState(false);
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -30,8 +33,28 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
     { icon: Video, label: "Video", type: "video" as UploadType, description: "Upload a video file" },
   ];
 
+  const stopActiveStream = () => {
+    mediaStream?.getTracks().forEach((track) => track.stop());
+    setMediaStream(null);
+  };
+
+  const resetCapturedMedia = () => {
+    setRecordedBlob(null);
+    setUploadedFile(null);
+    setIsWebcamReady(false);
+    chunksRef.current = [];
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   const startWebcam = async () => {
     setPermissionError(null);
+    stopActiveStream();
+    resetCapturedMedia();
+    setIsRecording(false);
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ 
         video: { 
@@ -69,11 +92,23 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
 
   const startAudioRecording = async () => {
     setPermissionError(null);
+    stopActiveStream();
+    resetCapturedMedia();
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       setMediaStream(stream);
       
-      const mediaRecorder = new MediaRecorder(stream);
+      const preferredMimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+        ? "audio/webm;codecs=opus"
+        : MediaRecorder.isTypeSupported("audio/mp4")
+          ? "audio/mp4"
+          : undefined;
+
+      const mediaRecorder = preferredMimeType
+        ? new MediaRecorder(stream, { mimeType: preferredMimeType })
+        : new MediaRecorder(stream);
+
       mediaRecorderRef.current = mediaRecorder;
       chunksRef.current = [];
 
@@ -84,8 +119,10 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
       };
 
       mediaRecorder.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: "audio/webm" });
+        const blob = new Blob(chunksRef.current, { type: mediaRecorder.mimeType || "audio/webm" });
         setRecordedBlob(blob);
+        stream.getTracks().forEach((track) => track.stop());
+        setMediaStream(null);
       };
 
       mediaRecorder.start();
@@ -123,6 +160,8 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
     const file = e.target.files?.[0];
     if (file) {
       if (file.type.startsWith("video/")) {
+        stopActiveStream();
+        resetCapturedMedia();
         setUploadedFile(file);
         setSelectedType("video");
         toast.success(`Video "${file.name}" ready! 🎬`);
@@ -134,14 +173,21 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
 
   const captureFrame = useCallback((): Promise<string> => {
     return new Promise((resolve, reject) => {
-      if (!videoRef.current) {
+      const video = videoRef.current;
+
+      if (!video) {
         reject(new Error("No video element"));
         return;
       }
 
+      if (!isWebcamReady || video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
+        reject(new Error("Camera is still getting ready. Please wait a second and try again."));
+        return;
+      }
+
       const canvas = document.createElement("canvas");
-      canvas.width = videoRef.current.videoWidth || 640;
-      canvas.height = videoRef.current.videoHeight || 480;
+      canvas.width = video.videoWidth || 640;
+      canvas.height = video.videoHeight || 480;
       
       const ctx = canvas.getContext("2d");
       if (!ctx) {
@@ -149,12 +195,12 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
         return;
       }
 
-      ctx.drawImage(videoRef.current, 0, 0);
+      ctx.drawImage(video, 0, 0);
       const dataUrl = canvas.toDataURL("image/jpeg", 0.8);
       const base64 = dataUrl.split(",")[1];
       resolve(base64);
     });
-  }, []);
+  }, [isWebcamReady]);
 
   const fileToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -218,8 +264,25 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
   };
 
   const analyzeMedia = async () => {
-    if (!selectedType) {
+    const uploadType = selectedType;
+
+    if (!uploadType) {
       toast.error("Please select an input type first");
+      return;
+    }
+
+    if (uploadType === "webcam" && !isWebcamReady) {
+      toast.error("Camera is still getting ready. Please wait a second.");
+      return;
+    }
+
+    if (uploadType === "audio" && !recordedBlob) {
+      toast.error("Please record your audio first.");
+      return;
+    }
+
+    if (uploadType === "video" && !uploadedFile) {
+      toast.error("Please upload a video first.");
       return;
     }
 
@@ -227,76 +290,62 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
 
     try {
       let mediaBase64 = "";
-      let mediaMimeType = selectedType === "audio" ? "audio/webm" : "image/jpeg";
+      let mediaMimeType = uploadType === "audio" ? "audio/webm" : "image/jpeg";
 
-      if (selectedType === "webcam" && videoRef.current) {
+      if (uploadType === "webcam" && videoRef.current) {
         mediaBase64 = await captureFrame();
-      } else if (selectedType === "video" && uploadedFile) {
+      } else if (uploadType === "video" && uploadedFile) {
         mediaBase64 = await fileToBase64(uploadedFile);
-      } else if (selectedType === "audio" && recordedBlob) {
+      } else if (uploadType === "audio" && recordedBlob) {
         mediaBase64 = await blobToBase64(recordedBlob);
         mediaMimeType = recordedBlob.type || "audio/webm";
       }
 
-      const functionUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-emotion`;
-      const headers: Record<string, string> = {
-        "Content-Type": "application/json",
-        apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-      };
-
-      // Get auth token if available (logged-in users)
-      try {
-        const { supabase } = await import("@/integrations/supabase/client");
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session?.access_token) {
-          headers["Authorization"] = `Bearer ${session.access_token}`;
-        }
-      } catch (_) {
-        // No auth available (landing page)
+      if (!mediaBase64.trim()) {
+        throw new Error("Could not capture your media. Please try again.");
       }
 
-      const functionResponse = await fetch(functionUrl, {
-        method: "POST",
-        headers,
-        body: JSON.stringify({
+      const { data, error } = await supabase.functions.invoke("analyze-emotion", {
+        body: {
           mediaBase64,
           mediaType: mediaMimeType,
-          uploadType: selectedType,
-        }),
+          uploadType,
+        },
       });
 
-      const data = await functionResponse.json();
-
-      if (!functionResponse.ok) {
-        throw new Error(data?.error || "Function request failed");
+      if (error) {
+        throw new Error(error.message || "Could not analyze your media.");
       }
 
-      if (data.error) {
-        toast.error(data.error);
-        return;
+      if (!data || typeof data !== "object") {
+        throw new Error("Analysis returned an unexpected response.");
       }
+
+      if ("error" in data && typeof data.error === "string") {
+        throw new Error(data.error);
+      }
+
+      stopActiveStream();
 
       onAnalysisComplete({
-        ...data,
-        uploadType: selectedType
+        ...(data as Omit<AnalysisResult, "uploadType">),
+        uploadType,
       });
 
     } catch (error) {
       console.error("Analysis error:", error);
+      onAnalysisError();
       toast.error(error instanceof Error ? error.message : "Failed to analyze. Please try again.");
     }
   };
 
   const resetSelection = () => {
-    if (mediaStream) {
-      mediaStream.getTracks().forEach(track => track.stop());
-    }
-    setMediaStream(null);
+    stopActiveStream();
     setSelectedType(null);
-    setRecordedBlob(null);
-    setUploadedFile(null);
+    resetCapturedMedia();
     setIsRecording(false);
     setPermissionError(null);
+    mediaRecorderRef.current = null;
   };
 
   return (
@@ -349,9 +398,17 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
               autoPlay
               playsInline
               muted
+              onLoadedMetadata={() => setIsWebcamReady(true)}
+              onCanPlay={() => setIsWebcamReady(true)}
               className="w-full h-full object-cover"
             />
           </div>
+        )}
+
+        {selectedType === "webcam" && mediaStream && !isWebcamReady && (
+          <p className="mb-4 text-sm text-muted-foreground text-center">
+            Camera is starting… hold steady for a moment before analyzing.
+          </p>
         )}
 
         {/* Audio Recording - Dark themed */}
@@ -447,10 +504,11 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, isAnalyzing }: M
             {(selectedType === "webcam" || recordedBlob || uploadedFile) && !isAnalyzing && (
               <Button
                 onClick={analyzeMedia}
+                disabled={selectedType === "webcam" && !isWebcamReady}
                 className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-bold gap-2 w-full sm:w-auto"
               >
                 <span>🧠</span>
-                Analyze with AI
+                {selectedType === "webcam" && !isWebcamReady ? "Camera starting..." : "Analyze with AI"}
               </Button>
             )}
           </div>
