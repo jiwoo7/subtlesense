@@ -31,10 +31,10 @@ const variantColors: Record<string, string> = {
   mint: "card-mint",
   sky: "card-sky",
   yellow: "card-yellow",
-  peach: "bg-orange-500/20 border border-orange-500/30",
-  rose: "bg-rose-500/20 border border-rose-500/30",
-  purple: "bg-purple-500/20 border border-purple-500/30",
-  red: "bg-red-500/20 border border-red-500/30",
+  peach: "card-peach",
+  rose: "card-rose",
+  purple: "card-purple",
+  red: "card-red",
 };
 
 const getTypeLabel = (type: string | null) => {
@@ -80,6 +80,17 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
       </motion.div>
     );
   }
+
+  const suggestions = analysisResult.suggestions?.length
+    ? analysisResult.suggestions
+    : [
+        {
+          title: "Try a clearer capture",
+          description: "Face the camera in even lighting, speak clearly, or upload a short front-facing clip for a stronger read.",
+          icon: "sparkles",
+          variant: "purple",
+        },
+      ];
 
   return (
     <div className="space-y-6 max-h-[80vh] overflow-y-auto pr-2">
@@ -277,7 +288,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
         </h3>
         
         <div className="space-y-3">
-          {analysisResult.suggestions?.map((suggestion, index) => {
+          {suggestions.map((suggestion, index) => {
             const IconComponent = iconMap[suggestion.icon] || Lightbulb;
             const colorClass = variantColors[suggestion.variant] || "card-lavender";
             

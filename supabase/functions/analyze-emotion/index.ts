@@ -103,6 +103,10 @@ const normalizeAudioFormat = (mediaType: string | undefined) => {
   return "webm";
 };
 
+const hasUsableMedia = (value: unknown) => typeof value === "string" && value.trim().length > 20;
+
+const isNonEmptyString = (value: unknown): value is string => typeof value === "string" && value.trim().length > 0;
+
 const stripCodeFences = (value: string) => value.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/```$/i, "").trim();
 
 const extractContentString = (content: unknown) => {
@@ -143,12 +147,33 @@ const normalizeAnalysis = (raw: Record<string, unknown>): EmotionAnalysis => ({
   accuracy: clampScore(raw.accuracy, 75),
   suggestions: Array.isArray(raw.suggestions)
     ? raw.suggestions
-        .filter((item): item is { title?: unknown; description?: unknown; icon?: unknown; variant?: unknown } => !!item && typeof item === "object")
+        .map((item) => {
+          if (typeof item === "string") {
+            return {
+              title: "💡 Try a clearer capture",
+              description: item,
+              icon: "sparkles",
+              variant: "purple",
+            };
+          }
+
+          if (item && typeof item === "object") {
+            return {
+              title: typeof item.title === "string" ? item.title : "💡 Gentle reset",
+              description: typeof item.description === "string" ? item.description : "Take a slow breath and notice what emotion feels strongest right now.",
+              icon: typeof item.icon === "string" ? item.icon : "sparkles",
+              variant: typeof item.variant === "string" ? item.variant : "purple",
+            };
+          }
+
+          return null;
+        })
+        .filter((item): item is { title: string; description: string; icon: string; variant: string } => item !== null)
         .map((item) => ({
-          title: typeof item.title === "string" ? item.title : "💡 Gentle reset",
-          description: typeof item.description === "string" ? item.description : "Take a slow breath and notice what emotion feels strongest right now.",
-          icon: typeof item.icon === "string" ? item.icon : "sparkles",
-          variant: typeof item.variant === "string" ? item.variant : "purple",
+          title: item.title,
+          description: item.description,
+          icon: item.icon,
+          variant: item.variant,
         }))
         .slice(0, 5)
     : [],
@@ -317,6 +342,20 @@ serve(async (req) => {
     if (!allowedUploadTypes.includes(uploadType)) {
       return new Response(
         JSON.stringify({ error: 'Invalid upload type. Must be webcam, audio, or video.' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (!hasUsableMedia(mediaBase64)) {
+      return new Response(
+        JSON.stringify({ error: 'No usable media was captured. Please try recording or uploading again.' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (!isNonEmptyString(mediaType)) {
+      return new Response(
+        JSON.stringify({ error: 'Missing media type. Please try again.' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }

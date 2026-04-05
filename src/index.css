@@ -270,6 +270,26 @@
     border: 1px solid hsla(350, 85%, 55%, 0.3);
   }
 
+  .card-peach {
+    background: linear-gradient(135deg, hsl(var(--warning) / 0.16) 0%, hsl(var(--warning) / 0.08) 100%);
+    border: 1px solid hsl(var(--warning) / 0.28);
+  }
+
+  .card-rose {
+    background: linear-gradient(135deg, hsl(var(--accent) / 0.16) 0%, hsl(var(--accent) / 0.08) 100%);
+    border: 1px solid hsl(var(--accent) / 0.28);
+  }
+
+  .card-purple {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.16) 0%, hsl(var(--secondary) / 0.08) 100%);
+    border: 1px solid hsl(var(--primary) / 0.28);
+  }
+
+  .card-red {
+    background: linear-gradient(135deg, hsl(var(--destructive) / 0.16) 0%, hsl(var(--destructive) / 0.08) 100%);
+    border: 1px solid hsl(var(--destructive) / 0.28);
+  }
+
   .neon-glow {
     box-shadow: 
       0 0 10px hsla(330, 90%, 55%, 0.4),
