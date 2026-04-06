@@ -108,6 +108,7 @@ const Dashboard = () => {
               <MediaUploadZone 
                 onStartAnalysis={handleStartAnalysis}
                 onAnalysisComplete={handleAnalysisComplete}
+                onAnalysisError={() => setIsAnalyzing(false)}
                 isAnalyzing={isAnalyzing}
               />
               
