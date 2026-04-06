@@ -4,7 +4,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-subtlesense.lovable.app-blue)](https://subtlesense.lovable.app)
 [![Product Hunt](https://img.shields.io/badge/Product%20Hunt-%23252-orange)](https://www.producthunt.com)
-[![Users](https://img.shields.io/badge/Users-567%2B-green)]()
+[![Users](https://img.shields.io/badge/Users-667%2B-green)]()
 [![Accuracy](https://img.shields.io/badge/Accuracy-84%25-brightgreen)]()
 
 ---
