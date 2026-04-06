@@ -41,7 +41,7 @@ Built on principles from affective computing and micro-expression research, Subt
 
 The idea came from a personal observation: people routinely mask their real emotional states due to fear of judgment. SubtleSense was built to make those hidden states visible — to the person themselves, and to those who care about them.
 
-*130+ users tested the emotion detection demo across 567 visits*
+*200+ users tested the emotion detection demo across 667 visits*
 
 ---
 
@@ -57,13 +57,13 @@ The idea came from a personal observation: people routinely mask their real emot
 
 | Metric | Value |
 |---|---|
-| Active users | 567+ |
-| People tested| 130+|
+| Active users | 667+ |
+| People tested| 200+|
 | Hidden emotion accuracy | 84% |
 | Evaluation method | Human-verified testing across diverse user sessions |
 | Platform | Web (PWA) |
 
-**Accuracy methodology:** In early testing across 17 sessions, the model averaged 84% confidence in emotion detection, with accuracy varying based on environmental factors including lighting and camera angle."
+**Accuracy methodology:** In early testing across 48 sessions, the model averaged 84% confidence in emotion detection, with accuracy varying based on environmental factors including lighting and camera angle."
 
 ---
 
@@ -131,24 +131,10 @@ An independent research paper exploring ethnic-specific bias in micro-expression
 
 ---
 
-## Roadmap
-
-- [x] Core emotion detection (live webcam)
-- [x] 600+ user deployment
-- [x] Moodboard and emotion graph visualization
-- [x] PWA support
-- [ ] Hand-coded rebuild (removing no-code dependencies)
-- [ ] Custom domain deployment
-- [ ] Android app (Play Store)
-- [ ] Ethnic-bias correction layer for South Asian expression norms
-- [ ] Research paper publication (arXiv + IEEE/ACM student conference)
-
----
-
 ## Recognition
 
 - 🚀 Launched on [Product Hunt](https://www.producthunt.com) — ranked #252 on launch day
-- 👥 600+ real users across web platform
+- 👥 660+ real users across web platform
 - 🔬 Independent research in progress on cultural bias in micro-expression AI
 
 ---
