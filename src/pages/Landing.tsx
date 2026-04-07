@@ -1,7 +1,8 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Heart, Sparkles, Brain, Shield, Zap, Users, ArrowDown } from "lucide-react";
+import { Heart, Sparkles, Brain, Shield, Zap, Users, ArrowDown, LogIn, BarChart3, History, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import TransparencySection from "@/components/landing/TransparencySection";
 import SampleOutputSection from "@/components/landing/SampleOutputSection";
@@ -9,7 +10,9 @@ import ComparisonSection from "@/components/landing/ComparisonSection";
 import RealWorldUseCases from "@/components/landing/RealWorldUseCases";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
 import ShareResults from "@/components/ShareResults";
+import { supabase } from "@/integrations/supabase/client";
 import type { AnalysisResult } from "@/types/emotions";
+import type { User } from "@supabase/supabase-js";
 
 const MediaUploadZone = lazy(() => import("@/components/MediaUploadZone"));
 const ExitPoll = lazy(() => import("@/components/ExitPoll"));
