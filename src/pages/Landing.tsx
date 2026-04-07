@@ -124,12 +124,60 @@ const Landing = () => {
               </motion.div>
               <span className="font-display text-xl sm:text-2xl font-bold gradient-text">Subtle Sense</span>
             </div>
-            <Button
-              onClick={scrollToTry}
-              className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-semibold shadow-lg text-sm sm:text-base px-3 sm:px-4"
-            >
-              Analyze Now ↓
-            </Button>
+            <div className="flex items-center gap-2 sm:gap-3">
+              {currentUser ? (
+                <>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => navigate("/dashboard")}
+                    className="text-sm font-medium gap-1.5"
+                  >
+                    <BarChart3 className="w-4 h-4" />
+                    <span className="hidden sm:inline">Mood Board</span>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      navigate("/dashboard");
+                    }}
+                    className="text-sm font-medium gap-1.5"
+                  >
+                    <History className="w-4 h-4" />
+                    <span className="hidden sm:inline">History</span>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={async () => {
+                      await supabase.auth.signOut();
+                      setCurrentUser(null);
+                    }}
+                    className="rounded-full"
+                    title="Sign Out"
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate("/auth")}
+                  className="font-semibold gap-1.5 text-sm"
+                >
+                  <LogIn className="w-4 h-4" />
+                  Sign In
+                </Button>
+              )}
+              <Button
+                onClick={scrollToTry}
+                className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-semibold shadow-lg text-sm sm:text-base px-3 sm:px-4"
+              >
+                Analyze Now ↓
+              </Button>
+            </div>
           </nav>
         </header>
 
