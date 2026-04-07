@@ -27,10 +27,21 @@ const AnalyzerFallback = () => (
 );
 
 const Landing = () => {
+  const navigate = useNavigate();
   const [isMounted, setIsMounted] = useState(false);
   const [isAnalyzed, setIsAnalyzed] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setCurrentUser(session?.user ?? null);
+    });
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setCurrentUser(session?.user ?? null);
+    });
+  }, []);
 
   const featureToneClasses = {
     primary: { badge: "bg-primary/15", icon: "text-primary" },
