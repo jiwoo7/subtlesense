@@ -20,6 +20,7 @@
 
     --popover: 0 0% 8%;
     --popover-foreground: 0 0% 95%;
+    
 
     --primary: 330 80% 60%;
     --primary-foreground: 0 0% 100%;
@@ -134,6 +135,9 @@
     --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.4), 0 4px 6px -1px hsl(0 0% 0% / 0.3);
     --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.4), 0 8px 10px -1px hsl(0 0% 0% / 0.3);
     --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.5);
+  }
+  #lovable-badge {
+    display: none !important;
   }
 
   .light {
