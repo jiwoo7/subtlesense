@@ -4,7 +4,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-subtlesense.lovable.app-blue)](https://subtlesense.lovable.app)
 [![Product Hunt](https://img.shields.io/badge/Product%20Hunt-%23252-pink)](https://www.producthunt.com)
-[![Users](https://img.shields.io/badge/Users-667%2B-green)]()
+[![Users](https://img.shields.io/badge/Users-700+%2B-green)]()
 [![Accuracy](https://img.shields.io/badge/Accuracy-84%25-brightgreen)]()
 
 ---
@@ -29,7 +29,7 @@ Technical Architecture & Innovation
 
 **Iterative Engineering:** The project utilizes an ErrorBoundary framework to ensure high fault tolerance, maintaining 99% uptime during peak traffic of 500+ global visitors.
 
-Now available as Android app (in testing)
+Now available as Android app on May 16, 2026!!!
 
 ---
 
@@ -41,7 +41,7 @@ Built on principles from affective computing and micro-expression research, Subt
 
 The idea came from a personal observation: people routinely mask their real emotional states due to fear of judgment. SubtleSense was built to make those hidden states visible — to the person themselves, and to those who care about them.
 
-*200+ users tested the emotion detection demo across 667 visits*
+*200+ users tested the emotion detection demo across 700+ visits*
 
 ---
 
@@ -57,7 +57,7 @@ The idea came from a personal observation: people routinely mask their real emot
 
 | Metric | Value |
 |---|---|
-| Active users | 667+ |
+| Active users | 700+ |
 | People tested| 200+|
 | Hidden emotion accuracy | 84% |
 | Evaluation method | Human-verified testing across diverse user sessions |
