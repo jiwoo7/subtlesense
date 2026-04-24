@@ -151,6 +151,12 @@ This is not a school project. It is a real product, built to solve a real proble
 https://www.producthunt.com/products/subtle-sense/reviews/new
 ---
 
-## License
+Copyright (c) 2026 Naiyya Thapa. All Rights Reserved.
 
-MIT License — open for research and educational use.
+This software and all associated files (the "Software") are the sole property of Naiyya Thapa.
+
+Commercial and Non-Commercial Use: No person or entity is permitted to use, copy, modify, merge, publish, distribute, sublicense, or sell copies of the Software without the express written permission of the author.
+
+Confidentiality: The logic, design, and architecture of SubtleSense are trade secrets. Unauthorized access or replication is strictly prohibited.
+
+Inquiries: For licensing or partnership inquiries, contact naiyyathapa@gmail.com.
