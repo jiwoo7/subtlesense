@@ -148,6 +148,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
           <span className="text-xs font-normal text-muted-foreground">(What you feel but don't show)</span>
         </h3>
         <div className="grid grid-cols-3 gap-4">
+          {HIDDEN_EMOTIONS.map((emotion, index) => (
             <EmotionGauge
               key={emotion.key}
               label={emotion.label}
@@ -173,7 +174,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
           Suppressed Emotions
           <span className="text-xs font-normal text-muted-foreground">(What you're holding back)</span>
         </h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           {SUPPRESSED_EMOTIONS.map((emotion, index) => (
             <EmotionGauge
               key={emotion.key}
