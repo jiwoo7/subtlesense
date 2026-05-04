@@ -20,11 +20,15 @@ const DEMO_ANALYSIS: AnalysisResult = {
   hiddenInsecurity: 25,
   hiddenLoneliness: 18,
   hiddenGuilt: 12,
+  hiddenHappiness: 22,
+  hiddenLove: 30,
   // Suppressed Emotions
   suppressedAnger: 28,
   suppressedSadness: 35,
   suppressedFear: 20,
   suppressedDesire: 42,
+  suppressedJoy: 18,
+  suppressedLove: 26,
   // Meta States
   emotionalMasking: 55,
   innerConflict: 32,
