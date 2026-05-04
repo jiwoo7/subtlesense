@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 
 export type EmotionColor = 
   | "happiness" | "sadness" | "anger" | "fear" | "surprise" | "disgust"
-  | "hiddenAnxiety" | "hiddenInsecurity" | "hiddenLoneliness" | "hiddenGuilt"
-  | "suppressedAnger" | "suppressedSadness" | "suppressedFear" | "suppressedDesire"
+  | "hiddenAnxiety" | "hiddenInsecurity" | "hiddenLoneliness" | "hiddenGuilt" | "hiddenHappiness" | "hiddenLove"
+  | "suppressedAnger" | "suppressedSadness" | "suppressedFear" | "suppressedDesire" | "suppressedJoy" | "suppressedLove"
   | "emotionalMasking" | "innerConflict";
 
 interface EmotionGaugeProps {
@@ -58,6 +58,14 @@ const colorMap: Record<EmotionColor, { stroke: string; bg: string }> = {
     stroke: "hsl(320, 50%, 50%)",
     bg: "hsla(320, 50%, 50%, 0.2)",
   },
+  hiddenHappiness: {
+    stroke: "hsl(45, 80%, 55%)",
+    bg: "hsla(45, 80%, 55%, 0.2)",
+  },
+  hiddenLove: {
+    stroke: "hsl(340, 70%, 65%)",
+    bg: "hsla(340, 70%, 65%, 0.2)",
+  },
   // Suppressed emotions
   suppressedAnger: {
     stroke: "hsl(0, 80%, 45%)",
@@ -74,6 +82,14 @@ const colorMap: Record<EmotionColor, { stroke: string; bg: string }> = {
   suppressedDesire: {
     stroke: "hsl(340, 75%, 55%)",
     bg: "hsla(340, 75%, 55%, 0.2)",
+  },
+  suppressedJoy: {
+    stroke: "hsl(50, 75%, 50%)",
+    bg: "hsla(50, 75%, 50%, 0.2)",
+  },
+  suppressedLove: {
+    stroke: "hsl(330, 65%, 50%)",
+    bg: "hsla(330, 65%, 50%, 0.2)",
   },
   // Meta states
   emotionalMasking: {

@@ -8,16 +8,20 @@ export interface AnalysisResult {
   fear: number;
   surprise: number;
   disgust: number;
-  // Hidden Emotions
+  // Hidden Emotions (6)
   hiddenAnxiety: number;
   hiddenInsecurity: number;
   hiddenLoneliness: number;
   hiddenGuilt: number;
-  // Suppressed Emotions
+  hiddenHappiness: number;
+  hiddenLove: number;
+  // Suppressed Emotions (6)
   suppressedAnger: number;
   suppressedSadness: number;
   suppressedFear: number;
   suppressedDesire: number;
+  suppressedJoy: number;
+  suppressedLove: number;
   // Meta States
   emotionalMasking: number;
   innerConflict: number;
@@ -34,10 +38,10 @@ export interface AnalysisResult {
   uploadType: UploadType;
 }
 
-export type EmotionColor = 
+export type EmotionColor =
   | "happiness" | "sadness" | "anger" | "fear" | "surprise" | "disgust"
-  | "hiddenAnxiety" | "hiddenInsecurity" | "hiddenLoneliness" | "hiddenGuilt"
-  | "suppressedAnger" | "suppressedSadness" | "suppressedFear" | "suppressedDesire"
+  | "hiddenAnxiety" | "hiddenInsecurity" | "hiddenLoneliness" | "hiddenGuilt" | "hiddenHappiness" | "hiddenLove"
+  | "suppressedAnger" | "suppressedSadness" | "suppressedFear" | "suppressedDesire" | "suppressedJoy" | "suppressedLove"
   | "emotionalMasking" | "innerConflict";
 
 export interface EmotionData {
@@ -62,6 +66,8 @@ export const HIDDEN_EMOTIONS: Array<{ key: keyof AnalysisResult; label: string; 
   { key: "hiddenInsecurity", label: "Hidden Insecurity", color: "hiddenInsecurity", emoji: "🫣" },
   { key: "hiddenLoneliness", label: "Hidden Loneliness", color: "hiddenLoneliness", emoji: "🥀" },
   { key: "hiddenGuilt", label: "Hidden Guilt", color: "hiddenGuilt", emoji: "😔" },
+  { key: "hiddenHappiness", label: "Hidden Happiness", color: "hiddenHappiness", emoji: "🙂" },
+  { key: "hiddenLove", label: "Hidden Love", color: "hiddenLove", emoji: "💗" },
 ];
 
 export const SUPPRESSED_EMOTIONS: Array<{ key: keyof AnalysisResult; label: string; color: EmotionColor; emoji: string }> = [
@@ -69,6 +75,8 @@ export const SUPPRESSED_EMOTIONS: Array<{ key: keyof AnalysisResult; label: stri
   { key: "suppressedSadness", label: "Suppressed Sadness", color: "suppressedSadness", emoji: "😶" },
   { key: "suppressedFear", label: "Suppressed Fear", color: "suppressedFear", emoji: "😬" },
   { key: "suppressedDesire", label: "Suppressed Desire", color: "suppressedDesire", emoji: "💭" },
+  { key: "suppressedJoy", label: "Suppressed Joy", color: "suppressedJoy", emoji: "😌" },
+  { key: "suppressedLove", label: "Suppressed Love", color: "suppressedLove", emoji: "💞" },
 ];
 
 export const META_EMOTIONS: Array<{ key: keyof AnalysisResult; label: string; color: EmotionColor; emoji: string }> = [

@@ -27,11 +27,15 @@ const generateAnalysis = (type: UploadType): AnalysisResult => {
     hiddenInsecurity: randomValue(),
     hiddenLoneliness: randomValue(),
     hiddenGuilt: randomValue(),
+    hiddenHappiness: randomValue(),
+    hiddenLove: randomValue(),
     // Suppressed Emotions
     suppressedAnger: randomValue(),
     suppressedSadness: randomValue(),
     suppressedFear: randomValue(),
     suppressedDesire: randomValue(),
+    suppressedJoy: randomValue(),
+    suppressedLove: randomValue(),
     // Meta States
     emotionalMasking: randomValue(),
     innerConflict: randomValue(),

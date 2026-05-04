@@ -96,9 +96,9 @@ const Landing = () => {
   ];
 
   const stats = [
-    { value: "16", label: "Emotions Detected" },
-    { value: "84.5%", label: "Avg Accuracy" },
-    { value: "<5s", label: "Response time" },
+    { value: "20", label: "Emotions Detected" },
+    { value: "95%", label: "Peak Accuracy" },
+    { value: "<8s", label: "Response time" },
     { value: "Deep", label: "AI Analysis" }
   ];
 
@@ -361,8 +361,8 @@ const Landing = () => {
                   transition={{ delay: 0.4 }}
                 >
                   {[
-                    { label: "Detection", value: "16 Emotions", emoji: "🔮" },
-                     { label: "Powered by", value: "AI models", emoji: "🧠" },
+                    { label: "Detection", value: "20 Emotions", emoji: "🔮" },
+                    { label: "Powered by", value: "Multi-pass AI", emoji: "🧠" },
                     { label: "Detects", value: "Hidden + Suppressed", emoji: "🎭" },
                   ].map((stat) => (
                     <motion.div
@@ -408,58 +408,47 @@ const Landing = () => {
         {/* Real World Use Cases */}
         <RealWorldUseCases />
 
-        {/* How It Works */}
-        <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
-          <motion.div
-            className="text-center mb-10 sm:mb-16"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">
-              Simple 3-Step Process 🚀
-            </h2>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
-            {[
-              { step: "1", title: "Upload or Record", desc: "Use webcam, record audio, or upload a video of yourself", emoji: "📹" },
-              { step: "2", title: "Deep AI Analysis", desc: "AI detects surface, hidden, AND suppressed emotions", emoji: "🔮" },
-              { step: "3", title: "Get Deep Insights", desc: "Receive insights about what you're truly feeling inside", emoji: "💜" }
-            ].map((item, index) => (
-              <motion.div
-                key={item.step}
-                className="text-center glass-panel sm:bg-transparent rounded-xl sm:rounded-none p-4 sm:p-0 border sm:border-0 border-border/30"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
-              >
-                <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">{item.emoji}</div>
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r from-neon-purple to-neon-pink mx-auto mb-3 sm:mb-4 flex items-center justify-center">
-                  <span className="text-white font-bold text-lg sm:text-xl">{item.step}</span>
-                </div>
-                <h3 className="font-display text-lg sm:text-xl font-bold mb-1 sm:mb-2">{item.title}</h3>
-                <p className="text-muted-foreground text-sm">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
         {/* Footer */}
         <footer className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 text-center border-t border-border/30">
           <p className="text-muted-foreground mb-2 text-sm sm:text-base">
             Made with 💜 for emotional awareness • Privacy-first • Your emotions, your data
           </p>
-          <p className="text-xs sm:text-sm text-muted-foreground/70">
-            Made by <span className="font-semibold text-neon-pink">Naiyya Thapa</span>
+          <p className="text-xs sm:text-sm">
+            Made by{" "}
+            <span
+              className="font-bold tracking-wide"
+              style={{ color: "hsl(0, 85%, 38%)" }}
+            >
+              Naiyya Thapa
+            </span>
+          </p>
+          <p className="text-[10px] sm:text-xs text-muted-foreground/60 mt-1">
+            Powered by AI ✨
           </p>
         </footer>
 
-        <section className="container mx-auto px-4 sm:px-6 pb-8 sm:pb-10">
+        <section className="container mx-auto px-4 sm:px-6 pb-6 sm:pb-8">
           <p className="mx-auto max-w-5xl text-center text-xs sm:text-sm text-muted-foreground leading-relaxed">
             Disclaimer: This app uses AI to provide insights into emotional states for informational and educational purposes only. These results are not a medical diagnosis or a substitute for professional mental health advice. If you or someone you know is in crisis, please seek immediate help from a licensed professional or emergency services.
           </p>
+        </section>
+
+        {/* Contact */}
+        <section className="container mx-auto px-4 sm:px-6 pb-10 sm:pb-14">
+          <div className="mx-auto max-w-2xl text-center glass-panel rounded-2xl p-5 sm:p-6 border border-border/40">
+            <h3 className="font-display text-base sm:text-lg font-bold text-foreground mb-1">
+              Contact & Reviews
+            </h3>
+            <p className="text-xs sm:text-sm text-muted-foreground mb-2">
+              Questions, feedback, or partnership ideas? Reach out anytime.
+            </p>
+            <a
+              href="mailto:naiyyathapa@gmail.com"
+              className="text-sm sm:text-base font-semibold gradient-text hover:opacity-80 transition-opacity"
+            >
+              naiyyathapa@gmail.com
+            </a>
+          </div>
         </section>
       </div>
     </div>
