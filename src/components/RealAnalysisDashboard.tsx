@@ -57,28 +57,7 @@ const getTypeEmoji = (type: string | null) => {
 
 const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashboardProps) => {
   if (!isAnalyzed || !analysisResult) {
-    return (
-      <motion.div
-        className="glass-panel rounded-3xl p-12 text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-      >
-        <motion.div 
-          className="w-20 h-20 rounded-2xl pastel-gradient-soft mx-auto mb-6 flex items-center justify-center"
-          animate={{ rotate: [0, 5, -5, 0] }}
-          transition={{ duration: 3, repeat: Infinity }}
-        >
-          <Brain className="w-10 h-10 text-neon-purple" />
-        </motion.div>
-        <h3 className="font-display text-xl font-bold text-foreground mb-2">
-          Ready for Deep Analysis! 🔮
-        </h3>
-        <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mx-auto">
-          Our AI detects hidden & suppressed emotions beyond the surface
-        </p>
-      </motion.div>
-    );
+    return null;
   }
 
   const suggestions = analysisResult.suggestions?.length
@@ -168,8 +147,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
           Hidden Emotions
           <span className="text-xs font-normal text-muted-foreground">(What you feel but don't show)</span>
         </h3>
-        <div className="grid grid-cols-2 gap-4">
-          {HIDDEN_EMOTIONS.map((emotion, index) => (
+        <div className="grid grid-cols-3 gap-4">
             <EmotionGauge
               key={emotion.key}
               label={emotion.label}
