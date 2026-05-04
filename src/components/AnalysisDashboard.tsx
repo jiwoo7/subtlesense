@@ -189,7 +189,7 @@ const AnalysisDashboard = ({ isAnalyzed, analysisResult }: AnalysisDashboardProp
         <h4 className="text-sm font-semibold text-neon-purple mb-3 flex items-center gap-2">
           <Shield className="w-4 h-4" /> Hidden Emotions
         </h4>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-3">
           {HIDDEN_EMOTIONS.map((emotion, index) => (
             <EmotionGauge
               key={emotion.key}
@@ -209,7 +209,7 @@ const AnalysisDashboard = ({ isAnalyzed, analysisResult }: AnalysisDashboardProp
         <h4 className="text-sm font-semibold text-neon-red mb-3 flex items-center gap-2">
           <Unlock className="w-4 h-4" /> Suppressed Emotions
         </h4>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-3">
           {SUPPRESSED_EMOTIONS.map((emotion, index) => (
             <EmotionGauge
               key={emotion.key}
