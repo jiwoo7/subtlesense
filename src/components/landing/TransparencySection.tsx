@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Brain, Cpu, BarChart3, Layers } from "lucide-react";
+import { Brain, Cpu, BarChart3 } from "lucide-react";
 
 const TransparencySection = () => {
   return (
