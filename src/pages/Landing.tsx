@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Heart, Sparkles, Brain, Shield, Zap, Users, ArrowDown, LogIn, BarChart3, History, LogOut } from "lucide-react";
+import { Heart, Sparkles, Brain, Shield, Zap, Users, ArrowDown, LogIn, BarChart3, History, LogOut, Crown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
@@ -170,6 +170,15 @@ const Landing = () => {
                   Sign In
                 </Button>
               )}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate("/premium")}
+                className="font-semibold gap-1.5 text-sm hidden sm:inline-flex text-warning hover:text-warning"
+              >
+                <Crown className="w-4 h-4" />
+                Premium
+              </Button>
               <Button
                 onClick={scrollToTry}
                 className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-semibold shadow-lg text-sm sm:text-base px-3 sm:px-4"
