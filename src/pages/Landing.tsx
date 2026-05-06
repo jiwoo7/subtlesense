@@ -4,12 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Heart, Sparkles, Brain, Shield, Zap, Users, ArrowDown, LogIn, BarChart3, History, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import TransparencySection from "@/components/landing/TransparencySection";
-import SampleOutputSection from "@/components/landing/SampleOutputSection";
-import ComparisonSection from "@/components/landing/ComparisonSection";
-import RealWorldUseCases from "@/components/landing/RealWorldUseCases";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
 import ShareResults from "@/components/ShareResults";
+
+const TransparencySection = lazy(() => import("@/components/landing/TransparencySection"));
+const RealWorldUseCases = lazy(() => import("@/components/landing/RealWorldUseCases"));
 import { supabase } from "@/integrations/supabase/client";
 import type { AnalysisResult } from "@/types/emotions";
 import type { User } from "@supabase/supabase-js";
@@ -396,17 +395,15 @@ const Landing = () => {
           </section>
         </div>
 
-        {/* Comparison Section */}
-        <ComparisonSection />
-
         {/* Transparency Section */}
-        <TransparencySection />
-
-        {/* Sample Output Section */}
-        <SampleOutputSection />
+        <Suspense fallback={<div className="h-32" />}>
+          <TransparencySection />
+        </Suspense>
 
         {/* Real World Use Cases */}
-        <RealWorldUseCases />
+        <Suspense fallback={<div className="h-32" />}>
+          <RealWorldUseCases />
+        </Suspense>
 
         {/* Footer */}
         <footer className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 text-center border-t border-border/30">

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Brain, Cpu, BarChart3, Layers } from "lucide-react";
+import { Brain, Cpu, BarChart3 } from "lucide-react";
 
 const TransparencySection = () => {
   return (
@@ -93,32 +93,6 @@ const TransparencySection = () => {
           </div>
         </motion.div>
 
-        {/* Hidden vs Suppressed */}
-        <motion.div
-          className="glass-panel rounded-2xl p-5 sm:p-6 border border-border/50 sm:col-span-2 lg:col-span-1"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-        >
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-neon-purple/20 flex items-center justify-center mb-4">
-            <Layers className="w-5 h-5 sm:w-6 sm:h-6 text-neon-purple" />
-          </div>
-          <h3 className="font-display text-lg font-bold mb-2">Hidden vs Suppressed</h3>
-          <div className="space-y-3 text-sm">
-            <div className="p-3 rounded-xl bg-neon-purple/10 border border-neon-purple/20">
-              <p className="font-semibold text-foreground mb-1">🎭 Hidden Emotions</p>
-              <p className="text-muted-foreground">Emotions you <em>don't realize</em> you're feeling. Detected through micro-expressions, voice pitch shifts, and involuntary body cues you can't consciously control.</p>
-            </div>
-            <div className="p-3 rounded-xl bg-neon-red/10 border border-neon-red/20">
-              <p className="font-semibold text-foreground mb-1">🔒 Suppressed Emotions</p>
-              <p className="text-muted-foreground">Emotions you <em>actively push down</em>. Detected through tension patterns, forced expressions, and contradictions between what you say and how your body reacts.</p>
-            </div>
-            <p className="text-xs text-muted-foreground/70">
-              The AI looks for mismatches between your surface expression and deeper signals to separate the two.
-            </p>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
