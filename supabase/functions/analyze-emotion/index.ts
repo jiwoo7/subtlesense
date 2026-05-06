@@ -237,7 +237,7 @@ const buildUserContent = (uploadType: string, mediaBase64: string, mediaType: st
   return parts;
 };
 
-const callModel = async (lovableApiKey: string, model: string, userContent: unknown[], systemPrompt: string): Promise<EmotionAnalysis | null> => {
+const callModel = async (lovableApiKey: string, model: string, userContent: unknown[], systemPrompt: string, useReasoning = false): Promise<EmotionAnalysis | null> => {
   const requestBody: Record<string, unknown> = {
     model,
     messages: [
@@ -247,6 +247,9 @@ const callModel = async (lovableApiKey: string, model: string, userContent: unkn
     tools: [TOOL_SCHEMA],
     tool_choice: { type: "function", function: { name: "report_emotion_analysis" } },
   };
+  if (useReasoning && model.startsWith("openai/")) {
+    requestBody.reasoning = { effort: "high" };
+  }
 
   const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
     method: "POST",
@@ -324,12 +327,15 @@ const verifyAnalysis = async (
       console.log("Verification pass returned nothing, using primary.");
       return primary;
     }
-    // Average the two passes for stability, prefer reviewer's narrative
+    // Weighted blend (reviewer 60%, primary 40%) for stability with reviewer bias
     const merged = { ...reviewed };
     for (const k of NUMERIC_KEYS) {
-      merged[k] = Math.round((primary[k] + reviewed[k]) / 2);
+      merged[k] = Math.round(primary[k] * 0.4 + reviewed[k] * 0.6);
     }
-    merged.accuracy = Math.max(primary.accuracy, reviewed.accuracy, 88);
+    // High accuracy when both passes agree closely
+    const avgDelta = NUMERIC_KEYS.reduce((sum, k) => sum + Math.abs(primary[k] - reviewed[k]), 0) / NUMERIC_KEYS.length;
+    const agreementBoost = avgDelta < 8 ? 4 : avgDelta < 15 ? 2 : 0;
+    merged.accuracy = Math.min(95, Math.max(primary.accuracy, reviewed.accuracy, 88) + agreementBoost);
     merged.suggestions = reviewed.suggestions.length ? reviewed.suggestions : primary.suggestions;
     merged.advice = reviewed.advice || primary.advice;
     merged.deepInsight = reviewed.deepInsight || primary.deepInsight;
