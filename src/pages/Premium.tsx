@@ -25,8 +25,21 @@ const perks = [
 
 const Premium = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const referralCode = searchParams.get("ref") || "";
   const [showModal, setShowModal] = useState(false);
   const [joined, setJoined] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [signup, setSignup] = useState<{ position?: number; referral_code?: string } | null>(null);
+  const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    supabase.from("waitlist_stats").select("total").maybeSingle().then(({ data }) => {
+      if (data?.total != null) setWaitlistCount(data.total);
+    });
+  }, []);
 
   const fireConfetti = () => {
     const colors = ["#ff3d7f", "#a855f7", "#ec4899", "#ef4444", "#fff"];
@@ -35,12 +48,43 @@ const Premium = () => {
     setTimeout(() => confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1, y: 0.7 }, colors }), 300);
   };
 
-  const handleJoinWaitlist = () => {
-    setJoined(true);
-    fireConfetti();
-    // Open mail client to actually deliver the message to naiyyathapa@gmail.com
-    window.location.href =
-      "mailto:naiyyathapa@gmail.com?subject=Subtle%20Sense%20Premium%20Waitlist&body=Hi%20Naiyya%2C%0A%0AI%27d%20like%20to%20join%20the%20Subtle%20Sense%20Premium%20waitlist.%0A%0AThanks!";
+  const handleJoinWaitlist = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) {
+      toast({ title: "Please enter your email", variant: "destructive" });
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("join-waitlist", {
+        body: { email: email.trim(), name: name.trim(), referredByCode: referralCode || undefined },
+      });
+      if (error) throw error;
+      setSignup(data);
+      setJoined(true);
+      fireConfetti();
+      if (data?.alreadyJoined) {
+        toast({ title: "You're already on the waitlist! 💌", description: `Position #${data.position}` });
+      } else {
+        toast({ title: "You're in! 💌", description: "Check your inbox for confirmation." });
+        setWaitlistCount((c) => (c == null ? c : c + 1));
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast({ title: "Couldn't join", description: err?.message || "Try again in a moment", variant: "destructive" });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const shareReferral = async () => {
+    if (!signup?.referral_code) return;
+    const url = `${window.location.origin}/premium?ref=${signup.referral_code}`;
+    if (navigator.share) {
+      try { await navigator.share({ title: "Subtle Sense Premium", text: "Join me on the Subtle Sense Premium waitlist ✨", url }); return; } catch {}
+    }
+    await navigator.clipboard.writeText(url);
+    toast({ title: "Referral link copied!", description: "Share it with a friend 💜" });
   };
 
   return (
