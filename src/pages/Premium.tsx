@@ -270,25 +270,60 @@ const Premium = () => {
                 <Sparkles className="w-8 h-8 text-white" />
               </motion.div>
               <h3 className="font-display text-2xl font-bold mb-2 gradient-text">
-                Coming Soon ✨
+                {joined ? "You took a step ✨" : "Coming Soon ✨"}
               </h3>
-              <p className="text-sm text-muted-foreground mb-6">
-                Premium payments are launching shortly. Join the waitlist by emailing us —
-                we'll let you know the moment it's live.
-              </p>
-              <a
-                href="mailto:naiyyathapa@gmail.com?subject=Subtle%20Sense%20Premium%20Waitlist"
-                className="inline-block w-full"
-              >
-                <Button className="w-full bg-gradient-to-r from-neon-purple to-neon-pink text-white font-bold">
-                  Join the Waitlist
-                </Button>
-              </a>
+              {!joined ? (
+                <>
+                  <p className="text-sm text-muted-foreground mb-6">
+                    Premium payments are launching shortly. Join the waitlist —
+                    we'll let you know the moment it's live.
+                  </p>
+                  <button
+                    onClick={handleJoinWaitlist}
+                    className="relative w-full overflow-hidden rounded-full px-6 py-3 font-bold text-white bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red shadow-[0_0_30px_hsl(var(--neon-pink)/0.6)] hover:shadow-[0_0_50px_hsl(var(--neon-pink)/0.9)] transition-shadow"
+                  >
+                    <motion.span
+                      aria-hidden
+                      className="absolute inset-y-0 w-1/2"
+                      style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)" }}
+                      animate={{ x: ["-100%", "250%"] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    />
+                    <span className="relative z-10">Join the Waitlist</span>
+                  </button>
+                </>
+              ) : (
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ type: "spring", damping: 12 }}
+                  className="space-y-4"
+                >
+                  <p className="text-sm text-muted-foreground">
+                    Your email just opened — hit send and you're officially in 💌
+                  </p>
+                  <motion.div
+                    className="relative inline-block w-full"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <span
+                      aria-hidden
+                      className="absolute -inset-1 rounded-full blur-xl opacity-70"
+                      style={{ background: "linear-gradient(90deg, hsl(var(--neon-pink)), hsl(var(--neon-purple)))" }}
+                    />
+                    <div className="relative w-full rounded-full px-6 py-4 bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red text-white font-display font-bold flex items-center justify-center gap-2">
+                      <Heart className="w-5 h-5 fill-white" />
+                      You've taken a step for yourself
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
               <button
-                onClick={() => setShowModal(false)}
+                onClick={() => { setShowModal(false); setTimeout(() => setJoined(false), 300); }}
                 className="text-xs text-muted-foreground hover:text-foreground mt-4 transition-colors"
               >
-                Maybe later
+                {joined ? "Close" : "Maybe later"}
               </button>
             </motion.div>
           </motion.div>
