@@ -33,6 +33,7 @@ const Dashboard = () => {
   const [lastSessionId, setLastSessionId] = useState<string | undefined>();
   const [showExitPoll, setShowExitPoll] = useState(false);
   const [showShare, setShowShare] = useState(false);
+  const { current: streakCurrent, longest: streakLongest, recordSession } = useStreak(user?.id);
 
   useEffect(() => {
     if (!loading && !user) {
