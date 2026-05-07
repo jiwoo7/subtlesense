@@ -19,6 +19,8 @@ import WelcomeMessage from "@/components/WelcomeMessage";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { AnalysisResult, UploadType } from "@/types/emotions";
+import { useStreak } from "@/hooks/useStreak";
+import StreakBadge from "@/components/StreakBadge";
 
 const Dashboard = () => {
   const { user, loading } = useAuth();
