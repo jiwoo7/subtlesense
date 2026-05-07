@@ -22,13 +22,22 @@ const queryClient = new QueryClient();
 
 const RouteFallback = () => <SubtleSenseLoader />;
 
-const App = () => (
+const App = () => {
+  useEffect(() => {
+    try {
+      const stored = (localStorage.getItem("subtlesense-theme-preset") as ThemePreset) || "midnight";
+      applyThemePreset(stored);
+    } catch {}
+  }, []);
+
+  return (
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
         <OfflineIndicator />
+        <InstallPrompt />
         <BrowserRouter>
           <Suspense fallback={<RouteFallback />}>
             <Routes>
