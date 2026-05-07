@@ -44,6 +44,7 @@ async function sendEmail(opts: {
     console.error("Brevo error", res.status, text);
     return { ok: false, error: text };
   }
+  console.log("Brevo ok", res.status, text.slice(0, 200));
   return { ok: true };
 }
 
