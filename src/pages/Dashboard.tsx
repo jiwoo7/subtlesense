@@ -64,7 +64,10 @@ const Dashboard = () => {
         
         setLastSessionId(data?.id);
         toast.success("Deep analysis saved! 🔮");
-        
+
+        // Update streak after a successful save
+        try { await recordSession(); } catch (e) { console.error("streak update failed", e); }
+
         setTimeout(() => {
           setShowFeedback(true);
         }, 2000);
