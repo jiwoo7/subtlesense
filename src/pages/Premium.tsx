@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import confetti from "canvas-confetti";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { toast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Crown, ArrowLeft, Check, Sparkles, BookOpen, BarChart3, History,
-  Brain, Zap, Shield, Infinity as InfinityIcon, Heart, Download
+  Brain, Zap, Shield, Infinity as InfinityIcon, Heart, Download, Loader2, Share2, Users
 } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 
@@ -22,8 +25,21 @@ const perks = [
 
 const Premium = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const referralCode = searchParams.get("ref") || "";
   const [showModal, setShowModal] = useState(false);
   const [joined, setJoined] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [signup, setSignup] = useState<{ position?: number; referral_code?: string } | null>(null);
+  const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    supabase.from("waitlist_stats").select("total").maybeSingle().then(({ data }) => {
+      if (data?.total != null) setWaitlistCount(data.total);
+    });
+  }, []);
 
   const fireConfetti = () => {
     const colors = ["#ff3d7f", "#a855f7", "#ec4899", "#ef4444", "#fff"];
@@ -32,12 +48,43 @@ const Premium = () => {
     setTimeout(() => confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1, y: 0.7 }, colors }), 300);
   };
 
-  const handleJoinWaitlist = () => {
-    setJoined(true);
-    fireConfetti();
-    // Open mail client to actually deliver the message to naiyyathapa@gmail.com
-    window.location.href =
-      "mailto:naiyyathapa@gmail.com?subject=Subtle%20Sense%20Premium%20Waitlist&body=Hi%20Naiyya%2C%0A%0AI%27d%20like%20to%20join%20the%20Subtle%20Sense%20Premium%20waitlist.%0A%0AThanks!";
+  const handleJoinWaitlist = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) {
+      toast({ title: "Please enter your email", variant: "destructive" });
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("join-waitlist", {
+        body: { email: email.trim(), name: name.trim(), referredByCode: referralCode || undefined },
+      });
+      if (error) throw error;
+      setSignup(data);
+      setJoined(true);
+      fireConfetti();
+      if (data?.alreadyJoined) {
+        toast({ title: "You're already on the waitlist! 💌", description: `Position #${data.position}` });
+      } else {
+        toast({ title: "You're in! 💌", description: "Check your inbox for confirmation." });
+        setWaitlistCount((c) => (c == null ? c : c + 1));
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast({ title: "Couldn't join", description: err?.message || "Try again in a moment", variant: "destructive" });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const shareReferral = async () => {
+    if (!signup?.referral_code) return;
+    const url = `${window.location.origin}/premium?ref=${signup.referral_code}`;
+    if (navigator.share) {
+      try { await navigator.share({ title: "Subtle Sense Premium", text: "Join me on the Subtle Sense Premium waitlist ✨", url }); return; } catch {}
+    }
+    await navigator.clipboard.writeText(url);
+    toast({ title: "Referral link copied!", description: "Share it with a friend 💜" });
   };
 
   return (
@@ -142,6 +189,21 @@ const Premium = () => {
           <p className="text-xs text-muted-foreground/70 mt-3">
             Cancel anytime • Secure checkout • Loved by emotional explorers ✨
           </p>
+
+          {waitlistCount != null && waitlistCount > 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-xs sm:text-sm"
+            >
+              <Users className="w-4 h-4 text-neon-pink" />
+              <span><strong className="gradient-text">{waitlistCount}</strong> {waitlistCount === 1 ? "explorer is" : "explorers are"} already on the waitlist</span>
+            </motion.div>
+          )}
+          {referralCode && (
+            <p className="mt-3 text-xs text-neon-pink">✨ A friend invited you — first 100 get lifetime 50% off</p>
+          )}
         </section>
 
         {/* Perks grid */}
@@ -274,23 +336,44 @@ const Premium = () => {
               </h3>
               {!joined ? (
                 <>
-                  <p className="text-sm text-muted-foreground mb-6">
-                    Premium payments are launching shortly. Join the waitlist —
-                    we'll let you know the moment it's live.
+                  <p className="text-sm text-muted-foreground mb-5">
+                    Premium payments are launching shortly. Drop your email and we'll let you know the moment it's live.
                   </p>
-                  <button
-                    onClick={handleJoinWaitlist}
-                    className="relative w-full overflow-hidden rounded-full px-6 py-3 font-bold text-white bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red shadow-[0_0_30px_hsl(var(--neon-pink)/0.6)] hover:shadow-[0_0_50px_hsl(var(--neon-pink)/0.9)] transition-shadow"
-                  >
-                    <motion.span
-                      aria-hidden
-                      className="absolute inset-y-0 w-1/2"
-                      style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)" }}
-                      animate={{ x: ["-100%", "250%"] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  <form onSubmit={handleJoinWaitlist} className="space-y-3 text-left">
+                    <Input
+                      type="text"
+                      placeholder="Your name (optional)"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      disabled={submitting}
+                      className="bg-background/50"
                     />
-                    <span className="relative z-10">Join the Waitlist</span>
-                  </button>
+                    <Input
+                      type="email"
+                      required
+                      placeholder="you@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      disabled={submitting}
+                      className="bg-background/50"
+                    />
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="relative w-full overflow-hidden rounded-full px-6 py-3 font-bold text-white bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red shadow-[0_0_30px_hsl(var(--neon-pink)/0.6)] hover:shadow-[0_0_50px_hsl(var(--neon-pink)/0.9)] transition-shadow disabled:opacity-60"
+                    >
+                      <motion.span
+                        aria-hidden
+                        className="absolute inset-y-0 w-1/2"
+                        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)" }}
+                        animate={{ x: ["-100%", "250%"] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      />
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        {submitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Joining…</> : <>Join the Waitlist</>}
+                      </span>
+                    </button>
+                  </form>
                 </>
               ) : (
                 <motion.div
@@ -300,7 +383,7 @@ const Premium = () => {
                   className="space-y-4"
                 >
                   <p className="text-sm text-muted-foreground">
-                    Your email just opened — hit send and you're officially in 💌
+                    {signup?.position ? <>You're <strong className="gradient-text">#{signup.position}</strong> in line. Check your inbox 💌</> : "Confirmation sent — check your inbox 💌"}
                   </p>
                   <motion.div
                     className="relative inline-block w-full"
@@ -317,6 +400,16 @@ const Premium = () => {
                       You've taken a step for yourself
                     </div>
                   </motion.div>
+                  {signup?.referral_code && (
+                    <Button
+                      onClick={shareReferral}
+                      variant="outline"
+                      className="w-full gap-2 border-neon-pink/40 hover:bg-neon-pink/10"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      Share with a friend (50% off for first 100)
+                    </Button>
+                  )}
                 </motion.div>
               )}
               <button

@@ -19,6 +19,8 @@ import WelcomeMessage from "@/components/WelcomeMessage";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { AnalysisResult, UploadType } from "@/types/emotions";
+import { useStreak } from "@/hooks/useStreak";
+import StreakBadge from "@/components/StreakBadge";
 
 const Dashboard = () => {
   const { user, loading } = useAuth();
@@ -31,6 +33,7 @@ const Dashboard = () => {
   const [lastSessionId, setLastSessionId] = useState<string | undefined>();
   const [showExitPoll, setShowExitPoll] = useState(false);
   const [showShare, setShowShare] = useState(false);
+  const { current: streakCurrent, longest: streakLongest, recordSession } = useStreak(user?.id);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -61,7 +64,10 @@ const Dashboard = () => {
         
         setLastSessionId(data?.id);
         toast.success("Deep analysis saved! 🔮");
-        
+
+        // Update streak after a successful save
+        try { await recordSession(); } catch (e) { console.error("streak update failed", e); }
+
         setTimeout(() => {
           setShowFeedback(true);
         }, 2000);
@@ -96,6 +102,10 @@ const Dashboard = () => {
       
       <div className="relative z-10 container mx-auto px-4 sm:px-6 py-4 sm:py-6 max-w-6xl">
         <DashboardHeader activeTab={activeTab} setActiveTab={setActiveTab} />
+
+        <div className="mt-3 sm:mt-4 flex justify-end">
+          <StreakBadge current={streakCurrent} longest={streakLongest} />
+        </div>
 
         {activeTab === "analyze" && (
           <>

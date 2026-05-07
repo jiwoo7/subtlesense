@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import OfflineIndicator from "@/components/OfflineIndicator";
 import SubtleSenseLoader from "@/components/SubtleSenseLoader";
+import InstallPrompt from "@/components/InstallPrompt";
+import { applyThemePreset, type ThemePreset } from "@/hooks/useThemePreset";
 
 const Landing = lazy(() => import("./pages/Landing"));
 const Auth = lazy(() => import("./pages/AuthWithProvider"));
@@ -20,13 +22,22 @@ const queryClient = new QueryClient();
 
 const RouteFallback = () => <SubtleSenseLoader />;
 
-const App = () => (
+const App = () => {
+  useEffect(() => {
+    try {
+      const stored = (localStorage.getItem("subtlesense-theme-preset") as ThemePreset) || "midnight";
+      applyThemePreset(stored);
+    } catch {}
+  }, []);
+
+  return (
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
         <OfflineIndicator />
+        <InstallPrompt />
         <BrowserRouter>
           <Suspense fallback={<RouteFallback />}>
             <Routes>
@@ -43,6 +54,7 @@ const App = () => (
       </TooltipProvider>
     </QueryClientProvider>
   </ErrorBoundary>
-);
+  );
+};
 
 export default App;

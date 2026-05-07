@@ -175,6 +175,40 @@
     --chart-4: 310 65% 48%;
     --chart-5: 270 55% 50%;
   }
+
+  /* Theme Presets — applied via [data-theme] on <html> */
+  [data-theme="midnight"] {
+    --neon-pink: 330 90% 65%;
+    --neon-purple: 280 80% 60%;
+    --neon-red: 350 85% 55%;
+    --neon-magenta: 310 85% 55%;
+    --neon-violet: 270 70% 55%;
+    --primary: 330 80% 60%;
+    --accent: 350 70% 50%;
+    --ring: 330 80% 60%;
+  }
+
+  [data-theme="sunset"] {
+    --neon-pink: 20 95% 60%;
+    --neon-purple: 350 85% 58%;
+    --neon-red: 10 90% 55%;
+    --neon-magenta: 340 85% 55%;
+    --neon-violet: 30 90% 55%;
+    --primary: 20 90% 58%;
+    --accent: 350 85% 55%;
+    --ring: 20 90% 58%;
+  }
+
+  [data-theme="forest"] {
+    --neon-pink: 160 70% 50%;
+    --neon-purple: 190 75% 50%;
+    --neon-red: 145 65% 45%;
+    --neon-magenta: 175 70% 48%;
+    --neon-violet: 200 70% 50%;
+    --primary: 160 70% 45%;
+    --accent: 190 75% 45%;
+    --ring: 160 70% 45%;
+  }
 }
 
 @layer base {

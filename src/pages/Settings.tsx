@@ -9,9 +9,10 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, User, Bell, Save, Upload, Loader2 } from "lucide-react";
+import { ArrowLeft, User, Bell, Save, Upload, Loader2, Palette, Check } from "lucide-react";
 import { toast } from "sonner";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import { useThemePreset, THEME_PRESETS } from "@/hooks/useThemePreset";
 
 interface ProfileSettings {
   display_name: string;
@@ -24,6 +25,7 @@ interface ProfileSettings {
 const Settings = () => {
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const { preset, setPreset } = useThemePreset();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -257,6 +259,48 @@ const Settings = () => {
                   <p className="text-xs text-muted-foreground">
                     Email cannot be changed
                   </p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Theme Presets Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+          >
+            <Card className="glass-panel border-border/50">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Palette className="w-5 h-5 text-primary" />
+                  Theme
+                </CardTitle>
+                <CardDescription>Pick the vibe that matches your mood</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-3 gap-3">
+                  {THEME_PRESETS.map((t) => {
+                    const active = preset === t.id;
+                    return (
+                      <button
+                        key={t.id}
+                        type="button"
+                        onClick={() => { setPreset(t.id); toast.success(`Theme: ${t.label} ${t.emoji}`); }}
+                        className={`relative rounded-xl p-3 text-left border transition-all overflow-hidden ${active ? "border-primary shadow-[0_0_24px_hsl(var(--primary)/0.5)]" : "border-border/50 hover:border-primary/40"}`}
+                      >
+                        <div
+                          className="w-full h-14 rounded-lg mb-2"
+                          style={{ background: t.swatch }}
+                        />
+                        <div className="flex items-center justify-between gap-1">
+                          <span className="font-bold text-sm">{t.emoji} {t.label}</span>
+                          {active && <Check className="w-4 h-4 text-primary" />}
+                        </div>
+                        <p className="text-[10px] text-muted-foreground leading-tight mt-0.5">{t.desc}</p>
+                      </button>
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>
