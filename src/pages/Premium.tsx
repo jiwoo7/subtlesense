@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import confetti from "canvas-confetti";
 import { Button } from "@/components/ui/button";
 import {
   Crown, ArrowLeft, Check, Sparkles, BookOpen, BarChart3, History,
