@@ -25,6 +25,7 @@ interface ProfileSettings {
 const Settings = () => {
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const { preset, setPreset } = useThemePreset();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
