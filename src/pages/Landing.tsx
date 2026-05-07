@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Heart, Sparkles, Brain, Shield, Zap, Users, ArrowDown, LogIn, BarChart3, History, LogOut, Crown } from "lucide-react";
+import { Heart, Sparkles, Brain, Shield, Zap, Users, ArrowDown, BarChart3, History, LogOut, Crown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
@@ -159,17 +159,7 @@ const Landing = () => {
                     <LogOut className="w-4 h-4" />
                   </Button>
                 </>
-              ) : (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate("/auth")}
-                  className="font-semibold gap-1.5 text-sm"
-                >
-                  <LogIn className="w-4 h-4" />
-                  Sign In
-                </Button>
-              )}
+              ) : null}
               <Button
                 variant="ghost"
                 size="sm"
