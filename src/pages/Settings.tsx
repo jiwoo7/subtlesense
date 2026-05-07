@@ -9,9 +9,10 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, User, Bell, Save, Upload, Loader2 } from "lucide-react";
+import { ArrowLeft, User, Bell, Save, Upload, Loader2, Palette, Check } from "lucide-react";
 import { toast } from "sonner";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import { useThemePreset, THEME_PRESETS } from "@/hooks/useThemePreset";
 
 interface ProfileSettings {
   display_name: string;
