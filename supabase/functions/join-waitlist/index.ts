@@ -6,7 +6,8 @@ const corsHeaders = {
 };
 
 const NOTIFY_TO = "naiyyathapa@gmail.com";
-const FROM_EMAIL = "noreply@subtlesense.app"; // Brevo will use sender; can be unverified for low-volume but recommend verifying
+// Brevo requires a verified sender. Using the account owner's email (auto-verified on signup).
+const FROM_EMAIL = "naiyyathapa@gmail.com";
 const FROM_NAME = "Subtle Sense";
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/brevo";
