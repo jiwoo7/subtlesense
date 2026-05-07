@@ -23,6 +23,22 @@ const perks = [
 const Premium = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const [joined, setJoined] = useState(false);
+
+  const fireConfetti = () => {
+    const colors = ["#ff3d7f", "#a855f7", "#ec4899", "#ef4444", "#fff"];
+    confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 }, colors });
+    setTimeout(() => confetti({ particleCount: 50, angle: 60, spread: 55, origin: { x: 0, y: 0.7 }, colors }), 150);
+    setTimeout(() => confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1, y: 0.7 }, colors }), 300);
+  };
+
+  const handleJoinWaitlist = () => {
+    setJoined(true);
+    fireConfetti();
+    // Open mail client to actually deliver the message to naiyyathapa@gmail.com
+    window.location.href =
+      "mailto:naiyyathapa@gmail.com?subject=Subtle%20Sense%20Premium%20Waitlist&body=Hi%20Naiyya%2C%0A%0AI%27d%20like%20to%20join%20the%20Subtle%20Sense%20Premium%20waitlist.%0A%0AThanks!";
+  };
 
   return (
     <div className="min-h-screen relative overflow-hidden">
