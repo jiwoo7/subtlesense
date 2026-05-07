@@ -159,17 +159,7 @@ const Landing = () => {
                     <LogOut className="w-4 h-4" />
                   </Button>
                 </>
-              ) : (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate("/auth")}
-                  className="font-semibold gap-1.5 text-sm"
-                >
-                  <LogIn className="w-4 h-4" />
-                  Sign In
-                </Button>
-              )}
+              ) : null}
               <Button
                 variant="ghost"
                 size="sm"
