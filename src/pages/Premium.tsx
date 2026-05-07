@@ -189,6 +189,21 @@ const Premium = () => {
           <p className="text-xs text-muted-foreground/70 mt-3">
             Cancel anytime • Secure checkout • Loved by emotional explorers ✨
           </p>
+
+          {waitlistCount != null && waitlistCount > 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-xs sm:text-sm"
+            >
+              <Users className="w-4 h-4 text-neon-pink" />
+              <span><strong className="gradient-text">{waitlistCount}</strong> {waitlistCount === 1 ? "explorer is" : "explorers are"} already on the waitlist</span>
+            </motion.div>
+          )}
+          {referralCode && (
+            <p className="mt-3 text-xs text-neon-pink">✨ A friend invited you — first 100 get lifetime 50% off</p>
+          )}
         </section>
 
         {/* Perks grid */}
