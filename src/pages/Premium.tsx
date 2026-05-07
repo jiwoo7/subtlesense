@@ -336,23 +336,44 @@ const Premium = () => {
               </h3>
               {!joined ? (
                 <>
-                  <p className="text-sm text-muted-foreground mb-6">
-                    Premium payments are launching shortly. Join the waitlist —
-                    we'll let you know the moment it's live.
+                  <p className="text-sm text-muted-foreground mb-5">
+                    Premium payments are launching shortly. Drop your email and we'll let you know the moment it's live.
                   </p>
-                  <button
-                    onClick={handleJoinWaitlist}
-                    className="relative w-full overflow-hidden rounded-full px-6 py-3 font-bold text-white bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red shadow-[0_0_30px_hsl(var(--neon-pink)/0.6)] hover:shadow-[0_0_50px_hsl(var(--neon-pink)/0.9)] transition-shadow"
-                  >
-                    <motion.span
-                      aria-hidden
-                      className="absolute inset-y-0 w-1/2"
-                      style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)" }}
-                      animate={{ x: ["-100%", "250%"] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  <form onSubmit={handleJoinWaitlist} className="space-y-3 text-left">
+                    <Input
+                      type="text"
+                      placeholder="Your name (optional)"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      disabled={submitting}
+                      className="bg-background/50"
                     />
-                    <span className="relative z-10">Join the Waitlist</span>
-                  </button>
+                    <Input
+                      type="email"
+                      required
+                      placeholder="you@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      disabled={submitting}
+                      className="bg-background/50"
+                    />
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="relative w-full overflow-hidden rounded-full px-6 py-3 font-bold text-white bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red shadow-[0_0_30px_hsl(var(--neon-pink)/0.6)] hover:shadow-[0_0_50px_hsl(var(--neon-pink)/0.9)] transition-shadow disabled:opacity-60"
+                    >
+                      <motion.span
+                        aria-hidden
+                        className="absolute inset-y-0 w-1/2"
+                        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)" }}
+                        animate={{ x: ["-100%", "250%"] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      />
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        {submitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Joining…</> : <>Join the Waitlist</>}
+                      </span>
+                    </button>
+                  </form>
                 </>
               ) : (
                 <motion.div
@@ -362,7 +383,7 @@ const Premium = () => {
                   className="space-y-4"
                 >
                   <p className="text-sm text-muted-foreground">
-                    Your email just opened — hit send and you're officially in 💌
+                    {signup?.position ? <>You're <strong className="gradient-text">#{signup.position}</strong> in line. Check your inbox 💌</> : "Confirmation sent — check your inbox 💌"}
                   </p>
                   <motion.div
                     className="relative inline-block w-full"
@@ -379,6 +400,16 @@ const Premium = () => {
                       You've taken a step for yourself
                     </div>
                   </motion.div>
+                  {signup?.referral_code && (
+                    <Button
+                      onClick={shareReferral}
+                      variant="outline"
+                      className="w-full gap-2 border-neon-pink/40 hover:bg-neon-pink/10"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      Share with a friend (50% off for first 100)
+                    </Button>
+                  )}
                 </motion.div>
               )}
               <button
