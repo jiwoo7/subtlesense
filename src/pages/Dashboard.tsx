@@ -103,6 +103,10 @@ const Dashboard = () => {
       <div className="relative z-10 container mx-auto px-4 sm:px-6 py-4 sm:py-6 max-w-6xl">
         <DashboardHeader activeTab={activeTab} setActiveTab={setActiveTab} />
 
+        <div className="mt-3 sm:mt-4 flex justify-end">
+          <StreakBadge current={streakCurrent} longest={streakLongest} />
+        </div>
+
         {activeTab === "analyze" && (
           <>
             <div className="mt-4 sm:mt-6">
