@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import confetti from "canvas-confetti";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { toast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Crown, ArrowLeft, Check, Sparkles, BookOpen, BarChart3, History,
-  Brain, Zap, Shield, Infinity as InfinityIcon, Heart, Download
+  Brain, Zap, Shield, Infinity as InfinityIcon, Heart, Download, Loader2, Share2, Users
 } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 
