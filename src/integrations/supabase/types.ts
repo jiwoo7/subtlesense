@@ -133,38 +133,80 @@ export type Database = {
         Row: {
           avatar_url: string | null
           created_at: string
+          current_streak: number | null
           display_name: string | null
           full_name: string | null
           id: string
+          last_session_date: string | null
+          longest_streak: number | null
           notification_analysis_complete: boolean | null
           notification_email: boolean | null
           notification_weekly_report: boolean | null
+          theme_preset: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
           avatar_url?: string | null
           created_at?: string
+          current_streak?: number | null
           display_name?: string | null
           full_name?: string | null
           id?: string
+          last_session_date?: string | null
+          longest_streak?: number | null
           notification_analysis_complete?: boolean | null
           notification_email?: boolean | null
           notification_weekly_report?: boolean | null
+          theme_preset?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
           avatar_url?: string | null
           created_at?: string
+          current_streak?: number | null
           display_name?: string | null
           full_name?: string | null
           id?: string
+          last_session_date?: string | null
+          longest_streak?: number | null
           notification_analysis_complete?: boolean | null
           notification_email?: boolean | null
           notification_weekly_report?: boolean | null
+          theme_preset?: string | null
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      waitlist_signups: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string | null
+          position: number | null
+          referral_code: string
+          referred_by_code: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name?: string | null
+          position?: number | null
+          referral_code?: string
+          referred_by_code?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string | null
+          position?: number | null
+          referral_code?: string
+          referred_by_code?: string | null
         }
         Relationships: []
       }
@@ -177,6 +219,12 @@ export type Database = {
           avg_frustration: number | null
           date: string | null
           session_count: number | null
+        }
+        Relationships: []
+      }
+      waitlist_stats: {
+        Row: {
+          total: number | null
         }
         Relationships: []
       }
