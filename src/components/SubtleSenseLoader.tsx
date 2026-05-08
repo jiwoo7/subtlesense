@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
+import logoUrl from "@/assets/subtle-sense-logo.png";
 
 interface SubtleSenseLoaderProps {
   message?: string;
@@ -16,17 +16,18 @@ const SubtleSenseLoader = ({ message = "Loading Subtle Sense" }: SubtleSenseLoad
       <div className="relative z-10 flex flex-col items-center gap-6">
         {/* Logo with pulse */}
         <motion.div
-          className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-neon-purple to-neon-pink flex items-center justify-center shadow-2xl"
+          className="relative w-20 h-20 rounded-2xl overflow-hidden flex items-center justify-center shadow-2xl"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
           <motion.div
-            className="absolute inset-0 rounded-2xl bg-gradient-to-br from-neon-pink to-neon-purple"
-            animate={{ scale: [1, 1.3, 1], opacity: [0.6, 0, 0.6] }}
+            className="absolute -inset-3 rounded-3xl pointer-events-none"
+            style={{ background: "radial-gradient(circle, hsl(var(--neon-pink)/0.55), transparent 70%)" }}
+            animate={{ scale: [1, 1.25, 1], opacity: [0.6, 0.2, 0.6] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
           />
-          <Heart className="w-10 h-10 text-white fill-white relative z-10" />
+          <img src={logoUrl} alt="Subtle Sense" className="w-full h-full object-cover relative z-10" />
         </motion.div>
 
         {/* Wordmark with translucent wave overlay */}

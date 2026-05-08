@@ -1,11 +1,14 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Heart, Sparkles, Brain, Shield, Zap, Users, ArrowDown, BarChart3, History, LogOut, Crown, Settings as SettingsIcon } from "lucide-react";
+import { Sparkles, Brain, Shield, Zap, Users, ArrowDown, BarChart3, History, LogOut, Crown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
 import ShareResults from "@/components/ShareResults";
+import ThemePickerButton from "@/components/ThemePickerButton";
+import PremiumComparisonTable from "@/components/landing/PremiumComparisonTable";
+import logoUrl from "@/assets/subtle-sense-logo.png";
 
 const TransparencySection = lazy(() => import("@/components/landing/TransparencySection"));
 const RealWorldUseCases = lazy(() => import("@/components/landing/RealWorldUseCases"));
@@ -116,10 +119,10 @@ const Landing = () => {
           <nav className="flex items-center justify-between">
             <div className="flex items-center gap-2 sm:gap-3">
               <motion.div
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-neon-purple to-neon-pink flex items-center justify-center"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl overflow-hidden flex items-center justify-center shadow-[0_0_20px_hsl(var(--neon-pink)/0.4)]"
                 whileHover={{ scale: 1.05 }}
               >
-                <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white" />
+                <img src={logoUrl} alt="Subtle Sense logo" className="w-full h-full object-cover" />
               </motion.div>
               <span className="font-display text-xl sm:text-2xl font-bold gradient-text">Subtle Sense</span>
             </div>
@@ -160,16 +163,7 @@ const Landing = () => {
                   </Button>
                 </>
               ) : null}
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => navigate("/settings")}
-                className="rounded-full"
-                title="Settings & Themes"
-                aria-label="Settings"
-              >
-                <SettingsIcon className="w-4 h-4" />
-              </Button>
+              <ThemePickerButton />
               <Button
                 variant="ghost"
                 size="sm"
@@ -293,6 +287,9 @@ const Landing = () => {
               )})}
           </div>
         </section>
+
+        {/* Free vs Premium */}
+        <PremiumComparisonTable />
 
         {/* Inline Try Section */}
         <div id="try-it-out" style={{ scrollMarginTop: 80 }}>

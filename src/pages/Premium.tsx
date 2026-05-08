@@ -11,6 +11,7 @@ import {
   Brain, Zap, Shield, Infinity as InfinityIcon, Heart, Download, Loader2, Share2, Users
 } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import logoUrl from "@/assets/subtle-sense-logo.png";
 
 const perks = [
   { icon: Brain, title: "Pro AI Engine", desc: "Multi-pass Gemini 2.5 Pro for ~95% accuracy" },
@@ -105,6 +106,7 @@ const Premium = () => {
               Back
             </Button>
             <div className="flex items-center gap-2">
+              <img src={logoUrl} alt="Subtle Sense" className="w-7 h-7 rounded-lg" />
               <Crown className="w-5 h-5 text-warning" />
               <span className="font-display font-bold gradient-text">Premium</span>
             </div>
@@ -150,35 +152,31 @@ const Premium = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            {/* Outer animated glow ring */}
+            {/* Soft pulsing aura (no rotation) */}
             <motion.span
               aria-hidden
-              className="absolute -inset-1.5 rounded-full opacity-70"
+              className="absolute -inset-3 rounded-full pointer-events-none"
               style={{
                 background:
-                  "conic-gradient(from 0deg, hsl(var(--neon-pink)), hsl(var(--neon-purple)), hsl(var(--neon-red)), hsl(var(--neon-pink)))",
-                filter: "blur(14px)",
+                  "radial-gradient(closest-side, hsl(var(--neon-pink)/0.55), hsl(var(--neon-purple)/0.3) 60%, transparent 75%)",
+                filter: "blur(18px)",
               }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+              animate={{ scale: [1, 1.12, 1], opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Twin breathing ring */}
+            <motion.span
+              aria-hidden
+              className="absolute -inset-1 rounded-full border border-neon-pink/40 pointer-events-none"
+              animate={{ scale: [1, 1.08, 1], opacity: [0.8, 0.3, 0.8] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.button
               onClick={() => setShowModal(true)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="relative overflow-hidden rounded-full px-8 sm:px-12 py-4 sm:py-5 font-display text-base sm:text-lg font-bold text-white bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red shadow-2xl"
+              className="relative overflow-hidden rounded-full px-8 sm:px-12 py-4 sm:py-5 font-display text-base sm:text-lg font-bold text-white bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red shadow-[0_0_40px_hsl(var(--neon-pink)/0.6)] hover:shadow-[0_0_60px_hsl(var(--neon-pink)/0.9)] transition-shadow"
             >
-              {/* Translucent wave sweep */}
-              <motion.span
-                aria-hidden
-                className="absolute inset-y-0 w-1/2"
-                style={{
-                  background:
-                    "linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent)",
-                }}
-                animate={{ x: ["-100%", "250%"] }}
-                transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-              />
               <span className="relative z-10 flex items-center gap-2">
                 <Zap className="w-5 h-5" />
                 Pay Now — Enjoy Unlimited
