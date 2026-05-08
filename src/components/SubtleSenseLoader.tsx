@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
+import logoUrl from "@/assets/subtle-sense-logo.png";
 
 interface SubtleSenseLoaderProps {
   message?: string;
