@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Heart, Sparkles, Brain, Shield, Zap, Users, ArrowDown, BarChart3, History, LogOut, Crown } from "lucide-react";
+import { Heart, Sparkles, Brain, Shield, Zap, Users, ArrowDown, BarChart3, History, LogOut, Crown, Settings as SettingsIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
@@ -162,18 +162,29 @@ const Landing = () => {
               ) : null}
               <Button
                 variant="ghost"
+                size="icon"
+                onClick={() => navigate("/settings")}
+                className="rounded-full"
+                title="Settings & Themes"
+                aria-label="Settings"
+              >
+                <SettingsIcon className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
                 size="sm"
                 onClick={() => navigate("/premium")}
-                className="font-semibold gap-1.5 text-sm hidden sm:inline-flex text-warning hover:text-warning"
+                className="font-semibold gap-1 text-xs sm:text-sm px-2 sm:px-3 text-warning hover:text-warning"
               >
                 <Crown className="w-4 h-4" />
-                Premium
+                <span className="hidden xs:inline sm:inline">Premium</span>
               </Button>
               <Button
                 onClick={scrollToTry}
-                className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-semibold shadow-lg text-sm sm:text-base px-3 sm:px-4"
+                className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-semibold shadow-lg text-xs sm:text-base px-2.5 sm:px-4"
               >
-                Analyze Now ↓
+                <span className="sm:hidden">Analyze ↓</span>
+                <span className="hidden sm:inline">Analyze Now ↓</span>
               </Button>
             </div>
           </nav>
@@ -284,7 +295,7 @@ const Landing = () => {
         </section>
 
         {/* Inline Try Section */}
-        <div id="try-it-out">
+        <div id="try-it-out" style={{ scrollMarginTop: 80 }}>
           <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
             <motion.div
               className="text-center mb-8 sm:mb-12"
