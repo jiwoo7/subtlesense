@@ -8,6 +8,7 @@ import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
 import ShareResults from "@/components/ShareResults";
 import ThemePickerButton from "@/components/ThemePickerButton";
 import PremiumComparisonTable from "@/components/landing/PremiumComparisonTable";
+import MindToolsSection from "@/components/landing/MindToolsSection";
 import logoUrl from "@/assets/subtle-sense-logo.png";
 
 const TransparencySection = lazy(() => import("@/components/landing/TransparencySection"));
@@ -401,6 +402,9 @@ const Landing = () => {
             )}
           </section>
         </div>
+
+        {/* Mind Games + Mood Playlists */}
+        <MindToolsSection />
 
         {/* Transparency Section */}
         <Suspense fallback={<div className="h-32" />}>

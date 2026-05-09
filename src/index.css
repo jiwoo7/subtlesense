@@ -209,6 +209,39 @@
     --accent: 190 75% 45%;
     --ring: 160 70% 45%;
   }
+
+  [data-theme="pastelpink"] {
+    --neon-pink: 330 75% 78%;
+    --neon-purple: 320 65% 80%;
+    --neon-red: 350 80% 78%;
+    --neon-magenta: 340 70% 80%;
+    --neon-violet: 300 60% 80%;
+    --primary: 330 70% 70%;
+    --accent: 350 75% 78%;
+    --ring: 330 70% 70%;
+  }
+
+  [data-theme="pastelgreen"] {
+    --neon-pink: 145 55% 75%;
+    --neon-purple: 160 50% 72%;
+    --neon-red: 130 50% 70%;
+    --neon-magenta: 155 55% 72%;
+    --neon-violet: 175 45% 72%;
+    --primary: 150 55% 60%;
+    --accent: 165 50% 62%;
+    --ring: 150 55% 60%;
+  }
+
+  [data-theme="noir"] {
+    --neon-pink: 0 75% 45%;
+    --neon-purple: 0 60% 35%;
+    --neon-red: 0 85% 50%;
+    --neon-magenta: 0 70% 40%;
+    --neon-violet: 0 50% 30%;
+    --primary: 0 75% 45%;
+    --accent: 0 65% 38%;
+    --ring: 0 75% 45%;
+  }
 }
 
 @layer base {

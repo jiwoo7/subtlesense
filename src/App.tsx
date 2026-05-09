@@ -8,6 +8,7 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import OfflineIndicator from "@/components/OfflineIndicator";
 import SubtleSenseLoader from "@/components/SubtleSenseLoader";
 import InstallPrompt from "@/components/InstallPrompt";
+import CompanionChat from "@/components/CompanionChat";
 import { applyThemePreset, type ThemePreset } from "@/hooks/useThemePreset";
 
 const Landing = lazy(() => import("./pages/Landing"));
@@ -16,6 +17,8 @@ const Dashboard = lazy(() => import("./pages/DashboardWithProvider"));
 const Settings = lazy(() => import("./pages/SettingsWithProvider"));
 const Demo = lazy(() => import("./pages/Demo"));
 const Premium = lazy(() => import("./pages/Premium"));
+const Games = lazy(() => import("./pages/Games"));
+const Playlists = lazy(() => import("./pages/Playlists"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -44,12 +47,15 @@ const App = () => {
               <Route path="/" element={<Landing />} />
               <Route path="/demo" element={<Demo />} />
               <Route path="/premium" element={<Premium />} />
+              <Route path="/games" element={<Games />} />
+              <Route path="/playlists" element={<Playlists />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
+          <CompanionChat />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
