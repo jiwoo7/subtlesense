@@ -2,3 +2,6 @@ project_id = "uclvhoubbimigdsqcvao"
 
 [functions.join-waitlist]
 verify_jwt = false
+
+[functions.companion-chat]
+verify_jwt = false
