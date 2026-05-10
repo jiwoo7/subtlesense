@@ -11,7 +11,6 @@ const rows: { icon: any; feature: string; free: string | boolean; premium: strin
   { icon: History, feature: "History", free: "7 days", premium: "Lifetime" },
   { icon: BarChart3, feature: "Moodboard & themes", free: false, premium: true },
   { icon: Mail, feature: "Weekly email reports", free: false, premium: true },
-  { icon: Gamepad2, feature: "Mindful games & training", free: false, premium: true },
   { icon: Zap, feature: "Early access to new AI", free: false, premium: true },
   { icon: InfinityIcon, feature: "Export reports (PDF)", free: false, premium: true },
 ];
