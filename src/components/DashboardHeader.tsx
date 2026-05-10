@@ -97,12 +97,14 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
         </div>
 
         {/* Navigation Tabs - Full width on mobile */}
-        <div className="flex items-center justify-center w-full sm:w-auto glass-panel rounded-full p-1 sm:p-1.5 overflow-x-auto">
+        <div className="flex items-center justify-center w-full sm:w-auto glass-panel rounded-full p-1 sm:p-1.5 gap-0.5">
           {tabs.map((tab) => (
             <motion.button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
+              title={tab.label}
+              aria-label={tab.label}
+              className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
                 activeTab === tab.id
                   ? "pastel-gradient text-white shadow-md"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -110,8 +112,8 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <span className="text-sm sm:text-base">{tab.emoji}</span>
-              <span>{tab.label}</span>
+              <span className="text-base sm:text-base">{tab.emoji}</span>
+              <span className="hidden sm:inline">{tab.label}</span>
             </motion.button>
           ))}
         </div>
