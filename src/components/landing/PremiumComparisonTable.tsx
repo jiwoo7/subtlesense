@@ -72,7 +72,7 @@ const PremiumComparisonTable = () => {
             transition={{ delay: i * 0.03 }}
           >
             <div className="p-2.5 sm:p-4 flex items-center gap-2 min-w-0">
-              <row.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neon-pink/70 flex-shrink-0" />
+              <row.icon className="w-3 h-3 sm:w-4 sm:h-4 text-neon-pink/70 flex-shrink-0" />
               <span className="text-[11px] sm:text-sm font-medium truncate">{row.feature}</span>
             </div>
             <div className="p-2 sm:p-4">
