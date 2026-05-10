@@ -258,32 +258,43 @@ const Premium = () => {
           </div>
         </section>
 
-        {/* Compare strip */}
-        <section className="container mx-auto px-4 sm:px-6 py-8">
-          <div className="max-w-3xl mx-auto glass-panel rounded-2xl p-6 sm:p-8 border border-primary/20">
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div>
-                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Free</p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex gap-2"><Check className="w-4 h-4 text-muted-foreground mt-0.5" /> Basic AI analysis</li>
-                  <li className="flex gap-2"><Check className="w-4 h-4 text-muted-foreground mt-0.5" /> Surface emotion detection</li>
-                  <li className="flex gap-2"><Check className="w-4 h-4 text-muted-foreground mt-0.5" /> Limited daily sessions</li>
-                </ul>
+        {/* Compare strip — pricing + tiers */}
+        <section className="container mx-auto px-3 sm:px-6 py-6 sm:py-8">
+          <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
+            {/* Free */}
+            <div className="glass-panel rounded-2xl p-4 sm:p-6 border border-border/40">
+              <p className="text-[10px] sm:text-xs uppercase tracking-wider text-muted-foreground mb-1">Free</p>
+              <p className="font-display text-2xl sm:text-3xl font-extrabold mb-3">₹0<span className="text-xs font-normal text-muted-foreground">/forever</span></p>
+              <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
+                <li className="flex gap-2"><Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground mt-0.5 flex-shrink-0" /> 10 analyses / day</li>
+                <li className="flex gap-2"><Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground mt-0.5 flex-shrink-0" /> Core emotion detection</li>
+                <li className="flex gap-2"><Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground mt-0.5 flex-shrink-0" /> Basic journaling & streak</li>
+                <li className="flex gap-2"><Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground mt-0.5 flex-shrink-0" /> 7-day history</li>
+              </ul>
+            </div>
+            {/* Premium */}
+            <div className="relative glass-panel rounded-2xl p-4 sm:p-6 border border-neon-pink/40 bg-gradient-to-br from-neon-purple/10 to-neon-pink/10">
+              <div className="absolute -top-2.5 right-3 px-2 py-0.5 rounded-full bg-gradient-to-r from-neon-pink to-neon-purple text-white text-[9px] sm:text-[10px] font-bold tracking-wide">
+                RECOMMENDED
               </div>
-              <div className="relative">
-                <div className="absolute -top-3 -right-2 px-2 py-0.5 rounded-full bg-gradient-to-r from-neon-pink to-neon-purple text-white text-[10px] font-bold tracking-wide">
-                  RECOMMENDED
-                </div>
-                <p className="text-xs uppercase tracking-wider gradient-text font-bold mb-2">Premium</p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex gap-2"><Check className="w-4 h-4 text-neon-pink mt-0.5" /> Pro multi-pass AI (~95% accuracy)</li>
-                  <li className="flex gap-2"><Check className="w-4 h-4 text-neon-pink mt-0.5" /> Hidden + suppressed emotions</li>
-                  <li className="flex gap-2"><Check className="w-4 h-4 text-neon-pink mt-0.5" /> Journals, mood board & history</li>
-                  <li className="flex gap-2"><Check className="w-4 h-4 text-neon-pink mt-0.5" /> Unlimited everything</li>
-                </ul>
+              <p className="text-[10px] sm:text-xs uppercase tracking-wider gradient-text font-bold mb-1">Premium</p>
+              <div className="flex items-baseline gap-2 mb-3 flex-wrap">
+                <p className="font-display text-2xl sm:text-3xl font-extrabold">₹399<span className="text-xs font-normal text-muted-foreground">/mo</span></p>
+                <span className="text-[10px] sm:text-xs text-muted-foreground">or ₹2999/yr <span className="text-neon-pink font-semibold">(save 37%)</span></span>
               </div>
+              <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
+                <li className="flex gap-2"><Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neon-pink mt-0.5 flex-shrink-0" /> Unlimited Pro AI (~95% accuracy)</li>
+                <li className="flex gap-2"><Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neon-pink mt-0.5 flex-shrink-0" /> Hidden & suppressed emotions</li>
+                <li className="flex gap-2"><Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neon-pink mt-0.5 flex-shrink-0" /> Weekly email reports (Sundays)</li>
+                <li className="flex gap-2"><Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neon-pink mt-0.5 flex-shrink-0" /> Moodboard, themes & rich journal</li>
+                <li className="flex gap-2"><Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neon-pink mt-0.5 flex-shrink-0" /> Mindful games & training</li>
+                <li className="flex gap-2"><Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neon-pink mt-0.5 flex-shrink-0" /> Lifetime history + PDF export</li>
+              </ul>
             </div>
           </div>
+          <p className="max-w-3xl mx-auto text-center text-[11px] sm:text-sm text-muted-foreground italic mt-4 px-2">
+            "Most people only see surface emotions. Premium users understand the emotions they hide even from themselves."
+          </p>
         </section>
 
         {/* Bottom CTA */}
