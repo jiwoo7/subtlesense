@@ -407,14 +407,18 @@ const Landing = () => {
         <MindToolsSection />
 
         {/* Transparency Section */}
-        <Suspense fallback={<div className="h-32" />}>
-          <TransparencySection />
-        </Suspense>
+        <div className="hidden sm:block">
+          <Suspense fallback={<div className="h-32" />}>
+            <TransparencySection />
+          </Suspense>
+        </div>
 
         {/* Real World Use Cases */}
-        <Suspense fallback={<div className="h-32" />}>
-          <RealWorldUseCases />
-        </Suspense>
+        <div className="hidden sm:block">
+          <Suspense fallback={<div className="h-32" />}>
+            <RealWorldUseCases />
+          </Suspense>
+        </div>
 
         {/* Footer */}
         <footer className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 text-center border-t border-border/30">
