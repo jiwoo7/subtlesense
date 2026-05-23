@@ -13,7 +13,7 @@ export default function PhoneFrame({ children }: { children: React.ReactNode }) 
         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/5 to-transparent pointer-events-none"></div>
 
         {/* SAFE AREA CONTENT */}
-        <div className="relative h-full w-full overflow-y-auto px-4 py-6">
+        <div className="relative h-full w-full overflow-y-auto px-4 py-6 scrollbar-hide">
           {children}
         </div>
 
