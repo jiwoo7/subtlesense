@@ -45,16 +45,16 @@ const App = () => {
         <BrowserRouter>
           <Suspense fallback={<RouteFallback />}>
             <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/demo" element={<Demo />} />
-              <Route path="/premium" element={<Premium />} />
-              <Route path="/games" element={<Games />} />
-              <Route path="/playlists" element={<Playlists />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+  <Route path="/" element={<PhoneFrame><Landing /></PhoneFrame>} />
+  <Route path="/demo" element={<PhoneFrame><Demo /></PhoneFrame>} />
+  <Route path="/premium" element={<PhoneFrame><Premium /></PhoneFrame>} />
+  <Route path="/games" element={<PhoneFrame><Games /></PhoneFrame>} />
+  <Route path="/playlists" element={<PhoneFrame><Playlists /></PhoneFrame>} />
+  <Route path="/auth" element={<PhoneFrame><Auth /></PhoneFrame>} />
+  <Route path="/dashboard" element={<PhoneFrame><Dashboard /></PhoneFrame>} />
+  <Route path="/settings" element={<PhoneFrame><Settings /></PhoneFrame>} />
+  <Route path="*" element={<PhoneFrame><NotFound /></PhoneFrame>} />
+</Routes>
           </Suspense>
           <CompanionChat />
         </BrowserRouter>
