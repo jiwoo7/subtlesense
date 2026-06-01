@@ -19,6 +19,16 @@ const CompanionChat = () => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, open]);
 
+  useEffect(() => {
+    const handler = (e: Event) => {
+      setOpen(true);
+      const detail = (e as CustomEvent<{ text?: string }>).detail;
+      if (detail?.text) setInput(detail.text);
+    };
+    window.addEventListener("subtle:open-companion", handler as EventListener);
+    return () => window.removeEventListener("subtle:open-companion", handler as EventListener);
+  }, []);
+
   const send = async () => {
     const text = input.trim();
     if (!text || busy) return;
