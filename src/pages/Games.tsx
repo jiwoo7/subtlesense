@@ -19,32 +19,32 @@ const Games = () => {
 
   return (
     <div className="min-h-screen bubble-bg">
-      <header className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm hover:opacity-80">
+      <header className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+        <Link to="/" className="inline-flex items-center gap-1.5 text-xs sm:text-sm hover:opacity-80">
           <ArrowLeft className="w-4 h-4" /> Back
         </Link>
-        <h1 className="font-display text-xl font-bold gradient-text">Mind Games 🎮</h1>
-        <div className="w-12" />
+        <h1 className="font-display text-base sm:text-xl font-bold gradient-text">Mind Games 🎮</h1>
+        <div className="w-10" />
       </header>
 
       <main className="container mx-auto px-4 sm:px-6 pb-12">
         {!active ? (
           <>
-            <p className="text-center text-muted-foreground mb-8 max-w-xl mx-auto">
-              Tiny mindful breaks designed to reset your nervous system. Pick one — they all take under 2 minutes.
+            <p className="text-center text-xs sm:text-base text-muted-foreground mb-5 sm:mb-8 max-w-xl mx-auto px-2">
+              Tiny mindful breaks. Pick one — under 2 minutes each.
             </p>
-            <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4 max-w-3xl mx-auto">
               {GAMES.map((g) => (
                 <button
                   key={g.id}
                   onClick={() => setActive(g.id)}
-                  className="glass-panel rounded-2xl p-6 text-left hover:scale-[1.02] transition-transform"
+                  className="glass-panel rounded-2xl p-3 sm:p-6 text-left hover:scale-[1.02] transition-transform"
                 >
-                  <div className="w-12 h-12 rounded-xl neon-gradient flex items-center justify-center mb-3">
-                    <g.icon className="w-6 h-6 text-primary-foreground" />
+                  <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl neon-gradient flex items-center justify-center mb-2 sm:mb-3">
+                    <g.icon className="w-4 h-4 sm:w-6 sm:h-6 text-primary-foreground" />
                   </div>
-                  <h2 className="font-display text-lg font-bold">{g.title}</h2>
-                  <p className="text-sm text-muted-foreground">{g.desc}</p>
+                  <h2 className="font-display text-sm sm:text-lg font-bold">{g.title}</h2>
+                  <p className="text-[11px] sm:text-sm text-muted-foreground leading-tight mt-0.5">{g.desc}</p>
                 </button>
               ))}
             </div>
@@ -53,7 +53,7 @@ const Games = () => {
           <div className="max-w-3xl mx-auto">
             <button
               onClick={() => setActive(null)}
-              className="mb-4 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+              className="mb-3 sm:mb-4 inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-foreground"
             >
               <ArrowLeft className="w-4 h-4" /> All games
             </button>
