@@ -74,47 +74,47 @@ const Playlists = () => {
 
   return (
     <div className="min-h-screen bubble-bg">
-      <header className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm hover:opacity-80">
+      <header className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
+        <Link to="/" className="inline-flex items-center gap-1.5 text-xs sm:text-sm hover:opacity-80">
           <ArrowLeft className="w-4 h-4" /> Back
         </Link>
-        <h1 className="font-display text-xl font-bold gradient-text">Mood Playlists 🎧</h1>
+        <h1 className="font-display text-sm sm:text-xl font-bold gradient-text truncate">Mood Playlists 🎧</h1>
         <button
           onClick={surprise}
-          className="inline-flex items-center gap-2 text-xs sm:text-sm px-3 py-1.5 rounded-full neon-gradient text-primary-foreground font-semibold"
+          className="inline-flex items-center gap-1 text-[11px] sm:text-sm px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full neon-gradient text-primary-foreground font-semibold whitespace-nowrap"
         >
-          <Shuffle className="w-3 h-3" /> Surprise me
+          <Shuffle className="w-3 h-3" /> Surprise
         </button>
       </header>
 
       <main className="container mx-auto px-4 sm:px-6 pb-12">
-        <p className="text-center text-muted-foreground mb-8 max-w-xl mx-auto">
-          Curated Spotify playlists for whatever you're feeling. Tap any to open in Spotify.
+        <p className="text-center text-xs sm:text-base text-muted-foreground mb-5 sm:mb-8 max-w-xl mx-auto">
+          Tap any playlist to open in Spotify.
         </p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 max-w-5xl mx-auto">
           {MOODS.map((m) => (
             <div
               key={m.id}
-              className={`glass-panel rounded-2xl p-5 transition-all ${
+              className={`glass-panel rounded-2xl p-3 sm:p-5 transition-all ${
                 pick?.id === m.id ? "ring-2 ring-primary scale-[1.02]" : ""
               }`}
             >
-              <div className="flex items-center gap-3 mb-3">
-                <span className="text-3xl">{m.emoji}</span>
-                <div>
-                  <h2 className="font-display text-lg font-bold">{m.label}</h2>
-                  <p className="text-xs text-muted-foreground">{m.blurb}</p>
+              <div className="flex items-center gap-2.5 sm:gap-3 mb-2 sm:mb-3">
+                <span className="text-2xl sm:text-3xl">{m.emoji}</span>
+                <div className="min-w-0">
+                  <h2 className="font-display text-base sm:text-lg font-bold">{m.label}</h2>
+                  <p className="text-[11px] sm:text-xs text-muted-foreground">{m.blurb}</p>
                 </div>
               </div>
-              <ul className="space-y-2">
+              <ul className="space-y-1 sm:space-y-2">
                 {m.playlists.map((p) => (
                   <li key={p.url}>
                     <a
                       href={p.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-between gap-2 text-sm px-3 py-2 rounded-lg hover:bg-muted/50 transition-colors"
+                      className="flex items-center justify-between gap-2 text-xs sm:text-sm px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg hover:bg-muted/50 transition-colors"
                     >
                       <span className="truncate">{p.name}</span>
                       <ExternalLink className="w-3 h-3 flex-shrink-0 opacity-60" />

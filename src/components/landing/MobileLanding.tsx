@@ -100,14 +100,15 @@ const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
           </p>
         </div>
         <motion.div
-          className="w-24 h-24 flex-shrink-0 rounded-2xl flex items-center justify-center"
+          className="w-24 h-24 flex-shrink-0 rounded-full flex items-center justify-center overflow-hidden"
           style={{
-            background: "radial-gradient(circle, hsl(var(--neon-pink)/0.35), transparent 70%)",
+            background: "radial-gradient(circle, hsl(var(--neon-pink)/0.45), transparent 70%)",
+            boxShadow: "0 0 30px hsl(var(--neon-pink)/0.5)",
           }}
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 3, repeat: Infinity }}
         >
-          <img src={logoUrl} alt="" className="w-20 h-20 object-contain drop-shadow-[0_0_18px_hsl(var(--neon-pink))]" />
+          <img src={logoUrl} alt="" className="w-20 h-20 rounded-full object-cover" />
         </motion.div>
       </div>
 

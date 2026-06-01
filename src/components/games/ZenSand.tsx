@@ -59,22 +59,22 @@ const ZenSand = () => {
   };
 
   return (
-    <div className="p-4">
-      <p className="text-center text-sm text-muted-foreground mb-3">
+    <div className="p-3 sm:p-4">
+      <p className="text-center text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3">
         Draw freely. No goal. Just trace.
       </p>
       <div className="relative rounded-2xl overflow-hidden glass-panel">
         <canvas
           ref={canvasRef}
-          className="w-full h-[420px] touch-none cursor-crosshair block"
+          className="w-full h-[280px] sm:h-[420px] touch-none cursor-crosshair block"
           onPointerDown={start}
           onPointerMove={move}
           onPointerUp={end}
           onPointerLeave={end}
         />
       </div>
-      <div className="flex justify-center mt-4">
-        <button onClick={clear} className="px-5 py-2 rounded-full glass-panel font-semibold">
+      <div className="flex justify-center mt-3 sm:mt-4">
+        <button onClick={clear} className="px-4 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-base rounded-full glass-panel font-semibold">
           Clear
         </button>
       </div>
