@@ -181,7 +181,7 @@ const CompanionChat = () => {
         onClick={() => setOpen((o) => !o)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] group"
+        className="hidden sm:flex fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] group"
         aria-label="Open companion chat"
       >
         <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 hidden sm:block whitespace-nowrap text-xs font-semibold px-3 py-1.5 rounded-full glass-panel opacity-0 group-hover:opacity-100 transition-opacity italic">
