@@ -9,6 +9,7 @@ import ShareResults from "@/components/ShareResults";
 import ThemePickerButton from "@/components/ThemePickerButton";
 import PremiumComparisonTable from "@/components/landing/PremiumComparisonTable";
 import MindToolsSection from "@/components/landing/MindToolsSection";
+import MobileLanding from "@/components/landing/MobileLanding";
 import logoUrl from "@/assets/subtle-sense-logo.png";
 
 const TransparencySection = lazy(() => import("@/components/landing/TransparencySection"));
@@ -114,7 +115,9 @@ const Landing = () => {
     <div className="min-h-screen relative overflow-hidden">
       <AnimatedBackground />
       
-      <div className="relative z-10">
+      <MobileLanding currentUser={currentUser} onAnalyze={scrollToTry} />
+
+      <div className="relative z-10 hidden sm:block">
         {/* Header */}
         <header className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
           <nav className="flex items-center justify-between">
