@@ -28,7 +28,7 @@ interface Props {
 const startCards = [
   { icon: Gamepad2, label: "Mind Games", sub: "Reset in 2 mins", to: "/games" },
   { icon: Music, label: "Mood Playlists", sub: "Curated for you", to: "/playlists" },
-  { icon: LineChart, label: "AI Analysis", sub: "Discover deeper", to: "#analyze" },
+  { icon: LineChart, label: "AI Analysis", sub: "Discover deeper", to: "/demo" },
   { icon: BookOpen, label: "Journal", sub: "Write it out", to: "/dashboard" },
 ];
 
