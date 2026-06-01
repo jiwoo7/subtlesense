@@ -9,6 +9,7 @@ import ShareResults from "@/components/ShareResults";
 import ThemePickerButton from "@/components/ThemePickerButton";
 import PremiumComparisonTable from "@/components/landing/PremiumComparisonTable";
 import MindToolsSection from "@/components/landing/MindToolsSection";
+import MobileLanding from "@/components/landing/MobileLanding";
 import logoUrl from "@/assets/subtle-sense-logo.png";
 
 const TransparencySection = lazy(() => import("@/components/landing/TransparencySection"));
