@@ -17,6 +17,7 @@ interface JournalEntry {
 }
 
 const MOOD_TAGS = ["😊 Happy", "😔 Sad", "😤 Frustrated", "😌 Calm", "🤔 Reflective", "💪 Motivated", "😰 Anxious"];
+const LOCAL_JOURNAL_KEY = "subtlesense-local-journal";
 
 const JournalSection = () => {
   const { user } = useAuth();
@@ -29,8 +30,24 @@ const JournalSection = () => {
   const [editContent, setEditContent] = useState("");
 
   useEffect(() => {
-    if (user) fetchEntries();
+    if (user) {
+      fetchEntries();
+      return;
+    }
+
+    try {
+      const saved = localStorage.getItem(LOCAL_JOURNAL_KEY);
+      setEntries(saved ? JSON.parse(saved) : []);
+    } catch {
+      setEntries([]);
+    }
+    setLoading(false);
   }, [user]);
+
+  const persistLocalEntries = (next: JournalEntry[]) => {
+    setEntries(next);
+    localStorage.setItem(LOCAL_JOURNAL_KEY, JSON.stringify(next));
+  };
 
   const fetchEntries = async () => {
     try {
@@ -51,7 +68,24 @@ const JournalSection = () => {
   };
 
   const saveEntry = async () => {
-    if (!newContent.trim() || !user) return;
+    if (!newContent.trim()) return;
+
+    if (!user) {
+      const localEntry: JournalEntry = {
+        id: crypto.randomUUID(),
+        content: newContent.trim(),
+        mood_tag: selectedMood,
+        created_at: new Date().toISOString(),
+        session_id: null,
+      };
+      persistLocalEntries([localEntry, ...entries]);
+      setNewContent("");
+      setSelectedMood(null);
+      setShowNew(false);
+      toast.success("Journal saved on this device. Login to sync it.");
+      return;
+    }
+
     try {
       const { data, error } = await supabase
         .from("journal_entries")
@@ -77,6 +111,13 @@ const JournalSection = () => {
 
   const updateEntry = async (id: string) => {
     if (!editContent.trim()) return;
+    if (!user) {
+      persistLocalEntries(entries.map((e) => (e.id === id ? { ...e, content: editContent.trim() } : e)));
+      setEditingId(null);
+      toast.success("Entry updated on this device");
+      return;
+    }
+
     try {
       const { error } = await supabase
         .from("journal_entries")
@@ -94,6 +135,12 @@ const JournalSection = () => {
   };
 
   const deleteEntry = async (id: string) => {
+    if (!user) {
+      persistLocalEntries(entries.filter((e) => e.id !== id));
+      toast.success("Entry deleted");
+      return;
+    }
+
     try {
       const { error } = await supabase
         .from("journal_entries")
