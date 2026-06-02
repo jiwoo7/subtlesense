@@ -128,6 +128,7 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
 
         {/* Desktop User Menu */}
         <div className="hidden sm:flex items-center gap-3">
+          <ThemeToggle />
           {user ? (
             <>
           <motion.div
@@ -141,8 +142,6 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
               {user?.email?.split("@")[0]}
             </span>
           </motion.div>
-          
-          <ThemeToggle />
           
           <Button
             variant="ghost"
