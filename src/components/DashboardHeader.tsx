@@ -49,7 +49,7 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
                   animate={{ rotate: [0, 10, -10, 0] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white" />
+                  <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground fill-primary-foreground" />
                 </motion.div>
                 <motion.div
                   className="absolute -top-1 -right-1"
@@ -114,7 +114,7 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
               aria-label={tab.label}
               className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
                 activeTab === tab.id
-                  ? "pastel-gradient text-white shadow-md"
+                  ? "pastel-gradient text-primary-foreground shadow-md"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               }`}
               whileHover={{ scale: 1.02 }}
