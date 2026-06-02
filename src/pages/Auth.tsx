@@ -57,44 +57,44 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
+    <div className="min-h-[100dvh] sm:min-h-screen relative overflow-x-hidden sm:overflow-hidden flex items-center justify-center py-4 sm:py-0">
       <AnimatedBackground />
       
-      <div className="relative z-10 w-full max-w-md px-6">
+      <div className="relative z-10 w-full max-w-md px-4 sm:px-6">
         {/* Back button */}
         <motion.button
           onClick={() => navigate("/")}
-          className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors"
+          className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-4 sm:mb-8 transition-colors"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
         >
           <ArrowLeft className="w-4 h-4" />
-          <span className="text-sm font-medium">Back to home</span>
+          <span className="text-xs sm:text-sm font-medium">Back to home</span>
         </motion.button>
 
         <motion.div
-          className="glass-panel rounded-3xl p-8"
+          className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           {/* Logo */}
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <div className="w-14 h-14 rounded-2xl pastel-gradient flex items-center justify-center">
-              <Heart className="w-7 h-7 text-white fill-white" />
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-8">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl pastel-gradient flex items-center justify-center">
+              <Heart className="w-5 h-5 sm:w-7 sm:h-7 text-primary-foreground fill-primary-foreground" />
             </div>
             <div>
-              <h1 className="font-display text-2xl font-bold gradient-text">Subtle Sense</h1>
+              <h1 className="font-display text-xl sm:text-2xl font-bold gradient-text">Subtle Sense</h1>
               <p className="text-xs text-muted-foreground">Your Learning Companion</p>
             </div>
           </div>
 
           {/* Title */}
-          <div className="text-center mb-8">
-            <h2 className="font-display text-2xl font-bold mb-2">
+          <div className="text-center mb-4 sm:mb-8">
+            <h2 className="font-display text-xl sm:text-2xl font-bold mb-1 sm:mb-2">
               {isSignUp ? "Create Your Account ✨" : "Welcome Back! 👋"}
             </h2>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-xs sm:text-sm">
               {isSignUp 
                 ? "Start your journey to better learning" 
                 : "Continue your emotional learning journey"}
@@ -102,10 +102,10 @@ const Auth = () => {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-5">
             {isSignUp && (
               <div className="space-y-2">
-                <Label htmlFor="fullName" className="text-sm font-medium">
+                <Label htmlFor="fullName" className="text-xs sm:text-sm font-medium">
                   Full Name
                 </Label>
                 <Input
@@ -114,14 +114,14 @@ const Auth = () => {
                   placeholder="Your name"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  className="h-12 rounded-xl border-2 focus:border-primary/50"
+                  className="h-10 sm:h-12 rounded-xl border-2 focus:border-primary/50 text-sm"
                   required={isSignUp}
                 />
               </div>
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-sm font-medium">
+              <Label htmlFor="email" className="text-xs sm:text-sm font-medium">
                 Email Address
               </Label>
               <Input
@@ -130,13 +130,13 @@ const Auth = () => {
                 placeholder="you@example.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="h-12 rounded-xl border-2 focus:border-primary/50"
+                className="h-10 sm:h-12 rounded-xl border-2 focus:border-primary/50 text-sm"
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-sm font-medium">
+              <Label htmlFor="password" className="text-xs sm:text-sm font-medium">
                 Password
               </Label>
               <div className="relative">
@@ -146,16 +146,16 @@ const Auth = () => {
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="h-12 rounded-xl border-2 focus:border-primary/50 pr-12"
+                  className="h-10 sm:h-12 rounded-xl border-2 focus:border-primary/50 pr-12 text-sm"
                   required
                   minLength={6}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  {showPassword ? <EyeOff className="w-4 h-4 sm:w-5 sm:h-5" /> : <Eye className="w-4 h-4 sm:w-5 sm:h-5" />}
                 </button>
               </div>
             </div>
@@ -163,7 +163,7 @@ const Auth = () => {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full h-12 pastel-gradient text-white font-bold text-lg rounded-xl shadow-lg"
+              className="w-full h-10 sm:h-12 pastel-gradient text-primary-foreground font-bold text-sm sm:text-lg rounded-xl shadow-lg"
             >
               {loading ? (
                 <motion.div
@@ -174,15 +174,15 @@ const Auth = () => {
               ) : (
                 <>
                   {isSignUp ? "Create Account" : "Sign In"}
-                  <Sparkles className="w-5 h-5 ml-2" />
+                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
                 </>
               )}
             </Button>
           </form>
 
           {/* Toggle */}
-          <div className="text-center mt-6">
-            <p className="text-muted-foreground text-sm">
+          <div className="text-center mt-4 sm:mt-6">
+            <p className="text-muted-foreground text-xs sm:text-sm">
               {isSignUp ? "Already have an account?" : "Don't have an account?"}
               <button
                 type="button"
