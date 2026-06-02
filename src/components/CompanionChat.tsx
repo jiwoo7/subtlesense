@@ -106,7 +106,7 @@ const CompanionChat = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 right-4 sm:right-6 z-[60] w-[calc(100vw-2rem)] sm:w-96 max-w-[26rem] h-[32rem] glass-panel rounded-3xl flex flex-col overflow-hidden shadow-2xl border border-border/60"
+            className="fixed inset-x-3 bottom-20 sm:inset-x-auto sm:bottom-24 sm:right-6 z-[60] w-auto sm:w-96 sm:max-w-[26rem] h-[calc(100dvh-6rem)] max-h-[28rem] sm:h-[32rem] sm:max-h-none glass-panel rounded-3xl flex flex-col overflow-hidden shadow-2xl border border-border/60"
           >
             <div className="flex items-center gap-3 px-4 py-3 border-b border-border/40 neon-gradient">
               <img src={logo} alt="" className="w-8 h-8 rounded-full bg-background/20 p-1" />
@@ -119,7 +119,7 @@ const CompanionChat = () => {
               </button>
             </div>
 
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3">
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3">
               {messages.length === 0 && (
                 <div className="text-center py-6">
                   <img src={logo} alt="" className="w-14 h-14 mx-auto mb-3 opacity-90" />
@@ -155,7 +155,7 @@ const CompanionChat = () => {
 
             <form
               onSubmit={(e) => { e.preventDefault(); send(); }}
-              className="p-3 border-t border-border/40 flex gap-2"
+              className="p-2.5 sm:p-3 border-t border-border/40 flex gap-2"
             >
               <input
                 value={input}
