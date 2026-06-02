@@ -112,7 +112,7 @@ const Landing = () => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-x-hidden sm:overflow-hidden">
       <AnimatedBackground />
       
       <MobileLanding currentUser={currentUser} onAnalyze={scrollToTry} />

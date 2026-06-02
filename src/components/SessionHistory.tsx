@@ -26,7 +26,10 @@ const SessionHistory = () => {
   useEffect(() => {
     if (user) {
       fetchSessions();
+      return;
     }
+    setSessions([]);
+    setLoading(false);
   }, [user]);
 
   const fetchSessions = async () => {
@@ -122,9 +125,9 @@ const SessionHistory = () => {
           animate={{ opacity: 1 }}
         >
           <Calendar className="w-16 h-16 text-pastel-lavender mx-auto mb-4" />
-          <h3 className="font-display text-xl font-bold mb-2">No Sessions Yet</h3>
+          <h3 className="font-display text-xl font-bold mb-2">{user ? "No Sessions Yet" : "History starts when you login"}</h3>
           <p className="text-muted-foreground">
-            Start your first analysis to see your emotional journey here! 🚀
+            {user ? "Start your first analysis to see your emotional journey here! 🚀" : "You can still use every tool now — login only saves and syncs your progress."}
           </p>
         </motion.div>
       ) : (

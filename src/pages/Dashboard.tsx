@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import DashboardHeader from "@/components/DashboardHeader";
@@ -24,7 +25,7 @@ import StreakBadge from "@/components/StreakBadge";
 
 const Dashboard = () => {
   const { user, loading } = useAuth();
-  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState<"analyze" | "history" | "moodboard" | "journal">("analyze");
   const [isAnalyzed, setIsAnalyzed] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -36,10 +37,11 @@ const Dashboard = () => {
   const { current: streakCurrent, longest: streakLongest, recordSession } = useStreak(user?.id);
 
   useEffect(() => {
-    if (!loading && !user) {
-      navigate("/auth");
+    const tab = searchParams.get("tab");
+    if (tab === "history" || tab === "moodboard" || tab === "journal" || tab === "analyze") {
+      setActiveTab(tab);
     }
-  }, [user, loading, navigate]);
+  }, [searchParams]);
 
   const handleAnalysisComplete = async (result: AnalysisResult) => {
     setAnalysisResult(result);
@@ -97,14 +99,20 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-x-hidden sm:overflow-hidden">
       <AnimatedBackground />
       
       <div className="relative z-10 container mx-auto px-4 sm:px-6 py-4 sm:py-6 max-w-6xl">
         <DashboardHeader activeTab={activeTab} setActiveTab={setActiveTab} />
 
-        <div className="mt-3 sm:mt-4 flex justify-end">
-          <StreakBadge current={streakCurrent} longest={streakLongest} />
+        <div className="mt-2 sm:mt-4 flex justify-end">
+          {user ? (
+            <StreakBadge current={streakCurrent} longest={streakLongest} />
+          ) : (
+            <Button asChild size="sm" variant="outline" className="h-8 rounded-full text-[11px] sm:text-sm">
+              <Link to="/auth">Login to save progress</Link>
+            </Button>
+          )}
         </div>
 
         {activeTab === "analyze" && (
