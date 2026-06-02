@@ -74,25 +74,33 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
           {/* Mobile user actions */}
           <div className="flex items-center gap-2 sm:hidden">
             <ThemeToggle />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => navigate("/settings")}
-              className="rounded-full h-8 w-8"
-              title="Settings"
-            >
-              <Settings className="w-4 h-4" />
-            </Button>
-            
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleSignOut}
-              className="rounded-full h-8 w-8"
-              title="Sign Out"
-            >
-              <LogOut className="w-4 h-4" />
-            </Button>
+            {user ? (
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => navigate("/settings")}
+                  className="rounded-full h-8 w-8"
+                  title="Settings"
+                >
+                  <Settings className="w-4 h-4" />
+                </Button>
+                
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleSignOut}
+                  className="rounded-full h-8 w-8"
+                  title="Sign Out"
+                >
+                  <LogOut className="w-4 h-4" />
+                </Button>
+              </>
+            ) : (
+              <Button onClick={() => navigate("/auth")} size="sm" className="h-8 rounded-full px-3 text-xs">
+                Login
+              </Button>
+            )}
           </div>
         </div>
 
@@ -120,6 +128,8 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
 
         {/* Desktop User Menu */}
         <div className="hidden sm:flex items-center gap-3">
+          {user ? (
+            <>
           <motion.div
             className="flex items-center gap-2 px-4 py-2 glass-panel rounded-full"
             whileHover={{ scale: 1.02 }}
@@ -153,6 +163,12 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
           >
             <LogOut className="w-4 h-4" />
           </Button>
+            </>
+          ) : (
+            <Button onClick={() => navigate("/auth")} size="sm" className="rounded-full">
+              Login to save
+            </Button>
+          )}
         </div>
       </div>
     </motion.header>
