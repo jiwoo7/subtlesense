@@ -34,8 +34,8 @@ const startCards = [
 const moodCards = [
   { icon: Sparkles, label: "Overthinking", pct: "78%", color: "text-neon-purple", bg: "bg-neon-purple/15" },
   { icon: Zap, label: "Stress", pct: "65%", color: "text-warning", bg: "bg-warning/15" },
-  { icon: Droplet, label: "Sadness", pct: "42%", color: "text-sky-400", bg: "bg-sky-400/15" },
-  { icon: Leaf, label: "Hope", pct: "71%", color: "text-emerald-400", bg: "bg-emerald-400/15" },
+  { icon: Droplet, label: "Sadness", pct: "42%", color: "text-neon-magenta", bg: "bg-neon-magenta/15" },
+  { icon: Leaf, label: "Hope", pct: "71%", color: "text-success", bg: "bg-success/15" },
 ];
 
 const tabs = [
