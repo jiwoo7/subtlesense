@@ -1,6 +1,6 @@
 export default function PhoneFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center overflow-x-hidden">
+    <div className="min-h-screen bg-[#050507] flex items-center justify-center overflow-x-hidden">
 
       {/* DESKTOP = NORMAL */}
       <div className="hidden md:block w-full">
