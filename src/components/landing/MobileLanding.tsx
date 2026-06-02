@@ -153,7 +153,7 @@ const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
 
       <motion.button
         whileTap={{ scale: 0.97 }}
-        onClick={() => navigate("/demo")}
+        onClick={() => navigate("/dashboard")}
         className="w-full mb-5 overflow-hidden rounded-2xl border border-primary/35 bg-primary/10 p-3 text-left shadow-[0_0_22px_hsl(var(--primary)/0.16)]"
       >
         <div className="flex items-center gap-3">
@@ -162,7 +162,7 @@ const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
           </div>
           <div className="min-w-0 flex-1">
             <p className="font-display text-sm font-bold text-foreground leading-tight">AI Analysis</p>
-            <p className="text-[10px] text-muted-foreground leading-tight">Explore hidden emotions instantly</p>
+            <p className="text-[10px] text-muted-foreground leading-tight">Analyze now, login only to save</p>
           </div>
           <span className="text-[10px] font-semibold text-primary">Open ›</span>
         </div>
