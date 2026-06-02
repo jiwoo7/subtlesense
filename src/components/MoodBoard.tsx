@@ -36,7 +36,10 @@ const MoodBoard = () => {
   useEffect(() => {
     if (user) {
       fetchStats();
+      return;
     }
+    setStats(null);
+    setLoading(false);
   }, [user]);
 
   const fetchStats = async () => {
@@ -157,9 +160,9 @@ const MoodBoard = () => {
         animate={{ opacity: 1, y: 0 }}
       >
         <BarChart3 className="w-16 h-16 text-pastel-lavender mx-auto mb-4" />
-        <h3 className="font-display text-xl font-bold mb-2">No Data Yet</h3>
+        <h3 className="font-display text-xl font-bold mb-2">{user ? "No Data Yet" : "Login to build your mood board"}</h3>
         <p className="text-muted-foreground">
-          Complete a few analysis sessions to see your mood board and personalized advice! 🎯
+          {user ? "Complete a few analysis sessions to see your mood board and personalized advice! 🎯" : "You can explore tools without login. Sign in only when you want syncing and personalization."}
         </p>
       </motion.div>
     );

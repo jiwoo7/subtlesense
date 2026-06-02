@@ -19,7 +19,12 @@ const EmotionTimeline = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user) fetchData();
+    if (user) {
+      fetchData();
+      return;
+    }
+    setData([]);
+    setLoading(false);
   }, [user]);
 
   const fetchData = async () => {
@@ -67,9 +72,9 @@ const EmotionTimeline = () => {
         animate={{ opacity: 1, y: 0 }}
       >
         <Activity className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
-        <h3 className="font-display font-bold text-foreground mb-1">Not Enough Data Yet</h3>
+        <h3 className="font-display font-bold text-foreground mb-1">{user ? "Not Enough Data Yet" : "Login to save trends"}</h3>
         <p className="text-sm text-muted-foreground">
-          Complete at least 2 sessions to see your emotion trends 📈
+          {user ? "Complete at least 2 sessions to see your emotion trends 📈" : "Analysis still works now. Your timeline appears here after saved sessions."}
         </p>
       </motion.div>
     );
