@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import AnimatedBackground from "@/components/AnimatedBackground";
@@ -110,7 +110,7 @@ const Dashboard = () => {
             <StreakBadge current={streakCurrent} longest={streakLongest} />
           ) : (
             <Button asChild size="sm" variant="outline" className="h-8 rounded-full text-[11px] sm:text-sm">
-              <a href="/auth">Login to save progress</a>
+              <Link to="/auth">Login to save progress</Link>
             </Button>
           )}
         </div>
