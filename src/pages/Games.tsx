@@ -27,7 +27,7 @@ const Games = () => {
         <div className="w-10" />
       </header>
 
-      <main className="container mx-auto px-4 sm:px-6 pb-12">
+      <main className="container mx-auto px-4 sm:px-6 pb-28 sm:pb-12">
         {!active ? (
           <>
             <p className="text-center text-xs sm:text-base text-muted-foreground mb-5 sm:mb-8 max-w-xl mx-auto px-2">

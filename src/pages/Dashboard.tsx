@@ -102,7 +102,7 @@ const Dashboard = () => {
     <div className="min-h-screen relative overflow-x-hidden sm:overflow-hidden">
       <AnimatedBackground />
       
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-4 sm:py-6 max-w-6xl">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-4 sm:py-6 pb-28 sm:pb-6 max-w-6xl">
         <DashboardHeader activeTab={activeTab} setActiveTab={setActiveTab} />
 
         <div className="mt-2 sm:mt-4 flex justify-end">

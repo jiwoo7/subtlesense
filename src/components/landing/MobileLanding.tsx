@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Crown,
   Send,
@@ -48,6 +48,7 @@ const tabs = [
 
 const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const openCompanion = (text?: string) => {
     window.dispatchEvent(new CustomEvent("subtle:open-companion", { detail: { text } }));
@@ -57,11 +58,25 @@ const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
     navigate(to);
   };
 
+  const activeTab = (() => {
+    const p = location.pathname;
+    if (p.startsWith("/dashboard")) return "Insights";
+    if (p.startsWith("/settings") || p.startsWith("/auth")) return "Profile";
+    if (p.startsWith("/games") || p.startsWith("/playlists")) return "Tools";
+    return "Home";
+  })();
+
   const handleTab = (label: string) => {
-    if (label === "Home") window.scrollTo({ top: 0, behavior: "smooth" });
+    if (label === "Home") {
+      if (location.pathname !== "/") navigate("/");
+      else window.scrollTo({ top: 0, behavior: "smooth" });
+    }
     else if (label === "Insights") navigate("/dashboard");
     else if (label === "Companion") openCompanion();
-    else if (label === "Tools") document.getElementById("mobile-tools")?.scrollIntoView({ behavior: "smooth" });
+    else if (label === "Tools") {
+      if (location.pathname !== "/") navigate("/");
+      setTimeout(() => document.getElementById("mobile-tools")?.scrollIntoView({ behavior: "smooth" }), 80);
+    }
     else if (label === "Profile") navigate(currentUser ? "/settings" : "/auth");
   };
 
@@ -142,11 +157,12 @@ const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
             key={c.label}
             whileTap={{ scale: 0.94 }}
             onClick={() => handleCard(c.to)}
+            aria-label={c.label}
             className="glass-panel rounded-2xl p-2.5 flex min-w-0 flex-col items-center text-center aspect-square justify-center gap-1"
           >
             <c.icon className="w-5 h-5 text-primary mb-0.5" />
-            <p className="text-[10px] font-semibold leading-tight break-words">{c.label}</p>
-            <p className="text-[9px] text-muted-foreground leading-tight">{c.sub}</p>
+            <p className="text-[11px] font-semibold leading-tight break-words">{c.label}</p>
+            <p className="text-[11px] text-muted-foreground leading-tight">{c.sub}</p>
           </motion.button>
         ))}
       </div>
@@ -154,6 +170,7 @@ const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
       <motion.button
         whileTap={{ scale: 0.97 }}
         onClick={() => navigate("/dashboard")}
+        aria-label="Open AI Analysis"
         className="w-full mb-5 overflow-hidden rounded-2xl border border-primary/35 bg-primary/10 p-3 text-left shadow-[0_0_22px_hsl(var(--primary)/0.16)]"
       >
         <div className="flex items-center gap-3">
@@ -162,9 +179,9 @@ const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
           </div>
           <div className="min-w-0 flex-1">
             <p className="font-display text-sm font-bold text-foreground leading-tight">AI Analysis</p>
-            <p className="text-[10px] text-muted-foreground leading-tight">Analyze now, login only to save</p>
+            <p className="text-[11px] text-muted-foreground leading-tight">Analyze now, login only to save</p>
           </div>
-          <span className="text-[10px] font-semibold text-primary">Open ›</span>
+          <span className="text-[11px] font-semibold text-primary">Open ›</span>
         </div>
       </motion.button>
 
@@ -187,28 +204,34 @@ const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
             <div className={`w-8 h-8 rounded-full ${m.bg} flex items-center justify-center mb-0.5`}>
               <m.icon className={`w-4 h-4 ${m.color}`} />
             </div>
-            <p className="text-[10px] font-semibold leading-tight break-words">{m.label}</p>
-            <p className="text-[10px] text-muted-foreground">{m.pct}</p>
+            <p className="text-[11px] font-semibold leading-tight break-words">{m.label}</p>
+            <p className="text-[11px] text-muted-foreground">{m.pct}</p>
           </div>
         ))}
       </div>
 
       {/* Bottom tabs */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 sm:hidden pointer-events-none">
+      <nav
+        className="fixed bottom-0 left-0 right-0 z-40 sm:hidden pointer-events-none"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+        aria-label="Primary"
+      >
         <div className="mx-auto mb-3 w-[calc(100%-1rem)] max-w-[414px] rounded-3xl bg-background/90 backdrop-blur-xl border border-border/50 shadow-2xl pointer-events-auto">
           <div className="flex items-center justify-around py-1.5">
-            {tabs.map((t, i) => {
-              const active = i === 0;
+            {tabs.map((t) => {
+              const active = activeTab === t.label;
               return (
                 <button
                   key={t.label}
                   onClick={() => handleTab(t.label)}
-                  className={`flex min-w-[56px] flex-col items-center gap-0.5 px-1 py-1.5 rounded-xl ${
+                  aria-label={t.label}
+                  aria-current={active ? "page" : undefined}
+                  className={`flex min-w-[56px] flex-col items-center gap-0.5 px-1 py-1.5 rounded-xl transition-colors ${
                     active ? "text-neon-pink" : "text-muted-foreground"
                   }`}
                 >
                   <t.icon className="w-4 h-4" />
-                  <span className="text-[9px] font-medium leading-none">{t.label}</span>
+                  <span className="text-[11px] font-medium leading-none">{t.label}</span>
                 </button>
               );
             })}
