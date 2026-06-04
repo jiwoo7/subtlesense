@@ -1,65 +1,46 @@
-# June Launch Polish — Credit-Smart Plan
+# Batch 2 (Revised) — Navigation, Streaks, Cleanup
 
-Goal: fix every mobile flaw from the audit in **3 batched messages** instead of 15+ small ones. Each batch groups related files so we pay for one round of reasoning, not many.
+Four focused fixes, all in one build message to save credits.
 
-Estimated total: ~3 build messages. Keep plan-mode chatter minimal between batches.
+## 1. Fix "stuck after login" — Persistent Mobile Bottom Nav
 
----
+Right now the bottom nav lives **inside** `MobileLanding.tsx`, which only renders on `/`. After login users land on `/dashboard` and lose access to Home / Companion / Tools / Profile.
 
-## Batch 1 — Mobile Shell, Nav & Safety (1 message)
+- Extract the bottom-nav JSX into a new shared component `src/components/MobileBottomNav.tsx`.
+- Render it once from `PhoneFrame.tsx` so it appears on **every** mobile route (`/`, `/dashboard`, `/games`, `/playlists`, `/settings`, `/auth`).
+- Remove the duplicate nav from `MobileLanding.tsx`.
+- Active tab still derives from `useLocation()` like Batch 1.
+- Hide the nav on `/auth` so the login form has full height.
 
-Everything that touches global layout, so we edit it once.
+## 2. Show Streak in Top Bar When Logged In
 
-- **`PhoneFrame.tsx`** — remove the pink blur halo that causes edge overflow on small Androids; add `overflow-x-hidden` guarantees.
-- **`MobileLanding.tsx` bottom nav**:
-  - Add `pb-[env(safe-area-inset-bottom)]` so iPhone home indicator stops covering it.
-  - Make tabs route-aware (active state based on current path).
-  - Bump all `text-[9px]` / `text-[10px]` labels to `text-[11px]` minimum (WCAG).
-  - Add `aria-label` to every icon-only tab button.
-- **Dashboard / Games / Playlists pages** — add `pb-24` so last card isn't hidden under the floating nav.
-- **`index.html`** — add per-route-friendly meta description + OG tags placeholder; add `<meta name="theme-color">` for mobile browser chrome.
+- In `MobileLanding.tsx` top bar, when `currentUser` exists, replace the (now-removed) Premium button with a compact `StreakBadge` fetched via the existing `useStreak` hook.
+- Falls back to nothing if streak is 0 (StreakBadge already handles this).
 
----
+## 3. Remove "10K+ Happy Learners" (Fake Stat)
 
-## Batch 2 — Trust, Data Honesty & Auth Flow (1 message)
+- Edit `src/components/StatsSection.tsx` — drop the "10K+ Happy Learners" item. Keep the 3 real metrics (Accuracy, Confusion Reduced, Real-time) and switch grid to `grid-cols-3`.
 
-Grouped because they all touch the same "first impression → signup" journey.
+## 4. Remove Premium Completely
 
-- **MobileLanding hero** — replace hardcoded mood landscape (Overthinking 78% etc.) with either real last-session values from Supabase (if logged in) or an "Example" badge so it's not misleading.
-- **`JournalSection.tsx`** — on login, auto-migrate `subtlesense-local-journal` entries to Supabase, then clear localStorage. Show toast: "Your journal entries are now synced."
-- **Dashboard analysis result** — append small inline medical disclaimer ("Informational only, not medical advice") under each result.
-- **AI failure UX** — in `MediaUploadZone` / `RealAnalysisDashboard`, add a graceful error card with a Retry button instead of silent failure.
-- **Auth page mobile** — reorder so Google sign-in is above email; standardize all "Login to save" copy across `SessionHistory`, `EmotionTimeline`, `MoodBoard`, `StreakBadge` to one shared component.
-- **PWA `InstallPrompt`** — delay until 2nd visit (check localStorage visit counter).
+- Delete `src/pages/Premium.tsx` and `src/components/landing/PremiumComparisonTable.tsx`.
+- Remove the `/premium` route + lazy import from `src/App.tsx`.
+- Remove the Crown Premium button from `MobileLanding.tsx` top bar.
+- Remove the Premium button + `<PremiumComparisonTable />` usage from `src/pages/Landing.tsx` (desktop).
+- Drop unused `Crown` icon imports.
 
 ---
 
-## Batch 3 — Performance & Polish (1 message)
+## Files touched
 
-- **`Landing.tsx`** — gate the desktop landing behind a `useIsMobile` check so mobiles don't parse the heavy desktop tree (currently both render, just one is `hidden`).
-- **Logo/mascot `<img>`** — add explicit `width` / `height` to prevent CLS; add `loading="eager"` + `fetchpriority="high"` on hero, `loading="lazy"` elsewhere.
-- **Streak badge** — show ghost "Start your streak → Login" version for unauth users instead of hiding.
-- **Companion chat mobile** — ensure close button reachable; add swipe-down-to-dismiss handler.
-- **OG image** — generate one branded 1200x630 image with `imagegen`, wire into `index.html`.
-- **Premium page** — confirm ₹399/₹2999 toggle hit area + add sticky bottom CTA on mobile only.
+- **New**: `src/components/MobileBottomNav.tsx`
+- **Edit**: `PhoneFrame.tsx`, `MobileLanding.tsx`, `StatsSection.tsx`, `App.tsx`, `Landing.tsx`
+- **Delete**: `pages/Premium.tsx`, `components/landing/PremiumComparisonTable.tsx`
 
----
+## What I'm NOT doing (saves credits)
 
-## Credit-Saving Rules I'll Follow
+- Not touching desktop layout beyond removing Premium references.
+- Not changing the Dashboard internals — the shared nav alone fixes the access issue.
+- Not auditing every "thousands of learners" copy line; only the visible stat card. (Let me know if you also want the `CTASection.tsx` line scrubbed — easy add.)
 
-1. **Batch all file edits in parallel** within each message — one round of model reasoning, many writes.
-2. **No "try to fix" loops** — I'll verify changes via `code--view` and the preview screenshot, not by guessing.
-3. **No design-direction prototypes** for these fixes — they're deterministic edits, not visual explorations.
-4. **No new backend tables / migrations** — everything is frontend + one localStorage→Supabase migration on existing `journals` table.
-5. **Skip rewrites** — surgical `line_replace` edits only.
-
----
-
-## What I'm NOT doing (to save credits)
-
-- No first-time coachmark tour — nice-to-have, not launch-blocking.
-- No SSR for social previews — would require migration off Vite.
-- No new analytics events.
-- No refactor of working desktop code.
-
-If you approve, reply "go" and I'll start Batch 1. After each batch you can preview, then say "next" for the following batch.
+Reply **"go"** and I'll ship all four in one message. Then we still have Batch 3 (perf, OG image, AI error retry) left for ~1 more credit.
