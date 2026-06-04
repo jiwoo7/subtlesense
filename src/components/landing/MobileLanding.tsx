@@ -1,23 +1,19 @@
 import { motion } from "framer-motion";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
-  Crown,
   Send,
   Gamepad2,
   Music,
   BookOpen,
   Brain,
-  Home,
-  Compass,
-  Heart,
-  LayoutGrid,
-  User as UserIcon,
   Sparkles,
   Zap,
   Droplet,
   Leaf,
 } from "lucide-react";
 import logoUrl from "@/assets/subtle-sense-logo.png";
+import StreakBadge from "@/components/StreakBadge";
+import { useStreak } from "@/hooks/useStreak";
 import type { User } from "@supabase/supabase-js";
 
 interface Props {
@@ -38,17 +34,9 @@ const moodCards = [
   { icon: Leaf, label: "Hope", pct: "71%", color: "text-success", bg: "bg-success/15" },
 ];
 
-const tabs = [
-  { icon: Home, label: "Home" },
-  { icon: Compass, label: "Insights" },
-  { icon: Heart, label: "Companion" },
-  { icon: LayoutGrid, label: "Tools" },
-  { icon: UserIcon, label: "Profile" },
-];
-
 const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const { current, longest } = useStreak(currentUser?.id);
 
   const openCompanion = (text?: string) => {
     window.dispatchEvent(new CustomEvent("subtle:open-companion", { detail: { text } }));
@@ -56,28 +44,6 @@ const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
 
   const handleCard = (to: string) => {
     navigate(to);
-  };
-
-  const activeTab = (() => {
-    const p = location.pathname;
-    if (p.startsWith("/dashboard")) return "Insights";
-    if (p.startsWith("/settings") || p.startsWith("/auth")) return "Profile";
-    if (p.startsWith("/games") || p.startsWith("/playlists")) return "Tools";
-    return "Home";
-  })();
-
-  const handleTab = (label: string) => {
-    if (label === "Home") {
-      if (location.pathname !== "/") navigate("/");
-      else window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-    else if (label === "Insights") navigate("/dashboard");
-    else if (label === "Companion") openCompanion();
-    else if (label === "Tools") {
-      if (location.pathname !== "/") navigate("/");
-      setTimeout(() => document.getElementById("mobile-tools")?.scrollIntoView({ behavior: "smooth" }), 80);
-    }
-    else if (label === "Profile") navigate(currentUser ? "/settings" : "/auth");
   };
 
   return (
@@ -90,13 +56,16 @@ const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
           </div>
           <span className="font-display text-base font-bold text-foreground">Subtle Sense</span>
         </div>
-        <button
-          onClick={() => navigate("/premium")}
-          className="flex items-center gap-1 px-2.5 py-1.5 rounded-full border border-primary/40 text-primary text-[11px] font-semibold"
-        >
-          <Crown className="w-3 h-3" />
-          Premium
-        </button>
+        {currentUser ? (
+          <StreakBadge current={current} longest={longest} compact />
+        ) : (
+          <button
+            onClick={() => navigate("/auth")}
+            className="px-2.5 py-1.5 rounded-full border border-primary/40 text-primary text-[11px] font-semibold"
+          >
+            Sign in
+          </button>
+        )}
       </div>
 
       {/* Hero */}
@@ -149,7 +118,7 @@ const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
         </button>
       </form>
 
-      {/* Start with something */}
+      {/* Tools */}
       <h2 id="mobile-tools" className="font-display text-sm font-bold mb-2.5">Tools</h2>
       <div className="grid grid-cols-3 gap-2.5 mb-4">
         {startCards.map((c) => (
@@ -209,35 +178,6 @@ const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
           </div>
         ))}
       </div>
-
-      {/* Bottom tabs */}
-      <nav
-        className="fixed bottom-0 left-0 right-0 z-40 sm:hidden pointer-events-none"
-        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-        aria-label="Primary"
-      >
-        <div className="mx-auto mb-3 w-[calc(100%-1rem)] max-w-[414px] rounded-3xl bg-background/90 backdrop-blur-xl border border-border/50 shadow-2xl pointer-events-auto">
-          <div className="flex items-center justify-around py-1.5">
-            {tabs.map((t) => {
-              const active = activeTab === t.label;
-              return (
-                <button
-                  key={t.label}
-                  onClick={() => handleTab(t.label)}
-                  aria-label={t.label}
-                  aria-current={active ? "page" : undefined}
-                  className={`flex min-w-[56px] flex-col items-center gap-0.5 px-1 py-1.5 rounded-xl transition-colors ${
-                    active ? "text-neon-pink" : "text-muted-foreground"
-                  }`}
-                >
-                  <t.icon className="w-4 h-4" />
-                  <span className="text-[11px] font-medium leading-none">{t.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </nav>
     </div>
   );
 };

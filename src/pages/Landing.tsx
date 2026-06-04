@@ -1,13 +1,12 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Brain, Shield, Zap, Users, ArrowDown, BarChart3, History, LogOut, Crown } from "lucide-react";
+import { Sparkles, Brain, Shield, Zap, Users, ArrowDown, BarChart3, History, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
 import ShareResults from "@/components/ShareResults";
 import ThemePickerButton from "@/components/ThemePickerButton";
-import PremiumComparisonTable from "@/components/landing/PremiumComparisonTable";
 import MindToolsSection from "@/components/landing/MindToolsSection";
 import MobileLanding from "@/components/landing/MobileLanding";
 import logoUrl from "@/assets/subtle-sense-logo.png";
@@ -169,15 +168,6 @@ const Landing = () => {
               ) : null}
               <ThemePickerButton />
               <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate("/premium")}
-                className="font-semibold gap-1 text-xs sm:text-sm px-2 sm:px-3 text-warning hover:text-warning"
-              >
-                <Crown className="w-4 h-4" />
-                <span className="hidden xs:inline sm:inline">Premium</span>
-              </Button>
-              <Button
                 onClick={scrollToTry}
                 className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-semibold shadow-lg text-xs sm:text-base px-2.5 sm:px-4"
               >
@@ -292,8 +282,6 @@ const Landing = () => {
           </div>
         </section>
 
-        {/* Free vs Premium */}
-        <PremiumComparisonTable />
 
         {/* Inline Try Section */}
         <div id="try-it-out" style={{ scrollMarginTop: 80 }}>
