@@ -17,7 +17,7 @@ const Auth = lazy(() => import("./pages/AuthWithProvider"));
 const Dashboard = lazy(() => import("./pages/DashboardWithProvider"));
 const Settings = lazy(() => import("./pages/SettingsWithProvider"));
 const Demo = lazy(() => import("./pages/Demo"));
-const Premium = lazy(() => import("./pages/Premium"));
+
 const Games = lazy(() => import("./pages/Games"));
 const Playlists = lazy(() => import("./pages/Playlists"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -47,7 +47,7 @@ const App = () => {
             <Routes>
   <Route path="/" element={<PhoneFrame><Landing /></PhoneFrame>} />
   <Route path="/demo" element={<PhoneFrame><Demo /></PhoneFrame>} />
-  <Route path="/premium" element={<PhoneFrame><Premium /></PhoneFrame>} />
+  
   <Route path="/games" element={<PhoneFrame><Games /></PhoneFrame>} />
   <Route path="/playlists" element={<PhoneFrame><Playlists /></PhoneFrame>} />
   <Route path="/auth" element={<PhoneFrame><Auth /></PhoneFrame>} />
