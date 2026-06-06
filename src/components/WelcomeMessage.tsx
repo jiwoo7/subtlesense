@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, Sparkles, Star, Sun, Moon, Coffee } from "lucide-react";
+import { Sparkles, Star, Sun, Moon, Coffee } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
+import logoUrl from "@/assets/subtle-sense-logo.png";
 
 const WelcomeMessage = () => {
   const { user } = useAuth();
@@ -72,11 +73,11 @@ const WelcomeMessage = () => {
         >
           <div className="flex items-center gap-3">
             <motion.div
-              className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-pink to-neon-purple flex items-center justify-center flex-shrink-0"
+              className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 shadow-[0_0_16px_hsl(var(--neon-pink)/0.5)]"
               animate={{ rotate: [0, 5, -5, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <Heart className="w-6 h-6 text-white fill-white" />
+              <img src={logoUrl} alt="Subtle Sense" className="w-full h-full object-cover" />
             </motion.div>
             
             <div className="flex-1 min-w-0">
