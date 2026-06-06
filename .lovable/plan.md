@@ -1,33 +1,39 @@
-## Tier A — 7 Audit Fixes (one build message)
+## Tier B — Pre-launch build (one message, ~2 credits)
 
-### 1. Remove fake "10K+ Happy Learners" from StatsSection
-`src/components/StatsSection.tsx` — drop the 4th stat, switch grid to `grid-cols-3` on both breakpoints.
+### 1. Heart → Subtle Sense logo (greeting card only)
+`src/components/WelcomeMessage.tsx`
+- Replace the pink-gradient circle containing `<Heart>` with the SS logo (`@/assets/subtle-sense-logo.png`) at the same 12×12 size, keep the soft rotate animation and pink glow ring.
+- Remove the `Heart` import.
+- No other heart icons touched (per your answer).
 
-### 2. Scrub "Join thousands of learners…" copy
-`src/components/CTASection.tsx` — replace with honest copy ("Start understanding your emotions today" or similar, no learner counts).
+### 2. Offline "Wait & Play" mini-game
+When the network drops, instead of just showing `OfflineIndicator`, surface a small playable distraction so users have something to do while waiting.
 
-### 3. Delete orphaned `src/pages/Index.tsx`
-Not referenced in `App.tsx` routes. Removes dead bundle weight + another fake stat surface.
+- New component `src/components/OfflineGame.tsx` — lightweight in-house mini (no new deps): a calming **Breathing Bubble** loop reusing logic from `src/components/games/BreathingBubble.tsx` wrapped in a full-screen offline overlay. Tap-to-pause, "You're offline — breathe while we wait" copy, auto-dismisses when `navigator.onLine` flips true (listen to `online` event).
+- Wire-in: replace current `<OfflineIndicator />` mount in `App.tsx` with a combined `<OfflineIndicator />` (toast at top, unchanged) **plus** `<OfflineGame />` (overlay), so the toast still appears for quick blips and the game only auto-opens after offline persists >3 s.
+- Dismissible: user can close the overlay and just see the toast.
 
-### 4. Fix mobile "Emotion landscape" — label as Example
-`src/components/landing/MobileLanding.tsx` — add a small "Example" badge next to the heading so the hardcoded 78/65/42/71 numbers don't read as real user data. (Logged-in users will eventually see real data in a later batch; for launch, labeling is the safe fix.)
+### 3. Journal local → cloud migration (logged-in users)
+Currently logged-in users' journal entries are written to `localStorage` in `JournalSection.tsx`, so they don't sync across devices and get lost on cache clear.
 
-### 5. Companion tab reliability
-`src/components/MobileBottomNav.tsx` — when "Companion" is tapped and we're not on `/`, navigate to `/` first then dispatch `subtle:open-companion` after a short delay, so CompanionChat (mounted on landing) reliably opens.
-
-### 6. Remove unused `onAnalyze` prop on MobileLanding
-`src/components/landing/MobileLanding.tsx` + caller in `src/pages/Landing.tsx` — drop the dead prop.
-
-### 7. Standardize "Login to save" copy under Journal card
-`src/components/landing/MobileLanding.tsx` — change Journal card sub from "Login to save" to "Track your mood" (works for both guest & logged-in, no auth-state branching).
-
----
+- On first mount when `user` exists:
+  1. Read any existing `localStorage` journal entries.
+  2. Upsert them into the existing `journals` Supabase table (schema already exists per memory).
+  3. Clear the localStorage key after successful sync.
+- Switch all CRUD in `JournalSection.tsx` to Supabase when `user` is present; keep localStorage path for guests.
+- RLS already in place (existing `journals` table); no schema changes.
+- Add a one-line toast on successful migration: "Synced N journal entries to your account."
 
 ### Files touched
-- Edit: `StatsSection.tsx`, `CTASection.tsx`, `MobileLanding.tsx`, `MobileBottomNav.tsx`, `Landing.tsx`
-- Delete: `src/pages/Index.tsx`
+- Edit: `src/components/WelcomeMessage.tsx`, `src/App.tsx`, `src/components/JournalSection.tsx`
+- Create: `src/components/OfflineGame.tsx`
 
-### Out of scope (Batch 3, later)
-Performance/code-splitting, OG image, AI error retry, local→cloud journal migration, medical disclaimer placement.
+### Out of scope (post-launch)
+Medical disclaimer placement, AI error retry UX, OG image, PWA install delay, code-splitting.
 
-Reply **"go"** to ship all 7 in one build message (~1 credit).
+### Technical notes
+- Offline detection: `window.addEventListener("online"/"offline", …)` + `navigator.onLine` initial check.
+- No new packages.
+- Journal migration is idempotent — guard with a `localStorage.getItem("journal_migrated_<userId>")` flag so it runs once per user per device.
+
+Reply **"go"** to ship.
