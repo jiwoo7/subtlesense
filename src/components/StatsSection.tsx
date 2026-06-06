@@ -4,7 +4,6 @@ const stats = [
   { value: "82%", label: "Detection Accuracy", emoji: "🎯" },
   { value: "40%", label: "Confusion Reduced", emoji: "📉" },
   { value: "<50ms", label: "Real-time Analysis", emoji: "⚡" },
-  { value: "10K+", label: "Happy Learners", emoji: "🎉" },
 ];
 
 const StatsSection = () => {
@@ -17,7 +16,7 @@ const StatsSection = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-3 gap-6">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
