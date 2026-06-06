@@ -44,12 +44,12 @@ const CTASection = () => {
           </motion.div>
 
           <h2 className="font-display text-3xl md:text-4xl font-extrabold text-white mb-4 max-w-2xl mx-auto">
-            Ready to Transform Your Learning Experience? 🌟
+            Ready to Understand Your Emotions? 🌟
           </h2>
           
           <p className="text-lg text-white/90 max-w-xl mx-auto mb-8 leading-relaxed">
-            Join thousands of learners who've discovered the power of emotion-aware coding. 
-            It's free to start, and the benefits last a lifetime.
+            Start exploring the hidden patterns behind how you feel.
+            It's free to try — no sign-up required.
           </p>
 
           <motion.button
