@@ -18,11 +18,10 @@ import type { User } from "@supabase/supabase-js";
 
 interface Props {
   currentUser: User | null;
-  onAnalyze: () => void;
 }
 
 const startCards = [
-  { icon: BookOpen, label: "Journal", sub: "Login to save", to: "/dashboard?tab=journal" },
+  { icon: BookOpen, label: "Journal", sub: "Track your mood", to: "/dashboard?tab=journal" },
   { icon: Gamepad2, label: "Mind Games", sub: "2 min reset", to: "/games" },
   { icon: Music, label: "Spotify", sub: "Mood playlists", to: "/playlists" },
 ];
@@ -34,7 +33,7 @@ const moodCards = [
   { icon: Leaf, label: "Hope", pct: "71%", color: "text-success", bg: "bg-success/15" },
 ];
 
-const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
+const MobileLanding = ({ currentUser }: Props) => {
   const navigate = useNavigate();
   const { current, longest } = useStreak(currentUser?.id);
 
@@ -156,7 +155,12 @@ const MobileLanding = ({ currentUser, onAnalyze }: Props) => {
 
       {/* Emotion landscape */}
       <div className="flex items-center justify-between mb-3">
-        <h2 className="font-display text-base font-bold">Your emotion landscape</h2>
+        <div className="flex items-center gap-2">
+          <h2 className="font-display text-base font-bold">Your emotion landscape</h2>
+          <span className="px-1.5 py-0.5 rounded-full bg-muted text-[9px] font-semibold text-muted-foreground uppercase tracking-wide">
+            Example
+          </span>
+        </div>
         <button
           onClick={() => navigate("/dashboard")}
           className="text-xs text-muted-foreground flex items-center gap-0.5"

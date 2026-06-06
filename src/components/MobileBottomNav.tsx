@@ -31,7 +31,14 @@ const MobileBottomNav = () => {
   if (location.pathname.startsWith("/auth")) return null;
 
   const openCompanion = () => {
-    window.dispatchEvent(new CustomEvent("subtle:open-companion"));
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent("subtle:open-companion"));
+      }, 250);
+    } else {
+      window.dispatchEvent(new CustomEvent("subtle:open-companion"));
+    }
   };
 
   const activeTab = (() => {
