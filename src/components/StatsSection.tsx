@@ -4,7 +4,6 @@ const stats = [
   { value: "82%", label: "Detection Accuracy", emoji: "🎯" },
   { value: "40%", label: "Confusion Reduced", emoji: "📉" },
   { value: "<50ms", label: "Real-time Analysis", emoji: "⚡" },
-  { value: "10K+", label: "Happy Learners", emoji: "🎉" },
 ];
 
 const StatsSection = () => {
