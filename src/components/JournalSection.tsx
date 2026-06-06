@@ -31,7 +31,7 @@ const JournalSection = () => {
 
   useEffect(() => {
     if (user) {
-      fetchEntries();
+      migrateLocalThenFetch();
       return;
     }
 
@@ -43,6 +43,34 @@ const JournalSection = () => {
     }
     setLoading(false);
   }, [user]);
+
+  const migrateLocalThenFetch = async () => {
+    if (!user) return;
+    const migratedKey = `journal_migrated_${user.id}`;
+    try {
+      if (!localStorage.getItem(migratedKey)) {
+        const raw = localStorage.getItem(LOCAL_JOURNAL_KEY);
+        const local: JournalEntry[] = raw ? JSON.parse(raw) : [];
+        if (local.length > 0) {
+          const rows = local.map((e) => ({
+            user_id: user.id,
+            content: e.content,
+            mood_tag: e.mood_tag,
+            created_at: e.created_at,
+          }));
+          const { error } = await supabase.from("journal_entries").insert(rows);
+          if (!error) {
+            localStorage.removeItem(LOCAL_JOURNAL_KEY);
+            toast.success(`Synced ${rows.length} journal ${rows.length === 1 ? "entry" : "entries"} to your account.`);
+          }
+        }
+        localStorage.setItem(migratedKey, "1");
+      }
+    } catch (e) {
+      console.error("Journal migration failed:", e);
+    }
+    fetchEntries();
+  };
 
   const persistLocalEntries = (next: JournalEntry[]) => {
     setEntries(next);

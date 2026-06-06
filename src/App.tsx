@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import OfflineIndicator from "@/components/OfflineIndicator";
+import OfflineGame from "@/components/OfflineGame";
 import SubtleSenseLoader from "@/components/SubtleSenseLoader";
 import InstallPrompt from "@/components/InstallPrompt";
 import CompanionChat from "@/components/CompanionChat";
@@ -41,6 +42,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <OfflineIndicator />
+        <OfflineGame />
         <InstallPrompt />
         <BrowserRouter>
           <Suspense fallback={<RouteFallback />}>
