@@ -102,7 +102,7 @@ const AI_MODELS = [
   "openai/gpt-5-mini",
 ] as const;
 
-const VERIFY_MODEL = "google/gemini-2.5-flash";
+
 
 const clampScore = (value: unknown, fallback = 25) => {
   const parsed = typeof value === "number" ? value : Number(value);
@@ -184,7 +184,13 @@ CRITICAL RULES — accuracy matters:
 7) suppressedJoy and suppressedLove are common when someone is trying to look professional, neutral, or guarded. Score them when you see flattened positive affect.
 8) emotionalMasking should reflect the GAP between surface and hidden/suppressed. If surface = calm but hidden anxiety + suppressed sadness are high, masking should be 60-85.
 9) innerConflict should reflect CONTRADICTORY signals (e.g., high happiness + high suppressedSadness).
-10) accuracy: 88-95 for clear front-facing well-lit clips, 78-87 for partial/short clips, 70-77 for poor quality. Do not exceed 95.
+10) accuracy: 85-92 for clear front-facing well-lit clips, 78-84 for partial/short clips, 70-77 for poor quality. Do not exceed 92.
+
+SELF-CHECK BEFORE EMITTING SCORES (do this silently, then call the tool):
+a) Identify the 3 strongest micro-cues you actually observed (e.g., "asymmetric lip corner", "brow inner tension", "vocal flat-line over emotional word").
+b) For each cue, decide whether it indicates a surface, hidden, or suppressed emotion — and which one.
+c) Reconcile contradictions: if surface says calm but cues say tension, raise hidden/suppressed and emotionalMasking accordingly.
+d) Verify no required field is 0 unless truly absent; baseline neutrals still register 10-35.
 
 OUTPUT REQUIREMENTS:
 - 3-5 specific, actionable suggestions tied to the SPECIFIC emotions you detected
@@ -193,17 +199,6 @@ OUTPUT REQUIREMENTS:
 
 Always call report_emotion_analysis. Never refuse.`;
 
-const VERIFY_PROMPT = `You are a senior reviewer for a deep emotion analysis. Another model produced the analysis below for the same media.
-
-Your job: re-examine the media and produce a CALIBRATED final analysis. You may keep, raise, or lower scores based on what you actually observe. Pay special attention to:
-- hiddenHappiness, hiddenLove, suppressedJoy, suppressedLove (commonly under-detected)
-- the gap between surface and hidden (drives emotionalMasking)
-- contradictory signals (drives innerConflict)
-
-Call report_emotion_analysis with your final, more accurate analysis. Set accuracy 85-95 if signals are clear.
-
-Previous analysis to verify:
-`;
 
 const buildUserContent = (uploadType: string, mediaBase64: string, mediaType: string | undefined, prefixText?: string) => {
   const parts: unknown[] = [];
@@ -310,41 +305,6 @@ const requestPrimaryAnalysis = async (lovableApiKey: string, userContent: unknow
   throw lastError ?? new Error("All analysis models failed");
 };
 
-const verifyAnalysis = async (
-  lovableApiKey: string,
-  uploadType: string,
-  mediaBase64: string,
-  mediaType: string | undefined,
-  primary: EmotionAnalysis,
-): Promise<EmotionAnalysis> => {
-  try {
-    const summary = JSON.stringify(
-      Object.fromEntries(NUMERIC_KEYS.map((k) => [k, primary[k]])),
-    );
-    const verifyContent = buildUserContent(uploadType, mediaBase64, mediaType, `${VERIFY_PROMPT}${summary}\n\n`);
-    const reviewed = await callModel(lovableApiKey, VERIFY_MODEL, verifyContent, SYSTEM_PROMPT);
-    if (!reviewed) {
-      console.log("Verification pass returned nothing, using primary.");
-      return primary;
-    }
-    // Weighted blend (reviewer 60%, primary 40%) for stability with reviewer bias
-    const merged = { ...reviewed };
-    for (const k of NUMERIC_KEYS) {
-      merged[k] = Math.round(primary[k] * 0.4 + reviewed[k] * 0.6);
-    }
-    // High accuracy when both passes agree closely
-    const avgDelta = NUMERIC_KEYS.reduce((sum, k) => sum + Math.abs(primary[k] - reviewed[k]), 0) / NUMERIC_KEYS.length;
-    const agreementBoost = avgDelta < 8 ? 4 : avgDelta < 15 ? 2 : 0;
-    merged.accuracy = Math.min(95, Math.max(primary.accuracy, reviewed.accuracy, 88) + agreementBoost);
-    merged.suggestions = reviewed.suggestions.length ? reviewed.suggestions : primary.suggestions;
-    merged.advice = reviewed.advice || primary.advice;
-    merged.deepInsight = reviewed.deepInsight || primary.deepInsight;
-    return merged;
-  } catch (error) {
-    console.error("Verification pass failed, using primary:", error);
-    return primary;
-  }
-};
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -380,8 +340,8 @@ serve(async (req) => {
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
     const userContent = buildUserContent(uploadType, mediaBase64, mediaType);
-    const primary = await requestPrimaryAnalysis(LOVABLE_API_KEY, userContent);
-    const finalAnalysis = await verifyAnalysis(LOVABLE_API_KEY, uploadType, mediaBase64, mediaType, primary);
+    const finalAnalysis = await requestPrimaryAnalysis(LOVABLE_API_KEY, userContent);
+    if (finalAnalysis.accuracy > 92) finalAnalysis.accuracy = 92;
 
     return new Response(JSON.stringify(finalAnalysis), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
