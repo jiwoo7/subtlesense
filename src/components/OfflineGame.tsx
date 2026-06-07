@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { WifiOff, X, RefreshCw } from "lucide-react";
+import { toast } from "sonner";
 import BreathingBubble from "@/components/games/BreathingBubble";
 
 const OfflineGame = () => {
+  const location = useLocation();
   const [showGame, setShowGame] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
@@ -40,6 +43,21 @@ const OfflineGame = () => {
     };
   }, []);
 
+  // Don't block the auth form when connection blips
+  if (location.pathname.startsWith("/auth")) return null;
+
+  const handleRetry = () => {
+    if (typeof window !== "undefined" && window.navigator.onLine) {
+      setShowGame(false);
+      setDismissed(false);
+      toast.success("You're back online!");
+    } else {
+      toast("Still offline", {
+        description: "We'll auto-resume the moment you reconnect.",
+      });
+    }
+  };
+
   const visible = showGame && !dismissed;
 
   return (
@@ -75,7 +93,7 @@ const OfflineGame = () => {
           <BreathingBubble />
 
           <button
-            onClick={() => window.location.reload()}
+            onClick={handleRetry}
             className="mt-2 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
           >
             <RefreshCw className="w-3 h-3" /> Retry connection

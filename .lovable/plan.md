@@ -1,39 +1,38 @@
-## Tier B — Pre-launch build (one message, ~2 credits)
+### Scope
+Fix the 4 real bugs identified in the audit. One build message, ~4 small edits.
 
-### 1. Heart → Subtle Sense logo (greeting card only)
-`src/components/WelcomeMessage.tsx`
-- Replace the pink-gradient circle containing `<Heart>` with the SS logo (`@/assets/subtle-sense-logo.png`) at the same 12×12 size, keep the soft rotate animation and pink glow ring.
-- Remove the `Heart` import.
-- No other heart icons touched (per your answer).
+### 1. Suppress `OfflineGame` on `/auth`
+**File:** `src/components/OfflineGame.tsx`
+- Import `useLocation` from `react-router-dom`.
+- Problem: `OfflineGame` is rendered in `App.tsx` *outside* `<BrowserRouter>`, so `useLocation` won't work there.
+- Fix approach: Move `<OfflineGame />` *inside* `<BrowserRouter>` in `src/App.tsx` (just below `<Suspense>` wrapper or as a sibling to `<Routes>`), then inside `OfflineGame.tsx` use `useLocation()` and early-return `null` when `pathname.startsWith("/auth")`.
 
-### 2. Offline "Wait & Play" mini-game
-When the network drops, instead of just showing `OfflineIndicator`, surface a small playable distraction so users have something to do while waiting.
+### 2. Journal migration dedup (prevent double-insert across devices)
+**File:** `src/components/JournalSection.tsx`
+- Add a `migrated_from_local` boolean column check by querying existing entries first: before inserting local rows, fetch the user's existing `journal_entries` `created_at` values, then filter local entries to only those whose `created_at` isn't already present in cloud.
+- Keep the localStorage `journal_migrated_${user.id}` flag for same-device fast-path.
+- This prevents re-upload on a second device that still has stale local data.
 
-- New component `src/components/OfflineGame.tsx` — lightweight in-house mini (no new deps): a calming **Breathing Bubble** loop reusing logic from `src/components/games/BreathingBubble.tsx` wrapped in a full-screen offline overlay. Tap-to-pause, "You're offline — breathe while we wait" copy, auto-dismisses when `navigator.onLine` flips true (listen to `online` event).
-- Wire-in: replace current `<OfflineIndicator />` mount in `App.tsx` with a combined `<OfflineIndicator />` (toast at top, unchanged) **plus** `<OfflineGame />` (overlay), so the toast still appears for quick blips and the game only auto-opens after offline persists >3 s.
-- Dismissible: user can close the overlay and just see the toast.
+### 3. `OfflineGame` retry button shouldn't hard-reload when still offline
+**File:** `src/components/OfflineGame.tsx`
+- Replace `window.location.reload()` with: check `navigator.onLine` → if true, `setShowGame(false)` + `setDismissed(false)`; if still false, show a brief toast "Still offline — we'll auto-resume when you reconnect."
+- Import `toast` from `sonner`.
 
-### 3. Journal local → cloud migration (logged-in users)
-Currently logged-in users' journal entries are written to `localStorage` in `JournalSection.tsx`, so they don't sync across devices and get lost on cache clear.
+### 4. Swap `Heart` → Subtle Sense logo in MobileBottomNav Companion tab
+**File:** `src/components/MobileBottomNav.tsx`
+- Remove `Heart` from `lucide-react` imports.
+- Replace the Companion tab's icon entry: instead of an icon component, render an `<img src={logoUrl} className="w-4 h-4 rounded-full object-cover" />`.
+- Update the `tabs` array shape to allow either `icon` or `img`, OR keep array as-is and special-case Companion in the render loop (simpler — special-case in render).
+- Import `logoUrl from "@/assets/subtle-sense-logo.png"`.
 
-- On first mount when `user` exists:
-  1. Read any existing `localStorage` journal entries.
-  2. Upsert them into the existing `journals` Supabase table (schema already exists per memory).
-  3. Clear the localStorage key after successful sync.
-- Switch all CRUD in `JournalSection.tsx` to Supabase when `user` is present; keep localStorage path for guests.
-- RLS already in place (existing `journals` table); no schema changes.
-- Add a one-line toast on successful migration: "Synced N journal entries to your account."
+### Out of scope (intentionally skipped)
+- BreathingBubble timer jitter (cosmetic, pre-existing)
+- WelcomeMessage rotate animation tweak (cosmetic)
+- Toast z-index conflict with OfflineGame (edge case)
+- Medical disclaimer, AI error retry, OG image (separate launch items)
 
-### Files touched
-- Edit: `src/components/WelcomeMessage.tsx`, `src/App.tsx`, `src/components/JournalSection.tsx`
-- Create: `src/components/OfflineGame.tsx`
-
-### Out of scope (post-launch)
-Medical disclaimer placement, AI error retry UX, OG image, PWA install delay, code-splitting.
-
-### Technical notes
-- Offline detection: `window.addEventListener("online"/"offline", …)` + `navigator.onLine` initial check.
-- No new packages.
-- Journal migration is idempotent — guard with a `localStorage.getItem("journal_migrated_<userId>")` flag so it runs once per user per device.
-
-Reply **"go"** to ship.
+### Verification
+- Open `/auth` with DevTools offline → confirm no overlay appears.
+- Mobile bottom nav Companion tab shows logo, not heart.
+- Click "Retry connection" while offline → toast appears, no reload.
+- Journal migration: log in fresh, confirm local entries upload once; reload, confirm no duplicates.

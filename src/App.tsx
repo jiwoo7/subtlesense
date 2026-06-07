@@ -42,9 +42,9 @@ const App = () => {
         <Toaster />
         <Sonner />
         <OfflineIndicator />
-        <OfflineGame />
         <InstallPrompt />
         <BrowserRouter>
+          <OfflineGame />
           <Suspense fallback={<RouteFallback />}>
             <Routes>
   <Route path="/" element={<PhoneFrame><Landing /></PhoneFrame>} />
