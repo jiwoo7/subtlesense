@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Home, Compass, Heart, LayoutGrid, User as UserIcon } from "lucide-react";
+import { Home, Compass, LayoutGrid, User as UserIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { User } from "@supabase/supabase-js";
+import logoUrl from "@/assets/subtle-sense-logo.png";
 
 const tabs = [
   { icon: Home, label: "Home" },
   { icon: Compass, label: "Insights" },
-  { icon: Heart, label: "Companion" },
+  { icon: null, label: "Companion" },
   { icon: LayoutGrid, label: "Tools" },
   { icon: UserIcon, label: "Profile" },
-];
+] as const;
 
 const MobileBottomNav = () => {
   const navigate = useNavigate();
@@ -85,7 +86,15 @@ const MobileBottomNav = () => {
                   active ? "text-neon-pink" : "text-muted-foreground"
                 }`}
               >
-                <t.icon className="w-4 h-4" />
+                {t.icon ? (
+                  <t.icon className="w-4 h-4" />
+                ) : (
+                  <img
+                    src={logoUrl}
+                    alt=""
+                    className={`w-4 h-4 rounded-full object-cover ${active ? "" : "opacity-70"}`}
+                  />
+                )}
                 <span className="text-[11px] font-medium leading-none">{t.label}</span>
               </button>
             );

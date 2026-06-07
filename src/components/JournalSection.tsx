@@ -52,16 +52,27 @@ const JournalSection = () => {
         const raw = localStorage.getItem(LOCAL_JOURNAL_KEY);
         const local: JournalEntry[] = raw ? JSON.parse(raw) : [];
         if (local.length > 0) {
-          const rows = local.map((e) => ({
-            user_id: user.id,
-            content: e.content,
-            mood_tag: e.mood_tag,
-            created_at: e.created_at,
-          }));
-          const { error } = await supabase.from("journal_entries").insert(rows);
-          if (!error) {
+          // Dedup: skip locals whose created_at already exists in cloud (other-device safety)
+          const { data: existing } = await supabase
+            .from("journal_entries")
+            .select("created_at")
+            .eq("user_id", user.id);
+          const existingTimes = new Set((existing || []).map((r: any) => r.created_at));
+          const fresh = local.filter((e) => !existingTimes.has(e.created_at));
+          if (fresh.length > 0) {
+            const rows = fresh.map((e) => ({
+              user_id: user.id,
+              content: e.content,
+              mood_tag: e.mood_tag,
+              created_at: e.created_at,
+            }));
+            const { error } = await supabase.from("journal_entries").insert(rows);
+            if (!error) {
+              localStorage.removeItem(LOCAL_JOURNAL_KEY);
+              toast.success(`Synced ${rows.length} journal ${rows.length === 1 ? "entry" : "entries"} to your account.`);
+            }
+          } else {
             localStorage.removeItem(LOCAL_JOURNAL_KEY);
-            toast.success(`Synced ${rows.length} journal ${rows.length === 1 ? "entry" : "entries"} to your account.`);
           }
         }
         localStorage.setItem(migratedKey, "1");
