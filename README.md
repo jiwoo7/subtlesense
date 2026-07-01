@@ -24,9 +24,9 @@ Technical Architecture & Innovation
 
 - Multimodal Integration: Unlike standard sentiment analysis, SubtleSense synchronizes Visual (Spatial) and Audio (Acoustic) data streams. This dual-stream approach reaches an enterprise-grade 84% accuracy baseline in controlled environments.
 
--Agile Deployment: Developed as a Single-Page Application (SPA), the systemprioritizes "Zero-Friction Onboarding," utilizing client-side processing to ensure data privacy and low-latency feedback loops.
+- Agile Deployment: Developed as a Single-Page Application (SPA), the systemprioritizes "Zero-Friction Onboarding," utilizing client-side processing to ensure data privacy and low-latency feedback loops.
 
--Iterative Engineering: The project utilizes an ErrorBoundary framework to ensure high fault tolerance, maintaining 99% uptime during peak traffic of 500+ global visitors.
+- Iterative Engineering: The project utilizes an ErrorBoundary framework to ensure high fault tolerance, maintaining 99% uptime during peak traffic of 500+ global visitors.
 
 Now available as Android app on July 25, 2026!!!
 
