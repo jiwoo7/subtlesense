@@ -30,8 +30,9 @@ const RouteFallback = () => <SubtleSenseLoader />;
 const App = () => {
   useEffect(() => {
     try {
-      const stored = (localStorage.getItem("subtlesense-theme-preset") as ThemePreset) || "midnight";
-      applyThemePreset(stored);
+      const valid: ThemePreset[] = ["heritage", "minimalist", "opulence", "estate", "carrara"];
+      const stored = localStorage.getItem("subtlesense-theme-preset") as ThemePreset | null;
+      applyThemePreset(stored && valid.includes(stored) ? stored : "heritage");
     } catch {}
   }, []);
 
