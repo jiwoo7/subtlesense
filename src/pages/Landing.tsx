@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Brain, Shield, Zap, Users, ArrowDown, BarChart3, History, LogOut } from "lucide-react";
+import { Brain, Shield, Zap, Users, BarChart3, History, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
@@ -9,7 +9,7 @@ import ShareResults from "@/components/ShareResults";
 import ThemePickerButton from "@/components/ThemePickerButton";
 import MindToolsSection from "@/components/landing/MindToolsSection";
 import MobileLanding from "@/components/landing/MobileLanding";
-import logoUrl from "@/assets/subtle-sense-logo.png";
+
 
 const TransparencySection = lazy(() => import("@/components/landing/TransparencySection"));
 const RealWorldUseCases = lazy(() => import("@/components/landing/RealWorldUseCases"));
@@ -117,191 +117,160 @@ const Landing = () => {
       <MobileLanding currentUser={currentUser} />
 
       <div className="relative z-10 hidden sm:block">
-        {/* Header */}
-        <header className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
+        {/* ============ HEADER ============ */}
+        <header className="container mx-auto px-8 lg:px-12 pt-8 pb-6 border-b border-border/60">
           <nav className="flex items-center justify-between">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <motion.div
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl overflow-hidden flex items-center justify-center shadow-[0_0_20px_hsl(var(--neon-pink)/0.4)]"
-                whileHover={{ scale: 1.05 }}
-              >
-                <img src={logoUrl} alt="Subtle Sense logo" className="w-full h-full object-cover" />
-              </motion.div>
-              <span className="font-display text-xl sm:text-2xl font-bold gradient-text">Subtle Sense</span>
+            <div className="flex items-center gap-3">
+              <span className="editorial-heading text-2xl tracking-[0.22em] uppercase text-foreground">
+                Subtle&nbsp;Sense
+              </span>
             </div>
-            <div className="flex items-center gap-2 sm:gap-3">
+
+            <div className="hidden md:flex items-center gap-10">
+              <a href="#philosophy" className="nav-link">Philosophy</a>
+              <a href="#features" className="nav-link">The Method</a>
+              <a href="#try-it-out" className="nav-link">Analysis</a>
+            </div>
+
+            <div className="flex items-center gap-4">
               {currentUser ? (
                 <>
-                  <Button
-                    variant="ghost"
-                    size="sm"
+                  <button
                     onClick={() => navigate("/dashboard")}
-                    className="text-sm font-medium gap-1.5"
+                    className="nav-link hidden lg:inline-flex items-center gap-2"
                   >
-                    <BarChart3 className="w-4 h-4" />
-                    <span className="hidden sm:inline">Mood Board</span>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => {
-                      navigate("/dashboard");
-                    }}
-                    className="text-sm font-medium gap-1.5"
+                    <BarChart3 className="w-3.5 h-3.5" />
+                    Mood Board
+                  </button>
+                  <button
+                    onClick={() => navigate("/dashboard")}
+                    className="nav-link hidden lg:inline-flex items-center gap-2"
                   >
-                    <History className="w-4 h-4" />
-                    <span className="hidden sm:inline">History</span>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
+                    <History className="w-3.5 h-3.5" />
+                    History
+                  </button>
+                  <button
                     onClick={async () => {
                       await supabase.auth.signOut();
                       setCurrentUser(null);
                     }}
-                    className="rounded-full"
-                    title="Sign Out"
+                    className="nav-link inline-flex items-center gap-2"
+                    title="Sign out"
                   >
-                    <LogOut className="w-4 h-4" />
-                  </Button>
+                    <LogOut className="w-3.5 h-3.5" />
+                  </button>
                 </>
               ) : null}
               <ThemePickerButton />
-              <Button
-                onClick={scrollToTry}
-                className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-semibold shadow-lg text-xs sm:text-base px-2.5 sm:px-4"
-              >
-                <span className="sm:hidden">Analyze ↓</span>
-                <span className="hidden sm:inline">Analyze Now ↓</span>
-              </Button>
+              <button onClick={scrollToTry} className="btn-editorial-ghost">
+                Begin
+              </button>
             </div>
           </nav>
         </header>
 
-        {/* Hero Section */}
-        <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
-          <motion.div
-            className="text-center max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <motion.div
-              className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass-panel mb-4 sm:mb-6"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-neon-pink" />
-              <span className="text-xs sm:text-sm font-medium">Powered by AI • Hidden & Suppressed Detection</span>
-            </motion.div>
+        {/* ============ HERO ============ */}
+        <section className="container mx-auto px-8 lg:px-12 pt-24 pb-32">
+          <div className="max-w-5xl mx-auto animate-editorial-in">
+            <p className="eyebrow text-center mb-10">
+              Est. 2025 · An Editorial Study of Emotion
+            </p>
 
-            <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 sm:mb-6 leading-tight">
-              Discover What You're
+            <h1 className="editorial-heading text-center text-[3.75rem] md:text-[5.5rem] lg:text-[6.75rem] leading-[0.98] mb-10">
+              Discover What You&rsquo;re
               <br />
-              <span className="gradient-text font-serif italic text-[1.1em]">Really Feeling</span>
+              <span className="editorial-italic block mt-2 text-[1.02em]">
+                really feeling.
+              </span>
             </h1>
 
-            <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed px-4">
-              Our AI goes beyond surface emotions to detect what you're hiding and suppressing. 
-              Test it out right here — instant results, no account needed. 🔮
+            <p className="text-center max-w-2xl mx-auto text-base md:text-lg text-muted-foreground leading-relaxed mb-14 font-light">
+              A composed, private study of what lies beneath the surface. Subtle Sense
+              observes micro-expression, cadence and tone &mdash; and returns a quiet,
+              considered reading of the emotions you seldom name aloud.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4">
-              <Button
-                size="lg"
-                onClick={scrollToTry}
-                className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-xl w-full sm:w-auto"
-              >
-                <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Start Analyzing
-              </Button>
+            <div className="flex items-center justify-center gap-4">
+              <button onClick={scrollToTry} className="btn-editorial">
+                Start Analysis
+              </button>
+              <a href="#features" className="btn-editorial-ghost">
+                The Method
+              </a>
             </div>
 
-            {/* Stats */}
-            <motion.div
-              className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mt-10 sm:mt-16 px-4 sm:px-0"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  className="glass-panel rounded-xl sm:rounded-2xl p-3 sm:p-6 text-center"
-                  whileHover={{ y: -5 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 + index * 0.1 }}
-                >
-                  <p className="text-xl sm:text-3xl font-display font-bold gradient-text">{stat.value}</p>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">{stat.label}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* Features Section */}
-        <section id="features" className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
-          <motion.div
-            className="text-center mb-10 sm:mb-16"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">
-              How Subtle Sense Works 🔮
-            </h2>
-            <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-              Deep analysis that reveals what's beneath the surface
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              {features.map((feature, index) => {
-                const toneClasses = featureToneClasses[feature.tone];
-
-                return (
-              <motion.div
-                key={feature.title}
-                className="glass-panel rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-border/50 hover:border-neon-purple/30 transition-all"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-              >
-                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${toneClasses.badge} flex items-center justify-center mb-3 sm:mb-4`}>
-                    <feature.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${toneClasses.icon}`} />
+            {/* Editorial index strip */}
+            <div className="mt-24 pt-10 border-t border-border/60 grid grid-cols-2 md:grid-cols-4 gap-8">
+              {stats.map((stat) => (
+                <div key={stat.label} className="text-center md:text-left">
+                  <p className="editorial-heading text-4xl md:text-5xl text-foreground">
+                    {stat.value}
+                  </p>
+                  <p className="eyebrow mt-3">{stat.label}</p>
                 </div>
-                <h3 className="font-display text-base sm:text-lg font-bold mb-1 sm:mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground text-xs sm:text-sm">{feature.description}</p>
-              </motion.div>
-              )})}
+              ))}
+            </div>
           </div>
         </section>
 
-
-        {/* Inline Try Section */}
-        <div id="try-it-out" style={{ scrollMarginTop: 80 }}>
-          <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
-            <motion.div
-              className="text-center mb-8 sm:mb-12"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="font-display text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">
-                Analyze Your Emotions Now 🔮
+        {/* ============ THE METHOD ============ */}
+        <section id="features" className="container mx-auto px-8 lg:px-12 py-28 border-t border-border/60">
+          <div className="grid lg:grid-cols-12 gap-12 mb-20">
+            <div className="lg:col-span-5">
+              <p className="eyebrow mb-6">Chapter I &mdash; The Method</p>
+              <h2 className="editorial-heading text-4xl md:text-5xl leading-tight">
+                A quiet observation, <br />
+                <span className="editorial-italic">rendered with precision.</span>
               </h2>
-              <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-                Use your webcam, record audio, or upload a video — get full AI-powered deep analysis instantly.
+            </div>
+            <div className="lg:col-span-6 lg:col-start-7">
+              <p className="text-muted-foreground text-base md:text-lg leading-relaxed font-light">
+                Every session is composed of four disciplined passes &mdash; each attending
+                to a different layer of expression. The result is not a verdict, but a
+                mirror; a careful account of what was there to be seen.
               </p>
-            </motion.div>
+            </div>
+          </div>
 
-            <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-              <div className="space-y-4 sm:space-y-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 border-t border-border/60">
+            {features.map((feature, index) => (
+              <div
+                key={feature.title}
+                className="p-8 lg:p-10 border-b border-border/60 md:border-r md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0 animate-editorial-in"
+                style={{ animationDelay: `${index * 90}ms` }}
+              >
+                <p className="eyebrow mb-6">№ {String(index + 1).padStart(2, "0")}</p>
+                <feature.icon className="w-5 h-5 text-primary mb-8" strokeWidth={1.25} />
+                <h3 className="editorial-heading text-2xl mb-4 text-foreground">{feature.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed font-light">
+                  {feature.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ============ ANALYSIS ============ */}
+        <div id="try-it-out" style={{ scrollMarginTop: 80 }}>
+          <section className="container mx-auto px-8 lg:px-12 py-28 border-t border-border/60">
+            <div className="grid lg:grid-cols-12 gap-12 mb-16">
+              <div className="lg:col-span-5">
+                <p className="eyebrow mb-6">Chapter II &mdash; The Session</p>
+                <h2 className="editorial-heading text-4xl md:text-5xl leading-tight">
+                  Begin your <br />
+                  <span className="editorial-italic">private analysis.</span>
+                </h2>
+              </div>
+              <div className="lg:col-span-6 lg:col-start-7 flex items-end">
+                <p className="text-muted-foreground text-base md:text-lg leading-relaxed font-light">
+                  Speak, look, or upload a short clip. The reading returns in moments and
+                  is yours alone &mdash; nothing is stored without consent.
+                </p>
+              </div>
+            </div>
+
+            <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8">
+              <div className="space-y-6">
                 <Suspense fallback={<AnalyzerFallback />}>
                   {isMounted ? (
                     <MediaUploadZone
@@ -316,76 +285,51 @@ const Landing = () => {
                 </Suspense>
 
                 {isAnalyzing && (
-                  <motion.div
-                    className="glass-panel rounded-xl sm:rounded-2xl p-4 sm:p-6"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                  >
-                    <div className="flex items-center gap-3 sm:gap-4">
-                      <div className="relative flex-shrink-0">
-                        <motion.div
-                          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-3 border-neon-pink border-t-transparent"
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-lg sm:text-xl">🔮</span>
-                        </div>
-                      </div>
-                      <div className="min-w-0">
-                        <h4 className="font-display font-bold text-foreground text-sm sm:text-base">
-                          Deep Emotion Analysis...
-                        </h4>
-                        <p className="text-xs sm:text-sm text-muted-foreground truncate">
-                          Detecting hidden & suppressed emotions ✨
-                        </p>
-                      </div>
+                  <div className="border border-border/60 p-6 animate-editorial-in">
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="eyebrow">In session</p>
+                      <p className="eyebrow text-primary">Observing</p>
                     </div>
-                    <div className="mt-3 sm:mt-4 h-2 bg-muted rounded-full overflow-hidden">
+                    <h4 className="editorial-heading text-xl text-foreground mb-1">
+                      Reading composition&hellip;
+                    </h4>
+                    <p className="text-sm text-muted-foreground font-light mb-5">
+                      Attending to micro-expression, cadence, and tone.
+                    </p>
+                    <div className="h-px bg-border relative overflow-hidden">
                       <motion.div
-                        className="h-full bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red"
+                        className="absolute inset-y-0 left-0 bg-primary"
                         initial={{ width: "0%" }}
                         animate={{ width: "100%" }}
-                        transition={{ duration: 8, ease: "easeInOut" }}
+                        transition={{ duration: 8, ease: [0.25, 1, 0.5, 1] }}
                       />
                     </div>
-                  </motion.div>
+                  </div>
                 )}
 
-                <motion.div
-                  className="grid grid-cols-3 gap-2 sm:gap-3"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                >
+                <div className="grid grid-cols-3 border-t border-border/60">
                   {[
-                    { label: "Detection", value: "20 Emotions", emoji: "🔮" },
-                    { label: "Powered by", value: "Multi-pass AI", emoji: "🧠" },
-                    { label: "Detects", value: "Hidden + Suppressed", emoji: "🎭" },
-                  ].map((stat) => (
-                    <motion.div
+                    { label: "Detection", value: "20" },
+                    { label: "Method", value: "Multi-pass" },
+                    { label: "Reads", value: "Suppressed" },
+                  ].map((stat, i) => (
+                    <div
                       key={stat.label}
-                      className="glass-panel rounded-lg sm:rounded-xl p-2 sm:p-4 text-center"
-                      whileHover={{ y: -5 }}
+                      className={`p-5 ${i < 2 ? "border-r border-border/60" : ""}`}
                     >
-                      <div className="text-lg sm:text-2xl mb-1">{stat.emoji}</div>
-                      <p className="text-[10px] sm:text-sm font-display font-bold gradient-text leading-tight">
-                        {stat.value}
-                      </p>
-                      <p className="text-[9px] sm:text-xs text-muted-foreground font-medium mt-0.5 sm:mt-1">
-                        {stat.label}
-                      </p>
-                    </motion.div>
+                      <p className="editorial-heading text-2xl text-foreground">{stat.value}</p>
+                      <p className="eyebrow mt-2">{stat.label}</p>
+                    </div>
                   ))}
-                </motion.div>
+                </div>
               </div>
 
               <RealAnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
             </div>
 
             {isMounted && isAnalyzed && (
-              <div className="grid sm:grid-cols-2 gap-4 mt-6 max-w-6xl mx-auto">
-                <Suspense fallback={<div className="glass-panel rounded-2xl p-5" />}>
+              <div className="grid sm:grid-cols-2 gap-4 mt-8 max-w-6xl mx-auto">
+                <Suspense fallback={<div className="border border-border/60 p-5" />}>
                   <ExitPoll isVisible={true} onDismiss={() => {}} />
                 </Suspense>
                 <ShareResults isVisible={true} analysisResult={analysisResult} />
@@ -394,22 +338,56 @@ const Landing = () => {
           </section>
         </div>
 
-        {/* Mind Games + Mood Playlists */}
-        <MindToolsSection />
+        {/* Mind Tools */}
+        <div className="border-t border-border/60">
+          <MindToolsSection />
+        </div>
 
-        {/* Transparency Section */}
-        <div className="hidden sm:block">
+        {/* Transparency */}
+        <div className="hidden sm:block border-t border-border/60">
           <Suspense fallback={<div className="h-32" />}>
             <TransparencySection />
           </Suspense>
         </div>
 
         {/* Real World Use Cases */}
-        <div className="hidden sm:block">
+        <div className="hidden sm:block border-t border-border/60">
           <Suspense fallback={<div className="h-32" />}>
             <RealWorldUseCases />
           </Suspense>
         </div>
+
+        {/* ============ FOOTER ============ */}
+        <footer className="container mx-auto px-8 lg:px-12 py-14 border-t border-border/60">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+            <div>
+              <p className="editorial-heading text-2xl tracking-[0.22em] uppercase text-foreground">
+                Subtle Sense
+              </p>
+              <p className="eyebrow mt-3">Est. 2025 &middot; Made by Naiyya Thapa</p>
+            </div>
+            <div className="text-left md:text-right">
+              <p className="eyebrow mb-2">Correspondence</p>
+              <a
+                href="mailto:naiyyathapa@gmail.com"
+                className="text-sm text-foreground border-b border-border hover:border-primary transition-colors"
+              >
+                naiyyathapa@gmail.com
+              </a>
+            </div>
+          </div>
+        </footer>
+
+        <section className="container mx-auto px-8 lg:px-12 pb-14">
+          <p className="mx-auto max-w-4xl text-center text-xs text-muted-foreground/80 leading-relaxed font-light tracking-wide">
+            Disclaimer &mdash; This service employs artificial intelligence to offer
+            impressions of emotional states for informational and educational purposes
+            only. It is not a medical diagnosis nor a substitute for professional advice.
+            If you or someone you know is in crisis, please contact a licensed
+            professional or emergency services.
+          </p>
+        </section>
+
 
         {/* Footer */}
         <footer className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 text-center border-t border-border/30">
