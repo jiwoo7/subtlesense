@@ -388,49 +388,6 @@ const Landing = () => {
           </p>
         </section>
 
-
-        {/* Footer */}
-        <footer className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 text-center border-t border-border/30">
-          <p className="text-muted-foreground mb-2 text-sm sm:text-base">
-            Made with 💜 for emotional awareness • Privacy-first • Your emotions, your data
-          </p>
-          <p className="text-xs sm:text-sm">
-            Made by{" "}
-            <span
-              className="font-bold tracking-wide"
-              style={{ color: "hsl(0, 85%, 38%)" }}
-            >
-              Naiyya Thapa
-            </span>
-          </p>
-          <p className="text-[10px] sm:text-xs text-muted-foreground/60 mt-1">
-            Powered by AI ✨
-          </p>
-        </footer>
-
-        <section className="container mx-auto px-4 sm:px-6 pb-6 sm:pb-8">
-          <p className="mx-auto max-w-5xl text-center text-xs sm:text-sm text-muted-foreground leading-relaxed">
-            Disclaimer: This app uses AI to provide insights into emotional states for informational and educational purposes only. These results are not a medical diagnosis or a substitute for professional mental health advice. If you or someone you know is in crisis, please seek immediate help from a licensed professional or emergency services.
-          </p>
-        </section>
-
-        {/* Contact */}
-        <section className="container mx-auto px-4 sm:px-6 pb-10 sm:pb-14">
-          <div className="mx-auto max-w-2xl text-center glass-panel rounded-2xl p-5 sm:p-6 border border-border/40">
-            <h3 className="font-display text-base sm:text-lg font-bold text-foreground mb-1">
-              Contact & Reviews
-            </h3>
-            <p className="text-xs sm:text-sm text-muted-foreground mb-2">
-              Questions, feedback, or partnership ideas? Reach out anytime.
-            </p>
-            <a
-              href="mailto:naiyyathapa@gmail.com"
-              className="text-sm sm:text-base font-semibold gradient-text hover:opacity-80 transition-opacity"
-            >
-              naiyyathapa@gmail.com
-            </a>
-          </div>
-        </section>
       </div>
     </div>
   );
