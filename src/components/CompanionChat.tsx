@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send } from "lucide-react";
-import logo from "@/assets/subtle-sense-logo.png";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -177,24 +176,26 @@ const CompanionChat = () => {
         )}
       </AnimatePresence>
 
-      <motion.button
+      <button
         onClick={() => setOpen((o) => !o)}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="hidden sm:flex fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] group"
-        aria-label="Open companion chat"
+        className="hidden sm:flex fixed bottom-8 right-8 z-[60] group items-center justify-center"
+        aria-label="Open companion"
       >
-        <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 hidden sm:block whitespace-nowrap text-xs font-semibold px-3 py-1.5 rounded-full glass-panel opacity-0 group-hover:opacity-100 transition-opacity italic">
-          Your Subtle Companion!
+        <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 whitespace-nowrap eyebrow opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          Companion
         </span>
-        <div className="w-14 h-14 rounded-full neon-gradient flex items-center justify-center shadow-2xl animate-neon-pulse">
+        <div
+          className="w-12 h-12 border border-border bg-transparent flex items-center justify-center transition-colors duration-500 group-hover:border-primary"
+          style={{ borderRadius: "2px" }}
+        >
           {open ? (
-            <X className="w-6 h-6 text-primary-foreground" />
+            <X className="w-4 h-4 text-foreground" strokeWidth={1.25} />
           ) : (
-            <img src={logo} alt="Companion" className="w-9 h-9 rounded-full" />
+            <MessageCircle className="w-4 h-4 text-foreground" strokeWidth={1.25} />
           )}
         </div>
-      </motion.button>
+      </button>
+
     </>
   );
 };
