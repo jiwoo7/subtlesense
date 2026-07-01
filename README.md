@@ -8,13 +8,12 @@
 [![Accuracy](https://img.shields.io/badge/Accuracy-84%25-brightgreen)]()
 
 ---
-## **Technical Abstract: SubtleSense**
 
-Project Title: SubtleSense: A Multimodal Affective Computing System for Real-Time Emotional Intelligence
+## SubtleSense
+AI that detects emotions people don’t express.
 
-Founder: Naiyya Thapa
+> Most AI reads what you show. SubtleSense reads what you hide.
 
-Category: Artificial Intelligence / Human-Computer Interaction (HCI)
 
 ## **Executive Summary**
 
@@ -29,8 +28,16 @@ Technical Architecture & Innovation
 
 **Iterative Engineering:** The project utilizes an ErrorBoundary framework to ensure high fault tolerance, maintaining 99% uptime during peak traffic of 500+ global visitors.
 
-Now available as Android app on May 16, 2026!!!
+Now available as Android app on July 25, 2026!!!
 
+---
+## Traction
+
+- 700+ users
+- 200+ tested sessions
+- 22% conversion rate
+- 6m 37s avg session time
+- 84% emotion detection accuracy
 ---
 
 ## What is SubtleSense?
@@ -42,6 +49,14 @@ Built on principles from affective computing and micro-expression research, Subt
 The idea came from a personal observation: people routinely mask their real emotional states due to fear of judgment. SubtleSense was built to make those hidden states visible — to the person themselves, and to those who care about them.
 
 *200+ users tested the emotion detection demo across 700+ visits*
+
+---
+
+## What it does
+
+SubtleSense analyzes facial micro-expressions and voice patterns in real time to detect suppressed emotions like stress, anxiety, and cognitive overload.
+
+Unlike traditional emotion AI, it focuses on signals people don’t consciously express.
 
 ---
 
@@ -108,7 +123,12 @@ User Dashboard (emotion timeline + moodboard)
 ```
 
 ---
+## Why this matters
 
+People mask their emotions in high-stakes environments — interviews, classrooms, meetings.
+
+SubtleSense makes those hidden states visible, enabling better decisions, communication, and self-awareness.
+---
 ## Features
 
 - 🎥 Real-time webcam emotion analysis
@@ -119,21 +139,18 @@ User Dashboard (emotion timeline + moodboard)
 
 ---
 
-## Research Foundation
+## How it works
 
-SubtleSense is grounded in affective computing research, drawing from:
-
-- Paul Ekman's foundational work on micro-expressions and universal emotion recognition
-- FACS (Facial Action Coding System) for facial muscle movement classification
-- Emerging critiques of cross-cultural bias in emotion AI — specifically, how neutral expressions in Indian and South Asian subjects are systematically misclassified as negative affect by Western-trained models
-
-An independent research paper exploring ethnic-specific bias in micro-expression spotting is currently in progress, motivated directly by limitations discovered while building SubtleSense.
+- CNN-based facial landmark detection (68-point mesh)
+- Micro-expression classification (<500ms signals)
+- Audio sentiment + tone analysis
+- Combined multimodal inference pipeline
 
 ---
 
 ## Recognition
 
-- 🚀 Launched on [Product Hunt](https://www.producthunt.com) — ranked #252 on launch day
+- 🚀 Launched on [Product Hunt](https://www.producthunt.com) — ranked #232 on launch day
 - 👥 660+ real users across web platform
 - 🔬 Independent research in progress on cultural bias in micro-expression AI
 
@@ -146,7 +163,7 @@ SubtleSense was independently conceived, designed, and built by **Naiyya Thapa**
 This is not a school project. It is a real product, built to solve a real problem.
 
 ---
-## Review my application on product hunt
+### Review my application on product hunt
 
 https://www.producthunt.com/products/subtle-sense/reviews/new
 ---
