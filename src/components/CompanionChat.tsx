@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send } from "lucide-react";
-import logo from "@/assets/subtle-sense-logo.png";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -106,26 +105,25 @@ const CompanionChat = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed inset-x-3 bottom-20 sm:inset-x-auto sm:bottom-24 sm:right-6 z-[60] w-auto sm:w-96 sm:max-w-[26rem] h-[calc(100dvh-6rem)] max-h-[28rem] sm:h-[32rem] sm:max-h-none glass-panel rounded-3xl flex flex-col overflow-hidden shadow-2xl border border-border/60"
+            className="fixed inset-x-3 bottom-20 sm:inset-x-auto sm:bottom-24 sm:right-8 z-[60] w-auto sm:w-96 sm:max-w-[26rem] h-[calc(100dvh-6rem)] max-h-[28rem] sm:h-[32rem] sm:max-h-none bg-card border border-border flex flex-col overflow-hidden"
+            style={{ borderRadius: 2 }}
           >
-            <div className="flex items-center gap-3 px-4 py-3 border-b border-border/40 neon-gradient">
-              <img src={logo} alt="" className="w-8 h-8 rounded-full bg-background/20 p-1" />
+            <div className="flex items-center gap-4 px-5 py-4 border-b border-border">
               <div className="flex-1 min-w-0">
-                <p className="font-display font-bold text-primary-foreground text-sm leading-tight">Subtle Companion</p>
-                <p className="text-[10px] text-primary-foreground/80 italic">Your subtle companion ✨</p>
+                <p className="editorial-heading text-base text-foreground leading-tight">Companion</p>
+                <p className="eyebrow mt-1">A quiet correspondent</p>
               </div>
-              <button onClick={() => setOpen(false)} className="text-primary-foreground/90 hover:text-primary-foreground" aria-label="Close">
-                <X className="w-5 h-5" />
+              <button onClick={() => setOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors" aria-label="Close">
+                <X className="w-4 h-4" strokeWidth={1.25} />
               </button>
             </div>
 
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3">
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3">
               {messages.length === 0 && (
-                <div className="text-center py-6">
-                  <img src={logo} alt="" className="w-14 h-14 mx-auto mb-3 opacity-90" />
-                  <p className="text-sm font-display font-bold gradient-text mb-1">Hi, I'm here.</p>
-                  <p className="text-xs text-muted-foreground max-w-[14rem] mx-auto">
-                    Tell me how you're feeling, or ask anything. No pressure.
+                <div className="text-center py-8">
+                  <p className="editorial-italic text-2xl text-foreground mb-3">Hello.</p>
+                  <p className="text-xs text-muted-foreground max-w-[16rem] mx-auto font-light leading-relaxed">
+                    Share what you're feeling, or ask anything. There is no rush.
                   </p>
                 </div>
               )}
@@ -177,24 +175,26 @@ const CompanionChat = () => {
         )}
       </AnimatePresence>
 
-      <motion.button
+      <button
         onClick={() => setOpen((o) => !o)}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="hidden sm:flex fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] group"
-        aria-label="Open companion chat"
+        className="hidden sm:flex fixed bottom-8 right-8 z-[60] group items-center justify-center"
+        aria-label="Open companion"
       >
-        <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 hidden sm:block whitespace-nowrap text-xs font-semibold px-3 py-1.5 rounded-full glass-panel opacity-0 group-hover:opacity-100 transition-opacity italic">
-          Your Subtle Companion!
+        <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 whitespace-nowrap eyebrow opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          Companion
         </span>
-        <div className="w-14 h-14 rounded-full neon-gradient flex items-center justify-center shadow-2xl animate-neon-pulse">
+        <div
+          className="w-12 h-12 border border-border bg-transparent flex items-center justify-center transition-colors duration-500 group-hover:border-primary"
+          style={{ borderRadius: "2px" }}
+        >
           {open ? (
-            <X className="w-6 h-6 text-primary-foreground" />
+            <X className="w-4 h-4 text-foreground" strokeWidth={1.25} />
           ) : (
-            <img src={logo} alt="Companion" className="w-9 h-9 rounded-full" />
+            <MessageCircle className="w-4 h-4 text-foreground" strokeWidth={1.25} />
           )}
         </div>
-      </motion.button>
+      </button>
+
     </>
   );
 };

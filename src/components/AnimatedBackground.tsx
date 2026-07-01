@@ -1,92 +1,34 @@
-import { motion } from "framer-motion";
-import { useIsMobile } from "@/hooks/use-mobile";
-
+/**
+ * Quiet Luxury background surface.
+ * No neon, no floating blobs — a subtle dark gradient mask
+ * plus a fine linen/stone noise texture for material depth.
+ */
 const AnimatedBackground = () => {
-  const isMobile = useIsMobile();
-
-  // On mobile: render only 2 static blurred shapes — no animation, no decorative dots.
-  // This dramatically reduces compositing/paint cost on low-end devices.
-  if (isMobile) {
-    return (
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bubble-bg" />
-        <div
-          className="absolute w-64 h-64 rounded-full bg-neon-pink/15 blur-3xl"
-          style={{ top: "5%", left: "5%" }}
-        />
-        <div
-          className="absolute w-72 h-72 rounded-full bg-neon-purple/15 blur-3xl"
-          style={{ bottom: "10%", right: "5%" }}
-        />
-      </div>
-    );
-  }
-
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute inset-0 bubble-bg" />
-
-      <motion.div
-        className="absolute w-64 h-64 rounded-full bg-neon-pink/20 blur-3xl"
-        animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        style={{ top: "5%", left: "5%" }}
+    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-0">
+      {/* Base gradient mask — vignette that pulls the eye to center */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 90% 70% at 50% 20%, hsl(var(--foreground) / 0.05), transparent 60%), radial-gradient(ellipse 80% 60% at 50% 100%, hsl(var(--primary) / 0.06), transparent 55%)",
+        }}
       />
 
-      <motion.div
-        className="absolute w-80 h-80 rounded-full bg-neon-purple/20 blur-3xl"
-        animate={{ x: [0, -40, 0], y: [0, 40, 0], scale: [1, 1.2, 1] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        style={{ top: "40%", right: "5%" }}
+      {/* Fine linen / stone noise — SVG fractal for organic material feel */}
+      <div
+        className="absolute inset-0 opacity-[0.06] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.88 0 0 0 0 0.85 0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+          backgroundSize: "240px 240px",
+        }}
       />
 
-      <motion.div
-        className="absolute w-72 h-72 rounded-full bg-neon-red/15 blur-3xl"
-        animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        style={{ bottom: "10%", left: "20%" }}
-      />
-
-      <motion.div
-        className="absolute w-56 h-56 rounded-full bg-neon-magenta/20 blur-3xl"
-        animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        style={{ top: "20%", left: "50%" }}
-      />
-
-      <motion.div
-        className="absolute w-48 h-48 rounded-full bg-neon-violet/20 blur-3xl"
-        animate={{ x: [0, 20, 0], y: [0, -25, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        style={{ bottom: "30%", right: "15%" }}
-      />
-
-      <motion.div
-        className="absolute w-8 h-8 rounded-full bg-neon-pink/40"
-        animate={{ y: [0, -30, 0], rotate: [0, 180, 360] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        style={{ top: "15%", left: "15%" }}
-      />
-
-      <motion.div
-        className="absolute w-6 h-6 rounded-lg bg-neon-purple/40 rotate-45"
-        animate={{ y: [0, -20, 0], rotate: [45, 135, 45] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        style={{ top: "60%", left: "80%" }}
-      />
-
-      <motion.div
-        className="absolute w-5 h-5 rounded-full bg-neon-red/50"
-        animate={{ y: [0, -25, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        style={{ top: "75%", left: "10%" }}
-      />
-
-      <motion.div
-        className="absolute w-4 h-4 rounded-full bg-neon-magenta/50"
-        animate={{ y: [0, -15, 0], x: [0, 10, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        style={{ top: "30%", right: "25%" }}
+      {/* Hairline horizon divider — editorial framing */}
+      <div
+        className="absolute left-0 right-0 top-1/2 h-px"
+        style={{ background: "linear-gradient(90deg, transparent, hsl(var(--border)) 25%, hsl(var(--border)) 75%, transparent)" }}
       />
     </div>
   );
