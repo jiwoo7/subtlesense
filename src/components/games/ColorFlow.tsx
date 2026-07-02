@@ -10,7 +10,8 @@ const COLORS = [
 ];
 
 const ColorFlow: React.FC = () => {
-const [target, setTarget] = useState(COLORS);
+type Color = typeof COLORS[number];
+const [target, setTarget] = useState<Color>(COLORS[0]);
 const [score, setScore] = useState(0);
 const [time, setTime] = useState(30);
 const [running, setRunning] = useState(false);
@@ -67,7 +68,7 @@ startVelocity: 6,
 ticks: 140,
 gravity: 0.18,
 origin: { x: Math.random() * 0.6 + 0.2, y: 0 },
-colors: [hsl(${colorHsl})],
+colors: [`hsl(${colorHsl})`],
 });
 }, 160);
 };
