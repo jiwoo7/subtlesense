@@ -1,16 +1,6 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import {
-  Send,
-  Gamepad2,
-  Music,
-  BookOpen,
-  Brain,
-  Sparkles,
-  Zap,
-  Droplet,
-  Leaf,
-} from "lucide-react";
+import { Send, Gamepad2, Music, BookOpen, Brain } from "lucide-react";
 import logoUrl from "@/assets/subtle-sense-logo.png";
 import StreakBadge from "@/components/StreakBadge";
 import { useStreak } from "@/hooks/useStreak";
@@ -20,18 +10,20 @@ interface Props {
   currentUser: User | null;
 }
 
-const startCards = [
+const tools = [
   { icon: BookOpen, label: "Journal", sub: "Track your mood", to: "/dashboard?tab=journal" },
   { icon: Gamepad2, label: "Mind Games", sub: "2 min reset", to: "/games" },
-  { icon: Music, label: "Spotify", sub: "Mood playlists", to: "/playlists" },
+  { icon: Music, label: "Playlists", sub: "Curated moods", to: "/playlists" },
 ];
 
 const moodCards = [
-  { icon: Sparkles, label: "Overthinking", pct: "78%", color: "text-neon-purple", bg: "bg-neon-purple/15" },
-  { icon: Zap, label: "Stress", pct: "65%", color: "text-warning", bg: "bg-warning/15" },
-  { icon: Droplet, label: "Sadness", pct: "42%", color: "text-neon-magenta", bg: "bg-neon-magenta/15" },
-  { icon: Leaf, label: "Hope", pct: "71%", color: "text-success", bg: "bg-success/15" },
+  { label: "Overthinking", pct: "78%" },
+  { label: "Stress", pct: "65%" },
+  { label: "Sadness", pct: "42%" },
+  { label: "Hope", pct: "71%" },
 ];
+
+const ease = [0.25, 1, 0.5, 1] as const;
 
 const MobileLanding = ({ currentUser }: Props) => {
   const navigate = useNavigate();
@@ -41,57 +33,67 @@ const MobileLanding = ({ currentUser }: Props) => {
     window.dispatchEvent(new CustomEvent("subtle:open-companion", { detail: { text } }));
   };
 
-  const handleCard = (to: string) => {
-    navigate(to);
-  };
-
   return (
-    <div className="sm:hidden relative z-10 w-full overflow-x-hidden px-4 pt-4 pb-24 min-h-[100dvh]">
+    <div className="sm:hidden relative z-10 w-full overflow-x-hidden px-5 pt-5 pb-24 min-h-[100dvh]">
       {/* Top bar */}
-      <div className="flex items-center justify-between mb-5">
-        <div className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-full overflow-hidden shadow-[0_0_16px_hsl(var(--neon-pink)/0.45)]">
-            <img src={logoUrl} alt="Subtle Sense" className="w-full h-full object-cover" />
-          </div>
-          <span className="font-display text-base font-bold text-foreground">Subtle Sense</span>
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center gap-2.5">
+          <img
+            src={logoUrl}
+            alt=""
+            className="w-8 h-8 object-contain"
+            style={{ filter: "drop-shadow(0 0 10px hsl(var(--primary) / 0.35))" }}
+          />
+          <span
+            className="editorial-heading text-[11px] tracking-[0.32em] uppercase text-foreground"
+          >
+            Subtle Sense
+          </span>
         </div>
         {currentUser ? (
           <StreakBadge current={current} longest={longest} compact />
         ) : (
           <button
             onClick={() => navigate("/auth")}
-            className="px-2.5 py-1.5 rounded-full border border-primary/40 text-primary text-[11px] font-semibold"
+            className="eyebrow border border-border px-3 py-1.5 hover:border-primary transition-colors duration-500"
           >
             Sign in
           </button>
         )}
       </div>
 
-      {/* Hero */}
-      <div className="flex items-start justify-between gap-2 mb-4">
-        <div className="flex-1">
-          <h1
-            className="font-display text-3xl font-extrabold leading-tight mb-1.5"
-            style={{ color: "hsl(var(--neon-pink))" }}
-          >
-            Hi, I'm here.
-          </h1>
-          <p className="text-xs text-muted-foreground leading-snug">
-            Tell me how you're feeling,<br />or ask anything. No pressure.
-          </p>
-        </div>
-        <motion.div
-          className="w-20 h-20 flex-shrink-0 rounded-full flex items-center justify-center overflow-hidden"
-          style={{
-            background: "radial-gradient(circle, hsl(var(--neon-pink)/0.45), transparent 70%)",
-            boxShadow: "0 0 30px hsl(var(--neon-pink)/0.5)",
-          }}
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 3, repeat: Infinity }}
-        >
-          <img src={logoUrl} alt="" className="w-16 h-16 rounded-full object-cover" />
-        </motion.div>
-      </div>
+      {/* Hero — logo mark */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.4, ease }}
+        className="mx-auto mb-8 relative w-28 h-28 gold-ring flex items-center justify-center"
+      >
+        <img
+          src={logoUrl}
+          alt="Subtle Sense"
+          className="relative z-10 w-full h-full object-contain"
+          style={{ filter: "drop-shadow(0 6px 24px hsl(var(--primary) / 0.4))" }}
+        />
+      </motion.div>
+
+      <motion.h1
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.1, delay: 0.2, ease }}
+        className="editorial-heading text-center text-[2.4rem] leading-[1.02] mb-3 text-foreground"
+      >
+        Discover what<br />
+        you&rsquo;re <span className="editorial-italic text-gold animate-shimmer">really feeling.</span>
+      </motion.h1>
+
+      <p className="text-center text-[13px] text-muted-foreground font-light leading-relaxed max-w-[20rem] mx-auto mb-5">
+        A quiet reading of the emotions you seldom name aloud.
+      </p>
+
+      <p className="eyebrow text-center text-gold animate-shimmer mb-8">
+        Understand · Empathize · Elevate
+      </p>
 
       {/* Input */}
       <form
@@ -101,85 +103,103 @@ const MobileLanding = ({ currentUser }: Props) => {
           openCompanion(String(fd.get("q") || ""));
           (e.currentTarget as HTMLFormElement).reset();
         }}
-        className="relative mb-5"
+        className="relative mb-8"
       >
         <input
           name="q"
-          placeholder="Share what's on your mind..."
-          className="w-full bg-card/60 border border-border/50 rounded-full pl-4 pr-12 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-primary/50"
+          placeholder="Share what's on your mind…"
+          className="w-full bg-card/60 border border-border pl-4 pr-12 py-3 text-xs focus:outline-none focus:border-primary transition-colors duration-500"
+          style={{ borderRadius: 2 }}
         />
         <button
           type="submit"
           aria-label="Send"
-          className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center bg-primary"
+          className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center bg-primary text-primary-foreground"
+          style={{ borderRadius: 2 }}
         >
-          <Send className="w-3.5 h-3.5 text-primary-foreground" />
+          <Send className="w-3.5 h-3.5" strokeWidth={1.5} />
         </button>
       </form>
 
+      <div className="gold-hairline mb-6" />
+
       {/* Tools */}
-      <h2 id="mobile-tools" className="font-display text-sm font-bold mb-2.5">Tools</h2>
-      <div className="grid grid-cols-3 gap-2.5 mb-4">
-        {startCards.map((c) => (
+      <p className="eyebrow mb-4">Chapter I · Tools</p>
+      <div className="grid grid-cols-3 gap-2.5 mb-6">
+        {tools.map((c, i) => (
           <motion.button
             key={c.label}
-            whileTap={{ scale: 0.94 }}
-            onClick={() => handleCard(c.to)}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.4 + i * 0.08, ease }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => navigate(c.to)}
             aria-label={c.label}
-            className="glass-panel rounded-2xl p-2.5 flex min-w-0 flex-col items-center text-center aspect-square justify-center gap-1"
+            className="border border-border bg-card/40 p-3 flex flex-col items-start text-left aspect-square justify-between hover:border-primary transition-colors duration-500"
+            style={{ borderRadius: 2 }}
           >
-            <c.icon className="w-5 h-5 text-primary mb-0.5" />
-            <p className="text-[11px] font-semibold leading-tight break-words">{c.label}</p>
-            <p className="text-[11px] text-muted-foreground leading-tight">{c.sub}</p>
+            <c.icon className="w-4 h-4 text-primary" strokeWidth={1.25} />
+            <div>
+              <p className="editorial-heading text-[13px] leading-tight text-foreground">{c.label}</p>
+              <p className="eyebrow mt-1 text-[9px]">{c.sub}</p>
+            </div>
           </motion.button>
         ))}
       </div>
 
       <motion.button
-        whileTap={{ scale: 0.97 }}
+        whileTap={{ scale: 0.98 }}
         onClick={() => navigate("/dashboard")}
         aria-label="Open AI Analysis"
-        className="w-full mb-5 overflow-hidden rounded-2xl border border-primary/35 bg-primary/10 p-3 text-left shadow-[0_0_22px_hsl(var(--primary)/0.16)]"
+        className="w-full mb-8 border border-primary/40 bg-primary/[0.04] p-4 text-left hover:bg-primary/[0.08] transition-colors duration-500"
+        style={{ borderRadius: 2 }}
       >
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-primary/20 flex items-center justify-center flex-shrink-0">
-            <Brain className="w-5 h-5 text-primary" />
+          <div className="w-10 h-10 border border-primary/40 flex items-center justify-center flex-shrink-0" style={{ borderRadius: 2 }}>
+            <Brain className="w-4 h-4 text-primary" strokeWidth={1.25} />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="font-display text-sm font-bold text-foreground leading-tight">AI Analysis</p>
-            <p className="text-[11px] text-muted-foreground leading-tight">Analyze now, login only to save</p>
+            <p className="editorial-heading text-base text-foreground leading-tight">Begin an Analysis</p>
+            <p className="eyebrow mt-1 text-[9px]">Analyze now — sign in only to save</p>
           </div>
-          <span className="text-[11px] font-semibold text-primary">Open ›</span>
+          <span className="eyebrow text-gold">Open ›</span>
         </div>
       </motion.button>
 
+      <div className="gold-hairline mb-6" />
+
       {/* Emotion landscape */}
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <h2 className="font-display text-base font-bold">Your emotion landscape</h2>
-          <span className="px-1.5 py-0.5 rounded-full bg-muted text-[9px] font-semibold text-muted-foreground uppercase tracking-wide">
-            Example
-          </span>
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <p className="eyebrow">Chapter II · Landscape</p>
+          <p className="editorial-heading text-base mt-1 text-foreground">
+            Your emotion <span className="editorial-italic">record.</span>
+          </p>
         </div>
         <button
           onClick={() => navigate("/dashboard")}
-          className="text-xs text-muted-foreground flex items-center gap-0.5"
+          className="eyebrow text-gold"
         >
           View all ›
         </button>
       </div>
-      <div className="grid grid-cols-4 gap-2 mb-5">
-        {moodCards.map((m) => (
-          <div
+      <div className="grid grid-cols-2 gap-2.5">
+        {moodCards.map((m, i) => (
+          <motion.div
             key={m.label}
-            className="glass-panel rounded-2xl p-2 flex min-w-0 flex-col items-center text-center aspect-[3/4] justify-center gap-1"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.6 + i * 0.08, ease }}
+            className="border border-border bg-card/40 p-4"
+            style={{ borderRadius: 2 }}
           >
-            <div className={`w-8 h-8 rounded-full ${m.bg} flex items-center justify-center mb-0.5`}>
-              <m.icon className={`w-4 h-4 ${m.color}`} />
+            <p className="eyebrow text-[9px]">№ {String(i + 1).padStart(2, "0")}</p>
+            <p className="editorial-heading text-lg text-foreground mt-2">{m.label}</p>
+            <div className="flex items-baseline justify-between mt-3">
+              <p className="editorial-italic text-gold text-2xl">{m.pct}</p>
+              <p className="eyebrow text-[9px]">Example</p>
             </div>
-            <p className="text-[11px] font-semibold leading-tight break-words">{m.label}</p>
-            <p className="text-[11px] text-muted-foreground">{m.pct}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
