@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 
 const COLORS = [
-{ name: "cherry", hsl: "330 90% 60%" },
-{ name: "emerald", hsl: "140 50% 40%" },
-{ name: "silver", hsl: "175 70% 50%" },
-{ name: "amber", hsl: "30 90% 55%" },
+  { name: "cherry", hsl: "350 85% 55%" },   // richer red
+  { name: "emerald", hsl: "160 70% 45%" },  // more alive green
+  { name: "silver", hsl: "210 15% 75%" },   // actual metallic feel
+  { name: "amber", hsl: "40 95% 60%" },     // punchy gold
 ];
 
 const ColorFlow: React.FC = () => {
@@ -100,7 +100,10 @@ initial={{ opacity: 0, y: 10 }}
 animate={{ opacity: 1, y: 0 }}
 exit={{ opacity: 0, y: -10 }}
 className="font-display text-2xl sm:text-4xl font-bold mt-1 sm:mt-2 capitalize"
-style={{ color: hsl(${target.hsl}) }}
+style={{
+  color: `hsl(${target.hsl})`,
+  textShadow: "0 2px 10px rgba(0,0,0,0.2)"
+}}
 >
 {target.name}
 </motion.p>
@@ -114,7 +117,9 @@ key={c.name}
 whileTap={{ scale: 0.92 }}
 onClick={() => handleTap(c)}
 className="aspect-square rounded-2xl sm:rounded-3xl shadow-lg"
-style={{ background: hsl(${c.hsl}) }}
+style={{
+  background: `radial-gradient(circle at 30% 30%, hsl(${c.hsl}), hsl(${c.hsl} / 0.6))`
+}}
 aria-label={c.name}
 // subtle hover/focus animation
 whileHover={{ scale: 1.03 }}
