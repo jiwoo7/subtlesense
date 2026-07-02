@@ -69,15 +69,16 @@ export function applyThemePreset(preset: ThemePreset) {
 
 export function useThemePreset() {
   const [preset, setPreset] = useState<ThemePreset>(() => {
-    if (typeof window === "undefined") return "heritage";
+    if (typeof window === "undefined") return "onyx";
     try {
       const stored = localStorage.getItem(KEY) as ThemePreset | null;
       if (stored && VALID_IDS.has(stored)) return stored;
     } catch {
       /* ignore */
     }
-    return "heritage";
+    return "onyx";
   });
+
 
   useEffect(() => {
     applyThemePreset(preset);
