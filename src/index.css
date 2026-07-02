@@ -460,4 +460,69 @@
   .animate-wiggle { animation: none; }
   .animate-pulse-soft { animation: pulse-soft 4s var(--editorial-ease) infinite; }
   .animate-neon-pulse { animation: none; }
+
+  /* ============= Gold accents ============= */
+  .text-gold {
+    background: var(--gradient-gold, linear-gradient(135deg,#7A5A1E,#C9A24C,#F1D98A,#C9A24C,#7A5A1E));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% 200%;
+  }
+  .gold-hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.7), transparent);
+  }
+  .gold-ring {
+    position: relative;
+  }
+  .gold-ring::before {
+    content: "";
+    position: absolute;
+    inset: -14%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, hsl(var(--primary) / 0), hsl(var(--primary) / 0.55), hsl(var(--primary) / 0), hsl(var(--primary) / 0.55), hsl(var(--primary) / 0));
+    -webkit-mask: radial-gradient(circle, transparent 62%, #000 63%, #000 65%, transparent 66%);
+    mask: radial-gradient(circle, transparent 62%, #000 63%, #000 65%, transparent 66%);
+    animation: gold-spin 22s linear infinite;
+    pointer-events: none;
+    opacity: 0.85;
+  }
+  .gold-ring::after {
+    content: "";
+    position: absolute;
+    inset: -35%;
+    border-radius: 50%;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.14), transparent 55%);
+    pointer-events: none;
+    filter: blur(8px);
+  }
+  @keyframes gold-spin { to { transform: rotate(360deg); } }
+
+  @keyframes gold-shimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  .animate-shimmer {
+    animation: gold-shimmer 6s linear infinite;
+  }
+
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(24px); filter: blur(6px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+  .animate-rise-in { animation: rise-in 1.2s var(--editorial-ease) both; }
+
+  @keyframes reveal-in {
+    from { opacity: 0; letter-spacing: 0.3em; }
+    to { opacity: 1; letter-spacing: 0.22em; }
+  }
+  .animate-reveal { animation: reveal-in 1.4s var(--editorial-ease) both; }
+
+  @keyframes marquee-x {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-marquee { animation: marquee-x 42s linear infinite; }
 }
+
