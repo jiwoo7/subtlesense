@@ -122,8 +122,14 @@ const Landing = () => {
         {/* ============ HEADER ============ */}
         <header className="container mx-auto px-8 lg:px-12 pt-8 pb-6 border-b border-border/60">
           <nav className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="editorial-heading text-2xl tracking-[0.22em] uppercase text-foreground">
+            <div className="flex items-center gap-4">
+              <img
+                src={logoUrl}
+                alt="Subtle Sense"
+                className="w-10 h-10 object-contain"
+                style={{ filter: "drop-shadow(0 0 12px hsl(var(--primary) / 0.35))" }}
+              />
+              <span className="editorial-heading text-xl tracking-[0.32em] uppercase text-foreground">
                 Subtle&nbsp;Sense
               </span>
             </div>
@@ -172,48 +178,89 @@ const Landing = () => {
         </header>
 
         {/* ============ HERO ============ */}
-        <section className="container mx-auto px-8 lg:px-12 pt-24 pb-32">
-          <div className="max-w-5xl mx-auto animate-editorial-in">
-            <p className="eyebrow text-center mb-10">
-              Est. 2025 · An Editorial Study of Emotion
+        <section className="container mx-auto px-8 lg:px-12 pt-20 pb-32">
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Logo — the maison mark */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 1.4, ease: [0.25, 1, 0.5, 1] }}
+              className="mx-auto mb-10 relative w-40 h-40 md:w-48 md:h-48 gold-ring flex items-center justify-center"
+            >
+              <img
+                src={logoUrl}
+                alt="Subtle Sense"
+                className="relative z-10 w-full h-full object-contain"
+                style={{ filter: "drop-shadow(0 8px 40px hsl(var(--primary) / 0.35))" }}
+              />
+            </motion.div>
+
+            <p className="eyebrow mb-8 animate-reveal">
+              <span className="text-gold animate-shimmer">Est. 2025</span>
+              <span className="mx-3 text-border">·</span>
+              An Editorial Study of Emotion
             </p>
 
-            <h1 className="editorial-heading text-center text-[3.75rem] md:text-[5.5rem] lg:text-[6.75rem] leading-[0.98] mb-10">
-              Discover What You&rsquo;re
+            <h1 className="editorial-heading text-[3.5rem] md:text-[5.25rem] lg:text-[6.5rem] leading-[0.98] mb-10 animate-rise-in">
+              Discover what you&rsquo;re
               <br />
-              <span className="editorial-italic block mt-2 text-[1.02em]">
+              <span className="editorial-italic text-gold animate-shimmer inline-block mt-2 text-[1.02em]">
                 really feeling.
               </span>
             </h1>
 
-            <p className="text-center max-w-2xl mx-auto text-base md:text-lg text-muted-foreground leading-relaxed mb-14 font-light">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.1, delay: 0.5, ease: [0.25, 1, 0.5, 1] }}
+              className="max-w-2xl mx-auto text-base md:text-lg text-muted-foreground leading-relaxed mb-4 font-light"
+            >
               A composed, private study of what lies beneath the surface. Subtle Sense
               observes micro-expression, cadence and tone &mdash; and returns a quiet,
               considered reading of the emotions you seldom name aloud.
+            </motion.p>
+
+            <p className="eyebrow text-gold animate-shimmer mb-12">
+              Understand · Empathize · Elevate
             </p>
 
-            <div className="flex items-center justify-center gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.1, delay: 0.75, ease: [0.25, 1, 0.5, 1] }}
+              className="flex items-center justify-center gap-4"
+            >
               <button onClick={scrollToTry} className="btn-editorial">
                 Start Analysis
               </button>
               <a href="#features" className="btn-editorial-ghost">
                 The Method
               </a>
-            </div>
+            </motion.div>
+
+            {/* Gold hairline */}
+            <div className="mt-24 gold-hairline" />
 
             {/* Editorial index strip */}
-            <div className="mt-24 pt-10 border-t border-border/60 grid grid-cols-2 md:grid-cols-4 gap-8">
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-center md:text-left">
-                  <p className="editorial-heading text-4xl md:text-5xl text-foreground">
+            <div className="pt-10 grid grid-cols-2 md:grid-cols-4 gap-8">
+              {stats.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.9 + i * 0.12, ease: [0.25, 1, 0.5, 1] }}
+                  className="text-center md:text-left"
+                >
+                  <p className="editorial-heading text-4xl md:text-5xl text-gold">
                     {stat.value}
                   </p>
                   <p className="eyebrow mt-3">{stat.label}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
+
 
         {/* ============ THE METHOD ============ */}
         <section id="features" className="container mx-auto px-8 lg:px-12 py-28 border-t border-border/60">
