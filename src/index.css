@@ -11,7 +11,90 @@
 
 @layer base {
   :root,
+  [data-theme="onyx"] {
+    /* Onyx & Gold — Signature (default). Matches the maison mark. */
+    --background: 0 0% 4%;              /* Deep Onyx #0A0A0A */
+    --foreground: 40 35% 92%;           /* Warm Bone */
+
+    --card: 0 0% 6%;
+    --card-foreground: 40 35% 92%;
+
+    --popover: 0 0% 5%;
+    --popover-foreground: 40 35% 92%;
+
+    --primary: 40 55% 55%;              /* Antique Gold #C9A24C */
+    --primary-foreground: 0 0% 4%;
+
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 40 35% 92%;
+
+    --muted: 0 0% 9%;
+    --muted-foreground: 40 12% 62%;
+
+    --accent: 40 65% 62%;               /* Brass highlight */
+    --accent-foreground: 0 0% 4%;
+
+    --destructive: 6 55% 52%;
+    --destructive-foreground: 40 35% 92%;
+
+    --success: 150 15% 55%;
+    --success-foreground: 0 0% 4%;
+
+    --warning: 40 55% 55%;
+    --warning-foreground: 0 0% 4%;
+
+    --border: 40 20% 18%;
+    --input: 0 0% 12%;
+    --ring: 40 55% 55%;
+
+    --neon-pink: 40 55% 55%;
+    --neon-purple: 40 30% 78%;
+    --neon-red: 6 55% 52%;
+    --neon-magenta: 40 45% 58%;
+    --neon-violet: 40 20% 30%;
+
+    --confusion: 40 20% 40%;
+    --frustration: 6 55% 52%;
+
+    --radius: 2px;
+
+    --font-display: 'Cormorant Garamond', ui-serif, Georgia, serif;
+    --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Cormorant Garamond', ui-serif, Georgia, serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --editorial-ease: cubic-bezier(0.25, 1, 0.5, 1);
+    --gradient-gold: linear-gradient(135deg, #7A5A1E 0%, #C9A24C 35%, #F1D98A 55%, #C9A24C 75%, #7A5A1E 100%);
+
+    --shadow-2xs: none;
+    --shadow-xs: none;
+    --shadow-sm: 0 1px 0 0 hsl(var(--border));
+    --shadow: 0 1px 0 0 hsl(var(--border));
+    --shadow-md: 0 1px 0 0 hsl(var(--border));
+    --shadow-lg: 0 1px 0 0 hsl(var(--border));
+    --shadow-xl: 0 1px 0 0 hsl(var(--border));
+    --shadow-2xl: 0 1px 0 0 hsl(var(--border));
+
+    --sidebar: 0 0% 6%;
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 40 35% 92%;
+    --sidebar-primary: 40 55% 55%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 40 35% 92%;
+    --sidebar-border: 40 20% 18%;
+    --sidebar-ring: 40 55% 55%;
+
+    --chart-1: 40 55% 55%;
+    --chart-2: 40 35% 75%;
+    --chart-3: 40 20% 40%;
+    --chart-4: 40 45% 58%;
+    --chart-5: 40 12% 62%;
+  }
+
   [data-theme="heritage"] {
+
     /* Heritage — Navy, Cream & Brass (default) */
     --background: 214 45% 11%;         /* Deep Navy #0A192F */
     --foreground: 40 33% 95%;          /* Rich Cream #F9F6F0 */
