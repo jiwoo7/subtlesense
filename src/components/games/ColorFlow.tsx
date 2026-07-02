@@ -40,7 +40,7 @@ startVelocity: 20,
 ticks: 120,
 gravity: 0.25,
 origin: { x: Math.random() * 0.6 + 0.2, y: 0 }, // spawn somewhere across top
-colors: [hsl(${colorHsl})],
+colors: [`hsl(${colorHsl})`],
 });
 // small trailing sparkles (very subtle)
 confetti({
