@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export type ThemePreset = "heritage" | "minimalist" | "opulence" | "estate" | "carrara";
+export type ThemePreset = "onyx" | "heritage" | "minimalist" | "opulence" | "estate" | "carrara";
 
 const KEY = "subtlesense-theme-preset";
 
@@ -12,12 +12,20 @@ export const THEME_PRESETS: {
   swatch: string;
 }[] = [
   {
+    id: "onyx",
+    label: "Onyx & Gold",
+    emoji: "✦",
+    desc: "Signature — Onyx & Antique Gold",
+    swatch: "linear-gradient(135deg,#0A0A0A 0%,#0A0A0A 45%,#C9A24C 45%,#F1D98A 72%,#7A5A1E 100%)",
+  },
+  {
     id: "heritage",
     label: "Heritage",
-    emoji: "⚜️",
+    emoji: "⚜",
     desc: "Navy, Cream & Brass",
     swatch: "linear-gradient(135deg,#0A192F 0%,#0A192F 45%,#C5A880 45%,#C5A880 72%,#F9F6F0 72%)",
   },
+
   {
     id: "minimalist",
     label: "Minimalist",
