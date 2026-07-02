@@ -409,14 +409,18 @@ const Landing = () => {
         {/* ============ FOOTER ============ */}
         <footer className="container mx-auto px-8 lg:px-12 py-14 border-t border-border/60">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-            <div>
-              <p className="editorial-heading text-2xl tracking-[0.22em] uppercase text-foreground">
-                Subtle Sense
-              </p>
-              <p className="eyebrow mt-3">Est. 2025 &middot; Made by Naiyya Thapa</p>
+            <div className="flex items-start gap-4">
+              <img src={logoUrl} alt="" className="w-12 h-12 object-contain opacity-90" />
+              <div>
+                <p className="editorial-heading text-2xl tracking-[0.28em] uppercase text-foreground">
+                  Subtle Sense
+                </p>
+                <p className="eyebrow mt-3">Est. 2025 &middot; Made by Naiyya Thapa</p>
+              </div>
             </div>
             <div className="text-left md:text-right">
               <p className="eyebrow mb-2">Correspondence</p>
+
               <a
                 href="mailto:naiyyathapa@gmail.com"
                 className="text-sm text-foreground border-b border-border hover:border-primary transition-colors"
