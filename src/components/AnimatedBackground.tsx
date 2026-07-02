@@ -6,14 +6,15 @@
 const AnimatedBackground = () => {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none -z-0">
-      {/* Base gradient mask — vignette that pulls the eye to center */}
+      {/* Base gradient mask — soft gold vignette on onyx */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 90% 70% at 50% 20%, hsl(var(--foreground) / 0.05), transparent 60%), radial-gradient(ellipse 80% 60% at 50% 100%, hsl(var(--primary) / 0.06), transparent 55%)",
+            "radial-gradient(ellipse 90% 60% at 50% 10%, hsl(var(--primary) / 0.10), transparent 55%), radial-gradient(ellipse 80% 50% at 50% 105%, hsl(var(--primary) / 0.06), transparent 55%)",
         }}
       />
+
 
       {/* Fine linen / stone noise — SVG fractal for organic material feel */}
       <div
