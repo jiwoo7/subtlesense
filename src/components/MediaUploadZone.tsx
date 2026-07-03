@@ -357,21 +357,27 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
     >
       <div className="relative">
         {/* Header */}
-        <div className="flex items-center justify-between mb-4 sm:mb-6">
-          <div>
-            <h3 className="text-lg sm:text-xl font-display font-bold text-foreground">
-              Capture Your Moment 🎬
+        <div className="flex items-start justify-between mb-4 sm:mb-6 gap-3">
+          <div className="min-w-0">
+            <p className="eyebrow mb-2">Chapter II · i — The Capture</p>
+            <h3 className="editorial-heading text-2xl sm:text-3xl leading-tight text-foreground">
+              Capture your <span className="editorial-italic text-gold">moment.</span>
             </h3>
-            <p className="text-muted-foreground text-xs sm:text-sm">
-              Choose how you want to analyze your emotions
+            <p className="text-xs sm:text-sm text-muted-foreground font-light mt-2 leading-relaxed">
+              Camera, voice, or a short clip. Choose the medium that feels natural.
+            </p>
+            <p className="eyebrow mt-3 text-muted-foreground flex items-center gap-2">
+              <span className="inline-block w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
+              Processed in-session · Nothing stored without consent
             </p>
           </div>
           {selectedType && (
-            <Button variant="ghost" size="icon" onClick={resetSelection} className="h-8 w-8 sm:h-10 sm:w-10">
+            <Button variant="ghost" size="icon" onClick={resetSelection} className="h-8 w-8 sm:h-10 sm:w-10 flex-shrink-0">
               <X className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
           )}
         </div>
+
 
         {/* Permission Error */}
         {permissionError && (
