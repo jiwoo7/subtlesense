@@ -359,8 +359,43 @@ const Landing = () => {
                 </div>
               </div>
 
-              <RealAnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
-            </div>
+              {isAnalyzed ? (
+                <RealAnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
+              ) : (
+                <aside className="hidden lg:flex flex-col justify-between border border-border/50 bg-transparent backdrop-blur-[2px] p-8 animate-editorial-in">
+                  <div>
+                    <p className="eyebrow mb-6">Chapter II · ii — The Reading</p>
+                    <h3 className="editorial-heading text-3xl leading-tight text-foreground">
+                      What the session <span className="editorial-italic text-gold">attends to.</span>
+                    </h3>
+                    <p className="text-sm text-muted-foreground font-light mt-4 leading-relaxed">
+                      Three quiet layers. Each returned as a composed reading — never a verdict.
+                    </p>
+                  </div>
+
+                  <div className="mt-10 space-y-5">
+                    {[
+                      { n: "I", t: "Surface", d: "The emotion you present — cadence, tone, phrasing." },
+                      { n: "II", t: "Hidden", d: "The undercurrent — micro-expression, hesitation, pace." },
+                      { n: "III", t: "Suppressed", d: "The unspoken — what the composition seldom names." },
+                    ].map((r) => (
+                      <div key={r.t} className="flex gap-5 pt-5 border-t border-border/40">
+                        <span className="eyebrow text-gold w-8 flex-shrink-0">{r.n}</span>
+                        <div className="flex-1">
+                          <p className="editorial-heading text-lg text-foreground leading-tight">{r.t}</p>
+                          <p className="text-xs text-muted-foreground font-light mt-1.5 leading-relaxed">{r.d}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="gold-hairline mt-10 mb-5" />
+                  <p className="eyebrow text-muted-foreground">
+                    Private by design · Nothing stored without consent
+                  </p>
+                </aside>
+              )}
+
 
             {isMounted && isAnalyzed && (
               <div className="grid sm:grid-cols-2 gap-4 mt-8 max-w-6xl mx-auto">
