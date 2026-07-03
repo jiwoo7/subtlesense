@@ -180,20 +180,6 @@ const Landing = () => {
         {/* ============ HERO ============ */}
         <section className="container mx-auto px-8 lg:px-12 pt-20 pb-32">
           <div className="max-w-5xl mx-auto text-center">
-            {/* Logo — the maison mark */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92, y: 8 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 1.4, ease: [0.25, 1, 0.5, 1] }}
-              className="mx-auto mb-10 relative w-40 h-40 md:w-48 md:h-48 gold-ring flex items-center justify-center"
-            >
-              <img
-                src={logoUrl}
-                alt="Subtle Sense"
-                className="relative z-10 w-full h-full object-contain"
-                style={{ filter: "drop-shadow(0 8px 40px hsl(var(--primary) / 0.35))" }}
-              />
-            </motion.div>
 
             <p className="eyebrow mb-8 animate-reveal">
               <span className="text-gold animate-shimmer">Est. 2025</span>
