@@ -395,6 +395,9 @@ const Landing = () => {
                   </p>
                 </aside>
               )}
+            </div>
+
+
 
 
             {isMounted && isAnalyzed && (
