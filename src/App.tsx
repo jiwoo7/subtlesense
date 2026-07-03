@@ -55,6 +55,7 @@ const App = () => {
   
   <Route path="/games" element={<PhoneFrame><Games /></PhoneFrame>} />
   <Route path="/playlists" element={<PhoneFrame><Playlists /></PhoneFrame>} />
+  <Route path="/methodology" element={<PhoneFrame><Methodology /></PhoneFrame>} />
   <Route path="/auth" element={<PhoneFrame><Auth /></PhoneFrame>} />
   <Route path="/dashboard" element={<PhoneFrame><Dashboard /></PhoneFrame>} />
   <Route path="/settings" element={<PhoneFrame><Settings /></PhoneFrame>} />
