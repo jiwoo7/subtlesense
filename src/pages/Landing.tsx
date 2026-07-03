@@ -180,20 +180,6 @@ const Landing = () => {
         {/* ============ HERO ============ */}
         <section className="container mx-auto px-8 lg:px-12 pt-20 pb-32">
           <div className="max-w-5xl mx-auto text-center">
-            {/* Logo — the maison mark */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92, y: 8 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 1.4, ease: [0.25, 1, 0.5, 1] }}
-              className="mx-auto mb-10 relative w-40 h-40 md:w-48 md:h-48 gold-ring flex items-center justify-center"
-            >
-              <img
-                src={logoUrl}
-                alt="Subtle Sense"
-                className="relative z-10 w-full h-full object-contain"
-                style={{ filter: "drop-shadow(0 8px 40px hsl(var(--primary) / 0.35))" }}
-              />
-            </motion.div>
 
             <p className="eyebrow mb-8 animate-reveal">
               <span className="text-gold animate-shimmer">Est. 2025</span>
@@ -373,8 +359,46 @@ const Landing = () => {
                 </div>
               </div>
 
-              <RealAnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
+              {isAnalyzed ? (
+                <RealAnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
+              ) : (
+                <aside className="hidden lg:flex flex-col justify-between border border-border/50 bg-transparent backdrop-blur-[2px] p-8 animate-editorial-in">
+                  <div>
+                    <p className="eyebrow mb-6">Chapter II · ii — The Reading</p>
+                    <h3 className="editorial-heading text-3xl leading-tight text-foreground">
+                      What the session <span className="editorial-italic text-gold">attends to.</span>
+                    </h3>
+                    <p className="text-sm text-muted-foreground font-light mt-4 leading-relaxed">
+                      Three quiet layers. Each returned as a composed reading — never a verdict.
+                    </p>
+                  </div>
+
+                  <div className="mt-10 space-y-5">
+                    {[
+                      { n: "I", t: "Surface", d: "The emotion you present — cadence, tone, phrasing." },
+                      { n: "II", t: "Hidden", d: "The undercurrent — micro-expression, hesitation, pace." },
+                      { n: "III", t: "Suppressed", d: "The unspoken — what the composition seldom names." },
+                    ].map((r) => (
+                      <div key={r.t} className="flex gap-5 pt-5 border-t border-border/40">
+                        <span className="eyebrow text-gold w-8 flex-shrink-0">{r.n}</span>
+                        <div className="flex-1">
+                          <p className="editorial-heading text-lg text-foreground leading-tight">{r.t}</p>
+                          <p className="text-xs text-muted-foreground font-light mt-1.5 leading-relaxed">{r.d}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="gold-hairline mt-10 mb-5" />
+                  <p className="eyebrow text-muted-foreground">
+                    Private by design · Nothing stored without consent
+                  </p>
+                </aside>
+              )}
             </div>
+
+
+
 
             {isMounted && isAnalyzed && (
               <div className="grid sm:grid-cols-2 gap-4 mt-8 max-w-6xl mx-auto">
