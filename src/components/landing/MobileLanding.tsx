@@ -121,6 +121,19 @@ const MobileLanding = ({ currentUser }: Props) => {
         </button>
       </form>
 
+      <div className="flex items-center justify-between mb-6">
+        <p className="eyebrow flex items-center gap-2 text-muted-foreground">
+          <span className="inline-block w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
+          Processed in-session · Nothing stored
+        </p>
+        <button
+          onClick={() => navigate("/methodology")}
+          className="eyebrow text-gold"
+        >
+          How we read ›
+        </button>
+      </div>
+
       <div className="gold-hairline mb-6" />
 
       {/* Tools */}
