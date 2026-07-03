@@ -55,6 +55,52 @@ const getTypeEmoji = (type: string | null) => {
   }
 };
 
+const NEXT_STEPS: Record<string, { title: string; description: string; href: string; cta: string }> = {
+  hiddenAnxiety: {
+    title: "A 90-second breath, before anything else",
+    description: "The reading picked up an anxious undercurrent. Try one round of box breathing — it reliably lowers the arousal signal we just measured.",
+    href: "/games?tool=breathing",
+    cta: "Open Breathing",
+  },
+  hiddenLoneliness: {
+    title: "A short note to one person",
+    description: "Loneliness shows up quietly in your composition. Message one person a single sentence — no request, just presence.",
+    href: "/dashboard?tab=journal",
+    cta: "Open Journal",
+  },
+  hiddenGuilt: {
+    title: "Name it in one line",
+    description: "Guilt lingers when it stays abstract. Write the sentence you'd say aloud if no one heard it.",
+    href: "/dashboard?tab=journal",
+    cta: "Open Journal",
+  },
+  hiddenInsecurity: {
+    title: "Ground yourself in three facts",
+    description: "Insecurity feeds on abstractions. List three things that are true about you today — small, verifiable, unremarkable.",
+    href: "/dashboard?tab=journal",
+    cta: "Open Journal",
+  },
+  hiddenHappiness: {
+    title: "Let the quiet joy breathe",
+    description: "There's a hidden lift in this reading. Sit with it for one minute before the next task — that's usually all it needs.",
+    href: "/playlists",
+    cta: "Open Playlists",
+  },
+  hiddenLove: {
+    title: "Say the thing, softly",
+    description: "Warmth is present but held back. A single unhurried message — no occasion, no context — is the next step.",
+    href: "/dashboard?tab=journal",
+    cta: "Open Journal",
+  },
+};
+
+const DEFAULT_NEXT_STEP = {
+  title: "A quiet minute is enough",
+  description: "The clearest signal here is composure. Take one slow minute before returning to what you were doing.",
+  href: "/games?tool=breathing",
+  cta: "Open Breathing",
+};
+
 const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashboardProps) => {
   if (!isAnalyzed || !analysisResult) {
     return null;
@@ -71,6 +117,16 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
         },
       ];
 
+  // Dominant hidden emotion → tailored next step
+  const dominantHidden = HIDDEN_EMOTIONS.reduce(
+    (top, e) => {
+      const v = Number(analysisResult[e.key]) || 0;
+      return v > top.v ? { key: String(e.key), label: e.label, v } : top;
+    },
+    { key: "", label: "", v: 0 }
+  );
+  const nextStep = dominantHidden.v >= 40 ? NEXT_STEPS[dominantHidden.key] ?? DEFAULT_NEXT_STEP : DEFAULT_NEXT_STEP;
+
   return (
     <div className="space-y-6 max-h-[80vh] overflow-y-auto pr-2">
       {/* Header */}
@@ -81,45 +137,71 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
       >
         <div className="flex items-center gap-3 mb-2">
           <motion.div 
-            className="w-4 h-4 rounded-full bg-neon-pink"
+            className="w-4 h-4 rounded-full bg-primary"
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 1, repeat: Infinity }}
           />
-          <span className="text-sm font-semibold text-neon-pink">
-            {getTypeEmoji(analysisResult.uploadType)} {getTypeLabel(analysisResult.uploadType)} Complete! ✨
+          <span className="eyebrow text-primary">
+            {getTypeEmoji(analysisResult.uploadType)} {getTypeLabel(analysisResult.uploadType)} · Complete
           </span>
         </div>
-        <h2 className="font-display text-2xl font-bold text-foreground">
-          Your Deep Emotion Profile
+        <h2 className="editorial-heading text-2xl text-foreground">
+          Your <span className="editorial-italic text-gold">quiet</span> reading
         </h2>
       </motion.div>
 
-      {/* Accuracy badge */}
+      {/* Accuracy badge + honest caveat */}
       <motion.div
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-purple/20 border border-neon-purple/30"
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.5, delay: 0.15 }}
+        className="border border-border/60 p-4"
       >
-        <Target className="w-4 h-4 text-neon-purple" />
-        <span className="text-sm font-semibold">
-          <span className="text-neon-purple">{analysisResult.accuracy}%</span>
-          <span className="text-muted-foreground ml-1">AI Confidence</span>
-        </span>
+        <div className="flex items-center gap-2">
+          <Target className="w-4 h-4 text-primary" />
+          <span className="eyebrow">
+            <span className="text-gold">{analysisResult.accuracy}%</span>
+            <span className="text-muted-foreground ml-2">Model confidence</span>
+          </span>
+        </div>
+        <p className="text-xs text-muted-foreground font-light mt-2 leading-relaxed">
+          A reading, not a diagnosis. Numbers reflect the model's certainty about signals in this capture —
+          not the truth of what you feel. Read them lightly. <a href="/methodology" className="text-gold underline underline-offset-4 decoration-border hover:decoration-gold transition-colors">How we read →</a>
+        </p>
       </motion.div>
 
-      {/* Surface Emotions */}
+      {/* One quiet next step — tailored */}
+      <motion.aside
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.25, duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+        className="border border-primary/40 bg-transparent p-5"
+      >
+        <p className="eyebrow text-gold mb-2">One quiet next step</p>
+        <h3 className="editorial-heading text-xl text-foreground leading-tight">{nextStep.title}</h3>
+        <p className="text-sm text-muted-foreground font-light mt-2 leading-relaxed">{nextStep.description}</p>
+        <a
+          href={nextStep.href}
+          className="eyebrow inline-block mt-4 text-gold border-b border-border hover:border-gold transition-colors pb-0.5"
+        >
+          {nextStep.cta} ›
+        </a>
+      </motion.aside>
+
+      {/* Spoken (Surface) */}
       <motion.div
-        className="glass-panel rounded-2xl p-6"
+        className="border border-border/60 p-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
-        <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-          <Eye className="w-5 h-5 text-neon-pink" />
-          Surface Emotions
-          <span className="text-xs font-normal text-muted-foreground">(What you show)</span>
-        </h3>
+        <div className="flex items-baseline justify-between mb-5">
+          <h3 className="editorial-heading text-xl text-foreground flex items-center gap-3">
+            <Eye className="w-4 h-4 text-primary" strokeWidth={1.25} />
+            Spoken
+          </h3>
+          <span className="eyebrow">What you present</span>
+        </div>
         <div className="grid grid-cols-3 gap-4">
           {SURFACE_EMOTIONS.map((emotion, index) => (
             <EmotionGauge
@@ -135,23 +217,25 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
         </div>
       </motion.div>
 
-      {/* Hidden Emotions */}
+      {/* Felt (Hidden) */}
       <motion.div
-        className="glass-panel rounded-2xl p-6 border-2 border-neon-purple/30"
+        className="border border-border/60 p-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
       >
-        <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-          <Shield className="w-5 h-5 text-neon-purple" />
-          Hidden Emotions
-          <span className="text-xs font-normal text-muted-foreground">(What you feel but don't show)</span>
-        </h3>
+        <div className="flex items-baseline justify-between mb-5">
+          <h3 className="editorial-heading text-xl text-foreground flex items-center gap-3">
+            <Shield className="w-4 h-4 text-primary" strokeWidth={1.25} />
+            Felt
+          </h3>
+          <span className="eyebrow">What runs beneath</span>
+        </div>
         <div className="grid grid-cols-3 gap-4">
           {HIDDEN_EMOTIONS.map((emotion, index) => (
             <EmotionGauge
               key={emotion.key}
-              label={emotion.label}
+              label={emotion.label.replace(/^Hidden\s+/, "")}
               value={Math.min(100, (analysisResult[emotion.key] as number) || 0)}
               color={emotion.color}
               emoji={emotion.emoji}
@@ -162,23 +246,25 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
         </div>
       </motion.div>
 
-      {/* Suppressed Emotions */}
+      {/* Unsaid (Suppressed) */}
       <motion.div
-        className="glass-panel rounded-2xl p-6 border-2 border-neon-red/30"
+        className="border border-border/60 p-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
       >
-        <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-          <Unlock className="w-5 h-5 text-neon-red" />
-          Suppressed Emotions
-          <span className="text-xs font-normal text-muted-foreground">(What you're holding back)</span>
-        </h3>
+        <div className="flex items-baseline justify-between mb-5">
+          <h3 className="editorial-heading text-xl text-foreground flex items-center gap-3">
+            <Unlock className="w-4 h-4 text-primary" strokeWidth={1.25} />
+            Unsaid
+          </h3>
+          <span className="eyebrow">What stays held back</span>
+        </div>
         <div className="grid grid-cols-3 gap-4">
           {SUPPRESSED_EMOTIONS.map((emotion, index) => (
             <EmotionGauge
               key={emotion.key}
-              label={emotion.label}
+              label={emotion.label.replace(/^Suppressed\s+/, "")}
               value={Math.min(100, (analysisResult[emotion.key] as number) || 0)}
               color={emotion.color}
               emoji={emotion.emoji}
@@ -188,6 +274,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
           ))}
         </div>
       </motion.div>
+
 
       {/* Meta Emotional States */}
       <motion.div

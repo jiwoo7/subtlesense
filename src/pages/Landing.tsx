@@ -375,9 +375,9 @@ const Landing = () => {
 
                   <div className="mt-10 space-y-5">
                     {[
-                      { n: "I", t: "Surface", d: "The emotion you present — cadence, tone, phrasing." },
-                      { n: "II", t: "Hidden", d: "The undercurrent — micro-expression, hesitation, pace." },
-                      { n: "III", t: "Suppressed", d: "The unspoken — what the composition seldom names." },
+                      { n: "I", t: "Spoken", d: "What you present — cadence, tone, phrasing." },
+                      { n: "II", t: "Felt", d: "The undercurrent — micro-expression, hesitation, pace." },
+                      { n: "III", t: "Unsaid", d: "What the composition seldom names aloud." },
                     ].map((r) => (
                       <div key={r.t} className="flex gap-5 pt-5 border-t border-border/40">
                         <span className="eyebrow text-gold w-8 flex-shrink-0">{r.n}</span>
@@ -440,7 +440,11 @@ const Landing = () => {
                   Subtle Sense
                 </p>
                 <p className="eyebrow mt-3">Est. 2025 &middot; Made by Naiyya Thapa</p>
+                <a href="/methodology" className="eyebrow inline-block mt-2 text-gold border-b border-border hover:border-gold transition-colors pb-0.5">
+                  How we read ›
+                </a>
               </div>
+
             </div>
             <div className="text-left md:text-right">
               <p className="eyebrow mb-2">Correspondence</p>
