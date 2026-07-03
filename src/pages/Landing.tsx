@@ -440,7 +440,11 @@ const Landing = () => {
                   Subtle Sense
                 </p>
                 <p className="eyebrow mt-3">Est. 2025 &middot; Made by Naiyya Thapa</p>
+                <a href="/methodology" className="eyebrow inline-block mt-2 text-gold border-b border-border hover:border-gold transition-colors pb-0.5">
+                  How we read ›
+                </a>
               </div>
+
             </div>
             <div className="text-left md:text-right">
               <p className="eyebrow mb-2">Correspondence</p>
