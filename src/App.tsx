@@ -22,6 +22,7 @@ const Demo = lazy(() => import("./pages/Demo"));
 const Games = lazy(() => import("./pages/Games"));
 const Playlists = lazy(() => import("./pages/Playlists"));
 const Methodology = lazy(() => import("./pages/Methodology"));
+const Pricing = lazy(() => import("./pages/Pricing"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
