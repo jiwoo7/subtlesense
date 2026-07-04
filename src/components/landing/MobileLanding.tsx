@@ -62,19 +62,16 @@ const MobileLanding = ({ currentUser }: Props) => {
         )}
       </div>
 
-      {/* Hero — logo mark */}
+      {/* Editorial masthead — no logo, letterpress feel */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.4, ease }}
-        className="mx-auto mb-8 relative w-28 h-28 gold-ring flex items-center justify-center"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease }}
+        className="text-center mb-6 mt-2"
       >
-        <img
-          src={logoUrl}
-          alt="Subtle Sense"
-          className="relative z-10 w-full h-full object-contain"
-          style={{ filter: "drop-shadow(0 6px 24px hsl(var(--primary) / 0.4))" }}
-        />
+        <p className="eyebrow text-[9px] tracking-[0.4em] text-muted-foreground">Volume I · Interior</p>
+        <div className="gold-hairline my-4 max-w-[60%] mx-auto" />
+        <p className="eyebrow text-[9px] tracking-[0.4em] text-gold">MMXXVI Edition</p>
       </motion.div>
 
       <motion.h1
