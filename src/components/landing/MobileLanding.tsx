@@ -69,9 +69,11 @@ const MobileLanding = ({ currentUser }: Props) => {
         transition={{ duration: 1.2, ease }}
         className="text-center mb-6 mt-2"
       >
-        <p className="eyebrow text-[9px] tracking-[0.4em] text-muted-foreground">Volume I · Interior</p>
+        <p className="eyebrow text-[9px] tracking-[0.4em] text-gold animate-shimmer">
+          Founding Members · 50% off for life
+        </p>
         <div className="gold-hairline my-4 max-w-[60%] mx-auto" />
-        <p className="eyebrow text-[9px] tracking-[0.4em] text-gold">MMXXVI Edition</p>
+        <p className="eyebrow text-[9px] tracking-[0.4em] text-muted-foreground">MMXXVI Edition</p>
       </motion.div>
 
       <motion.h1
