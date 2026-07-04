@@ -416,6 +416,13 @@ const Landing = () => {
           </section>
         </div>
 
+        {/* Sample Readings */}
+        <div className="border-t border-border/60">
+          <Suspense fallback={<div className="h-32" />}>
+            <SampleReadings />
+          </Suspense>
+        </div>
+
         {/* Mind Tools */}
         <div className="border-t border-border/60">
           <MindToolsSection />
@@ -432,6 +439,20 @@ const Landing = () => {
         <div className="hidden sm:block border-t border-border/60">
           <Suspense fallback={<div className="h-32" />}>
             <RealWorldUseCases />
+          </Suspense>
+        </div>
+
+        {/* Social Proof */}
+        <div className="border-t border-border/60">
+          <Suspense fallback={<div className="h-32" />}>
+            <SocialProof />
+          </Suspense>
+        </div>
+
+        {/* Founder Note */}
+        <div className="border-t border-border/60">
+          <Suspense fallback={<div className="h-32" />}>
+            <FounderNote />
           </Suspense>
         </div>
 
