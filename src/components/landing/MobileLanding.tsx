@@ -120,7 +120,7 @@ const MobileLanding = ({ currentUser }: Props) => {
         </button>
       </form>
 
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-4">
         <p className="eyebrow flex items-center gap-2 text-muted-foreground">
           <span className="inline-block w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
           Processed in-session · Nothing stored
@@ -132,6 +132,14 @@ const MobileLanding = ({ currentUser }: Props) => {
           How we read ›
         </button>
       </div>
+
+      <button
+        onClick={() => navigate("/pricing")}
+        className="w-full mb-6 border border-gold/40 bg-transparent p-3 text-center hover:border-gold transition-colors duration-500"
+        style={{ borderRadius: 2 }}
+      >
+        <span className="eyebrow text-gold">See Membership ·  From $8/mo</span>
+      </button>
 
       <div className="gold-hairline mb-6" />
 
