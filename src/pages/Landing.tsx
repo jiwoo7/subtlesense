@@ -224,9 +224,9 @@ const Landing = () => {
               <button onClick={scrollToTry} className="btn-editorial">
                 Start Analysis
               </button>
-              <a href="#features" className="btn-editorial-ghost">
-                The Method
-              </a>
+              <button onClick={() => navigate("/pricing")} className="btn-editorial-ghost">
+                See Membership
+              </button>
             </motion.div>
 
             {/* Gold hairline */}
