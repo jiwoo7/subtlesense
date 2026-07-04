@@ -15,6 +15,9 @@ import logoUrl from "@/assets/subtle-sense-logo.png";
 
 const TransparencySection = lazy(() => import("@/components/landing/TransparencySection"));
 const RealWorldUseCases = lazy(() => import("@/components/landing/RealWorldUseCases"));
+const SampleReadings = lazy(() => import("@/components/landing/SampleReadings"));
+const SocialProof = lazy(() => import("@/components/landing/SocialProof"));
+const FounderNote = lazy(() => import("@/components/landing/FounderNote"));
 import { supabase } from "@/integrations/supabase/client";
 import type { AnalysisResult } from "@/types/emotions";
 import type { User } from "@supabase/supabase-js";
