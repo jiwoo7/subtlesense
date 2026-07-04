@@ -187,16 +187,16 @@ const Landing = () => {
           <div className="max-w-5xl mx-auto text-center">
 
             <p className="eyebrow mb-8 animate-reveal">
-              <span className="text-gold animate-shimmer">Est. 2025</span>
+              <span className="text-gold animate-shimmer">Founding Members</span>
               <span className="mx-3 text-border">·</span>
-              An Editorial Study of Emotion
+              First 500 receive lifetime 50% off
             </p>
 
             <h1 className="editorial-heading text-[3.5rem] md:text-[5.25rem] lg:text-[6.5rem] leading-[0.98] mb-10 animate-rise-in">
-              Discover what you&rsquo;re
+              For the ones who over-explain
               <br />
               <span className="editorial-italic text-gold animate-shimmer inline-block mt-2 text-[1.02em]">
-                really feeling.
+                and under-feel.
               </span>
             </h1>
 
@@ -206,9 +206,9 @@ const Landing = () => {
               transition={{ duration: 1.1, delay: 0.5, ease: [0.25, 1, 0.5, 1] }}
               className="max-w-2xl mx-auto text-base md:text-lg text-muted-foreground leading-relaxed mb-4 font-light"
             >
-              A composed, private study of what lies beneath the surface. Subtle Sense
-              observes micro-expression, cadence and tone &mdash; and returns a quiet,
-              considered reading of the emotions you seldom name aloud.
+              A sixty-second reading of what you didn&rsquo;t say. Subtle Sense observes
+              micro-expression, cadence and tone &mdash; and returns a quiet, considered
+              account of the emotions you seldom name aloud.
             </motion.p>
 
             <p className="eyebrow text-gold animate-shimmer mb-12">
