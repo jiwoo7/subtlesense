@@ -22,6 +22,7 @@ const Demo = lazy(() => import("./pages/Demo"));
 const Games = lazy(() => import("./pages/Games"));
 const Playlists = lazy(() => import("./pages/Playlists"));
 const Methodology = lazy(() => import("./pages/Methodology"));
+const Pricing = lazy(() => import("./pages/Pricing"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -56,6 +57,7 @@ const App = () => {
   <Route path="/games" element={<PhoneFrame><Games /></PhoneFrame>} />
   <Route path="/playlists" element={<PhoneFrame><Playlists /></PhoneFrame>} />
   <Route path="/methodology" element={<PhoneFrame><Methodology /></PhoneFrame>} />
+  <Route path="/pricing" element={<PhoneFrame><Pricing /></PhoneFrame>} />
   <Route path="/auth" element={<PhoneFrame><Auth /></PhoneFrame>} />
   <Route path="/dashboard" element={<PhoneFrame><Dashboard /></PhoneFrame>} />
   <Route path="/settings" element={<PhoneFrame><Settings /></PhoneFrame>} />
