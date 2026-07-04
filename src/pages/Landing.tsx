@@ -140,7 +140,9 @@ const Landing = () => {
             <div className="hidden md:flex items-center gap-10">
               <a href="#philosophy" className="nav-link">Philosophy</a>
               <a href="#features" className="nav-link">The Method</a>
+              <a href="#samples" className="nav-link">Readings</a>
               <a href="#try-it-out" className="nav-link">Analysis</a>
+              <button onClick={() => navigate("/pricing")} className="nav-link">Pricing</button>
             </div>
 
             <div className="flex items-center gap-4">
