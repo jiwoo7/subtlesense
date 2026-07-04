@@ -26,11 +26,6 @@ const AnimatedBackground = () => {
         }}
       />
 
-      {/* Hairline horizon divider — editorial framing */}
-      <div
-        className="absolute left-0 right-0 top-1/2 h-px"
-        style={{ background: "linear-gradient(90deg, transparent, hsl(var(--border)) 25%, hsl(var(--border)) 75%, transparent)" }}
-      />
     </div>
   );
 };

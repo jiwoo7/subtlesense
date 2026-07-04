@@ -396,9 +396,9 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
           </motion.div>
         )}
 
-        {/* Webcam Preview - Dark themed */}
+        {/* Webcam Preview - Portrait on mobile, landscape on desktop */}
         {selectedType === "webcam" && mediaStream && (
-          <div className="mb-4 sm:mb-6 rounded-xl sm:rounded-2xl overflow-hidden bg-card border border-border aspect-video">
+          <div className="mb-4 sm:mb-6 rounded-xl sm:rounded-2xl overflow-hidden bg-card border border-border aspect-[3/4] sm:aspect-video max-h-[70dvh] mx-auto w-full">
             <video
               ref={videoRef}
               autoPlay
