@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Brain, Cpu, BarChart3 } from "lucide-react";
+import { Brain, Cpu, BarChart3, Shield } from "lucide-react";
 
 const TransparencySection = () => {
   return (
@@ -93,6 +93,33 @@ const TransparencySection = () => {
           </div>
         </motion.div>
 
+        {/* Privacy & Data Promise */}
+        <motion.div
+          className="glass-panel rounded-2xl p-5 sm:p-6 border border-border/50"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+        >
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-neon-purple/20 flex items-center justify-center mb-4">
+            <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-neon-purple" />
+          </div>
+          <h3 className="font-display text-lg font-bold mb-2">Privacy & Data Promise</h3>
+          <ul className="text-sm text-muted-foreground space-y-2">
+            <li className="flex items-start gap-2">
+              <span className="text-neon-pink mt-0.5">•</span>
+              <span><strong className="text-foreground">In-session processing</strong> — your media is analyzed live and never archived by default</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-neon-pink mt-0.5">•</span>
+              <span><strong className="text-foreground">Consent-first storage</strong> — personal history is only saved when you explicitly sign in and choose to keep it</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-neon-pink mt-0.5">•</span>
+              <span>All transit is encrypted; you can delete your data at any time from Settings</span>
+            </li>
+          </ul>
+        </motion.div>
       </div>
     </section>
   );
