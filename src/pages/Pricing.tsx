@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Check } from "lucide-react";
+import { Check, Linkedin } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import ThemePickerButton from "@/components/ThemePickerButton";
+import WaitlistDialog from "@/components/WaitlistDialog";
 import logoUrl from "@/assets/subtle-sense-logo.png";
 
 const ease = [0.25, 1, 0.5, 1] as const;
@@ -60,6 +62,13 @@ const tiers = [
 
 const Pricing = () => {
   const navigate = useNavigate();
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const [waitlistTier, setWaitlistTier] = useState<string | undefined>();
+
+  const openWaitlist = (tier: string) => {
+    setWaitlistTier(tier);
+    setWaitlistOpen(true);
+  };
 
   return (
     <div className="min-h-screen relative overflow-x-hidden">
@@ -150,7 +159,7 @@ const Pricing = () => {
                 </ul>
 
                 <button
-                  onClick={() => navigate(t.to)}
+                  onClick={() => (t.to === "/" ? navigate("/") : openWaitlist(t.name))}
                   className={t.featured ? "btn-editorial" : "btn-editorial-ghost"}
                 >
                   {t.cta}
@@ -165,7 +174,7 @@ const Pricing = () => {
           </p>
         </section>
 
-        <footer className="container mx-auto px-6 sm:px-8 lg:px-12 py-12 border-t border-border/60 text-center">
+        <footer className="container mx-auto px-6 sm:px-8 lg:px-12 py-12 border-t border-border/60 text-center space-y-4">
           <p className="eyebrow text-muted-foreground">
             Questions of correspondence &mdash;{" "}
             <a
@@ -175,8 +184,18 @@ const Pricing = () => {
               naiyyathapa@gmail.com
             </a>
           </p>
+          <a
+            href="https://www.linkedin.com/in/naiyya-thapa"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 eyebrow text-muted-foreground hover:text-gold transition-colors"
+          >
+            <Linkedin className="w-3.5 h-3.5" /> Naiyya Thapa on LinkedIn
+          </a>
         </footer>
       </div>
+
+      <WaitlistDialog open={waitlistOpen} onOpenChange={setWaitlistOpen} tier={waitlistTier} />
     </div>
   );
 };

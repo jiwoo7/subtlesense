@@ -10,11 +10,12 @@ const TransparencySection = () => {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
       >
-        <h2 className="font-display text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">
-          Full Transparency — No Black Box 🔬
+        <p className="eyebrow mb-3">Chapter · Transparency</p>
+        <h2 className="editorial-heading text-3xl sm:text-5xl mb-4">
+          Full <span className="editorial-italic text-gold">transparency</span> — no black box
         </h2>
-        <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-          We believe you deserve to know exactly how your emotions are analyzed
+        <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto font-light">
+          You deserve to know exactly how your emotions are read.
         </p>
       </motion.div>
 
@@ -30,7 +31,7 @@ const TransparencySection = () => {
           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-neon-purple/20 flex items-center justify-center mb-4">
             <Cpu className="w-5 h-5 sm:w-6 sm:h-6 text-neon-purple" />
           </div>
-          <h3 className="font-display text-lg font-bold mb-2">AI Models Used</h3>
+          <h3 className="editorial-heading text-lg mb-3">AI Models Used</h3>
           <ul className="text-sm text-muted-foreground space-y-2">
             <li className="flex items-start gap-2">
               <span className="text-neon-pink mt-0.5">•</span>
@@ -58,7 +59,7 @@ const TransparencySection = () => {
           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-neon-pink/20 flex items-center justify-center mb-4">
             <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 text-neon-pink" />
           </div>
-          <h3 className="font-display text-lg font-bold mb-2">Accuracy Rates</h3>
+          <h3 className="editorial-heading text-lg mb-3">Accuracy Rates</h3>
           <div className="space-y-3">
             <div>
               <div className="flex justify-between text-sm mb-1">
@@ -104,7 +105,7 @@ const TransparencySection = () => {
           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-neon-purple/20 flex items-center justify-center mb-4">
             <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-neon-purple" />
           </div>
-          <h3 className="font-display text-lg font-bold mb-2">Privacy & Data Promise</h3>
+          <h3 className="editorial-heading text-lg mb-3">Privacy & Data Promise</h3>
           <ul className="text-sm text-muted-foreground space-y-2">
             <li className="flex items-start gap-2">
               <span className="text-neon-pink mt-0.5">•</span>

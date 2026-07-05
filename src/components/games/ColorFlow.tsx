@@ -31,46 +31,46 @@ const next = () =>
 setTarget(COLORS[Math.floor(Math.random() * COLORS.length)]);
 
 const quietConfetti = (colorHsl: string) => {
-// base color fall — low particle count + gentle gravity for quiet fall
-confetti({
-particleCount: 18,
-angle: 90,
-spread: 40,
-startVelocity: 20,
-ticks: 120,
-gravity: 0.25,
-origin: { x: Math.random() * 0.6 + 0.2, y: 0 }, // spawn somewhere across top
-colors: [`hsl(${colorHsl})`],
-});
-// small trailing sparkles (very subtle)
-confetti({
-particleCount: 6,
-angle: 90,
-spread: 60,
-startVelocity: 8,
-ticks: 90,
-gravity: 0.15,
-origin: { x: Math.random() * 0.6 + 0.2, y: 0 },
-colors: ["#ffffff", "#ffffff20"],
-});
-// clear old timeout if any
-if (confettiTimeoutRef.current) {
-window.clearTimeout(confettiTimeoutRef.current);
-confettiTimeoutRef.current = null;
+const color = `hsl(${colorHsl})`;
+// A wide curtain of falling pieces of the same color across the whole screen
+const bursts = 5;
+for (let i = 0; i < bursts; i++) {
+  const originX = (i + 0.5) / bursts; // evenly spread across width
+  confetti({
+    particleCount: 30,
+    angle: 270, // downward
+    spread: 80,
+    startVelocity: 22,
+    ticks: 240,
+    gravity: 0.55,
+    scalar: 1,
+    origin: { x: originX, y: -0.05 },
+    colors: [color],
+    disableForReducedMotion: true,
+  });
 }
-// tiny delayed second pass to make it feel like falling pieces
+// A gentle secondary shower slightly delayed for depth
+if (confettiTimeoutRef.current) {
+  window.clearTimeout(confettiTimeoutRef.current);
+  confettiTimeoutRef.current = null;
+}
 confettiTimeoutRef.current = window.setTimeout(() => {
-confetti({
-particleCount: 10,
-angle: 90,
-spread: 50,
-startVelocity: 6,
-ticks: 140,
-gravity: 0.18,
-origin: { x: Math.random() * 0.6 + 0.2, y: 0 },
-colors: [`hsl(${colorHsl})`],
-});
-}, 160);
+  for (let i = 0; i < bursts; i++) {
+    const originX = (i / bursts) + Math.random() * 0.1;
+    confetti({
+      particleCount: 18,
+      angle: 270,
+      spread: 60,
+      startVelocity: 14,
+      ticks: 280,
+      gravity: 0.4,
+      scalar: 0.8,
+      origin: { x: originX, y: -0.05 },
+      colors: [color],
+      disableForReducedMotion: true,
+    });
+  }
+}, 220);
 };
 
 const handleTap = (c: typeof COLORS[number]) => {

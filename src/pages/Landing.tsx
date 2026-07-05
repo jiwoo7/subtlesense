@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Brain, Shield, Zap, Users, BarChart3, History, LogOut } from "lucide-react";
+import { Brain, Shield, Zap, Users, BarChart3, History, LogOut, Linkedin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
@@ -481,6 +481,16 @@ const Landing = () => {
               >
                 naiyyathapa@gmail.com
               </a>
+              <div className="mt-4">
+                <a
+                  href="https://www.linkedin.com/in/naiyya-thapa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 eyebrow text-muted-foreground hover:text-gold transition-colors"
+                >
+                  <Linkedin className="w-3.5 h-3.5" /> LinkedIn
+                </a>
+              </div>
             </div>
           </div>
         </footer>
