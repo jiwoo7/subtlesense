@@ -10,11 +10,12 @@ const TransparencySection = () => {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
       >
-        <h2 className="font-display text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">
-          Full Transparency — No Black Box 🔬
+        <p className="eyebrow mb-3">Chapter · Transparency</p>
+        <h2 className="editorial-heading text-3xl sm:text-5xl mb-4">
+          Full <span className="editorial-italic text-gold">transparency</span> — no black box
         </h2>
-        <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-          We believe you deserve to know exactly how your emotions are analyzed
+        <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto font-light">
+          You deserve to know exactly how your emotions are read.
         </p>
       </motion.div>
 
