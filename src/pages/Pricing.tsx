@@ -159,7 +159,7 @@ const Pricing = () => {
                 </ul>
 
                 <button
-                  onClick={() => navigate(t.to)}
+                  onClick={() => (t.to === "/" ? navigate("/") : openWaitlist(t.name))}
                   className={t.featured ? "btn-editorial" : "btn-editorial-ghost"}
                 >
                   {t.cta}
