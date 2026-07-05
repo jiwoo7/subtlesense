@@ -481,6 +481,16 @@ const Landing = () => {
               >
                 naiyyathapa@gmail.com
               </a>
+              <div className="mt-4">
+                <a
+                  href="https://www.linkedin.com/in/naiyya-thapa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 eyebrow text-muted-foreground hover:text-gold transition-colors"
+                >
+                  <Linkedin className="w-3.5 h-3.5" /> LinkedIn
+                </a>
+              </div>
             </div>
           </div>
         </footer>
