@@ -39,10 +39,10 @@ const MindToolsSection = () => {
                 <c.icon className="w-6 h-6 text-primary-foreground" />
               </div>
               <div className="flex items-center justify-between gap-2">
-                <h3 className="font-display text-lg font-bold">{c.title}</h3>
+                <h3 className="editorial-heading text-lg">{c.title}</h3>
                 <ArrowRight className="w-4 h-4 opacity-50 group-hover:translate-x-1 transition-transform" />
               </div>
-              <p className="text-sm text-muted-foreground mt-1">{c.desc}</p>
+              <p className="text-sm text-muted-foreground font-light mt-1">{c.desc}</p>
             </Link>
           </motion.div>
         ))}
