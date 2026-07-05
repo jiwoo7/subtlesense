@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Check } from "lucide-react";
+import { Check, Linkedin } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import ThemePickerButton from "@/components/ThemePickerButton";
+import WaitlistDialog from "@/components/WaitlistDialog";
 import logoUrl from "@/assets/subtle-sense-logo.png";
 
 const ease = [0.25, 1, 0.5, 1] as const;
