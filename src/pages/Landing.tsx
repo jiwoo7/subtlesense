@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Brain, Shield, Zap, Users, BarChart3, History, LogOut } from "lucide-react";
+import { Brain, Shield, Zap, Users, BarChart3, History, LogOut, Linkedin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
