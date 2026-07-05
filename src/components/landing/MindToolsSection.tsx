@@ -22,8 +22,11 @@ const MindToolsSection = () => {
   return (
     <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
       <div className="text-center mb-6">
-        <h2 className="font-display text-2xl sm:text-3xl font-bold mb-2">After your analysis ✨</h2>
-        <p className="text-muted-foreground text-sm sm:text-base">Tiny tools to help you sit with what came up.</p>
+        <p className="eyebrow mb-3">Chapter · After</p>
+        <h2 className="editorial-heading text-3xl sm:text-4xl mb-3">
+          After your <span className="editorial-italic text-gold">analysis</span>
+        </h2>
+        <p className="text-muted-foreground text-sm sm:text-base font-light">Tiny tools to help you sit with what came up.</p>
       </div>
       <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
         {cards.map((c) => (
