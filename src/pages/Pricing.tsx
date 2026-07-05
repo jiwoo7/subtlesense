@@ -62,6 +62,13 @@ const tiers = [
 
 const Pricing = () => {
   const navigate = useNavigate();
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const [waitlistTier, setWaitlistTier] = useState<string | undefined>();
+
+  const openWaitlist = (tier: string) => {
+    setWaitlistTier(tier);
+    setWaitlistOpen(true);
+  };
 
   return (
     <div className="min-h-screen relative overflow-x-hidden">
