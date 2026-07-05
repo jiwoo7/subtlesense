@@ -174,7 +174,7 @@ const Pricing = () => {
           </p>
         </section>
 
-        <footer className="container mx-auto px-6 sm:px-8 lg:px-12 py-12 border-t border-border/60 text-center">
+        <footer className="container mx-auto px-6 sm:px-8 lg:px-12 py-12 border-t border-border/60 text-center space-y-4">
           <p className="eyebrow text-muted-foreground">
             Questions of correspondence &mdash;{" "}
             <a
@@ -184,8 +184,18 @@ const Pricing = () => {
               naiyyathapa@gmail.com
             </a>
           </p>
+          <a
+            href="https://www.linkedin.com/in/naiyya-thapa"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 eyebrow text-muted-foreground hover:text-gold transition-colors"
+          >
+            <Linkedin className="w-3.5 h-3.5" /> Naiyya Thapa on LinkedIn
+          </a>
         </footer>
       </div>
+
+      <WaitlistDialog open={waitlistOpen} onOpenChange={setWaitlistOpen} tier={waitlistTier} />
     </div>
   );
 };
