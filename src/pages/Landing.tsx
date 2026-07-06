@@ -18,7 +18,6 @@ const RealWorldUseCases = lazy(() => import("@/components/landing/RealWorldUseCa
 const SampleReadings = lazy(() => import("@/components/landing/SampleReadings"));
 const SocialProof = lazy(() => import("@/components/landing/SocialProof"));
 const FounderNote = lazy(() => import("@/components/landing/FounderNote"));
-const LiveCounter = lazy(() => import("@/components/landing/LiveCounter"));
 const PressStrip = lazy(() => import("@/components/landing/PressStrip"));
 import { supabase } from "@/integrations/supabase/client";
 import type { AnalysisResult } from "@/types/emotions";
@@ -448,13 +447,6 @@ const Landing = () => {
         <div className="border-t border-border/60">
           <Suspense fallback={<div className="h-32" />}>
             <SocialProof />
-          </Suspense>
-        </div>
-
-        {/* Live counter — real momentum */}
-        <div className="border-t border-border/60">
-          <Suspense fallback={<div className="h-24" />}>
-            <LiveCounter />
           </Suspense>
         </div>
 
