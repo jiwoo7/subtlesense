@@ -4,6 +4,7 @@ import { Send, Gamepad2, Music, BookOpen, Brain } from "lucide-react";
 import logoUrl from "@/assets/subtle-sense-logo.png";
 import StreakBadge from "@/components/StreakBadge";
 import { useStreak } from "@/hooks/useStreak";
+import MobileStickyCTA from "@/components/landing/MobileStickyCTA";
 import type { User } from "@supabase/supabase-js";
 
 interface Props {
@@ -222,6 +223,7 @@ const MobileLanding = ({ currentUser }: Props) => {
           </motion.div>
         ))}
       </div>
+      <MobileStickyCTA onClick={() => navigate("/pricing")} />
     </div>
   );
 };
