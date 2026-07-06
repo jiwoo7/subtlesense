@@ -259,30 +259,6 @@ const MobileLanding = ({ currentUser }: Props) => {
         </div>
       </motion.div>
 
-      {/* Social proof / stats */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
-        className="bg-gradient-to-r from-primary/10 to-gold/10 border border-primary/20 p-4 mb-8"
-        style={{ borderRadius: 10 }}
-      >
-        <p className="eyebrow text-[10px] text-gold mb-3">TRUSTED BY FOUNDERS & THERAPISTS</p>
-        <div className="grid grid-cols-3 gap-4 text-center">
-          <div>
-            <p className="editorial-heading text-lg text-gold">5M+</p>
-            <p className="eyebrow text-[9px]">Emotions Read</p>
-          </div>
-          <div>
-            <p className="editorial-heading text-lg text-gold">98%</p>
-            <p className="eyebrow text-[9px]">Accuracy</p>
-          </div>
-          <div>
-            <p className="editorial-heading text-lg text-gold">0ms</p>
-            <p className="eyebrow text-[9px]">Data Stored</p>
-          </div>
-        </div>
-      </motion.div>
 
       {/* Emotion landscape */}
       <motion.div
