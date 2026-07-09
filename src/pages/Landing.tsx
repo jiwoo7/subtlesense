@@ -9,6 +9,7 @@ import ShareResults from "@/components/ShareResults";
 import ThemePickerButton from "@/components/ThemePickerButton";
 import MindToolsSection from "@/components/landing/MindToolsSection";
 import MobileLanding from "@/components/landing/MobileLanding";
+import ValidationSection from "@/components/landing/ValidationSection";
 import logoUrl from "@/assets/subtle-sense-logo.png";
 
 
@@ -216,11 +217,13 @@ const Landing = () => {
               Understand · Empathize · Elevate
             </p>
 
+            <ValidationSection />
+
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.1, delay: 0.75, ease: [0.25, 1, 0.5, 1] }}
-              className="flex items-center justify-center gap-4"
+              className="mt-12 flex items-center justify-center gap-4"
             >
               <button onClick={scrollToTry} className="btn-editorial">
                 Start Analysis
