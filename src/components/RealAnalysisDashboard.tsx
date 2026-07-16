@@ -305,7 +305,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
       {/* Deep Insight */}
       {analysisResult.deepInsight && (
         <motion.div
-          className="glass-panel rounded-2xl p-6 border-2 border-neon-purple/50 bg-gradient-to-br from-neon-purple/10 to-neon-pink/10"
+          className="glass-panel rounded-2xl p-6 border border-border/60 bg-card/85 backdrop-blur-md shadow-[0_14px_32px_rgba(0,0,0,0.10)]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1 }}
@@ -314,7 +314,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
             <Sparkles className="w-5 h-5 text-neon-purple" />
             Deep Insight 🔮
           </h3>
-          <p className="text-muted-foreground leading-relaxed italic">{analysisResult.deepInsight}</p>
+          <p className="text-foreground/85 leading-relaxed italic">{analysisResult.deepInsight}</p>
         </motion.div>
       )}
 
@@ -333,14 +333,6 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
           <p className="text-muted-foreground leading-relaxed">{analysisResult.advice}</p>
         </motion.div>
       )}
-
-      {/* Divider */}
-      <motion.div
-        className="h-px bg-gradient-to-r from-transparent via-neon-purple to-transparent"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ duration: 0.8, delay: 1.4 }}
-      />
 
       {/* Suggestions */}
       <motion.div

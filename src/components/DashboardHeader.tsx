@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
-import { Heart, Sparkles, Star, History, BarChart3, LogOut, User, Settings, BookOpen } from "lucide-react";
+import { Sparkles, History, BarChart3, LogOut, User, Settings, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import ThemeToggle from "./ThemeToggle";
+import logoUrl from "@/assets/subtle-sense-logo.png";
 
 interface DashboardHeaderProps {
   activeTab: "analyze" | "history" | "moodboard" | "journal";
@@ -44,20 +45,14 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
               whileHover={{ scale: 1.05, rotate: 5 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl pastel-gradient flex items-center justify-center shadow-lg">
-                <motion.div
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground fill-primary-foreground" />
-                </motion.div>
-                <motion.div
-                  className="absolute -top-1 -right-1"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-pastel-yellow" />
-                </motion.div>
+              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-background/85 backdrop-blur-sm border border-border/50 flex items-center justify-center shadow-lg overflow-hidden">
+                <motion.img
+                  src={logoUrl}
+                  alt="Subtle Sense"
+                  className="w-7 h-7 sm:w-8 sm:h-8 object-contain"
+                  animate={{ rotate: [0, 4, -4, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                />
               </div>
             </motion.div>
             
@@ -114,7 +109,7 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
               aria-label={tab.label}
               className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
                 activeTab === tab.id
-                  ? "pastel-gradient text-primary-foreground shadow-md"
+                  ? "bg-foreground text-background shadow-md"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               }`}
               whileHover={{ scale: 1.02 }}

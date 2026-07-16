@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Heart, Sparkles, Star } from "lucide-react";
+import logoUrl from "@/assets/subtle-sense-logo.png";
 
 const Header = () => {
   return (
@@ -17,31 +17,14 @@ const Header = () => {
             whileHover={{ scale: 1.05, rotate: 5 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            {/* Animated logo container */}
-            <div className="relative w-14 h-14 rounded-2xl pastel-gradient flex items-center justify-center shadow-lg">
-              <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <Heart className="w-7 h-7 text-white fill-white" />
-              </motion.div>
-              
-              {/* Sparkle decorations */}
-              <motion.div
-                className="absolute -top-1 -right-1"
-                animate={{ scale: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <Sparkles className="w-4 h-4 text-pastel-yellow" />
-              </motion.div>
-              
-              <motion.div
-                className="absolute -bottom-1 -left-1"
-                animate={{ scale: [1, 1.3, 1], opacity: [0.8, 1, 0.8] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Star className="w-3 h-3 text-pastel-pink fill-pastel-pink" />
-              </motion.div>
+            <div className="relative w-14 h-14 rounded-2xl bg-background/80 backdrop-blur-sm border border-border/50 flex items-center justify-center shadow-lg overflow-hidden">
+              <motion.img
+                src={logoUrl}
+                alt="Subtle Sense"
+                className="w-10 h-10 object-contain"
+                animate={{ rotate: [0, 4, -4, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              />
             </div>
           </motion.div>
           
