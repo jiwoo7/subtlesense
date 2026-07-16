@@ -1,6 +1,14 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Send, Gamepad2, Music, BookOpen, Brain, Sparkles, ChevronRight, Zap } from "lucide-react";
+import {
+  ArrowUpRight,
+  Brain,
+  BookOpen,
+  ChevronRight,
+  Gamepad2,
+  Sparkles,
+  Zap,
+} from "lucide-react";
 import logoUrl from "@/assets/subtle-sense-logo.png";
 import StreakBadge from "@/components/StreakBadge";
 import { useStreak } from "@/hooks/useStreak";
@@ -42,16 +50,20 @@ const MobileLanding = ({ currentUser }: Props) => {
   };
 
   return (
-    <div className="sm:hidden relative z-10 w-full overflow-x-hidden px-4 pt-4 pb-28 min-h-[100dvh] bg-gradient-to-b from-background via-background to-primary/5">
-      {/* Animated background blobs */}
+    <div className="sm:hidden relative z-10 w-full overflow-x-hidden px-4 pt-4 pb-28 min-h-[100dvh] bg-gradient-to-b from-background via-background to-background">
+      {/* Premium mobile backdrop (mobile-only) */}
       <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+        {/* soft vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_0%,hsl(var(--gold)_/_0.10),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(90%_70%_at_50%_100%,hsl(var(--primary)_/_0.10),transparent_55%)]" />
+
         <motion.div
-          className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl"
+          className="absolute -top-24 -right-20 w-44 h-44 bg-primary/10 rounded-full blur-3xl"
           animate={{ y: [0, 30, 0], x: [0, -15, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-0 -left-20 w-40 h-40 bg-gold/10 rounded-full blur-3xl"
+          className="absolute bottom-0 -left-24 w-44 h-44 bg-gold/10 rounded-full blur-3xl"
           animate={{ y: [0, -30, 0], x: [0, 15, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -85,7 +97,8 @@ const MobileLanding = ({ currentUser }: Props) => {
           <motion.button
             onClick={() => navigate("/auth")}
             whileTap={{ scale: 0.95 }}
-            className="eyebrow border border-border px-3 py-1.5 hover:border-gold hover:text-gold transition-all duration-500"
+            className="eyebrow border border-border/70 bg-card/30 backdrop-blur-sm px-3 py-1.5 hover:border-gold hover:text-gold transition-all duration-500"
+            style={{ borderRadius: 999 }}
           >
             Sign in
           </motion.button>
@@ -100,11 +113,12 @@ const MobileLanding = ({ currentUser }: Props) => {
         className="text-center mb-8 mt-4"
       >
         <motion.p
-          className="eyebrow text-[10px] tracking-[0.3em] text-gold font-light"
+          className="eyebrow text-[10px] tracking-[0.34em] text-gold font-light inline-flex items-center justify-center gap-1.5"
           animate={{ opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          🚀 FOUNDING MEMBER · 50% OFF FOR LIFE
+          <Sparkles className="w-3 h-3" strokeWidth={1.4} />
+          FOUNDING MEMBER · 50% OFF FOR LIFE
         </motion.p>
         <div className="gold-hairline my-3 max-w-[50%] mx-auto" />
       </motion.div>
@@ -143,7 +157,7 @@ const MobileLanding = ({ currentUser }: Props) => {
         {features.map((f, i) => (
           <div key={f.title} className="text-center text-[11px]">
             <div className="flex justify-center mb-2">
-              <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 rounded-xl border border-border/60 bg-card/40 backdrop-blur-sm flex items-center justify-center shadow-[0_8px_20px_rgba(0,0,0,0.08)]">
                 <f.icon className="w-4 h-4 text-primary" strokeWidth={1.5} />
               </div>
             </div>
@@ -169,16 +183,16 @@ const MobileLanding = ({ currentUser }: Props) => {
         <input
           name="q"
           placeholder="What's on your mind…"
-          className="w-full bg-card/70 backdrop-blur-sm border border-gold/30 pl-4 pr-11 py-3.5 text-xs focus:outline-none focus:border-gold focus:bg-card/90 transition-all duration-300 font-light"
-          style={{ borderRadius: 8 }}
+          className="w-full bg-card/55 backdrop-blur-md border border-gold/25 pl-4 pr-12 py-3.5 text-xs focus:outline-none focus:border-gold focus:bg-card/80 transition-all duration-300 font-light shadow-[0_10px_28px_rgba(0,0,0,0.10)]"
+          style={{ borderRadius: 14 }}
         />
         <motion.button
           type="submit"
           whileTap={{ scale: 0.9 }}
-          className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-gradient-to-br from-gold to-gold/70 text-foreground hover:from-gold/90 hover:to-gold/60 transition-all"
-          style={{ borderRadius: 6 }}
+          className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-gradient-to-br from-gold to-gold/70 text-foreground hover:from-gold/90 hover:to-gold/60 transition-all shadow-[0_10px_24px_hsl(var(--gold)_/_0.25)]"
+          style={{ borderRadius: 12 }}
         >
-          <Send className="w-3.5 h-3.5" strokeWidth={2} />
+          <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2} />
         </motion.button>
       </motion.form>
 
@@ -208,20 +222,24 @@ const MobileLanding = ({ currentUser }: Props) => {
         transition={{ delay: 0.65 }}
         whileTap={{ scale: 0.97 }}
         onClick={() => navigate("/dashboard")}
-        className="w-full mb-8 relative overflow-hidden group bg-gradient-to-r from-primary/80 to-primary p-4 text-white font-light transition-all"
-        style={{ borderRadius: 10 }}
+        className="w-full mb-8 relative overflow-hidden group bg-gradient-to-r from-primary/85 to-primary p-4 text-white font-light transition-all shadow-[0_18px_40px_hsl(var(--primary)_/_0.28)]"
+        style={{ borderRadius: 16 }}
       >
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-primary to-gold opacity-0 group-hover:opacity-100 transition-opacity"
           animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
           transition={{ duration: 3, repeat: Infinity }}
         />
+        {/* glossy highlight */}
+        <div className="absolute -top-16 left-0 right-0 h-24 bg-white/10 blur-2xl rotate-6 opacity-70" />
         <div className="relative flex items-center justify-between">
           <div className="text-left">
             <p className="editorial-heading text-base">Begin Analysis</p>
             <p className="eyebrow text-xs mt-0.5 text-white/70">Analyze now — save for later</p>
           </div>
-          <Brain className="w-5 h-5" strokeWidth={1.5} />
+          <div className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center">
+            <Brain className="w-5 h-5" strokeWidth={1.5} />
+          </div>
         </div>
       </motion.button>
 
@@ -243,14 +261,14 @@ const MobileLanding = ({ currentUser }: Props) => {
               transition={{ delay: 0.75 + i * 0.08 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate(tool.to)}
-              className={`relative overflow-hidden border border-border/50 bg-gradient-to-br ${tool.color} p-3 flex flex-col items-start text-left aspect-square justify-between hover:border-primary transition-all duration-500 group`}
-              style={{ borderRadius: 8 }}
+              className={`relative overflow-hidden border border-border/55 bg-gradient-to-br ${tool.color} p-3 flex flex-col items-start text-left aspect-square justify-between hover:border-primary transition-all duration-500 group shadow-[0_14px_30px_rgba(0,0,0,0.08)]`}
+              style={{ borderRadius: 16 }}
             >
               <motion.div
                 className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100"
                 transition={{ duration: 0.3 }}
               />
-              <div className="relative z-10 w-6 h-6 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <div className="relative z-10 w-7 h-7 bg-card/40 backdrop-blur-sm border border-border/50 rounded-xl flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                 <tool.icon className="w-3.5 h-3.5 text-primary" strokeWidth={1.5} />
               </div>
               <div className="relative z-10">
@@ -293,8 +311,8 @@ const MobileLanding = ({ currentUser }: Props) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.95 + i * 0.08 }}
               whileTap={{ scale: 0.97 }}
-              className={`relative overflow-hidden border border-border/40 bg-gradient-to-br ${m.color} p-4 group hover:border-primary/50 transition-all`}
-              style={{ borderRadius: 8 }}
+              className={`relative overflow-hidden border border-border/45 bg-gradient-to-br ${m.color} p-4 group hover:border-primary/50 transition-all shadow-[0_14px_30px_rgba(0,0,0,0.08)]`}
+              style={{ borderRadius: 16 }}
             >
               <motion.div
                 className="absolute inset-0 bg-white/[0.02] opacity-0 group-hover:opacity-100"

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ChevronRight, Sparkles } from "lucide-react";
 
 interface Props {
   onClick: () => void;
@@ -20,10 +21,14 @@ const MobileStickyCTA = ({ onClick }: Props) => {
     <div className="sm:hidden fixed left-0 right-0 bottom-4 z-40 px-5 pointer-events-none">
       <button
         onClick={onClick}
-        className="pointer-events-auto w-full py-3.5 rounded-full bg-foreground text-background editorial-heading text-sm tracking-[0.18em] uppercase shadow-2xl"
-        style={{ boxShadow: "0 10px 40px hsl(var(--primary) / 0.35)" }}
+        className="pointer-events-auto w-full py-3.5 rounded-full bg-gradient-to-r from-foreground via-foreground to-foreground text-background editorial-heading text-sm tracking-[0.18em] uppercase shadow-2xl border border-white/10 backdrop-blur-sm"
+        style={{ boxShadow: "0 14px 48px hsl(var(--primary) / 0.30)" }}
       >
-        Reserve founding spot
+        <span className="flex items-center justify-center gap-2">
+          <Sparkles className="w-4 h-4" strokeWidth={1.6} />
+          Reserve founding spot
+          <ChevronRight className="w-4 h-4" strokeWidth={1.8} />
+        </span>
       </button>
     </div>
   );
