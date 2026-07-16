@@ -13,7 +13,6 @@ import logoUrl from "@/assets/subtle-sense-logo.png";
 import StreakBadge from "@/components/StreakBadge";
 import { useStreak } from "@/hooks/useStreak";
 import MobileStickyCTA from "@/components/landing/MobileStickyCTA";
-import ValidationSection from "@/components/landing/ValidationSection";
 import type { User } from "@supabase/supabase-js";
 
 interface Props {
@@ -144,8 +143,6 @@ const MobileLanding = ({ currentUser }: Props) => {
       >
         AI reads the emotions you seldom name aloud. In 60 seconds.
       </motion.p>
-
-      <ValidationSection />
 
       {/* Quick features */}
       <motion.div
