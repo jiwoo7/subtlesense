@@ -130,10 +130,7 @@ const Pricing = () => {
                 <p className="eyebrow mb-3">{t.name}</p>
                 <p className="editorial-italic text-foreground mb-8">{t.tagline}</p>
 
-                <div className="flex items-baseline gap-3 mb-8">
-                  <span className="editorial-heading text-5xl text-foreground">{t.price}</span>
-                  <span className="eyebrow text-muted-foreground">{t.cadence}</span>
-                </div>
+                <div className="mb-8" />
 
                 <div className="gold-hairline mb-6" />
 
