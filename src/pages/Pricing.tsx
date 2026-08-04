@@ -12,8 +12,6 @@ const ease = [0.25, 1, 0.5, 1] as const;
 const tiers = [
   {
     name: "Guest",
-    price: "Free",
-    cadence: "forever",
     tagline: "For the curious visit.",
     features: [
       "3 readings per month",
@@ -27,8 +25,6 @@ const tiers = [
   },
   {
     name: "Interior",
-    price: "$8",
-    cadence: "per month",
     tagline: "The private practice.",
     features: [
       "Unlimited readings",
@@ -44,14 +40,11 @@ const tiers = [
   },
   {
     name: "Atelier",
-    price: "$24",
-    cadence: "per month",
     tagline: "For the reflective professional.",
     features: [
       "Everything in Interior",
       "Export sessions (PDF / CSV)",
       "Multiple named subjects",
-      "API access (beta)",
       "White-glove onboarding",
     ],
     cta: "Request Atelier",
@@ -109,8 +102,8 @@ const Pricing = () => {
           </h1>
 
           <p className="max-w-2xl mx-auto text-base md:text-lg text-muted-foreground font-light leading-relaxed">
-            Three tiers, plainly stated. No dark patterns, no trial mazes. Cancel from a
-            single button in settings &mdash; your history exports with you.
+            Three tiers, plainly stated. No dark patterns, no trial mazes &mdash; and
+            nothing to pay today. Reserve the tier that sounds like you.
           </p>
         </section>
 
@@ -137,10 +130,7 @@ const Pricing = () => {
                 <p className="eyebrow mb-3">{t.name}</p>
                 <p className="editorial-italic text-foreground mb-8">{t.tagline}</p>
 
-                <div className="flex items-baseline gap-3 mb-8">
-                  <span className="editorial-heading text-5xl text-foreground">{t.price}</span>
-                  <span className="eyebrow text-muted-foreground">{t.cadence}</span>
-                </div>
+                <div className="mb-8" />
 
                 <div className="gold-hairline mb-6" />
 
@@ -169,8 +159,8 @@ const Pricing = () => {
           </div>
 
           <p className="text-center eyebrow mt-14 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Prices anchor our roadmap. Payments open with the first Interior release &mdash;
-            Founding Members are billed only when the practice begins.
+            Reserving costs nothing. Founding Members hear from us first when the
+            practice opens &mdash; and keep their place for life.
           </p>
         </section>
 
