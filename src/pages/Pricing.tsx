@@ -12,8 +12,6 @@ const ease = [0.25, 1, 0.5, 1] as const;
 const tiers = [
   {
     name: "Guest",
-    price: "Free",
-    cadence: "forever",
     tagline: "For the curious visit.",
     features: [
       "3 readings per month",
@@ -27,8 +25,6 @@ const tiers = [
   },
   {
     name: "Interior",
-    price: "$8",
-    cadence: "per month",
     tagline: "The private practice.",
     features: [
       "Unlimited readings",
@@ -44,14 +40,11 @@ const tiers = [
   },
   {
     name: "Atelier",
-    price: "$24",
-    cadence: "per month",
     tagline: "For the reflective professional.",
     features: [
       "Everything in Interior",
       "Export sessions (PDF / CSV)",
       "Multiple named subjects",
-      "API access (beta)",
       "White-glove onboarding",
     ],
     cta: "Request Atelier",
