@@ -159,8 +159,8 @@ const Pricing = () => {
           </div>
 
           <p className="text-center eyebrow mt-14 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Prices anchor our roadmap. Payments open with the first Interior release &mdash;
-            Founding Members are billed only when the practice begins.
+            Reserving costs nothing. Founding Members hear from us first when the
+            practice opens &mdash; and keep their place for life.
           </p>
         </section>
 
