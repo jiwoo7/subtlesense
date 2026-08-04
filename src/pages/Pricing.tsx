@@ -102,8 +102,8 @@ const Pricing = () => {
           </h1>
 
           <p className="max-w-2xl mx-auto text-base md:text-lg text-muted-foreground font-light leading-relaxed">
-            Three tiers, plainly stated. No dark patterns, no trial mazes. Cancel from a
-            single button in settings &mdash; your history exports with you.
+            Three tiers, plainly stated. No dark patterns, no trial mazes &mdash; and
+            nothing to pay today. Reserve the tier that sounds like you.
           </p>
         </section>
 
