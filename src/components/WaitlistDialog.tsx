@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
@@ -12,14 +12,13 @@ interface Props {
 
 const ease = [0.25, 1, 0.5, 1] as const;
 
-const Field = ({
-  id,
-  label,
-  ...rest
-}: { id: string; label: string } & React.InputHTMLAttributes<HTMLInputElement>) => (
+type FieldProps = { id: string; label: string } & React.InputHTMLAttributes<HTMLInputElement>;
+
+const Field = forwardRef<HTMLInputElement, FieldProps>(({ id, label, ...rest }, ref) => (
   <div className="relative">
     <input
       id={id}
+      ref={ref}
       {...rest}
       placeholder=" "
       className="peer w-full bg-transparent border-0 border-b border-border/70 px-0 pt-6 pb-2 text-base font-light text-foreground outline-none transition-colors duration-500 focus:border-gold placeholder:text-transparent"
@@ -31,7 +30,8 @@ const Field = ({
       {label}
     </label>
   </div>
-);
+));
+Field.displayName = "Field";
 
 const WaitlistDialog = ({ open, onOpenChange, tier }: Props) => {
   const [email, setEmail] = useState("");
