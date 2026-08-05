@@ -72,7 +72,7 @@ const EmotionTimeline = () => {
         animate={{ opacity: 1, y: 0 }}
       >
         <Activity className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
-        <h3 className="font-display font-bold text-foreground mb-1">{user ? "Not Enough Data Yet" : "Login to save trends"}</h3>
+        <h3 className="editorial-heading text-xl text-foreground mb-1">{user ? "Not Enough Data Yet" : "Login to save trends"}</h3>
         <p className="text-sm text-muted-foreground">
           {user ? "Complete at least 2 sessions to see your emotion trends 📈" : "Analysis still works now. Your timeline appears here after saved sessions."}
         </p>
@@ -88,7 +88,7 @@ const EmotionTimeline = () => {
     >
       <div className="flex items-center gap-2 mb-4">
         <TrendingUp className="w-5 h-5 text-primary" />
-        <h3 className="font-display font-bold text-foreground">Emotion Trends 📈</h3>
+        <h3 className="editorial-heading text-xl sm:text-2xl text-foreground">Emotion Trends</h3>
       </div>
 
       <div className="h-64">

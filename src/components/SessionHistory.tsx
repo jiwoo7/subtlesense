@@ -146,7 +146,7 @@ const SessionHistory = () => {
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-2xl">{getTypeEmoji(session.upload_type)}</span>
                     <div>
-                      <p className="font-display font-bold text-foreground capitalize">
+                      <p className="editorial-heading text-lg text-foreground capitalize">
                         {session.upload_type} Analysis
                       </p>
                       <p className="text-xs text-muted-foreground">
