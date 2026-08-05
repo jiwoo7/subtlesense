@@ -1,11 +1,6 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import {
-  ArrowUpRight,
-  Brain,
-  ChevronRight,
-  Sparkles,
-} from "lucide-react";
+import { ArrowUpRight, ChevronRight } from "lucide-react";
 import logoUrl from "@/assets/subtle-sense-logo.png";
 import StreakBadge from "@/components/StreakBadge";
 import { useStreak } from "@/hooks/useStreak";
@@ -16,6 +11,25 @@ interface Props {
   currentUser: User | null;
 }
 
+const fade = (delay = 0) => ({
+  initial: { opacity: 0, y: 10 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.9, delay, ease: [0.25, 1, 0.5, 1] as const },
+});
+
+const PILLARS = [
+  { n: "01", title: "Spoken", desc: "What your face and voice openly say." },
+  { n: "02", title: "Felt", desc: "The current running underneath the words." },
+  { n: "03", title: "Unsaid", desc: "What is held back, softly named for you." },
+];
+
+const READINGS = [
+  { label: "Overthinking", pct: 78 },
+  { label: "Quiet stress", pct: 65 },
+  { label: "Tenderness", pct: 42 },
+  { label: "Hope", pct: 71 },
+];
+
 const MobileLanding = ({ currentUser }: Props) => {
   const navigate = useNavigate();
   const { current, longest } = useStreak(currentUser?.id);
@@ -25,241 +39,191 @@ const MobileLanding = ({ currentUser }: Props) => {
   };
 
   return (
-    <div className="sm:hidden relative z-10 w-full overflow-x-hidden px-4 pt-6 pb-24 min-h-[100dvh] bg-background">
-      {/* Luxury backdrop — subtle depth */}
+    <div className="sm:hidden relative z-10 w-full overflow-x-hidden px-6 pt-6 pb-28 min-h-[100dvh] bg-background">
+      {/* Backdrop — onyx with a single warm vignette */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(130%_100%_at_50%_20%,hsl(var(--primary)_/_0.05),transparent_70%)]" />
-        <motion.div
-          className="absolute -top-40 -right-40 w-80 h-80 bg-gold/5 rounded-full blur-3xl pointer-events-none"
-          animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
+        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_0%,hsl(var(--primary)_/_0.10),transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(100%_60%_at_50%_100%,hsl(var(--primary)_/_0.05),transparent_60%)]" />
       </div>
 
-      {/* Top bar — elegant */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="flex items-center justify-between mb-10"
-      >
-        <motion.div
-          className="flex items-center gap-2 group cursor-pointer"
-          whileHover={{ scale: 1.02 }}
-        >
-          <motion.img
-            src={logoUrl}
-            alt=""
-            className="w-6 h-6 object-contain group-hover:drop-shadow-[0_0_8px_hsl(var(--primary)_/_0.3)] transition-all"
-          />
-          <span className="text-[11px] tracking-[0.32em] uppercase font-light text-foreground group-hover:text-gold transition-colors duration-500">
-            Subtle Sense
-          </span>
-        </motion.div>
+      {/* Masthead */}
+      <motion.header {...fade(0)} className="flex items-center justify-between">
+        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2.5">
+          <img src={logoUrl} alt="Subtle Sense" width={22} height={22} className="w-[22px] h-[22px] object-contain" />
+          <span className="text-[10px] tracking-[0.4em] uppercase text-foreground/80 font-light">Subtle Sense</span>
+        </button>
         {currentUser ? (
           <StreakBadge current={current} longest={longest} compact />
         ) : (
-          <motion.button
-            onClick={() => navigate("/auth")}
-            whileTap={{ scale: 0.98 }}
-            className="text-[11px] tracking-[0.2em] text-foreground/70 hover:text-gold transition-colors duration-500"
-          >
+          <button onClick={() => navigate("/auth")} className="text-[10px] tracking-[0.24em] uppercase text-foreground/55 hover:text-foreground transition-colors">
             Sign in
-          </motion.button>
+          </button>
         )}
-      </motion.div>
+      </motion.header>
 
-      {/* Hero section — luxury refined */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-12"
-      >
-        {/* Founding member badge — with life */}
-        <motion.div
-          className="flex items-center justify-center gap-1.5 mb-6"
-          animate={{ opacity: [0.6, 0.9, 0.6] }}
-          transition={{ duration: 3, repeat: Infinity }}
-        >
-          <motion.div
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <Sparkles className="w-3 h-3 text-gold" strokeWidth={1.5} />
-          </motion.div>
-          <span className="text-[9px] tracking-[0.3em] text-gold font-light">
-            FOUNDING MEMBER · 50% OFF FOR LIFE
-          </span>
-          <motion.div
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
-          >
-            <Sparkles className="w-3 h-3 text-gold" strokeWidth={1.5} />
-          </motion.div>
-        </motion.div>
+      <div className="gold-hairline mt-6 opacity-60" />
 
-        {/* Main headline — luxury with accent */}
-        <motion.h1
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-[2.3rem] leading-[1.08] font-light text-foreground mb-4"
-        >
-          Discover<br />
-          <motion.span
-            className="text-gold font-light italic inline-block"
-            animate={{ opacity: [0.8, 1, 0.8] }}
-            transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-          >
-            what you're really<br />feeling.
-          </motion.span>
+      {/* Hero */}
+      <section className="pt-14 pb-12">
+        <motion.p {...fade(0.05)} className="eyebrow text-[9px] tracking-[0.42em] text-primary/80 mb-7">
+          Est. 2026 · Emotional Intelligence
+        </motion.p>
+
+        <motion.h1 {...fade(0.12)} className="editorial-heading text-[3.05rem] leading-[0.94] text-foreground">
+          Discover
+          <br />
+          <span className="editorial-italic text-primary">what you're</span>
+          <br />
+          <span className="editorial-italic text-primary">really feeling</span>
+          <span className="text-primary">.</span>
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-[13px] text-foreground/60 font-light leading-relaxed max-w-sm mx-auto"
-        >
-          AI reads the emotions you seldom name aloud. In 60 seconds.
+        <motion.p {...fade(0.2)} className="mt-7 text-[13.5px] leading-[1.75] text-muted-foreground font-light max-w-[19rem]">
+          A quiet reading of the emotions you seldom name aloud — spoken, felt, and unsaid. Sixty seconds, nothing stored.
         </motion.p>
-      </motion.div>
 
-      {/* Search input — elegant with focus state */}
-      <motion.form
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        onSubmit={(e) => {
-          e.preventDefault();
-          const fd = new FormData(e.currentTarget);
-          openCompanion(String(fd.get("q") || ""));
-          (e.currentTarget as HTMLFormElement).reset();
-        }}
-        className="relative mb-8 group"
-      >
-        <input
-          name="q"
-          placeholder="What's on your mind…"
-          className="w-full bg-background border border-gold/15 px-4 py-3.5 text-[13px] placeholder:text-foreground/40 focus:outline-none focus:border-gold/40 focus:shadow-[0_0_20px_hsl(var(--gold)_/_0.1)] transition-all duration-300 font-light"
-          style={{ borderRadius: 8 }}
-        />
-        <motion.button
-          type="submit"
-          whileTap={{ scale: 0.92 }}
-          className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-gold/60 hover:text-gold transition-colors duration-300"
+        {/* Whisper input */}
+        <motion.form
+          {...fade(0.28)}
+          onSubmit={(e) => {
+            e.preventDefault();
+            const fd = new FormData(e.currentTarget);
+            openCompanion(String(fd.get("q") || ""));
+            (e.currentTarget as HTMLFormElement).reset();
+          }}
+          className="relative mt-10"
         >
-          <ArrowUpRight className="w-4 h-4" strokeWidth={2.5} />
-        </motion.button>
-      </motion.form>
-
-      {/* Primary CTA — bold but refined */}
-      <motion.button
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        whileTap={{ scale: 0.96 }}
-        onClick={() => navigate("/dashboard")}
-        className="w-full mb-8 bg-gradient-to-r from-gold via-gold to-gold/80 text-foreground py-4 text-sm font-light transition-all hover:shadow-[0_20px_40px_hsl(var(--gold)_/_0.25)] shadow-[0_10px_30px_hsl(var(--gold)_/_0.15)]"
-        style={{ borderRadius: 8 }}
-      >
-        Begin Analysis
-      </motion.button>
-
-      {/* Info bar — refined */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="flex items-center justify-between text-[11px] mb-10 px-1"
-      >
-        <p className="text-foreground/50 flex items-center gap-1.5">
-          <motion.span
-            className="inline-block w-1.5 h-1.5 bg-gold/70 rounded-full"
-            animate={{ scale: [1, 1.3, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
+          <input
+            name="q"
+            placeholder="Say it here, however it comes out…"
+            className="w-full bg-transparent border-b border-border/70 focus:border-primary/70 pb-3 pr-9 text-[13px] font-light text-foreground placeholder:text-muted-foreground/70 focus:outline-none transition-colors duration-500"
           />
-          <span>In-session only</span>
-        </p>
-        <motion.button
-          onClick={() => navigate("/philosophy")}
-          whileHover={{ x: 2 }}
-          className="text-gold/70 hover:text-gold transition-colors flex items-center gap-1"
-        >
-          Philosophy
-          <ChevronRight className="w-3 h-3" />
-        </motion.button>
-      </motion.div>
-
-      {/* Quick features — card-based with depth */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className="space-y-3 mb-10"
-      >
-        {[
-          { title: "Deep Detection", desc: "Detects hidden & suppressed emotions" },
-          { title: "Instant Insights", desc: "Personalized suggestions in seconds" },
-          { title: "Privacy First", desc: "Nothing stored without consent" },
-        ].map((f, i) => (
-          <motion.div
-            key={f.title}
-            initial={{ opacity: 0, x: -8 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.65 + i * 0.08 }}
-            whileHover={{ x: 4, borderColor: "hsl(var(--gold) / 0.4)" }}
-            className="flex items-start gap-3 p-4 rounded-lg border border-gold/12 hover:bg-gold/[0.02] transition-all duration-300 cursor-pointer group"
+          <button
+            type="submit"
+            aria-label="Send to companion"
+            className="absolute right-0 bottom-3 text-primary/70 hover:text-primary transition-colors"
           >
-            <Brain className="w-4 h-4 text-gold/70 flex-shrink-0 mt-0.5 group-hover:text-gold transition-colors" strokeWidth={1.5} />
-            <div>
-              <p className="text-xs font-light text-foreground">{f.title}</p>
-              <p className="text-[11px] text-foreground/50 font-light mt-0.5">{f.desc}</p>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
+            <ArrowUpRight className="w-4 h-4" strokeWidth={1.6} />
+          </button>
+        </motion.form>
 
-      {/* Mood landscape — elegant grid */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.75 }}
-        className="mb-10"
-      >
-        <div className="mb-4">
-          <p className="text-[10px] tracking-[0.3em] text-gold/60 uppercase mb-2">Recent readings</p>
-          <p className="text-sm font-light text-foreground">Your emotional landscape</p>
-        </div>
+        {/* CTAs */}
+        <motion.div {...fade(0.36)} className="mt-9 space-y-3">
+          <button onClick={() => navigate("/dashboard")} className="btn-editorial w-full">
+            Begin a reading
+          </button>
+          <button onClick={() => navigate("/methodology")} className="btn-editorial-ghost w-full">
+            How we read
+          </button>
+        </motion.div>
 
-        <div className="grid grid-cols-2 gap-3">
-          {[
-            { label: "Overthinking", pct: "78%" },
-            { label: "Stress", pct: "65%" },
-            { label: "Sadness", pct: "42%" },
-            { label: "Hope", pct: "71%" },
-          ].map((m, i) => (
+        <motion.div {...fade(0.44)} className="mt-6 flex items-center gap-2">
+          <span className="inline-block w-1 h-1 rounded-full bg-primary/80 animate-pulse-soft" />
+          <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Processed in-session only</span>
+        </motion.div>
+      </section>
+
+      <div className="gold-hairline opacity-50" />
+
+      {/* Three layers */}
+      <section className="py-12">
+        <p className="eyebrow text-[9px] tracking-[0.4em] text-primary/70 mb-8">Three layers</p>
+        <div className="space-y-9">
+          {PILLARS.map((p, i) => (
             <motion.div
-              key={m.label}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 + i * 0.06 }}
-              whileHover={{ borderColor: "hsl(var(--gold) / 0.3)", y: -2 }}
-              className="border border-gold/10 rounded-lg p-4 hover:bg-gold/[0.02] transition-all duration-300 cursor-pointer group"
+              key={p.n}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.8, delay: i * 0.08, ease: [0.25, 1, 0.5, 1] }}
+              className="flex gap-5"
             >
-              <p className="text-[9px] text-foreground/40 mb-2 tracking-wide">№ {String(i + 1).padStart(2, "0")}</p>
-              <p className="text-sm font-light text-foreground mb-3 group-hover:text-gold/80 transition-colors">{m.label}</p>
-              <p className="text-gold/80 text-xs font-light group-hover:text-gold transition-colors">{m.pct}</p>
+              <span className="editorial-heading text-primary/45 text-[13px] pt-1 tabular-nums">{p.n}</span>
+              <div className="flex-1 border-b border-border/50 pb-7">
+                <h3 className="editorial-heading text-[1.5rem] text-foreground">{p.title}</h3>
+                <p className="mt-2 text-[12.5px] leading-relaxed text-muted-foreground font-light">{p.desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>
-      </motion.div>
+      </section>
 
-      {/* Sticky CTA */}
+      {/* Recent readings — editorial index with rules */}
+      <section className="pb-12">
+        <div className="flex items-baseline justify-between mb-7">
+          <p className="eyebrow text-[9px] tracking-[0.4em] text-primary/70">Recent readings</p>
+          <button onClick={() => navigate("/dashboard")} className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground flex items-center gap-1">
+            All <ChevronRight className="w-3 h-3" />
+          </button>
+        </div>
+
+        <h2 className="editorial-heading text-[2rem] leading-[1.05] text-foreground mb-8">
+          Your emotional <span className="editorial-italic text-primary">landscape</span>
+        </h2>
+
+        <div className="space-y-5">
+          {READINGS.map((r, i) => (
+            <motion.div
+              key={r.label}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: i * 0.06 }}
+            >
+              <div className="flex items-baseline justify-between">
+                <span className="text-[13px] font-light text-foreground">{r.label}</span>
+                <span className="editorial-heading text-[13px] text-primary tabular-nums">{r.pct}%</span>
+              </div>
+              <div className="mt-2.5 h-px w-full bg-border/60 overflow-hidden">
+                <motion.div
+                  className="h-px bg-primary/80"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${r.pct}%` }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, delay: 0.15 + i * 0.06, ease: [0.25, 1, 0.5, 1] }}
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <div className="gold-hairline opacity-50" />
+
+      {/* Quiet tools */}
+      <section className="py-12">
+        <p className="eyebrow text-[9px] tracking-[0.4em] text-primary/70 mb-7">Quiet tools</p>
+        <div className="divide-y divide-border/50 border-y border-border/50">
+          {[
+            { label: "Mind games", note: "Breath, colour, stillness", to: "/games" },
+            { label: "Mood playlists", note: "Sound matched to feeling", to: "/playlists" },
+            { label: "Philosophy", note: "Why we built this", to: "/philosophy" },
+          ].map((t) => (
+            <button
+              key={t.label}
+              onClick={() => navigate(t.to)}
+              className="w-full flex items-center justify-between py-5 text-left group"
+            >
+              <span>
+                <span className="editorial-heading text-[1.15rem] text-foreground block">{t.label}</span>
+                <span className="text-[11.5px] text-muted-foreground font-light">{t.note}</span>
+              </span>
+              <ArrowUpRight className="w-4 h-4 text-primary/60 group-hover:text-primary transition-colors" strokeWidth={1.4} />
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Closing invitation */}
+      <section className="pt-6 pb-4 text-center">
+        <div className="gold-hairline mb-10 opacity-60" />
+        <p className="editorial-italic text-[1.4rem] leading-snug text-foreground/90 px-2">
+          “Most people only see the surface. You are allowed to know the rest.”
+        </p>
+        <p className="mt-6 text-[10px] tracking-[0.32em] uppercase text-muted-foreground">Subtle Sense</p>
+      </section>
+
       <MobileStickyCTA onClick={() => navigate("/pricing")} />
-
-      <div className="h-2" />
     </div>
   );
 };

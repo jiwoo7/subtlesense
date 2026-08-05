@@ -18,19 +18,20 @@ const MobileStickyCTA = ({ onClick }: Props) => {
   if (!visible) return null;
 
   return (
-    <div className="sm:hidden fixed left-0 right-0 bottom-4 z-40 px-5 pointer-events-none">
+    <div className="sm:hidden fixed left-0 right-0 bottom-[88px] z-30 px-6 pointer-events-none">
       <button
         onClick={onClick}
-        className="pointer-events-auto w-full py-3.5 rounded-full bg-gradient-to-r from-foreground via-foreground to-foreground text-background editorial-heading text-sm tracking-[0.18em] uppercase shadow-2xl border border-white/10 backdrop-blur-sm"
-        style={{ boxShadow: "0 14px 48px hsl(var(--primary) / 0.30)" }}
+        className="pointer-events-auto w-full py-3.5 bg-primary text-primary-foreground editorial-heading text-[11px] tracking-[0.24em] uppercase border border-primary/60"
+        style={{ borderRadius: 2, boxShadow: "0 18px 44px hsl(var(--background) / 0.9)" }}
       >
         <span className="flex items-center justify-center gap-2">
-          <Sparkles className="w-4 h-4" strokeWidth={1.6} />
+          <Sparkles className="w-3.5 h-3.5" strokeWidth={1.4} />
           Reserve founding spot
-          <ChevronRight className="w-4 h-4" strokeWidth={1.8} />
+          <ChevronRight className="w-3.5 h-3.5" strokeWidth={1.4} />
         </span>
       </button>
     </div>
+
   );
 };
 
