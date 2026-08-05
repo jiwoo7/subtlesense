@@ -40,24 +40,20 @@ const WelcomeMessage = () => {
 
   const getTimeBasedGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return { greeting: "Good morning", icon: Sun, emoji: "☀️" };
-    if (hour < 17) return { greeting: "Good afternoon", icon: Coffee, emoji: "🌤️" };
-    if (hour < 21) return { greeting: "Good evening", icon: Star, emoji: "🌅" };
-    return { greeting: "Good night", icon: Moon, emoji: "🌙" };
+    if (hour < 12) return { greeting: "Good morning", icon: Sun };
+    if (hour < 17) return { greeting: "Good afternoon", icon: Coffee };
+    if (hour < 21) return { greeting: "Good evening", icon: Star };
+    return { greeting: "Good evening", icon: Moon };
   };
 
   const cuteMessages = [
-    "Hope you're feeling amazing today! 💜",
-    "You're doing great, keep it up! ✨",
-    "Remember: you're awesome! 🌟",
-    "Sending you good vibes! 💫",
-    "Ready to understand your emotions? 🔮",
-    "Your emotional wellness matters! 💖",
-    "Take a moment to check in with yourself 🧘",
-    "Every emotion is valid and important 🌈",
+    "Take a moment. Then begin when you are ready.",
+    "Whatever surfaces today is worth noticing.",
+    "A quiet check-in is enough.",
+    "Every emotion here is valid.",
   ];
 
-  const { greeting, emoji } = getTimeBasedGreeting();
+  const { greeting } = getTimeBasedGreeting();
   const randomMessage = cuteMessages[Math.floor(Math.random() * cuteMessages.length)];
 
   if (!user) return null;
@@ -69,11 +65,11 @@ const WelcomeMessage = () => {
           initial={{ opacity: 0, y: -20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -10, scale: 0.95 }}
-          className="glass-panel rounded-2xl p-4 mb-6 border border-neon-pink/30"
+          className="glass-panel rounded-sm p-4 mb-6 border border-border"
         >
           <div className="flex items-center gap-3">
             <motion.div
-              className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 shadow-[0_0_16px_hsl(var(--neon-pink)/0.5)]"
+              className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border border-border"
               animate={{ rotate: [0, 5, -5, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
@@ -82,12 +78,12 @@ const WelcomeMessage = () => {
             
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <h3 className="font-display font-bold text-foreground">
-                  {greeting}, {displayName}! {emoji}
+                <h3 className="editorial-heading text-xl sm:text-2xl text-foreground">
+                  {greeting}, {displayName}
                 </h3>
-                <Sparkles className="w-4 h-4 text-neon-pink" />
+                
               </div>
-              <p className="text-sm text-muted-foreground truncate">
+              <p className="text-sm text-muted-foreground truncate font-light">
                 {randomMessage}
               </p>
             </div>
