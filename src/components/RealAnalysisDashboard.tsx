@@ -363,7 +363,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
                   <IconComponent className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-display font-bold text-foreground text-sm">
+                  <h4 className="editorial-heading text-base text-foreground">
                     {suggestion.title}
                   </h4>
                   <p className="text-muted-foreground text-xs mt-1">

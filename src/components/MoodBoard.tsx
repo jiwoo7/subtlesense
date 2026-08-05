@@ -191,7 +191,7 @@ const MoodBoard = () => {
           transition={{ delay: 0.1 }}
         >
           <Target className="w-8 h-8 text-pastel-yellow mx-auto mb-2" />
-          <p className="text-3xl font-display font-bold gradient-text">{stats.totalSessions}</p>
+          <p className="editorial-heading text-4xl text-foreground">{stats.totalSessions}</p>
           <p className="text-sm text-muted-foreground">Total Sessions</p>
         </motion.div>
 
@@ -209,7 +209,7 @@ const MoodBoard = () => {
               <TrendingUp className="w-4 h-4 text-red-500" />
             ) : null}
           </div>
-          <p className="text-2xl font-display font-bold text-foreground">{stats.avgConfusion}%</p>
+          <p className="editorial-heading text-3xl text-foreground">{stats.avgConfusion}%</p>
           <div className="mt-2 h-2 rounded-full bg-muted overflow-hidden">
             <motion.div
               className="h-full bg-pastel-sky"
@@ -234,7 +234,7 @@ const MoodBoard = () => {
               <TrendingUp className="w-4 h-4 text-red-500" />
             ) : null}
           </div>
-          <p className="text-2xl font-display font-bold text-foreground">{stats.avgFrustration}%</p>
+          <p className="editorial-heading text-3xl text-foreground">{stats.avgFrustration}%</p>
           <div className="mt-2 h-2 rounded-full bg-muted overflow-hidden">
             <motion.div
               className="h-full bg-pastel-pink"
@@ -259,7 +259,7 @@ const MoodBoard = () => {
               <TrendingDown className="w-4 h-4 text-red-500" />
             ) : null}
           </div>
-          <p className="text-2xl font-display font-bold text-foreground">{stats.avgFocus}%</p>
+          <p className="editorial-heading text-3xl text-foreground">{stats.avgFocus}%</p>
           <div className="mt-2 h-2 rounded-full bg-muted overflow-hidden">
             <motion.div
               className="h-full bg-pastel-mint"

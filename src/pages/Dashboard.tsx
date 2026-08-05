@@ -139,27 +139,24 @@ const Dashboard = () => {
                   <div className="flex items-center gap-3 sm:gap-4">
                     <div className="relative flex-shrink-0">
                       <motion.div
-                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-3 border-neon-pink border-t-transparent"
+                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-primary/50 border-t-transparent"
                         animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        transition={{ duration: 1.6, repeat: Infinity, ease: "linear" }}
                       />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-lg sm:text-xl">🔮</span>
-                      </div>
                     </div>
                     <div className="min-w-0">
-                      <h4 className="font-display font-bold text-foreground text-sm sm:text-base">
-                        Deep Emotion Analysis...
+                      <h4 className="editorial-heading text-lg sm:text-xl text-foreground">
+                        Reading the session
                       </h4>
-                      <p className="text-xs sm:text-sm text-muted-foreground truncate">
-                        Detecting hidden & suppressed emotions ✨
+                      <p className="eyebrow mt-1 truncate">
+                        Spoken · Felt · Unsaid
                       </p>
                     </div>
                   </div>
                   
-                  <div className="mt-3 sm:mt-4 h-2 bg-muted rounded-full overflow-hidden">
+                  <div className="mt-3 sm:mt-4 h-px bg-border overflow-hidden">
                     <motion.div
-                      className="h-full bg-gradient-to-r from-neon-purple via-neon-pink to-neon-red"
+                      className="h-full bg-primary"
                       initial={{ width: "0%" }}
                       animate={{ width: "100%" }}
                       transition={{ duration: 8, ease: "easeInOut" }}
@@ -168,7 +165,7 @@ const Dashboard = () => {
                 </motion.div>
               )}
 
-              {/* Quick stats - Mobile optimized */}
+              {/* Quick stats */}
               <motion.div
                 className="grid grid-cols-3 gap-2 sm:gap-3"
                 initial={{ opacity: 0 }}
@@ -176,25 +173,22 @@ const Dashboard = () => {
                 transition={{ delay: 0.4 }}
               >
                 {[
-                  { label: "Detection", value: "16 Emotions", emoji: "🔮" },
-                  { label: "Powered by", value: "Gemini AI", emoji: "🧠" },
-                  { label: "Detects", value: "Hidden + Suppressed", emoji: "🎭" },
+                  { label: "Detection", value: "16 Emotions" },
+                  { label: "Powered by", value: "Gemini AI" },
+                  { label: "Detects", value: "Hidden + Suppressed" },
                 ].map((stat) => (
-                  <motion.div
+                  <div
                     key={stat.label}
-                    className="glass-panel rounded-lg sm:rounded-xl p-2 sm:p-4 text-center"
-                    whileHover={{ y: -5 }}
+                    className="glass-panel rounded-sm p-3 sm:p-4 text-center"
                   >
-                    <div className="text-lg sm:text-2xl mb-1">{stat.emoji}</div>
-                    <p className="text-[10px] sm:text-sm font-display font-bold gradient-text leading-tight">
+                    <p className="eyebrow mb-1.5">{stat.label}</p>
+                    <p className="editorial-heading text-sm sm:text-lg text-foreground leading-tight">
                       {stat.value}
                     </p>
-                    <p className="text-[9px] sm:text-xs text-muted-foreground font-medium mt-0.5 sm:mt-1">
-                      {stat.label}
-                    </p>
-                  </motion.div>
+                  </div>
                 ))}
               </motion.div>
+
             </div>
 
             <RealAnalysisDashboard isAnalyzed={isAnalyzed} analysisResult={analysisResult} />
