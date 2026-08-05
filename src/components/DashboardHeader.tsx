@@ -18,15 +18,15 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
 
   const handleSignOut = async () => {
     await signOut();
-    toast.success("See you soon! 👋");
+    toast.success("Signed out");
     navigate("/");
   };
 
   const tabs = [
-    { id: "analyze" as const, label: "Analyze", icon: Sparkles, emoji: "🎯" },
-    { id: "history" as const, label: "History", icon: History, emoji: "📊" },
-    { id: "moodboard" as const, label: "Mood Board", icon: BarChart3, emoji: "🎨" },
-    { id: "journal" as const, label: "Journal", icon: BookOpen, emoji: "📝" },
+    { id: "analyze" as const, label: "Analyze", icon: Sparkles },
+    { id: "history" as const, label: "History", icon: History },
+    { id: "moodboard" as const, label: "Mood Board", icon: BarChart3 },
+    { id: "journal" as const, label: "Journal", icon: BookOpen },
   ];
 
   return (
@@ -57,12 +57,10 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
             </motion.div>
             
             <div>
-              <h1 className="font-display text-xl sm:text-2xl font-extrabold gradient-text">
+              <h1 className="editorial-heading text-xl sm:text-3xl text-foreground">
                 Subtle Sense
               </h1>
-              <p className="text-[10px] sm:text-xs text-muted-foreground font-medium">
-                Welcome back! ✨
-              </p>
+              <p className="eyebrow mt-1">Insights</p>
             </div>
           </div>
 
@@ -107,7 +105,7 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
               onClick={() => setActiveTab(tab.id)}
               title={tab.label}
               aria-label={tab.label}
-              className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
+              className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.18em] font-medium transition-all whitespace-nowrap ${
                 activeTab === tab.id
                   ? "bg-foreground text-background shadow-md"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -115,7 +113,7 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <span className="text-base sm:text-base">{tab.emoji}</span>
+              <tab.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               <span className="hidden sm:inline">{tab.label}</span>
             </motion.button>
           ))}
