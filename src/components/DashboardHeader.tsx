@@ -66,7 +66,6 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
 
           {/* Mobile user actions */}
           <div className="flex items-center gap-2 sm:hidden">
-            <ThemeToggle />
             {user ? (
               <>
                 <Button
@@ -121,7 +120,6 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
 
         {/* Desktop User Menu */}
         <div className="hidden sm:flex items-center gap-3">
-          <ThemeToggle />
           {user ? (
             <>
           <motion.div
