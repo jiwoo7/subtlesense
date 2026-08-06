@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import ThemeToggle from "./ThemeToggle";
+
 import logoUrl from "@/assets/subtle-sense-logo.png";
 
 interface DashboardHeaderProps {
@@ -66,7 +66,6 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
 
           {/* Mobile user actions */}
           <div className="flex items-center gap-2 sm:hidden">
-            <ThemeToggle />
             {user ? (
               <>
                 <Button
@@ -121,7 +120,6 @@ const DashboardHeader = ({ activeTab, setActiveTab }: DashboardHeaderProps) => {
 
         {/* Desktop User Menu */}
         <div className="hidden sm:flex items-center gap-3">
-          <ThemeToggle />
           {user ? (
             <>
           <motion.div

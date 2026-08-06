@@ -20,6 +20,8 @@ const Settings = lazy(() => import("./pages/SettingsWithProvider"));
 const Demo = lazy(() => import("./pages/Demo"));
 
 const Games = lazy(() => import("./pages/Games"));
+const Tools = lazy(() => import("./pages/Tools"));
+
 const Playlists = lazy(() => import("./pages/Playlists"));
 const Methodology = lazy(() => import("./pages/Methodology"));
 const Philosophy = lazy(() => import("./pages/Philosophy"));
@@ -56,6 +58,8 @@ const App = () => {
   <Route path="/demo" element={<PhoneFrame><Demo /></PhoneFrame>} />
   
   <Route path="/games" element={<PhoneFrame><Games /></PhoneFrame>} />
+  <Route path="/tools" element={<PhoneFrame><Tools /></PhoneFrame>} />
+
   <Route path="/playlists" element={<PhoneFrame><Playlists /></PhoneFrame>} />
   <Route path="/methodology" element={<PhoneFrame><Methodology /></PhoneFrame>} />
   <Route path="/philosophy" element={<PhoneFrame><Philosophy /></PhoneFrame>} />
