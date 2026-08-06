@@ -48,7 +48,8 @@ const MobileBottomNav = () => {
     const p = location.pathname;
     if (p.startsWith("/dashboard")) return "Insights";
     if (p.startsWith("/settings")) return "Profile";
-    if (p.startsWith("/games") || p.startsWith("/playlists")) return "Tools";
+    if (p.startsWith("/pricing")) return "Premium";
+    if (p.startsWith("/tools") || p.startsWith("/games") || p.startsWith("/playlists")) return "Tools";
     return "Home";
   })();
 
@@ -58,15 +59,11 @@ const MobileBottomNav = () => {
       else window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (label === "Insights") navigate("/dashboard");
     else if (label === "Companion") openCompanion();
-    else if (label === "Tools") {
-      if (location.pathname !== "/") {
-        navigate("/");
-        setTimeout(() => document.getElementById("mobile-tools")?.scrollIntoView({ behavior: "smooth" }), 200);
-      } else {
-        document.getElementById("mobile-tools")?.scrollIntoView({ behavior: "smooth" });
-      }
-    } else if (label === "Profile") navigate(currentUser ? "/settings" : "/auth");
+    else if (label === "Tools") navigate("/tools");
+    else if (label === "Premium") navigate("/pricing");
+    else if (label === "Profile") navigate(currentUser ? "/settings" : "/auth");
   };
+
 
   return (
     <nav
@@ -84,8 +81,8 @@ const MobileBottomNav = () => {
                 onClick={() => handleTab(t.label)}
                 aria-label={t.label}
                 aria-current={active ? "page" : undefined}
-                className={`flex min-w-[56px] flex-col items-center gap-0.5 px-1 py-1.5 rounded-xl transition-colors ${
-                  active ? "text-neon-pink" : "text-muted-foreground"
+                className={`flex min-w-[48px] flex-col items-center gap-0.5 px-0.5 py-1.5 rounded-xl transition-colors ${
+                  active ? "text-gold" : "text-muted-foreground"
                 }`}
               >
                 {t.icon ? (
@@ -97,7 +94,8 @@ const MobileBottomNav = () => {
                     className={`w-4 h-4 rounded-full object-cover ${active ? "" : "opacity-70"}`}
                   />
                 )}
-                <span className="text-[11px] font-medium leading-none">{t.label}</span>
+                <span className="text-[10px] font-medium leading-none">{t.label}</span>
+
               </button>
             );
           })}
