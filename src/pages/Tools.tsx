@@ -80,21 +80,31 @@ const Tools = () => {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05, duration: 0.4 }}
-              className="glass-panel rounded-2xl p-4 sm:p-6 text-left group"
+              className="glass-panel rounded-2xl overflow-hidden text-left group"
             >
-              <div className="flex items-start gap-3">
-                <span className="w-10 h-10 rounded-full border border-border/60 flex items-center justify-center flex-shrink-0">
-                  <it.icon className="w-4 h-4 text-gold" />
+              <span className="block relative w-full aspect-[16/7] overflow-hidden">
+                <img
+                  src={it.thumb}
+                  alt={`${it.title} — Subtle Sense tool`}
+                  loading="lazy"
+                  width={768}
+                  height={512}
+                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500"
+                />
+                <span className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+                <span className="absolute bottom-2 left-3 w-8 h-8 rounded-full border border-gold/40 bg-background/60 backdrop-blur-sm flex items-center justify-center">
+                  <it.icon className="w-3.5 h-3.5 text-gold" />
                 </span>
-                <span className="flex-1 min-w-0">
-                  <span className="flex items-center justify-between gap-2">
-                    <span className="editorial-heading text-lg block">{it.title}</span>
-                    <ArrowRight className="w-4 h-4 opacity-40 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <span className="block text-sm text-muted-foreground font-light mt-1">{it.desc}</span>
+              </span>
+              <span className="block p-4 sm:p-5">
+                <span className="flex items-center justify-between gap-2">
+                  <span className="editorial-heading text-lg block">{it.title}</span>
+                  <ArrowRight className="w-4 h-4 opacity-40 group-hover:translate-x-1 transition-transform" />
                 </span>
-              </div>
+                <span className="block text-sm text-muted-foreground font-light mt-1">{it.desc}</span>
+              </span>
             </motion.button>
+
           ))}
         </div>
       </main>
