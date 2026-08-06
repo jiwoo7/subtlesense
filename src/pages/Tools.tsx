@@ -1,6 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Gamepad2, BookOpen, ScanFace, MessageCircle, Music, ArrowRight } from "lucide-react";
+import thumbGames from "@/assets/tool-games.jpg";
+import thumbJournal from "@/assets/tool-journal.jpg";
+import thumbMood from "@/assets/tool-mood.jpg";
+import thumbCompanion from "@/assets/tool-companion.jpg";
+import thumbPlaylists from "@/assets/tool-playlists.jpg";
 
 const Tools = () => {
   const navigate = useNavigate();
@@ -14,30 +19,35 @@ const Tools = () => {
       title: "Mind Games",
       desc: "Breathe, focus, reflect, draw — under two minutes each.",
       icon: Gamepad2,
+      thumb: thumbGames,
       action: () => navigate("/games"),
     },
     {
       title: "Journalling",
       desc: "Write it down. Tag the mood. Watch the pattern surface.",
       icon: BookOpen,
+      thumb: thumbJournal,
       action: () => navigate("/dashboard?tab=journal"),
     },
     {
       title: "Mood Detection",
       desc: "Read the spoken, the felt and the unsaid in one session.",
       icon: ScanFace,
+      thumb: thumbMood,
       action: () => navigate("/dashboard"),
     },
     {
       title: "AI Companion",
       desc: "Talk it through with your Subtle Companion, any hour.",
       icon: MessageCircle,
+      thumb: thumbCompanion,
       action: openCompanion,
     },
     {
       title: "Mood Playlists",
       desc: "Sound tuned to the feeling you arrived with.",
       icon: Music,
+      thumb: thumbPlaylists,
       action: () => navigate("/playlists"),
     },
   ];
