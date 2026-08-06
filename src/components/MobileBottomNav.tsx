@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Home, Compass, LayoutGrid, User as UserIcon } from "lucide-react";
+import { Home, Compass, LayoutGrid, Crown, User as UserIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { User } from "@supabase/supabase-js";
 import logoUrl from "@/assets/subtle-sense-logo.png";
@@ -10,8 +10,10 @@ const tabs = [
   { icon: Compass, label: "Insights" },
   { icon: null, label: "Companion" },
   { icon: LayoutGrid, label: "Tools" },
+  { icon: Crown, label: "Premium" },
   { icon: UserIcon, label: "Profile" },
 ] as const;
+
 
 const MobileBottomNav = () => {
   const navigate = useNavigate();
