@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 const LiveCounter = () => {
@@ -40,13 +40,13 @@ const LiveCounter = () => {
     <section className="container mx-auto px-6 sm:px-8 lg:px-12 py-10">
       <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-16 text-center">
         {stats.map((s, i) => (
-          <div key={s.label} className="contents sm:block">
+          <Fragment key={s.label}>
             {i > 0 && <div className="hidden sm:block h-10 w-px bg-border/60" />}
             <div>
               <p className="editorial-heading text-3xl sm:text-4xl text-gold">{fmt(s.value)}</p>
               <p className="eyebrow text-muted-foreground mt-2">{s.label}</p>
             </div>
-          </div>
+          </Fragment>
         ))}
       </div>
     </section>
