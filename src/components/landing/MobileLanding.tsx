@@ -30,7 +30,7 @@ const READINGS = [
 
 const MobileLanding = ({ currentUser }: Props) => {
   const navigate = useNavigate();
-  const { current, longest } = useStreak(currentUser?.id);
+  
 
   const openCompanion = (text?: string) => {
     window.dispatchEvent(new CustomEvent("subtle:open-companion", { detail: { text } }));
@@ -51,7 +51,9 @@ const MobileLanding = ({ currentUser }: Props) => {
           <span className="text-[10px] tracking-[0.4em] uppercase text-foreground/80 font-light">Subtle Sense</span>
         </button>
         {currentUser ? (
-          <StreakBadge current={current} longest={longest} compact />
+          <button onClick={() => navigate("/dashboard")} className="text-[10px] tracking-[0.24em] uppercase text-foreground/55 hover:text-foreground transition-colors">
+            Insights
+          </button>
         ) : (
           <button onClick={() => navigate("/auth")} className="text-[10px] tracking-[0.24em] uppercase text-foreground/55 hover:text-foreground transition-colors">
             Sign in
