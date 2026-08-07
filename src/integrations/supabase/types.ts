@@ -230,7 +230,13 @@ export type Database = {
       }
     }
     Functions: {
-      [_ in never]: never
+      get_public_counts: {
+        Args: never
+        Returns: {
+          members: number
+          readings_week: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
