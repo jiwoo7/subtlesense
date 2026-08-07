@@ -65,8 +65,6 @@ const Dashboard = () => {
         setLastSessionId(data?.id);
         toast.success("Deep analysis saved! 🔮");
 
-        // Update streak after a successful save
-        try { await recordSession(); } catch (e) { console.error("streak update failed", e); }
 
         setTimeout(() => {
           setShowFeedback(true);
@@ -104,9 +102,7 @@ const Dashboard = () => {
         <DashboardHeader activeTab={activeTab} setActiveTab={setActiveTab} />
 
         <div className="mt-2 sm:mt-4 flex justify-end">
-          {user ? (
-            <StreakBadge current={streakCurrent} longest={streakLongest} />
-          ) : (
+          {!user && (
             <Button asChild size="sm" variant="outline" className="h-8 rounded-full text-[11px] sm:text-sm">
               <Link to="/auth">Login to save progress</Link>
             </Button>

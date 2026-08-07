@@ -2,8 +2,6 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowUpRight, ChevronRight } from "lucide-react";
 import logoUrl from "@/assets/subtle-sense-logo.png";
-import StreakBadge from "@/components/StreakBadge";
-import { useStreak } from "@/hooks/useStreak";
 import MobileStickyCTA from "@/components/landing/MobileStickyCTA";
 import type { User } from "@supabase/supabase-js";
 
