@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 const LiveCounter = () => {
@@ -9,19 +9,12 @@ const LiveCounter = () => {
     let alive = true;
     (async () => {
       try {
-        const sinceIso = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-        const [{ count: r }, { count: m }] = await Promise.all([
-          supabase
-            .from("emotion_sessions")
-            .select("*", { count: "exact", head: true })
-            .gte("created_at", sinceIso),
-          supabase
-            .from("waitlist_signups")
-            .select("*", { count: "exact", head: true }),
-        ]);
+        const { data, error } = await supabase.rpc("get_public_counts");
+        if (error) throw error;
+        const row = Array.isArray(data) ? data[0] : (data as any);
         if (!alive) return;
-        setReadings(typeof r === "number" ? r : 0);
-        setMembers(typeof m === "number" ? m : 0);
+        setReadings(Number(row?.readings_week ?? 0));
+        setMembers(Number(row?.members ?? 0));
       } catch {
         if (!alive) return;
         setReadings(0);
@@ -33,20 +26,28 @@ const LiveCounter = () => {
     };
   }, []);
 
-  const fmt = (n: number | null) => (n === null ? "…" : n.toLocaleString());
+  const fmt = (n: number) => n.toLocaleString();
+
+  // Never advertise a zero — it reads worse than showing nothing.
+  const stats = [
+    readings && readings > 0 ? { value: readings, label: "Readings this week" } : null,
+    members && members > 0 ? { value: members, label: "Founding members reserved" } : null,
+  ].filter(Boolean) as { value: number; label: string }[];
+
+  if (stats.length === 0) return null;
 
   return (
     <section className="container mx-auto px-6 sm:px-8 lg:px-12 py-10">
       <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-16 text-center">
-        <div>
-          <p className="editorial-heading text-3xl sm:text-4xl text-gold">{fmt(readings)}</p>
-          <p className="eyebrow text-muted-foreground mt-2">Readings this week</p>
-        </div>
-        <div className="hidden sm:block h-10 w-px bg-border/60" />
-        <div>
-          <p className="editorial-heading text-3xl sm:text-4xl text-gold">{fmt(members)}</p>
-          <p className="eyebrow text-muted-foreground mt-2">Founding members reserved</p>
-        </div>
+        {stats.map((s, i) => (
+          <Fragment key={s.label}>
+            {i > 0 && <div className="hidden sm:block h-10 w-px bg-border/60" />}
+            <div>
+              <p className="editorial-heading text-3xl sm:text-4xl text-gold">{fmt(s.value)}</p>
+              <p className="eyebrow text-muted-foreground mt-2">{s.label}</p>
+            </div>
+          </Fragment>
+        ))}
       </div>
     </section>
   );

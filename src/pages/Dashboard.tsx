@@ -20,8 +20,6 @@ import WelcomeMessage from "@/components/WelcomeMessage";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { AnalysisResult, UploadType } from "@/types/emotions";
-import { useStreak } from "@/hooks/useStreak";
-import StreakBadge from "@/components/StreakBadge";
 
 const Dashboard = () => {
   const { user, loading } = useAuth();
@@ -34,7 +32,7 @@ const Dashboard = () => {
   const [lastSessionId, setLastSessionId] = useState<string | undefined>();
   const [showExitPoll, setShowExitPoll] = useState(false);
   const [showShare, setShowShare] = useState(false);
-  const { current: streakCurrent, longest: streakLongest, recordSession } = useStreak(user?.id);
+  
 
   useEffect(() => {
     const tab = searchParams.get("tab");
@@ -67,8 +65,6 @@ const Dashboard = () => {
         setLastSessionId(data?.id);
         toast.success("Deep analysis saved! 🔮");
 
-        // Update streak after a successful save
-        try { await recordSession(); } catch (e) { console.error("streak update failed", e); }
 
         setTimeout(() => {
           setShowFeedback(true);
@@ -106,9 +102,7 @@ const Dashboard = () => {
         <DashboardHeader activeTab={activeTab} setActiveTab={setActiveTab} />
 
         <div className="mt-2 sm:mt-4 flex justify-end">
-          {user ? (
-            <StreakBadge current={streakCurrent} longest={streakLongest} />
-          ) : (
+          {!user && (
             <Button asChild size="sm" variant="outline" className="h-8 rounded-full text-[11px] sm:text-sm">
               <Link to="/auth">Login to save progress</Link>
             </Button>
