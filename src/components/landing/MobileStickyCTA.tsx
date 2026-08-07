@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { ChevronRight, Sparkles } from "lucide-react";
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 
 const MobileStickyCTA = ({ onClick }: Props) => {
   const [visible, setVisible] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 600);
@@ -15,7 +17,8 @@ const MobileStickyCTA = ({ onClick }: Props) => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  if (!visible) return null;
+  // The pricing page has its own reserve buttons — don't duplicate it there.
+  if (pathname.startsWith("/pricing") || !visible) return null;
 
   return (
     <div className="sm:hidden fixed left-0 right-0 bottom-[88px] z-30 px-6 pointer-events-none">
@@ -31,7 +34,6 @@ const MobileStickyCTA = ({ onClick }: Props) => {
         </span>
       </button>
     </div>
-
   );
 };
 

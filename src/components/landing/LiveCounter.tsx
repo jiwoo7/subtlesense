@@ -9,19 +9,12 @@ const LiveCounter = () => {
     let alive = true;
     (async () => {
       try {
-        const sinceIso = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-        const [{ count: r }, { count: m }] = await Promise.all([
-          supabase
-            .from("emotion_sessions")
-            .select("*", { count: "exact", head: true })
-            .gte("created_at", sinceIso),
-          supabase
-            .from("waitlist_signups")
-            .select("*", { count: "exact", head: true }),
-        ]);
+        const { data, error } = await supabase.rpc("get_public_counts");
+        if (error) throw error;
+        const row = Array.isArray(data) ? data[0] : (data as any);
         if (!alive) return;
-        setReadings(typeof r === "number" ? r : 0);
-        setMembers(typeof m === "number" ? m : 0);
+        setReadings(Number(row?.readings_week ?? 0));
+        setMembers(Number(row?.members ?? 0));
       } catch {
         if (!alive) return;
         setReadings(0);

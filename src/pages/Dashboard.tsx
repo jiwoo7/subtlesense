@@ -20,8 +20,6 @@ import WelcomeMessage from "@/components/WelcomeMessage";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { AnalysisResult, UploadType } from "@/types/emotions";
-import { useStreak } from "@/hooks/useStreak";
-import StreakBadge from "@/components/StreakBadge";
 
 const Dashboard = () => {
   const { user, loading } = useAuth();
@@ -34,7 +32,7 @@ const Dashboard = () => {
   const [lastSessionId, setLastSessionId] = useState<string | undefined>();
   const [showExitPoll, setShowExitPoll] = useState(false);
   const [showShare, setShowShare] = useState(false);
-  const { current: streakCurrent, longest: streakLongest, recordSession } = useStreak(user?.id);
+  
 
   useEffect(() => {
     const tab = searchParams.get("tab");
