@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { Wind, Music, BookOpen, Dumbbell, Heart, Coffee, Sparkles } from "lucide-react";
-import type { AnalysisResult } from "@/types/emotions";
+import { motion } from"framer-motion";
+import { Wind, Music, BookOpen, Dumbbell, Heart, Coffee, Sparkles } from"lucide-react";
+import type { AnalysisResult } from"@/types/emotions";
 
 interface MoodRecommendationsProps {
   analysisResult: AnalysisResult | null;
@@ -10,7 +10,7 @@ interface Recommendation {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
-  type: "breathing" | "activity" | "music" | "reading";
+  type:"breathing" |"activity" |"music" |"reading";
   gradient: string;
 }
 
@@ -20,59 +20,59 @@ const getRecommendations = (result: AnalysisResult): Recommendation[] => {
   if (result.hiddenAnxiety > 40) {
     recs.push({
       icon: Wind,
-      title: "4-7-8 Breathing 🌬️",
-      description: "Inhale 4s, hold 7s, exhale 8s. Repeat 3 times to calm your nervous system.",
-      type: "breathing",
-      gradient: "from-neon-purple/20 to-neon-violet/10",
+      title:"4-7-8 Breathing",
+      description:"Inhale 4s, hold 7s, exhale 8s. Repeat 3 times to calm your nervous system.",
+      type:"breathing",
+      gradient:"from-neon-purple/20 to-neon-violet/10",
     });
   }
 
   if (result.suppressedAnger > 40) {
     recs.push({
       icon: Dumbbell,
-      title: "Physical Release 💪",
-      description: "Try 5 minutes of intense exercise — pushups, jumping jacks, or a brisk walk to release tension.",
-      type: "activity",
-      gradient: "from-neon-red/20 to-neon-pink/10",
+      title:"Physical Release",
+      description:"Try 5 minutes of intense exercise — pushups, jumping jacks, or a brisk walk to release tension.",
+      type:"activity",
+      gradient:"from-neon-red/20 to-neon-pink/10",
     });
   }
 
   if (result.emotionalMasking > 50) {
     recs.push({
       icon: BookOpen,
-      title: "Journaling Prompt ✍️",
-      description: "Write: 'Right now I'm pretending to feel ___ but actually I feel ___'. No judgment.",
-      type: "reading",
-      gradient: "from-neon-magenta/20 to-neon-purple/10",
+      title:"Journaling Prompt",
+      description:"Write: 'Right now I'm pretending to feel ___ but actually I feel ___'. No judgment.",
+      type:"reading",
+      gradient:"from-neon-magenta/20 to-neon-purple/10",
     });
   }
 
   if (result.innerConflict > 50) {
     recs.push({
       icon: Music,
-      title: "Binaural Beats 🎧",
-      description: "Listen to alpha-wave (8-12Hz) binaural beats for 10 minutes to reduce inner tension.",
-      type: "music",
-      gradient: "from-neon-pink/20 to-neon-magenta/10",
+      title:"Binaural Beats",
+      description:"Listen to alpha-wave (8-12Hz) binaural beats for 10 minutes to reduce inner tension.",
+      type:"music",
+      gradient:"from-neon-pink/20 to-neon-magenta/10",
     });
   }
 
   // Always add a calming rec
   recs.push({
     icon: Heart,
-    title: "Self-Compassion Pause 💜",
-    description: "Place your hand on your heart. Say: 'This is a moment of difficulty. I deserve kindness.'",
-    type: "breathing",
-    gradient: "from-primary/20 to-neon-purple/10",
+    title:"Self-Compassion Pause",
+    description:"Place your hand on your heart. Say: 'This is a moment of difficulty. I deserve kindness.'",
+    type:"breathing",
+    gradient:"from-primary/20 to-neon-purple/10",
   });
 
   if (result.hiddenAnxiety < 30 && result.suppressedAnger < 30) {
     recs.push({
       icon: Coffee,
-      title: "Celebrate This Moment ☕",
-      description: "Your emotional state looks balanced! Savor a mindful cup of tea or coffee.",
-      type: "activity",
-      gradient: "from-success/20 to-success/5",
+      title:"Celebrate This Moment",
+      description:"Your emotional state looks balanced! Savor a mindful cup of tea or coffee.",
+      type:"activity",
+      gradient:"from-success/20 to-success/5",
     });
   }
 
@@ -94,7 +94,7 @@ const MoodRecommendations = ({ analysisResult }: MoodRecommendationsProps) => {
       <div className="flex items-center gap-2 mb-4">
         <Sparkles className="w-5 h-5 text-primary" />
         <h3 className="font-display text-lg font-bold text-foreground">
-          Personalized Recommendations 🎯
+          Personalized Recommendations
         </h3>
       </div>
 

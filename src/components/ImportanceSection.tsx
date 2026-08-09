@@ -1,45 +1,45 @@
-import { motion } from "framer-motion";
-import { Heart, Shield, TrendingUp, Zap } from "lucide-react";
+import { motion } from"framer-motion";
+import { Heart, Shield, TrendingUp, Zap } from"lucide-react";
 
 const importanceData = [
   {
     icon: Heart,
-    title: "Emotional Wellbeing",
-    description: "Coding frustration affects mental health. We help catch burnout before it happens.",
-    color: "pink",
+    title:"Emotional Wellbeing",
+    description:"Coding frustration affects mental health. We help catch burnout before it happens.",
+    color:"pink",
   },
   {
     icon: TrendingUp,
-    title: "Better Learning Outcomes",
-    description: "Students who manage emotions learn 2x faster and retain knowledge longer.",
-    color: "lavender",
+    title:"Better Learning Outcomes",
+    description:"Students who manage emotions learn 2x faster and retain knowledge longer.",
+    color:"lavender",
   },
   {
     icon: Shield,
-    title: "Prevent Dropout",
-    description: "67% of coding learners quit due to frustration. Early intervention keeps them going.",
-    color: "mint",
+    title:"Prevent Dropout",
+    description:"67% of coding learners quit due to frustration. Early intervention keeps them going.",
+    color:"mint",
   },
   {
     icon: Zap,
-    title: "Boost Productivity",
-    description: "Recognizing cognitive walls helps developers work smarter, not harder.",
-    color: "sky",
+    title:"Boost Productivity",
+    description:"Recognizing cognitive walls helps developers work smarter, not harder.",
+    color:"sky",
   },
 ];
 
 const colorMap = {
-  pink: "card-pink",
-  lavender: "card-lavender",
-  mint: "card-mint",
-  sky: "card-sky",
+  pink:"card-pink",
+  lavender:"card-lavender",
+  mint:"card-mint",
+  sky:"card-sky",
 };
 
 const iconColorMap = {
-  pink: "bg-pastel-pink/40 text-pink-600",
-  lavender: "bg-pastel-lavender/40 text-purple-600",
-  mint: "bg-pastel-mint/40 text-emerald-600",
-  sky: "bg-pastel-sky/40 text-blue-600",
+  pink:"bg-pastel-pink/40 text-pink-600",
+  lavender:"bg-pastel-lavender/40 text-purple-600",
+  mint:"bg-pastel-mint/40 text-emerald-600",
+  sky:"bg-pastel-sky/40 text-blue-600",
 };
 
 const ImportanceSection = () => {
@@ -53,10 +53,10 @@ const ImportanceSection = () => {
         transition={{ duration: 0.6 }}
       >
         <h2 className="font-display text-3xl md:text-4xl font-extrabold gradient-text mb-4">
-          Why Emotion-Aware Learning Matters 💜
+          Why Emotion-Aware Learning Matters
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Traditional learning ignores how you feel. We believe understanding emotions 
+          Traditional learning ignores how you feel. We believe understanding emotions
           is the key to unlocking your true potential as a developer.
         </p>
       </motion.div>

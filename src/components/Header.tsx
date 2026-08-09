@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import logoUrl from "@/assets/subtle-sense-logo.png";
+import { motion } from"framer-motion";
+import logoUrl from"@/assets/subtle-sense-logo.png";
 
 const Header = () => {
   return (
@@ -15,7 +15,7 @@ const Header = () => {
           <motion.div
             className="relative"
             whileHover={{ scale: 1.05, rotate: 5 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            transition={{ type:"spring", stiffness: 300 }}
           >
             <div className="relative w-14 h-14 rounded-2xl bg-background/80 backdrop-blur-sm border border-border/50 flex items-center justify-center shadow-lg overflow-hidden">
               <motion.img
@@ -23,17 +23,17 @@ const Header = () => {
                 alt="Subtle Sense"
                 className="w-10 h-10 object-contain"
                 animate={{ rotate: [0, 4, -4, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 3, repeat: Infinity, ease:"easeInOut" }}
               />
             </div>
           </motion.div>
-          
+
           <div>
             <h1 className="font-display text-3xl font-extrabold gradient-text">
               Subtle Sense
             </h1>
             <p className="text-sm text-muted-foreground font-medium tracking-wide">
-              Your Friendly Learning Companion ✨
+              Your Friendly Learning Companion
             </p>
           </div>
         </div>
@@ -57,7 +57,7 @@ const Header = () => {
             }}
           />
           <span className="text-sm font-semibold text-foreground">
-            Ready to Help! 💪
+            Ready to Help!
           </span>
         </motion.div>
       </div>
@@ -69,9 +69,9 @@ const Header = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        We understand how you feel when coding gets tough. Let us help you 
-        <span className="text-pastel-pink font-semibold"> overcome frustration</span> and 
-        <span className="text-pastel-lavender font-semibold"> embrace clarity</span> 🌟
+        We understand how you feel when coding gets tough. Let us help you
+        <span className="text-pastel-pink font-semibold"> overcome frustration</span> and
+        <span className="text-pastel-lavender font-semibold"> embrace clarity</span>
       </motion.p>
     </motion.header>
   );
