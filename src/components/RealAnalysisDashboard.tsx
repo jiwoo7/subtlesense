@@ -142,7 +142,7 @@ const RealAnalysisDashboard = ({ isAnalyzed, analysisResult }: RealAnalysisDashb
             transition={{ duration: 1, repeat: Infinity }}
           />
           <span className="eyebrow text-primary">
-            {getTypeEmoji(analysisResult.uploadType)} {getTypeLabel(analysisResult.uploadType)} · Complete
+            {getTypeLabel(analysisResult.uploadType)} · Complete
           </span>
         </div>
         <h2 className="editorial-heading text-2xl text-foreground">
