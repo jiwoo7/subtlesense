@@ -16,7 +16,7 @@ interface JournalEntry {
   session_id: string | null;
 }
 
-const MOOD_TAGS = ["😊 Happy", "😔 Sad", "😤 Frustrated", "😌 Calm", "🤔 Reflective", "💪 Motivated", "😰 Anxious"];
+const MOOD_TAGS = ["Happy", "Sad", "Frustrated", "Calm", "Reflective", "Motivated", "Anxious"];
 const LOCAL_JOURNAL_KEY = "subtlesense-local-journal";
 
 const JournalSection = () => {

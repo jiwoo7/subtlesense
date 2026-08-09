@@ -73,48 +73,53 @@ const Playlists = () => {
   const surprise = () => setPick(MOODS[Math.floor(Math.random() * MOODS.length)]);
 
   return (
-    <div className="min-h-screen bubble-bg">
-      <header className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
-        <Link to="/" className="inline-flex items-center gap-1.5 text-xs sm:text-sm hover:opacity-80">
-          <ArrowLeft className="w-4 h-4" /> Back
+    <div className="min-h-screen bg-background">
+      <header className="container mx-auto px-5 sm:px-6 py-4 flex items-center justify-between gap-2">
+        <Link to="/" className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.24em] uppercase text-muted-foreground hover:text-foreground transition-colors">
+          <ArrowLeft className="w-3.5 h-3.5" strokeWidth={1.4} /> Back
         </Link>
-        <h1 className="font-display text-sm sm:text-xl font-bold gradient-text truncate">Mood Playlists 🎧</h1>
+        <h1 className="editorial-heading text-base sm:text-2xl text-foreground truncate">Mood Playlists</h1>
         <button
           onClick={surprise}
-          className="inline-flex items-center gap-1 text-[11px] sm:text-sm px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full neon-gradient text-primary-foreground font-semibold whitespace-nowrap"
+          className="inline-flex items-center gap-1.5 text-[9px] sm:text-[10px] tracking-[0.2em] uppercase px-3 py-1.5 border border-primary/50 text-primary whitespace-nowrap hover:bg-primary/10 transition-colors"
+          style={{ borderRadius: 2 }}
         >
-          <Shuffle className="w-3 h-3" /> Surprise
+          <Shuffle className="w-3 h-3" strokeWidth={1.4} /> Surprise
         </button>
       </header>
+      <div className="container mx-auto px-5 sm:px-6"><div className="gold-hairline opacity-60" /></div>
 
-      <main className="container mx-auto px-4 sm:px-6 pb-28 sm:pb-12">
-        <p className="text-center text-xs sm:text-base text-muted-foreground mb-5 sm:mb-8 max-w-xl mx-auto">
-          Tap any playlist to open in Spotify.
+      <main className="container mx-auto px-5 sm:px-6 pb-28 sm:pb-12 pt-8">
+        <p className="text-center text-[12.5px] sm:text-sm text-muted-foreground font-light mb-8 max-w-xl mx-auto">
+          Tap any playlist to open it in Spotify.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 max-w-5xl mx-auto">
-          {MOODS.map((m) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 max-w-5xl mx-auto">
+          {MOODS.map((m, i) => (
             <div
               key={m.id}
-              className={`glass-panel rounded-2xl p-3 sm:p-5 transition-all ${
-                pick?.id === m.id ? "ring-2 ring-primary scale-[1.02]" : ""
+              className={`border bg-card/40 p-4 sm:p-5 transition-colors ${
+                pick?.id === m.id ? "border-primary/70" : "border-border/60"
               }`}
+              style={{ borderRadius: 2 }}
             >
-              <div className="flex items-center gap-2.5 sm:gap-3 mb-2 sm:mb-3">
-                <span className="text-2xl sm:text-3xl">{m.emoji}</span>
+              <div className="flex items-baseline gap-3 mb-3">
+                <span className="editorial-heading text-primary/50 text-[12px] tabular-nums">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <div className="min-w-0">
-                  <h2 className="font-display text-base sm:text-lg font-bold">{m.label}</h2>
-                  <p className="text-[11px] sm:text-xs text-muted-foreground">{m.blurb}</p>
+                  <h2 className="editorial-heading text-lg sm:text-xl text-foreground">{m.label}</h2>
+                  <p className="text-[11.5px] text-muted-foreground font-light">{m.blurb}</p>
                 </div>
               </div>
-              <ul className="space-y-1 sm:space-y-2">
+              <ul className="divide-y divide-border/50 border-t border-border/50">
                 {m.playlists.map((p) => (
                   <li key={p.url}>
                     <a
                       href={p.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-between gap-2 text-xs sm:text-sm px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg hover:bg-muted/50 transition-colors"
+                      className="flex items-center justify-between gap-2 text-[12.5px] font-light py-2.5 text-foreground/85 hover:text-primary transition-colors"
                     >
                       <span className="truncate">{p.name}</span>
                       <ExternalLink className="w-3 h-3 flex-shrink-0 opacity-60" />
@@ -129,5 +134,8 @@ const Playlists = () => {
     </div>
   );
 };
+
+
+
 
 export default Playlists;

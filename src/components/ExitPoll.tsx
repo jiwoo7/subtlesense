@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircleQuestion, Check } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
+import { useState } from"react";
+import { motion, AnimatePresence } from"framer-motion";
+import { MessageCircleQuestion, Check } from"lucide-react";
+import { supabase } from"@/integrations/supabase/client";
+import { toast } from"sonner";
 
 interface ExitPollProps {
   isVisible: boolean;
@@ -11,18 +11,18 @@ interface ExitPollProps {
 }
 
 const MISSED_EMOTIONS = [
-  { label: "Nostalgia", emoji: "🥹" },
-  { label: "Hope", emoji: "🌱" },
-  { label: "Shame", emoji: "😶" },
-  { label: "Jealousy", emoji: "💚" },
-  { label: "Pride", emoji: "🦁" },
-  { label: "Boredom", emoji: "😑" },
-  { label: "Gratitude", emoji: "🙏" },
-  { label: "Confusion", emoji: "😵‍💫" },
-  { label: "Relief", emoji: "😮‍💨" },
-  { label: "Excitement", emoji: "🤩" },
-  { label: "Grief", emoji: "🖤" },
-  { label: "Love", emoji: "💗" },
+  { label:"Nostalgia", emoji:"" },
+  { label:"Hope", emoji:"" },
+  { label:"Shame", emoji:"" },
+  { label:"Jealousy", emoji:"" },
+  { label:"Pride", emoji:"" },
+  { label:"Boredom", emoji:"" },
+  { label:"Gratitude", emoji:"" },
+  { label:"Confusion", emoji:"‍" },
+  { label:"Relief", emoji:"‍" },
+  { label:"Excitement", emoji:"" },
+  { label:"Grief", emoji:"" },
+  { label:"Love", emoji:"" },
 ];
 
 const ExitPoll = ({ isVisible, sessionId, onDismiss }: ExitPollProps) => {
@@ -47,13 +47,13 @@ const ExitPoll = ({ isVisible, sessionId, onDismiss }: ExitPollProps) => {
     }
 
     setSubmitted(true);
-    toast.success(`Thanks! We'll work on detecting ${emotion} 💜`);
+    toast.success(`Thanks! We'll work on detecting ${emotion} `);
     setTimeout(onDismiss, 2000);
   };
 
   return (
     <AnimatePresence>
-      {isVisible && !submitted && (
+      {isVisible &&!submitted && (
         <motion.div
           className="glass-panel rounded-2xl p-5 border border-accent/30"
           initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -74,8 +74,8 @@ const ExitPoll = ({ isVisible, sessionId, onDismiss }: ExitPollProps) => {
                 onClick={() => handleSelect(e.label)}
                 className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
                   selected === e.label
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-muted/50 text-foreground border-border hover:bg-accent hover:border-accent"
+?"bg-primary text-primary-foreground border-primary"
+                    :"bg-muted/50 text-foreground border-border hover:bg-accent hover:border-accent"
                 }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -88,7 +88,7 @@ const ExitPoll = ({ isVisible, sessionId, onDismiss }: ExitPollProps) => {
             onClick={onDismiss}
             className="mt-3 text-xs text-muted-foreground hover:text-foreground transition-colors"
           >
-            None — you got them all! ✨
+            None — you got them all!
           </button>
         </motion.div>
       )}
@@ -100,7 +100,7 @@ const ExitPoll = ({ isVisible, sessionId, onDismiss }: ExitPollProps) => {
           exit={{ opacity: 0 }}
         >
           <Check className="w-8 h-8 text-primary mx-auto mb-2" />
-          <p className="text-sm font-medium text-foreground">Noted! Thanks for helping us improve 💜</p>
+          <p className="text-sm font-medium text-foreground">Noted! Thanks for helping us improve </p>
         </motion.div>
       )}
     </AnimatePresence>

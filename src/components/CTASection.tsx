@@ -44,7 +44,7 @@ const CTASection = () => {
           </motion.div>
 
           <h2 className="font-display text-3xl md:text-4xl font-extrabold text-white mb-4 max-w-2xl mx-auto">
-            Ready to Understand Your Emotions? 🌟
+            Ready to understand your emotions?
           </h2>
           
           <p className="text-lg text-white/90 max-w-xl mx-auto mb-8 leading-relaxed">

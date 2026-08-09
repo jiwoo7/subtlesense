@@ -94,7 +94,7 @@ const Settings = () => {
 
       if (error) throw error;
 
-      toast.success("Settings saved successfully! ✨");
+      toast.success("Settings saved");
     } catch (error) {
       console.error("Error saving settings:", error);
       toast.error("Failed to save settings");
@@ -135,7 +135,7 @@ const Settings = () => {
       if (signedError) throw signedError;
 
       setSettings(prev => ({ ...prev, avatar_url: signedData.signedUrl }));
-      toast.success("Avatar uploaded! Don't forget to save. 📸");
+      toast.success("Avatar uploaded — remember to save");
     } catch (error) {
       console.error("Error uploading avatar:", error);
       toast.error("Failed to upload avatar");

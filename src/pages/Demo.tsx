@@ -36,7 +36,7 @@ const DEMO_ANALYSIS: AnalysisResult = {
   accuracy: 87,
   uploadType: "webcam",
   deepInsight: "You're presenting a calm and positive exterior, but there's significant emotional processing happening beneath the surface. Your hidden anxiety and suppressed desire suggest you may be holding back from expressing what you truly want. This is common when navigating uncertainty or change.",
-  advice: "Consider journaling about what you're holding back. Sometimes acknowledging suppressed emotions helps release their grip on us. You're doing great—self-awareness is the first step! 💜",
+  advice: "Consider journaling about what you're holding back. Sometimes acknowledging suppressed emotions helps release their grip on us. You're doing great—self-awareness is the first step.",
   suggestions: [
     {
       title: "Take a 5-Minute Breathing Break",
@@ -113,7 +113,7 @@ const Demo = () => {
               </motion.div>
               
               <h1 className="font-display text-3xl sm:text-4xl font-bold mb-3">
-                See What Subtle Sense Reveals ✨
+                See What Subtle Sense Reveals
               </h1>
               <p className="text-muted-foreground max-w-xl mx-auto">
                 This is a sample analysis showing what you'll discover about your emotions. 
@@ -142,7 +142,7 @@ const Demo = () => {
             >
               <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-neon-purple/30">
                 <h2 className="font-display text-xl sm:text-2xl font-bold mb-3">
-                  Ready to Discover Your True Emotions? 🔮
+                  Ready to Discover Your True Emotions?
                 </h2>
                 <p className="text-muted-foreground mb-6">
                   Get your own personalized deep analysis in under 30 seconds
