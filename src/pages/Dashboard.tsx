@@ -63,7 +63,7 @@ const Dashboard = () => {
         if (error) throw error;
         
         setLastSessionId(data?.id);
-        toast.success("Deep analysis saved! 🔮");
+        toast.success("Reading saved");
 
 
         setTimeout(() => {

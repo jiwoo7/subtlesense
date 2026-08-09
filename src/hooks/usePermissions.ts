@@ -32,7 +32,7 @@ export const usePermissions = () => {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       stream.getTracks().forEach((track) => track.stop());
       setPermissions((prev) => ({ ...prev, camera: "granted" }));
-      toast.success("Camera access granted! 📸");
+      toast.success("Camera access granted");
       return true;
     } catch (error: any) {
       if (error.name === "NotAllowedError") {
@@ -52,7 +52,7 @@ export const usePermissions = () => {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       stream.getTracks().forEach((track) => track.stop());
       setPermissions((prev) => ({ ...prev, microphone: "granted" }));
-      toast.success("Microphone access granted! 🎙️");
+      toast.success("Microphone access granted");
       return true;
     } catch (error: any) {
       if (error.name === "NotAllowedError") {
