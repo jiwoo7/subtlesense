@@ -56,11 +56,12 @@ const Games = () => {
           <div className="max-w-3xl mx-auto">
             <button
               onClick={() => setActive(null)}
-              className="mb-3 sm:mb-4 inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-foreground"
+              className="mb-4 inline-flex items-center gap-1.5 text-[10px] tracking-[0.24em] uppercase text-muted-foreground hover:text-foreground transition-colors"
             >
-              <ArrowLeft className="w-4 h-4" /> All games
+              <ArrowLeft className="w-3.5 h-3.5" strokeWidth={1.4} /> All games
             </button>
-            <div className="glass-panel rounded-3xl">{Active && <Active />}</div>
+            <div className="border border-border/60 bg-card/40" style={{ borderRadius: 2 }}>{Active && <Active />}</div>
+
           </div>
         )}
       </main>
