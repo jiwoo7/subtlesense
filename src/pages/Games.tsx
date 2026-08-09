@@ -18,37 +18,40 @@ const Games = () => {
   const Active = GAMES.find((g) => g.id === active)?.component;
 
   return (
-    <div className="min-h-screen bubble-bg">
-      <header className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
-        <Link to="/" className="inline-flex items-center gap-1.5 text-xs sm:text-sm hover:opacity-80">
-          <ArrowLeft className="w-4 h-4" /> Back
+    <div className="min-h-screen bg-background">
+      <header className="container mx-auto px-5 sm:px-6 py-4 flex items-center justify-between">
+        <Link to="/" className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.24em] uppercase text-muted-foreground hover:text-foreground transition-colors">
+          <ArrowLeft className="w-3.5 h-3.5" strokeWidth={1.4} /> Back
         </Link>
-        <h1 className="font-display text-base sm:text-xl font-bold gradient-text">Mind Games 🎮</h1>
+        <h1 className="editorial-heading text-lg sm:text-2xl text-foreground">Mind Games</h1>
         <div className="w-10" />
       </header>
+      <div className="container mx-auto px-5 sm:px-6"><div className="gold-hairline opacity-60" /></div>
 
-      <main className="container mx-auto px-4 sm:px-6 pb-28 sm:pb-12">
+      <main className="container mx-auto px-5 sm:px-6 pb-28 sm:pb-12 pt-8">
         {!active ? (
           <>
-            <p className="text-center text-xs sm:text-base text-muted-foreground mb-5 sm:mb-8 max-w-xl mx-auto px-2">
-              Tiny mindful breaks. Pick one — under 2 minutes each.
+            <p className="text-center text-[12.5px] sm:text-sm text-muted-foreground font-light mb-8 max-w-xl mx-auto">
+              Tiny mindful breaks. Pick one — under two minutes each.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4 max-w-3xl mx-auto">
+            <div className="grid grid-cols-2 gap-3 sm:gap-5 max-w-3xl mx-auto">
               {GAMES.map((g) => (
                 <button
                   key={g.id}
                   onClick={() => setActive(g.id)}
-                  className="glass-panel rounded-2xl p-3 sm:p-6 text-left hover:scale-[1.02] transition-transform"
+                  className="border border-border/60 bg-card/40 p-4 sm:p-6 text-left transition-colors hover:border-primary/50"
+                  style={{ borderRadius: 2 }}
                 >
-                  <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl neon-gradient flex items-center justify-center mb-2 sm:mb-3">
-                    <g.icon className="w-4 h-4 sm:w-6 sm:h-6 text-primary-foreground" />
+                  <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-primary/40 flex items-center justify-center mb-3">
+                    <g.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" strokeWidth={1.4} />
                   </div>
-                  <h2 className="font-display text-sm sm:text-lg font-bold">{g.title}</h2>
-                  <p className="text-[11px] sm:text-sm text-muted-foreground leading-tight mt-0.5">{g.desc}</p>
+                  <h2 className="editorial-heading text-base sm:text-xl text-foreground">{g.title}</h2>
+                  <p className="text-[11px] sm:text-[12.5px] text-muted-foreground font-light leading-relaxed mt-1">{g.desc}</p>
                 </button>
               ))}
             </div>
           </>
+
         ) : (
           <div className="max-w-3xl mx-auto">
             <button
