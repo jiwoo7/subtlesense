@@ -130,6 +130,12 @@ const Playlists = () => {
             </div>
           ))}
         </div>
+      </main>
+    </div>
+  );
+};
+
+
 
 
 export default Playlists;
