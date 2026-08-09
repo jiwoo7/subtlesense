@@ -142,7 +142,7 @@ const AnalysisDashboard = ({ isAnalyzed, analysisResult }: AnalysisDashboardProp
             transition={{ duration: 1, repeat: Infinity }}
           />
           <span className="text-sm font-semibold text-neon-pink">
-            {getTypeLabel(analysisResult.uploadType)} Complete! ✨
+            {getTypeLabel(analysisResult.uploadType)} · Complete
           </span>
         </div>
         <h2 className="font-display text-2xl font-bold text-foreground">
