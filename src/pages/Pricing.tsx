@@ -185,13 +185,13 @@ const Pricing = () => {
                 href="https://www.uneed.best/tool/subtlesense"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-4 py-2.5 border border-border/60 bg-card/20 hover:border-gold/60 transition-colors"
+                className="inline-block opacity-90 hover:opacity-100 transition-opacity"
               >
-                <span className="editorial-heading text-lg text-foreground">Uneed</span>
-                <span className="h-4 w-px bg-border/60" />
-                <span className="text-xs text-muted-foreground font-light">
-                  Featured <span className="text-gold font-normal">#2</span> / 100+
-                </span>
+                <img
+                  src="https://www.uneed.best/badge/dr/subtlesense.svg?theme=dark"
+                  alt="SubtleSense Domain Rating by Ahrefs, on Uneed"
+                  className="h-[47px] w-auto"
+                />
               </a>
             </div>
             <div className="text-left md:text-right space-y-3">
