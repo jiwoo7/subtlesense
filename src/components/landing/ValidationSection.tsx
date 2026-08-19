@@ -12,7 +12,7 @@ const features = [
     icon: Sparkles,
     label: "Featured on",
     value: "Uneed",
-    detail: "#9 / 100+ startups",
+    detail: "2nd ranked on Uneed with Domain Rating 91",
   },
   {
     icon: Award,
