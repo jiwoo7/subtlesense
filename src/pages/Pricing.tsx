@@ -164,24 +164,56 @@ const Pricing = () => {
           </p>
         </section>
 
-        <footer className="container mx-auto px-6 sm:px-8 lg:px-12 py-12 border-t border-border/60 text-center space-y-4">
-          <p className="eyebrow text-muted-foreground">
-            Questions of correspondence &mdash;{" "}
-            <a
-              href="mailto:naiyyathapa@gmail.com"
-              className="text-foreground border-b border-border hover:border-gold transition-colors pb-0.5"
-            >
-              naiyyathapa@gmail.com
-            </a>
-          </p>
-          <a
-            href="https://www.linkedin.com/in/naiyya-thapa"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 eyebrow text-muted-foreground hover:text-gold transition-colors"
-          >
-            <Linkedin className="w-3.5 h-3.5" /> Naiyya Thapa on LinkedIn
-          </a>
+        <footer className="container mx-auto px-6 sm:px-8 lg:px-12 py-14 border-t border-border/60">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+            <div className="flex flex-wrap items-center gap-5">
+              <a
+                href="https://launchkiwi.com/p/subtlesense"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block opacity-90 hover:opacity-100 transition-opacity"
+              >
+                <img
+                  src="https://launchkiwi.com/badge-dark.svg"
+                  alt="Featured on LaunchKiwi"
+                  width="150"
+                  height="47"
+                  className="w-[150px] h-auto"
+                />
+              </a>
+              <a
+                href="https://www.uneed.best/tool/subtlesense"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 px-4 py-2.5 border border-border/60 bg-card/20 hover:border-gold/60 transition-colors"
+              >
+                <span className="editorial-heading text-lg text-foreground">Uneed</span>
+                <span className="h-4 w-px bg-border/60" />
+                <span className="text-xs text-muted-foreground font-light">
+                  Featured <span className="text-gold font-normal">#2</span> / 100+
+                </span>
+              </a>
+            </div>
+            <div className="text-left md:text-right space-y-3">
+              <p className="eyebrow text-muted-foreground">
+                Questions of correspondence &mdash;{" "}
+                <a
+                  href="mailto:naiyyathapa@gmail.com"
+                  className="text-foreground border-b border-border hover:border-gold transition-colors pb-0.5"
+                >
+                  naiyyathapa@gmail.com
+                </a>
+              </p>
+              <a
+                href="https://www.linkedin.com/in/naiyya-thapa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 eyebrow text-muted-foreground hover:text-gold transition-colors"
+              >
+                <Linkedin className="w-3.5 h-3.5" /> Naiyya Thapa on LinkedIn
+              </a>
+            </div>
+          </div>
         </footer>
       </div>
 
