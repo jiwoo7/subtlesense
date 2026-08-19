@@ -502,6 +502,22 @@ const Landing = () => {
                   <Linkedin className="w-3.5 h-3.5" /> LinkedIn
                 </a>
               </div>
+              <div className="mt-5">
+                <a
+                  href="https://launchkiwi.com/p/subtlesense"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block opacity-90 hover:opacity-100 transition-opacity"
+                >
+                  <img
+                    src="https://launchkiwi.com/badge-dark.svg"
+                    alt="Featured on LaunchKiwi"
+                    width="150"
+                    height="47"
+                    className="w-[150px] h-auto"
+                  />
+                </a>
+              </div>
             </div>
           </div>
         </footer>
