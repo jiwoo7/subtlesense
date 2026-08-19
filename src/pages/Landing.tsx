@@ -468,41 +468,31 @@ const Landing = () => {
         </div>
 
         {/* ============ FOOTER ============ */}
-        <footer className="container mx-auto px-8 lg:px-12 py-14 border-t border-border/60">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-            <div className="flex items-start gap-4">
-              <img src={logoUrl} alt="" className="w-12 h-12 object-contain opacity-90" />
-              <div>
-                <p className="editorial-heading text-2xl tracking-[0.28em] uppercase text-foreground">
+        <footer className="container mx-auto px-8 lg:px-12 py-16 border-t border-border/60">
+          <div className="grid md:grid-cols-12 gap-12 md:gap-8">
+            {/* Brand column */}
+            <div className="md:col-span-5 lg:col-span-4">
+              <div className="flex items-center gap-4 mb-6">
+                <img src={logoUrl} alt="" className="w-11 h-11 object-contain opacity-90" />
+                <p className="editorial-heading text-xl tracking-[0.28em] uppercase text-foreground">
                   Subtle Sense
                 </p>
-                <p className="eyebrow mt-3">Est. 2025 &middot; Made by Naiyya Thapa</p>
-                <a href="/methodology" className="eyebrow inline-block mt-2 text-gold border-b border-border hover:border-gold transition-colors pb-0.5">
-                  How we read ›
-                </a>
               </div>
-
-            </div>
-            <div className="text-left md:text-right">
-              <p className="eyebrow mb-2">Correspondence</p>
-
+              <p className="text-sm text-muted-foreground font-light leading-relaxed max-w-xs mb-6">
+                A quiet instrument for emotional self-observation. Read the surface, the undercurrent, and what is seldom named aloud.
+              </p>
               <a
-                href="mailto:naiyyathapa@gmail.com"
-                className="text-sm text-foreground border-b border-border hover:border-primary transition-colors"
+                href="/methodology"
+                className="eyebrow inline-flex items-center gap-1.5 text-gold border-b border-border hover:border-gold transition-colors pb-0.5"
               >
-                naiyyathapa@gmail.com
+                How we read <span className="text-[10px]">›</span>
               </a>
-              <div className="mt-4">
-                <a
-                  href="https://www.linkedin.com/in/naiyya-thapa"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 eyebrow text-muted-foreground hover:text-gold transition-colors"
-                >
-                  <Linkedin className="w-3.5 h-3.5" /> LinkedIn
-                </a>
-              </div>
-              <div className="mt-5">
+            </div>
+
+            {/* As seen on */}
+            <div className="md:col-span-7 lg:col-span-5">
+              <p className="eyebrow mb-6 text-muted-foreground">As seen on</p>
+              <div className="flex flex-wrap items-center gap-5">
                 <a
                   href="https://launchkiwi.com/p/subtlesense"
                   target="_blank"
@@ -517,7 +507,41 @@ const Landing = () => {
                     className="w-[150px] h-auto"
                   />
                 </a>
+                <a
+                  href="https://www.uneed.best/tool/subtlesense"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-3 px-4 py-2.5 border border-border/60 bg-card/20 hover:border-gold/60 transition-colors"
+                >
+                  <span className="editorial-heading text-lg text-foreground">Uneed</span>
+                  <span className="h-4 w-px bg-border/60" />
+                  <span className="text-xs text-muted-foreground font-light">
+                    Featured <span className="text-gold font-normal">#2</span> / 100+
+                  </span>
+                </a>
               </div>
+            </div>
+
+            {/* Correspondence */}
+            <div className="md:col-span-12 lg:col-span-3 lg:text-right">
+              <p className="eyebrow mb-5 text-muted-foreground">Correspondence</p>
+              <div className="space-y-3">
+                <a
+                  href="mailto:naiyyathapa@gmail.com"
+                  className="block text-sm text-foreground border-b border-border hover:border-primary transition-colors w-fit lg:ml-auto pb-0.5"
+                >
+                  naiyyathapa@gmail.com
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/naiyya-thapa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 eyebrow text-muted-foreground hover:text-gold transition-colors"
+                >
+                  <Linkedin className="w-3.5 h-3.5" /> LinkedIn
+                </a>
+              </div>
+              <p className="eyebrow mt-8 text-muted-foreground/80">Est. 2025 · Made by Naiyya Thapa</p>
             </div>
           </div>
         </footer>
