@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Gamepad2, Music, ArrowRight } from "lucide-react";
+import { Gamepad2, Music, BookOpen, ArrowRight } from "lucide-react";
 
 const MindToolsSection = () => {
   const cards = [
@@ -18,6 +18,13 @@ const MindToolsSection = () => {
       desc: "Curated Spotify playlists tuned to your feeling. Surprise Me inside.",
       tone: "from-neon-purple to-neon-magenta",
     },
+    {
+      to: "/dashboard?tab=journal",
+      icon: BookOpen,
+      title: "Mood Journal",
+      desc: "Reflect, tag, and revisit what came up. Private by default.",
+      tone: "from-gold to-neon-purple",
+    },
   ];
   return (
     <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
@@ -28,7 +35,7 @@ const MindToolsSection = () => {
         </h2>
         <p className="text-muted-foreground text-sm sm:text-base font-light">Tiny tools to help you sit with what came up.</p>
       </div>
-      <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+      <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
         {cards.map((c) => (
           <motion.div key={c.to} whileHover={{ y: -4 }}>
             <Link
