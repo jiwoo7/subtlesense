@@ -308,7 +308,7 @@ const Landing = () => {
               <div className="lg:col-span-6 lg:col-start-7 flex items-end">
                 <p className="text-muted-foreground text-base md:text-lg leading-relaxed font-light">
                   Speak, look, or upload a short clip. The reading returns in moments and
-                  is yours alone &mdash; nothing is stored without consent.
+                  is yours alone &mdash; analysed over an encrypted connection, then discarded. Nothing is stored without consent.
                 </p>
               </div>
             </div>
@@ -400,7 +400,7 @@ const Landing = () => {
 
                   <div className="gold-hairline mt-10 mb-5" />
                   <p className="eyebrow text-muted-foreground">
-                    Private by design · Nothing stored without consent
+                    Private by design · Encrypted, then discarded · Nothing stored without consent
                   </p>
                 </aside>
               )}

@@ -16,7 +16,7 @@ const tiers = [
     features: [
       "3 readings per month",
       "Spoken · Felt · Unsaid analysis",
-      "In-session processing",
+      "Encrypted, discard-after-reading processing",
       "Mind tools & journaling",
     ],
     cta: "Begin quietly",

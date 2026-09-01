@@ -21,6 +21,8 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [permissionError, setPermissionError] = useState<string | null>(null);
   const [isWebcamReady, setIsWebcamReady] = useState(false);
+  const [hasConsented, setHasConsented] = useState(false);
+
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -286,6 +288,11 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
       return;
     }
 
+    if (!hasConsented) {
+      toast.error("Please confirm the consent notice before analysing.");
+      return;
+    }
+
     onStartAnalysis();
 
     try {
@@ -310,6 +317,7 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
           mediaBase64,
           mediaType: mediaMimeType,
           uploadType,
+          consent: true,
         },
       });
 
@@ -345,6 +353,7 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
     resetCapturedMedia();
     setIsRecording(false);
     setPermissionError(null);
+    setHasConsented(false);
     mediaRecorderRef.current = null;
   };
 
@@ -368,7 +377,7 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
             </p>
             <p className="eyebrow mt-3 text-muted-foreground flex items-center gap-2">
               <span className="inline-block w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
-              Processed in-session · Nothing stored without consent
+              Encrypted upload · Analysed, then discarded · Never stored
             </p>
           </div>
           {selectedType && (
@@ -510,7 +519,7 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
             {(selectedType ==="webcam" || recordedBlob || uploadedFile) &&!isAnalyzing && (
               <Button
                 onClick={analyzeMedia}
-                disabled={selectedType ==="webcam" &&!isWebcamReady}
+                disabled={(selectedType ==="webcam" &&!isWebcamReady) ||!hasConsented}
                 className="bg-gradient-to-r from-neon-purple to-neon-pink text-white font-bold gap-2 w-full sm:w-auto"
               >
                 <span></span>
@@ -519,6 +528,24 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
             )}
           </div>
         )}
+
+        {/* Consent step — nothing is sent until this is ticked */}
+        {selectedType && (
+          <label className="mt-4 flex items-start gap-3 rounded-xl border border-border bg-card/60 p-3 sm:p-4 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={hasConsented}
+              onChange={(e) => setHasConsented(e.target.checked)}
+              className="mt-1 h-4 w-4 accent-primary flex-shrink-0"
+            />
+            <span className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              I understand my {selectedType ==="audio"?"recording" :"capture"} is sent over an encrypted
+              connection to Subtle Sense&rsquo;s servers to be analysed by AI, is used only for this reading,
+              and is discarded immediately afterwards &mdash; never stored, never used for training.
+            </span>
+          </label>
+        )}
+
 
         <input
           ref={fileInputRef}

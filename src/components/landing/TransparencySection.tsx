@@ -109,11 +109,11 @@ const TransparencySection = () => {
           <ul className="text-sm text-muted-foreground space-y-2">
             <li className="flex items-start gap-2">
               <span className="text-neon-pink mt-0.5">•</span>
-              <span><strong className="text-foreground">In-session processing</strong> — your media is analyzed live and never archived by default</span>
+              <span><strong className="text-foreground">Encrypted processing</strong> — your capture is sent over an encrypted connection to our secure AI service, used only for that one reading, then discarded. It is never archived or used for training.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-neon-pink mt-0.5">•</span>
-              <span><strong className="text-foreground">Consent-first storage</strong> — personal history is only saved when you explicitly sign in and choose to keep it</span>
+              <span><strong className="text-foreground">Consent-first</strong> — nothing is uploaded until you tick the consent box, and history is only saved when you sign in and choose to keep it</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-neon-pink mt-0.5">•</span>
