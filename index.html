@@ -11,6 +11,25 @@
   gtag('config', 'G-TPHJB6GZDT');
 </script>
     <meta charset="UTF-8" />
+    <!-- Clickjacking protection: this app requests camera/microphone access,
+         so it must never render inside a third-party frame. -->
+    <script>
+      (function () {
+        try {
+          if (window.top !== window.self) {
+            document.documentElement.style.display = "none";
+            window.top.location = window.self.location.href;
+          }
+        } catch (e) {
+          document.documentElement.style.display = "none";
+          document.addEventListener("DOMContentLoaded", function () {
+            document.body.innerHTML =
+              '<p style="font-family:system-ui;padding:2rem">Subtle Sense cannot be displayed inside another site. Please open subtlesense.lovable.app directly.</p>';
+            document.documentElement.style.display = "";
+          });
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Subtle Sense — AI reading of what you didn't say</title>
     <meta name="description" content="A 60-second AI reading of your spoken, felt and unsaid emotions. Journalling, mindful tools and a quiet companion — free to try, no signup needed." />
