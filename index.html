@@ -12,22 +12,32 @@
 </script>
     <meta charset="UTF-8" />
     <!-- Clickjacking protection: this app requests camera/microphone access,
-         so it must never render inside a third-party frame. -->
+         so it must never render inside an untrusted third-party frame. -->
     <script>
       (function () {
-        try {
-          if (window.top !== window.self) {
-            document.documentElement.style.display = "none";
-            window.top.location = window.self.location.href;
-          }
-        } catch (e) {
-          document.documentElement.style.display = "none";
-          document.addEventListener("DOMContentLoaded", function () {
-            document.body.innerHTML =
-              '<p style="font-family:system-ui;padding:2rem">Subtle Sense cannot be displayed inside another site. Please open subtlesense.lovable.app directly.</p>';
-            document.documentElement.style.display = "";
-          });
+        if (window.top === window.self) return;
+        var ok = function (origin) {
+          try {
+            var h = new URL(origin).hostname;
+            return h === "localhost" || h.endsWith("lovable.app") || h.endsWith("lovable.dev");
+          } catch (e) { return false; }
+        };
+        var ancestors = window.location.ancestorOrigins;
+        var trusted;
+        if (ancestors && ancestors.length) {
+          trusted = true;
+          for (var i = 0; i < ancestors.length; i++) { if (!ok(ancestors[i])) trusted = false; }
+        } else {
+          trusted = !!document.referrer && ok(document.referrer);
         }
+        if (trusted) return;
+        document.documentElement.style.display = "none";
+        try { window.top.location = window.self.location.href; } catch (e) {}
+        document.addEventListener("DOMContentLoaded", function () {
+          document.body.innerHTML =
+            '<p style="font-family:system-ui;padding:2rem">Subtle Sense cannot be displayed inside another site. Please open subtlesense.lovable.app directly.</p>';
+          document.documentElement.style.display = "";
+        });
       })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
