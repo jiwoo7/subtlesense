@@ -79,7 +79,7 @@ const MobileLanding = ({ currentUser }: Props) => {
         </motion.h1>
 
         <motion.p {...fade(0.2)} className="mt-7 text-[13.5px] leading-[1.75] text-muted-foreground font-light max-w-[19rem]">
-          A quiet reading of the emotions you seldom name aloud — spoken, felt, and unsaid. Sixty seconds, nothing stored.
+          A quiet reading of the emotions you seldom name aloud — spoken, felt, and unsaid. Sixty seconds, then discarded.
         </motion.p>
 
         {/* Whisper input */}
@@ -119,7 +119,7 @@ const MobileLanding = ({ currentUser }: Props) => {
 
         <motion.div {...fade(0.44)} className="mt-6 flex items-center gap-2">
           <span className="inline-block w-1 h-1 rounded-full bg-primary/80 animate-pulse-soft" />
-          <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Processed in-session only</span>
+          <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Encrypted · analysed · discarded</span>
         </motion.div>
       </section>
 
