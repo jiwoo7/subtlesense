@@ -288,6 +288,11 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
       return;
     }
 
+    if (!hasConsented) {
+      toast.error("Please confirm the consent notice before analysing.");
+      return;
+    }
+
     onStartAnalysis();
 
     try {
@@ -312,6 +317,7 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
           mediaBase64,
           mediaType: mediaMimeType,
           uploadType,
+          consent: true,
         },
       });
 
@@ -347,6 +353,7 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
     resetCapturedMedia();
     setIsRecording(false);
     setPermissionError(null);
+    setHasConsented(false);
     mediaRecorderRef.current = null;
   };
 
@@ -370,7 +377,7 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
             </p>
             <p className="eyebrow mt-3 text-muted-foreground flex items-center gap-2">
               <span className="inline-block w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
-              Processed in-session · Nothing stored without consent
+              Encrypted upload · Analysed, then discarded · Never stored
             </p>
           </div>
           {selectedType && (
