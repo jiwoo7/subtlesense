@@ -21,6 +21,8 @@ const MediaUploadZone = ({ onStartAnalysis, onAnalysisComplete, onAnalysisError,
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [permissionError, setPermissionError] = useState<string | null>(null);
   const [isWebcamReady, setIsWebcamReady] = useState(false);
+  const [hasConsented, setHasConsented] = useState(false);
+
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
