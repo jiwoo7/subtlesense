@@ -12,3 +12,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://subtlesense.lovable.app/sitemap.xml
+
