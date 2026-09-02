@@ -218,10 +218,27 @@ const MobileLanding = ({ currentUser }: Props) => {
       <section className="pt-6 pb-4 text-center">
         <div className="gold-hairline mb-10 opacity-60" />
         <p className="editorial-italic text-[1.4rem] leading-snug text-foreground/90 px-2">
-          “Most people only see the surface. You are allowed to know the rest.”
+          &ldquo;The most important emotions are often the ones we never say out loud.&rdquo;
         </p>
-        <p className="mt-6 text-[10px] tracking-[0.32em] uppercase text-muted-foreground">Subtle Sense</p>
+
+        <div className="mt-7 flex items-center justify-center gap-3">
+          <span className="h-px w-8 bg-primary/40" />
+          <img src={logoUrl} alt="" className="w-5 h-5 object-contain opacity-80" />
+          <span className="h-px w-8 bg-primary/40" />
+        </div>
+
+        <p className="mt-5 editorial-heading text-[1.05rem] text-foreground">
+          by <span className="editorial-italic text-primary">Naiyya Thapa</span>
+        </p>
+        <p className="mt-2 text-[9px] tracking-[0.34em] uppercase text-muted-foreground">
+          Founder · Subtle Sense
+        </p>
+
+        <p className="mt-8 text-[10px] tracking-[0.32em] uppercase text-muted-foreground/70">
+          Est. 2026 · Subtle Sense
+        </p>
       </section>
+
 
       <MobileStickyCTA onClick={() => navigate("/pricing")} />
     </div>
