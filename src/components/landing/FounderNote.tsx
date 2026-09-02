@@ -27,12 +27,17 @@ const FounderNote = () => {
 
         <div className="gold-hairline my-10 max-w-[40%] mx-auto" />
 
+        <p className="editorial-italic text-center text-xl md:text-2xl text-foreground/90 leading-snug mb-8">
+          &ldquo;The most important emotions are often the ones we never say out loud.&rdquo;
+        </p>
+
         <p className="editorial-italic text-center text-foreground text-lg">
           &mdash; Naiyya Thapa
         </p>
         <p className="eyebrow text-center mt-2 text-muted-foreground">
           Founder · Subtle Sense
         </p>
+
       </div>
     </section>
   );
