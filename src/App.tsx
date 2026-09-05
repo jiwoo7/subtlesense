@@ -5,6 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import OfflineIndicator from "@/components/OfflineIndicator";
 import OfflineGame from "@/components/OfflineGame";
@@ -26,6 +27,8 @@ const Playlists = lazy(() => import("./pages/Playlists"));
 const Methodology = lazy(() => import("./pages/Methodology"));
 const Philosophy = lazy(() => import("./pages/Philosophy"));
 const Pricing = lazy(() => import("./pages/Pricing"));
+const Guides = lazy(() => import("./pages/Guides"));
+const GuideArticle = lazy(() => import("./pages/GuideArticle"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -44,6 +47,7 @@ const App = () => {
 
   return (
   <ErrorBoundary>
+    <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
@@ -63,6 +67,8 @@ const App = () => {
   <Route path="/playlists" element={<PhoneFrame><Playlists /></PhoneFrame>} />
   <Route path="/methodology" element={<PhoneFrame><Methodology /></PhoneFrame>} />
   <Route path="/philosophy" element={<PhoneFrame><Philosophy /></PhoneFrame>} />
+  <Route path="/guides" element={<PhoneFrame><Guides /></PhoneFrame>} />
+  <Route path="/guides/:slug" element={<PhoneFrame><GuideArticle /></PhoneFrame>} />
   <Route path="/pricing" element={<PhoneFrame><Pricing /></PhoneFrame>} />
   <Route path="/auth" element={<PhoneFrame><Auth /></PhoneFrame>} />
   <Route path="/dashboard" element={<PhoneFrame><Dashboard /></PhoneFrame>} />
@@ -74,6 +80,7 @@ const App = () => {
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
+    </HelmetProvider>
   </ErrorBoundary>
   );
 };
