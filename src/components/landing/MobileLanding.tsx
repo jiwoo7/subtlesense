@@ -238,6 +238,9 @@ const MobileLanding = ({ currentUser }: Props) => {
         <p className="mt-8 text-[10px] tracking-[0.32em] uppercase text-muted-foreground/70">
           Est. 2026 · Subtle Sense
         </p>
+        <p className="mt-3 text-[9px] tracking-[0.24em] uppercase text-muted-foreground/50">
+          © {new Date().getFullYear()} Subtle Sense · All rights reserved
+        </p>
       </section>
 
 
