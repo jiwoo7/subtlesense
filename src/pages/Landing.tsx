@@ -487,6 +487,13 @@ const Landing = () => {
               >
                 How we read <span className="text-[10px]">›</span>
               </a>
+              <br />
+              <a
+                href="/guides"
+                className="eyebrow inline-flex items-center gap-1.5 mt-4 text-gold border-b border-border hover:border-gold transition-colors pb-0.5"
+              >
+                The Quiet Library <span className="text-[10px]">›</span>
+              </a>
             </div>
 
             {/* As seen on */}
@@ -547,6 +554,9 @@ const Landing = () => {
         </footer>
 
         <section className="container mx-auto px-8 lg:px-12 pb-14">
+          <p className="text-center text-[10px] tracking-[0.24em] uppercase text-muted-foreground/60 mb-6">
+            © {new Date().getFullYear()} Subtle Sense · Naiyya Thapa. All rights reserved.
+          </p>
           <p className="mx-auto max-w-4xl text-center text-xs text-muted-foreground/80 leading-relaxed font-light tracking-wide">
             Disclaimer &mdash; This service employs artificial intelligence to offer
             impressions of emotional states for informational and educational purposes

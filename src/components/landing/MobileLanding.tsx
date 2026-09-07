@@ -198,6 +198,7 @@ const MobileLanding = ({ currentUser }: Props) => {
             { label: "Mind games", note: "Breath, colour, stillness", to: "/games" },
             { label: "Mood playlists", note: "Sound matched to feeling", to: "/playlists" },
             { label: "Philosophy", note: "Why we built this", to: "/philosophy" },
+            { label: "The Quiet Library", note: "Writing on what goes unsaid", to: "/guides" },
           ].map((t) => (
             <button
               key={t.label}
