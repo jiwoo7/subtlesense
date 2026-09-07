@@ -8,4 +8,9 @@
   <url><loc>https://subtlesense.lovable.app/games</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://subtlesense.lovable.app/playlists</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://subtlesense.lovable.app/demo</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://subtlesense.lovable.app/guides</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://subtlesense.lovable.app/guides/signs-you-are-suppressing-emotions</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://subtlesense.lovable.app/guides/signs-of-masked-emotions</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://subtlesense.lovable.app/guides/emotion-journaling-prompts</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://subtlesense.lovable.app/guides/how-to-name-your-feelings</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

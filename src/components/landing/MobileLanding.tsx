@@ -198,6 +198,7 @@ const MobileLanding = ({ currentUser }: Props) => {
             { label: "Mind games", note: "Breath, colour, stillness", to: "/games" },
             { label: "Mood playlists", note: "Sound matched to feeling", to: "/playlists" },
             { label: "Philosophy", note: "Why we built this", to: "/philosophy" },
+            { label: "The Quiet Library", note: "Writing on what goes unsaid", to: "/guides" },
           ].map((t) => (
             <button
               key={t.label}
@@ -236,6 +237,9 @@ const MobileLanding = ({ currentUser }: Props) => {
 
         <p className="mt-8 text-[10px] tracking-[0.32em] uppercase text-muted-foreground/70">
           Est. 2026 · Subtle Sense
+        </p>
+        <p className="mt-3 text-[9px] tracking-[0.24em] uppercase text-muted-foreground/50">
+          © {new Date().getFullYear()} Subtle Sense · All rights reserved
         </p>
       </section>
 
