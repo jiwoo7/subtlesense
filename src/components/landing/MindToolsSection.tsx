@@ -26,7 +26,7 @@ const MindToolsSection = () => {
       to: "/guides",
       icon: Library,
       title: "The Quiet Library",
-      desc: "Essays on hidden, masked and unspoken emotions. Read in minutes.",
+      desc: "8 essays on hidden, masked and unspoken emotions. Read in minutes.",
     },
   ];
   return (
