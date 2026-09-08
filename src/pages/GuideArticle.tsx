@@ -44,6 +44,15 @@ const GuideArticle = () => {
               { "@type": "ListItem", position: 3, name: guide.title, item: url },
             ],
           },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: guide.faqs.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
         ]}
       />
 
@@ -81,7 +90,12 @@ const GuideArticle = () => {
             {guide.standfirst}
           </p>
           <p className="eyebrow mt-6 text-muted-foreground/70">
-            {guide.readingTime} read · Naiyya Thapa
+            {guide.readingTime} read · Naiyya Thapa · Updated{" "}
+            {new Date(guide.updated).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
           </p>
         </motion.header>
 

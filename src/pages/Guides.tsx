@@ -62,6 +62,9 @@ const Guides = () => {
             Slow, practical pieces on suppressed feeling, composed faces, and the vocabulary that makes
             an interior state workable. Free to read, no account required.
           </p>
+          <p className="eyebrow mt-6 text-muted-foreground/70">
+            {guides.length} pieces · Updated September 2026
+          </p>
         </motion.header>
 
         <div className="gold-hairline mb-10" />
