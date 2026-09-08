@@ -347,6 +347,298 @@ export const guides: Guide[] = [
       },
     ],
   },
+  {
+    slug: "emotional-burnout-signs",
+    title: "Emotional burnout: the signs that arrive before exhaustion",
+    metaTitle: "Emotional Burnout Signs — What Comes Before Exhaustion",
+    metaDescription:
+      "Burnout announces itself long before collapse. The early emotional signals, the three stages, and what genuinely helps at each one.",
+    eyebrow: "Volume VI · On running empty",
+    standfirst:
+      "Burnout is rarely a sudden failure. It is a slow narrowing — of patience, of curiosity, of the range of things that can still move you. The early signals are emotional, not physical.",
+    readingTime: "8 minutes",
+    updated: "2026-09-08",
+    sections: [
+      {
+        heading: "Burnout is a depletion of response, not of energy",
+        paragraphs: [
+          "People expect burnout to feel like tiredness. More often it feels like flatness: the work still gets done, the messages still get answered, but nothing lands. The clinical description names three components — exhaustion, cynical distance, and a collapsed sense of effectiveness — and only the first is about energy.",
+          "This is why rest alone frequently fails. A week away restores energy and returns you to the same conditions that produced the distance. The distance is the signal worth reading.",
+        ],
+      },
+      {
+        heading: "Early signals, in the order they usually appear",
+        paragraphs: ["These tend to arrive months before anyone calls it burnout."],
+        list: [
+          "Small requests feel disproportionately heavy — a two-minute reply is postponed for days.",
+          "You stop having opinions about work you used to argue about.",
+          "Sunday evening acquires a physical sensation.",
+          "You describe colleagues in categories rather than as people.",
+          "Recovery time lengthens: a hard day now costs two.",
+          "Pleasures outside work also thin out — the flatness stops respecting the boundary.",
+          "You fantasise about a rupture rather than a change: quitting, disappearing, being ill enough to be excused.",
+        ],
+      },
+      {
+        heading: "The three stages, and what helps at each",
+        paragraphs: [],
+        list: [
+          "Strain — still recoverable by rest and boundaries. Protect one uninterrupted block a day and refuse one thing a week.",
+          "Distance — rest no longer restores. This stage needs a change in conditions: load, autonomy, or who you answer to.",
+          "Depletion — effectiveness collapses and self-criticism becomes constant. This stage needs external support; it is not a willpower problem.",
+        ],
+      },
+      {
+        heading: "Why masking accelerates it",
+        paragraphs: [
+          "Sustained performance of an emotion you do not feel carries a measurable cost, sometimes called surface acting. The gap between displayed and felt state is the expensive part — not the difficulty of the work. People in roles that require constant composure burn out on lighter workloads than people permitted to be visibly frustrated.",
+          "If you cannot change what you display, changing where you can stop displaying it matters more than usual: one relationship, one hour, one page.",
+        ],
+      },
+      {
+        heading: "A weekly two-minute audit",
+        paragraphs: [],
+        list: [
+          "What did I feel this week that I did not show?",
+          "What did I stop caring about that I used to defend?",
+          "How long did it take me to recover from the worst hour?",
+          "What would need to change for next week to cost less?",
+        ],
+      },
+      {
+        heading: "Where a reading helps",
+        paragraphs: [
+          "A sixty-second capture gives you the distance between what you presented and what your face and voice carried. Tracked across a few weeks, that gap widening is a more honest early indicator than asking yourself whether you are coping — a question most people answer with a habit rather than an observation.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "What is the difference between burnout and depression?",
+        a: "Burnout is tied to a context — usually work — and tends to lift when that context genuinely changes. Depression is pervasive across contexts and includes symptoms burnout does not, such as persistent worthlessness. They overlap and can co-occur; a professional should make the distinction.",
+      },
+      {
+        q: "Can you recover from burnout without quitting?",
+        a: "Often, yes — but only if the conditions change, not just the hours. Autonomy, clarity of expectation, and a reduction in required emotional performance matter more than the size of the workload.",
+      },
+      {
+        q: "How long does burnout recovery take?",
+        a: "Early strain resolves in weeks. Depletion stage recovery is commonly measured in months, and rushing it is the most reliable way to repeat it.",
+      },
+    ],
+  },
+  {
+    slug: "high-functioning-anxiety",
+    title: "High-functioning anxiety: when nothing looks wrong",
+    metaTitle: "High-Functioning Anxiety — Signs, Costs and What Helps",
+    metaDescription:
+      "High-functioning anxiety hides behind competence and punctuality. The signs others never see, why achievement reinforces it, and practical ways through.",
+    eyebrow: "Volume VII · On the composed achiever",
+    standfirst:
+      "It is the anxiety nobody intervenes in, because it produces good outcomes. Early to everything, prepared for everything, and quietly running at a cost no one is billed for.",
+    readingTime: "7 minutes",
+    updated: "2026-09-08",
+    sections: [
+      {
+        heading: "Why it goes unnoticed",
+        paragraphs: [
+          "High-functioning anxiety is not a diagnostic category. It is a description of a pattern: significant internal anxiety paired with outward performance that meets or exceeds expectation. Because the visible output is good, the internal cost never triggers concern — from others, and often from the person themselves.",
+          "The reinforcement loop is the problem. Anxiety drives over-preparation, over-preparation produces praise, and praise confirms that the anxiety was necessary.",
+        ],
+      },
+      {
+        heading: "What it actually looks like from inside",
+        paragraphs: [],
+        list: [
+          "Arriving early everywhere, because lateness carries an outsized dread.",
+          "Rehearsing ordinary conversations in advance and reviewing them afterwards.",
+          "Difficulty accepting a compliment without immediately naming what could have been better.",
+          "Productivity as a regulation strategy: doing something because stopping is unbearable.",
+          "A body that never fully settles — a low hum of alertness even during rest.",
+          "Saying yes quickly, then resenting the commitment quietly.",
+          "Catastrophic forecasting that you would never say aloud because it sounds absurd.",
+        ],
+      },
+      {
+        heading: "The costs that eventually surface",
+        paragraphs: [
+          "Sleep is usually the first to go, then digestion, then patience with the people who get the unperformed version of you. Relationships absorb what the workplace never sees. The pattern is stable until an ordinary setback lands on an already-full system and the response looks disproportionate to everyone watching.",
+        ],
+      },
+      {
+        heading: "What actually reduces it",
+        paragraphs: ["Reassurance does not work, because the mechanism is not a lack of information."],
+        list: [
+          "Deliberately do one low-stakes thing to a lower standard, and watch the consequence be nothing.",
+          "Name the prediction in one sentence before acting on it — precision deflates most forecasts.",
+          "Delay the reflexive yes by a fixed interval: 'Let me confirm this evening.'",
+          "Separate rest from earning it. Schedule it before the work, not after.",
+          "Treat physical settling as primary: long exhale, feet on floor, unhurried breath before speaking.",
+        ],
+      },
+      {
+        heading: "When to get help",
+        paragraphs: [
+          "If the anxiety is present most days for six months, if sleep is regularly disturbed, or if the only relief comes from working, that is worth a conversation with a professional. Functioning well is not the same as being well, and treatment works.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Is high-functioning anxiety a real diagnosis?",
+        a: "No. It is not in diagnostic manuals. Clinically it usually maps onto generalised anxiety disorder, and the absence of a label often delays people from seeking help that would work.",
+      },
+      {
+        q: "Can anxiety make you more successful?",
+        a: "In the short term it can drive preparation and vigilance. Over time it narrows risk-taking, damages sleep and health, and the achievement usually persists after the anxiety is treated — it was not the engine people assume.",
+      },
+      {
+        q: "How do I explain it to someone who thinks I'm fine?",
+        a: "Describe the mechanics, not the feeling: how early you arrive, how long you rehearse, how long recovery takes. Behaviour is easier to hear than distress.",
+      },
+    ],
+  },
+  {
+    slug: "reading-emotion-in-voice",
+    title: "What your voice reveals that your face does not",
+    metaTitle: "Reading Emotion in Voice — Prosody, Pace and What It Reveals",
+    metaDescription:
+      "The voice leaks emotion the face can hold back. How pitch, pace, pauses and breath carry state, what the science supports, and where it misleads.",
+    eyebrow: "Volume VIII · On the sound of a state",
+    standfirst:
+      "A face can be arranged. A voice is harder — it is built from breath, and breath answers to the nervous system before it answers to intention.",
+    readingTime: "7 minutes",
+    updated: "2026-09-08",
+    sections: [
+      {
+        heading: "Why voice is harder to govern",
+        paragraphs: [
+          "Facial expression uses muscles you can consciously recruit. Vocal quality depends on breath support, laryngeal tension and timing, most of which shift automatically with arousal. People successfully hold a neutral face for a full sentence far more often than they hold a neutral voice.",
+          "This is why a phone call sometimes tells someone more than a visit did.",
+        ],
+      },
+      {
+        heading: "The features that carry information",
+        paragraphs: ["These are the prosodic markers with reasonable support in research."],
+        list: [
+          "Pitch range — narrowing suggests withdrawal or suppression; widening suggests arousal, pleasant or not.",
+          "Speech rate — sudden acceleration often accompanies anxiety; a marked slowdown often accompanies low mood or grief.",
+          "Pause structure — hesitation before emotionally loaded words, or long gaps where fluency was previously easy.",
+          "Breath — audible upper-chest breathing, or sentences that run out of air before their end.",
+          "Volume floor — the quietest points of speech dropping away, as though the sentence loses conviction.",
+          "Voice quality — creak at the end of phrases, a tightness in the throat, or an unusual breathiness.",
+        ],
+      },
+      {
+        heading: "Where voice reading misleads",
+        paragraphs: [
+          "Accent, first language, head cold, caffeine, phone codec, room noise and simple personality account for enormous variation. A slow, flat speaker is not necessarily depressed; a fast one is not necessarily anxious. Anything useful comes from deviation against that person's own baseline, not against a population average.",
+          "Any system — human or automated — that reads a single clip against a general model is making a confident guess. That is the honest description.",
+        ],
+      },
+      {
+        heading: "Listening better in ordinary conversation",
+        paragraphs: [],
+        list: [
+          "Track change, not state: what is different from how this person usually sounds?",
+          "Notice where fluency breaks, and what word it broke before.",
+          "Leave the pause open for three seconds longer than is comfortable.",
+          "Reflect the observation without interpretation: 'You went quiet there.'",
+          "Never announce a conclusion about someone's interior from their voice — ask instead.",
+        ],
+      },
+      {
+        heading: "How Subtle Sense uses voice",
+        paragraphs: [
+          "A capture with audio contributes prosodic signal alongside facial cues, and the two are weighed together into the Spoken, Felt and Unsaid registers. Where they disagree, that disagreement is the point — it is usually the most informative part of the reading. Confidence figures describe signal strength, not certainty about you.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Can emotion be detected from voice alone?",
+        a: "Partially. Systems perform meaningfully above chance on broad categories like arousal, and poorly on fine distinctions such as separating anxiety from excitement. Combining voice with facial and linguistic signal is more reliable than any one channel.",
+      },
+      {
+        q: "Does a monotone voice mean someone is depressed?",
+        a: "No. Reduced pitch range is associated with low mood, but it is also a stable trait for many people and varies by language and culture. It is only informative as a change from that person's own norm.",
+      },
+      {
+        q: "Is voice emotion analysis accurate?",
+        a: "It is a probabilistic reading, not a measurement. Treat outputs as prompts for reflection, and be sceptical of any tool that reports a feeling as a fact.",
+      },
+    ],
+  },
+  {
+    slug: "how-to-support-someone-who-wont-talk",
+    title: "How to support someone who will not talk about it",
+    metaTitle: "How to Support Someone Who Won't Open Up — A Practical Guide",
+    metaDescription:
+      "What to say and what to avoid when someone close to you is clearly struggling and will not talk. Openings, timing, and how to stay useful over months.",
+    eyebrow: "Volume IX · On staying close",
+    standfirst:
+      "The instinct is to ask better questions. Usually the thing that works is lowering the price of answering — and being reliably there when the moment arrives unannounced.",
+    readingTime: "7 minutes",
+    updated: "2026-09-08",
+    sections: [
+      {
+        heading: "Silence is usually protection, not rejection",
+        paragraphs: [
+          "People withhold for reasons that make sense to them: not wanting to be a burden, not having language for it yet, having been met badly before, or fearing that saying it aloud will make it real. Almost none of those reasons are about you, and pressing harder confirms the cost of speaking.",
+        ],
+      },
+      {
+        heading: "Openings that lower the price",
+        paragraphs: [],
+        list: [
+          "Be specific rather than general: 'You've seemed flat since the move' beats 'Are you okay?'",
+          "Offer a shared activity instead of a conversation — driving, walking, cooking. Side-by-side is easier than face-to-face.",
+          "Give permission to decline: 'You don't have to answer. I just wanted you to know I noticed.'",
+          "Name your own state first, briefly and without performance.",
+          "Send a message that requires nothing: 'Thinking of you. No reply needed.'",
+          "Return more than once. A single check-in reads as politeness; the third reads as real.",
+        ],
+      },
+      {
+        heading: "What reliably closes the door",
+        paragraphs: [],
+        list: [
+          "Diagnosing them — 'you're clearly depressed' — however accurate.",
+          "Comparing: 'when I went through this…' before they have said anything.",
+          "Solving immediately. Advice arriving before understanding tells them you want the topic finished.",
+          "Reporting the conversation to others, however caringly.",
+          "Making their silence about your hurt feelings.",
+        ],
+      },
+      {
+        heading: "When they do talk",
+        paragraphs: [
+          "Say less than feels natural. Reflect the specific words they used rather than paraphrasing them upward into something more manageable. Ask 'what would help?' and accept 'nothing' as an answer. Then follow up in a few days, referencing what they told you — being remembered is the part that makes people speak again.",
+        ],
+      },
+      {
+        heading: "Where the line is",
+        paragraphs: [
+          "If there is any indication of self-harm or suicide, ask directly and plainly — asking does not plant the idea — and involve professional or emergency help. Support from a friend is not a substitute for care, and staying close does not mean carrying it alone.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "What do I say to someone who says they're fine but clearly isn't?",
+        a: "Accept the answer aloud and leave the door open: 'Okay. I'm around if that changes.' Then come back another day with something specific you noticed. Pressure produces a firmer 'fine'.",
+      },
+      {
+        q: "How often should I check in without being annoying?",
+        a: "Low-demand contact roughly weekly is rarely felt as pressure if it asks nothing in return. What irritates people is being interrogated, not being remembered.",
+      },
+      {
+        q: "Should I tell someone else I'm worried about them?",
+        a: "Only if there is risk of harm, or with their agreement. Otherwise it usually reaches them as a betrayal and costs you the access you had.",
+      },
+    ],
+  },
 ];
+
 
 export const getGuide = (slug?: string) => guides.find((g) => g.slug === slug);
