@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Shuffle, ExternalLink } from "lucide-react";
+import Seo from "@/components/Seo";
 
 type Mood = {
   id: string;
@@ -74,6 +75,7 @@ const Playlists = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Seo title={"Mood playlists — music tuned to how you feel"} description={"Curated playlists matched to your current feeling, with a Surprise Me for when you cannot name it."} path="/playlists" />
       <header className="container mx-auto px-5 sm:px-6 py-4 flex items-center justify-between gap-2">
         <Link to="/" className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.24em] uppercase text-muted-foreground hover:text-foreground transition-colors">
           <ArrowLeft className="w-3.5 h-3.5" strokeWidth={1.4} /> Back

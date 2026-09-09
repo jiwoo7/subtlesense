@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import RealAnalysisDashboard from "@/components/RealAnalysisDashboard";
 import type { AnalysisResult } from "@/types/emotions";
+import Seo from "@/components/Seo";
 
 // Sample analysis result to showcase the product
 const DEMO_ANALYSIS: AnalysisResult = {
@@ -70,6 +71,7 @@ const Demo = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
+      <Seo title={"See a sample reading — Subtle Sense demo"} description={"A walkthrough of a Subtle Sense reading: the Spoken, Felt and Unsaid registers, and how to read the confidence figures."} path="/demo" />
       <AnimatedBackground />
       
       <div className="relative z-10">

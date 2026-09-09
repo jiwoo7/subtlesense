@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import logoUrl from "@/assets/subtle-sense-logo.png";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import Seo from "@/components/Seo";
 
 const ease = [0.25, 1, 0.5, 1] as const;
 
@@ -72,6 +73,7 @@ const Philosophy = () => {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-background">
+      <Seo title={"Philosophy — the emotions we never say out loud"} description={"Why Subtle Sense listens for what is held back, and the ideas behind reading feeling rather than diagnosing it."} path="/philosophy" />
       <AnimatedBackground />
       
       <div className="relative z-10">

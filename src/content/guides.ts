@@ -13,6 +13,7 @@ export interface Guide {
   standfirst: string;
   readingTime: string;
   updated: string;
+  selfCheck?: { intro: string; items: string[]; outro: string };
   sections: GuideSection[];
   faqs: { q: string; a: string }[];
 }
@@ -635,6 +636,113 @@ export const guides: Guide[] = [
       {
         q: "Should I tell someone else I'm worried about them?",
         a: "Only if there is risk of harm, or with their agreement. Otherwise it usually reaches them as a betrayal and costs you the access you had.",
+      },
+    ],
+  },
+  {
+    slug: "emotional-numbness",
+    title: "Why you feel emotionally numb — and how long it lasts",
+    metaTitle: "Emotionally Numb: Why It Happens, How Long It Lasts, What Helps",
+    metaDescription:
+      "Emotional numbness explained without jargon: what causes it, how long it usually lasts, a short self-check, and practical ways to start feeling again.",
+    eyebrow: "Volume IX \u00b7 On feeling nothing",
+    standfirst:
+      "Numbness is rarely the absence of emotion. It is emotion held at a distance \u2014 the mind turning the volume down because the volume was, at some point, unbearable. Here is what is happening, and what tends to help.",
+    readingTime: "9 minutes",
+    updated: "2026-09-09",
+    selfCheck: {
+      intro: "Read each line and note the ones true of the last two weeks. This is a reflection prompt, not a test or a diagnosis.",
+      items: [
+        "Good news lands flat \u2014 you can describe why it matters but cannot feel that it does.",
+        "You watch yourself from slightly outside, as if narrating your own day.",
+        "You reach for intensity to feel something: cold water, spicy food, conflict, risk, noise.",
+        "People say you seem calm during things that should have shaken you.",
+        "Crying feels unavailable even when you want it.",
+        "Time blurs: whole weeks summarise into one sentence.",
+        "You feel physically tired in a way sleep does not fix.",
+      ],
+      outro: "Three or more is worth sitting with rather than solving today. Naming which ones are true is already the first step described below.",
+    },
+    sections: [
+      {
+        heading: "Numbness is protection, not emptiness",
+        paragraphs: [
+          "When feeling becomes too costly \u2014 too fast, too repeated, too unsafe to show \u2014 the nervous system does something economical: it lowers the gain. Everything still arrives, but quieter. This is why numbness so often follows a stretch of intensity rather than a stretch of nothing: grief, a long stress period, a relationship that required constant composure, months of work that left no margin.",
+          "The important thing is that the mechanism is doing its job. People describe numbness as being broken. It is closer to a fuse that has done exactly what fuses do. That reframing matters, because trying to force feeling usually deepens the shutdown, while lowering the demand tends to loosen it.",
+        ],
+      },
+      {
+        heading: "What commonly causes it",
+        paragraphs: [
+          "Numbness is a symptom with many possible sources rather than a condition of its own. The usual ones:",
+        ],
+        list: [
+          "Sustained stress or burnout, where the body has been running above its budget for months.",
+          "Grief \u2014 particularly in the weeks after the immediate shock, when everyone else has returned to normal.",
+          "Depression, where flatness rather than sadness is often the dominant experience.",
+          "Anxiety that has run at a high level long enough that shutting down became the only rest available.",
+          "Trauma responses, where distance from the feeling was once genuinely the safest option.",
+          "Some medications, notably certain antidepressants, which can blunt the top and bottom of the emotional range \u2014 a doctor can adjust this.",
+          "Chronic self-editing: years of choosing the socially acceptable feeling over the real one.",
+        ],
+      },
+      {
+        heading: "How long does it last?",
+        paragraphs: [
+          "There is no fixed clock, and anyone offering one is guessing. What can be said honestly is the shape it usually takes. Numbness tied to a single event \u2014 a shock, a loss, an exhausting month \u2014 commonly eases over days to a few weeks as the load drops and sleep returns. Numbness that arrived slowly, from a long period of pressure, tends to lift slowly too, and usually only after the pressure itself changes.",
+          "The signal to watch is not intensity but movement. If the flatness is very gradually varying \u2014 a moment of irritation, a flicker of interest, a song that lands \u2014 something is coming back online. If it has stayed uniformly flat for more than a few weeks, or is paired with hopelessness or thoughts of self-harm, that is a reason to speak to a doctor or therapist rather than to wait it out.",
+        ],
+      },
+      {
+        heading: "What tends to help",
+        paragraphs: [
+          "Nothing here is a cure, and none of it works by trying harder to feel. Each one lowers the demand rather than raising it.",
+        ],
+        list: [
+          "Start with the body, not the emotion. Temperature, movement and breath reach the nervous system when words cannot: a walk without headphones, cold water on the wrists, a slower exhale than inhale.",
+          "Name sensations instead of feelings. \u2018Tight jaw, heavy chest, shallow breath\u2019 is achievable when \u2018sad\u2019 is not, and it reopens the channel gently.",
+          "Reduce input. Numbness and over-stimulation travel together; a quieter day often returns more feeling than an inspiring one.",
+          "Write three lines a night, unedited, with no requirement that they be interesting. The point is contact, not insight.",
+          "Choose small, low-stakes contact with people rather than deep conversation. Presence without performance is easier to tolerate.",
+          "Protect sleep before anything else. Emotional range is one of the first things sleep debt removes.",
+          "If you take medication and the flatness began after starting or changing it, raise that with the prescriber \u2014 it is a common, adjustable side effect.",
+        ],
+      },
+      {
+        heading: "When to get professional help",
+        paragraphs: [
+          "Speak to a doctor or a licensed therapist if the numbness has lasted more than a few weeks without variation, if it comes with hopelessness, if you have stopped doing things that reliably mattered, or if you are having thoughts of harming yourself. Numbness that follows a traumatic event also responds well to specific therapies and does not need to be endured privately.",
+          "Subtle Sense is an instrument for noticing, not a diagnosis or a treatment. It can show you that something is there when you cannot feel it. It cannot tell you what it means clinically.",
+        ],
+      },
+      {
+        heading: "How a reading helps when you cannot feel anything",
+        paragraphs: [
+          "This is the situation Subtle Sense was built for. A sixty-second reading returns three registers \u2014 Spoken, what you said; Felt, what your face and voice carried; Unsaid, what was held back. When the Spoken register is flat and the Unsaid register is not, you get evidence that the feeling exists even though the awareness of it has gone quiet.",
+          "That evidence is often the thing that restarts contact. Not a label handed to you, but a gap you can look at: I said I was fine, and something else was clearly present. Read the confidence figures lightly \u2014 they describe the strength of the signal, never the truth of your inner life.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Why do I feel emotionally numb for no reason?",
+        a: "There is almost always a reason, it is just rarely recent. Numbness usually follows a period of sustained load \u2014 stress, grief, or long self-editing \u2014 and often appears after the hard part has ended rather than during it.",
+      },
+      {
+        q: "Is emotional numbness dangerous?",
+        a: "In itself, no \u2014 it is a protective response. It matters when it persists for weeks without variation, or arrives with hopelessness or thoughts of self-harm, both of which are reasons to speak to a doctor.",
+      },
+      {
+        q: "How do I stop feeling emotionally numb?",
+        a: "Not by trying to feel harder, which usually deepens it. Lower the demand: sleep, movement, less input, and naming physical sensations rather than emotions until the channel reopens on its own.",
+      },
+      {
+        q: "What is the difference between numbness and depression?",
+        a: "Numbness is a symptom; depression is a pattern that can include it alongside low mood, loss of interest, changed sleep and appetite, and hopelessness. Only a clinician can make that distinction properly.",
+      },
+      {
+        q: "Can medication cause emotional numbness?",
+        a: "Yes. Some antidepressants blunt the upper and lower ends of emotional range for some people. It is common, it is adjustable, and the prescriber is the right person to raise it with.",
       },
     ],
   },
