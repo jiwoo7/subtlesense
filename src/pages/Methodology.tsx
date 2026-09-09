@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import logoUrl from "@/assets/subtle-sense-logo.png";
+import Seo from "@/components/Seo";
 
 const ease = [0.25, 1, 0.5, 1] as const;
 
@@ -41,6 +42,7 @@ const sections = [
 const Methodology = () => {
   return (
     <div className="min-h-[100dvh] bg-background relative">
+      <Seo title={"How Subtle Sense reads emotion — Methodology"} description={"How the three registers — Spoken, Felt and Unsaid — are produced, what the confidence figures mean, and where the limits are."} path="/methodology" />
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-10 sm:py-16 max-w-3xl">
         <Link
           to="/"

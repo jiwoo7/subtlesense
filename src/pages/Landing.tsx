@@ -23,6 +23,7 @@ const LiveCounter = lazy(() => import("@/components/landing/LiveCounter"));
 import { supabase } from "@/integrations/supabase/client";
 import type { AnalysisResult } from "@/types/emotions";
 import type { User } from "@supabase/supabase-js";
+import Seo from "@/components/Seo";
 
 const MediaUploadZone = lazy(() => import("@/components/MediaUploadZone"));
 const ExitPoll = lazy(() => import("@/components/ExitPoll"));
@@ -119,6 +120,7 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen relative overflow-x-hidden sm:overflow-hidden">
+      <Seo title={"Subtle Sense — AI reading of what you didn't say"} description={"A 60-second AI reading of your spoken, felt and unsaid emotions. Journalling, mindful tools and a quiet companion — free to try, no signup needed."} path="/" />
       <AnimatedBackground />
       
       <MobileLanding currentUser={currentUser} />

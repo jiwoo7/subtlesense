@@ -6,6 +6,7 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 import ThemePickerButton from "@/components/ThemePickerButton";
 import WaitlistDialog from "@/components/WaitlistDialog";
 import logoUrl from "@/assets/subtle-sense-logo.png";
+import Seo from "@/components/Seo";
 
 const ease = [0.25, 1, 0.5, 1] as const;
 
@@ -116,6 +117,7 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen relative overflow-x-hidden">
+      <Seo title={"Pricing — Subtle Sense"} description={"Guest, Interior and Atelier tiers for Subtle Sense. Start free with a 60-second reading of your spoken, felt and unsaid emotions."} path="/pricing" />
       <AnimatedBackground />
 
       <div className="relative z-10">

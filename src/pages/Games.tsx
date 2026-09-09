@@ -5,6 +5,7 @@ import BreathingBubble from "@/components/games/BreathingBubble";
 import ColorFlow from "@/components/games/ColorFlow";
 import GratitudeCards from "@/components/games/GratitudeCards";
 import ZenSand from "@/components/games/ZenSand";
+import Seo from "@/components/Seo";
 
 const GAMES = [
   { id: "breathe", title: "Breathing Bubble", desc: "Guided 4-7-8 breath work", icon: Wind, component: BreathingBubble },
@@ -19,6 +20,7 @@ const Games = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Seo title={"Mind games — four calming exercises under two minutes"} description={"Breathe, focus, reflect and draw. Four quiet games to settle your nervous system in under two minutes each. Free, no signup."} path="/games" />
       <header className="container mx-auto px-5 sm:px-6 py-4 flex items-center justify-between">
         <Link to="/" className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.24em] uppercase text-muted-foreground hover:text-foreground transition-colors">
           <ArrowLeft className="w-3.5 h-3.5" strokeWidth={1.4} /> Back

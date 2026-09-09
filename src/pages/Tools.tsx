@@ -6,6 +6,7 @@ import thumbJournal from "@/assets/tool-journal.jpg";
 import thumbMood from "@/assets/tool-mood.jpg";
 import thumbCompanion from "@/assets/tool-companion.jpg";
 import thumbPlaylists from "@/assets/tool-playlists.jpg";
+import Seo from "@/components/Seo";
 
 const Tools = () => {
   const navigate = useNavigate();
@@ -54,6 +55,7 @@ const Tools = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Seo title={"Mindful tools — journal, games, playlists, guides"} description={"Quiet tools to sit with what came up: a private mood journal, four calming games, mood playlists and The Quiet Library."} path="/tools" />
       <header className="container mx-auto px-5 sm:px-6 py-5 flex items-center justify-between">
         <Link to="/" className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground">
           <ArrowLeft className="w-4 h-4" /> Back
