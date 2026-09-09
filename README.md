@@ -162,11 +162,6 @@ SubtleSense was independently conceived, designed, and built by **Naiyya Thapa**
 
 This is not a school project. It is a real product, built to solve a real problem.
 
----
-### Review my application on product hunt
-
-https://www.producthunt.com/products/subtle-sense/reviews/new
----
 
 Copyright (c) 2026 Naiyya Thapa. All Rights Reserved.
 
