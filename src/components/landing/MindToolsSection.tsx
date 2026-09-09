@@ -92,7 +92,7 @@ const MindToolsSection = () => {
               className="block glass-panel rounded-2xl p-4 sm:p-6 group h-full"
             >
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-gold/40 bg-background/60 flex items-center justify-center mb-4 transition-colors group-hover:border-gold group-hover:bg-gold/10">
-                <c.Mark className="w-6 h-6 sm:w-7 sm:h-7 text-gold" />
+                <c.Mark className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
               </div>
               <div className="flex items-center justify-between gap-2">
                 <h3 className="editorial-heading text-base sm:text-lg">{c.title}</h3>
