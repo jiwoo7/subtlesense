@@ -135,6 +135,42 @@ const GuideArticle = () => {
               )}
             </motion.section>
           ))}
+
+          {guide.selfCheck && (
+            <motion.section
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.9, delay: guide.sections.length * 0.04, ease }}
+              className="bg-secondary/30 border border-border/40 rounded-lg p-8 sm:p-10"
+            >
+              <h2 className="editorial-heading text-2xl sm:text-3xl text-foreground leading-tight mb-4">
+                Self-check
+              </h2>
+              <p className="text-sm sm:text-base text-muted-foreground font-light leading-relaxed mb-6">
+                {guide.selfCheck.intro}
+              </p>
+              <ul className="space-y-4 mb-6">
+                {guide.selfCheck.items.map((item) => (
+                  <li
+                    key={item}
+                    className="flex gap-3"
+                  >
+                    <input
+                      type="checkbox"
+                      className="mt-1 w-4 h-4 rounded border-border/60 cursor-pointer shrink-0"
+                    />
+                    <span className="text-sm sm:text-base text-muted-foreground font-light leading-relaxed">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-sm sm:text-base text-muted-foreground font-light leading-relaxed italic">
+                {guide.selfCheck.outro}
+              </p>
+            </motion.section>
+          )}
         </article>
 
         <div className="gold-hairline my-14" />
