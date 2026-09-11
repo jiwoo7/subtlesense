@@ -29,6 +29,7 @@ const Philosophy = lazy(() => import("./pages/Philosophy"));
 const Pricing = lazy(() => import("./pages/Pricing"));
 const Guides = lazy(() => import("./pages/Guides"));
 const GuideArticle = lazy(() => import("./pages/GuideArticle"));
+const EmotionalGuide = lazy(() => import("./pages/EmotionalGuide"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -69,6 +70,7 @@ const App = () => {
   <Route path="/philosophy" element={<PhoneFrame><Philosophy /></PhoneFrame>} />
   <Route path="/guides" element={<PhoneFrame><Guides /></PhoneFrame>} />
   <Route path="/guides/:slug" element={<PhoneFrame><GuideArticle /></PhoneFrame>} />
+  <Route path="/emotional-guide" element={<PhoneFrame><EmotionalGuide /></PhoneFrame>} />
   <Route path="/pricing" element={<PhoneFrame><Pricing /></PhoneFrame>} />
   <Route path="/auth" element={<PhoneFrame><Auth /></PhoneFrame>} />
   <Route path="/dashboard" element={<PhoneFrame><Dashboard /></PhoneFrame>} />

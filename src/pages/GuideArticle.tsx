@@ -3,6 +3,7 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import logoUrl from "@/assets/subtle-sense-logo.png";
 import Seo from "@/components/Seo";
+import EmotionalSupportWidget from "@/components/EmotionalSupportWidget";
 import { getGuide, guides } from "@/content/guides";
 
 const ease = [0.25, 1, 0.5, 1] as const;
@@ -172,6 +173,11 @@ const GuideArticle = () => {
             </motion.section>
           )}
         </article>
+
+        {/* Emotional Support Widget */}
+        <div className="my-14">
+          <EmotionalSupportWidget emotion={guide.title} />
+        </div>
 
         <div className="gold-hairline my-14" />
 
