@@ -21,6 +21,16 @@ export interface Guide {
 export const guides: Guide[] = [
   {
     slug: "signs-you-are-suppressing-emotions",
+    selfCheck: {
+      intro: "Read slowly. Notice which of these sound familiar.",
+      items: [
+        "I say \"I'm fine\" before I have checked whether I am.",
+        "My body feels tense without a clear reason.",
+        "I over-explain rather than say how I feel.",
+        "Emotions arrive late, often when I am alone.",
+      ],
+      outro: "If several resonate, you may be holding more than you let on. A reading can help you name it.",
+    },
     title: "How to know what emotion you're suppressing",
     metaTitle: "How to Know What Emotion You're Suppressing — 9 Quiet Signs",
     metaDescription:
@@ -350,6 +360,16 @@ export const guides: Guide[] = [
   },
   {
     slug: "emotional-burnout-signs",
+    selfCheck: {
+      intro: "Over the past two weeks, notice which of these feel true.",
+      items: [
+        "Rest no longer restores me.",
+        "Small requests feel disproportionately heavy.",
+        "I feel detached from work or people I used to care about.",
+        "I am irritable in ways that surprise me.",
+      ],
+      outro: "Several ticks suggest your reserves are low. Consider speaking with a professional, and begin a reading to see what sits beneath.",
+    },
     title: "Emotional burnout: the signs that arrive before exhaustion",
     metaTitle: "Emotional Burnout Signs — What Comes Before Exhaustion",
     metaDescription:
